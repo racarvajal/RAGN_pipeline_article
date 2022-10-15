@@ -1,6 +1,17 @@
 dependencies:
-  - numpy=1.19.2
+  - numpy=1.20.3
   - pip=21.0.1
-  - python=3.9
+  - python=3.8
+  - scikit-learn=0.23.2
   - pip:
-      - matplotlib==3.4.3
+      - matplotlib=3.6.1
+      - pycaret=2.3.10
+      - pandas=1.4.4
+      - catboost
+      - xgboost=1.5.1
+      - fasttreeshap
+      - colorcet
+      - cmasher
+      - schemdraw
+      - mpl-scatter-density
+      - chainconsumer
