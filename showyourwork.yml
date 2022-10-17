@@ -4,6 +4,8 @@ verbose: true
 
 ms_name: ML_pipeline
 
+tectonic_args: ["-Z", "shell-escape"]
+
 dependencies:
     src/scripts/fig_bands_depth.py:
         - src/data/hlsp_agnsedatlas_multi_multi_mrk231_multi_v1_spec-obs.txt

@@ -299,17 +299,18 @@ Given that we need to be able to compare the results from the training and appli
 
 Before any calculation or transformation is applied to the data from the HETDEX field, we split the labelled dataset into training, testing, calibration, and validation subsets. The early creation of these subsets helps avoid information leakage from the validation subset into the models. Initially, a $20 \%$ of the dataset has been reserved as validation data. From the remaining elements, an $80 \%$ of them have been used for training, and the rest of the data has been divided equally between calibration and test subsets (i.e. a $10 \%$ each). The splitting process and the number of elements for each subset are shown in Fig.~\ref{fig:dataset_sizes}. The use of these subsets will be shown in Sects.~\ref{sec:model_selection} and \ref{sec:models_training}.
 
-\begin{comment}
 \begin{figure}
   \centering
   \begin{minipage}{0.29\textwidth}
     \centering
+    %\input{|python ../scripts/fig_flowchart_HETDEX.py}
     \includegraphics[width=0.99\textwidth]{figures/flowchart_HETDEX_subsets.pdf}\\
     {(a) HETDEX Field}
   \end{minipage}
   \hfill 
   \begin{minipage}{0.19\textwidth}
     \centering
+    %\input{|python ../scripts/fig_flowchart_Stripe82.py}
     \includegraphics[width=0.80\textwidth]{figures/flowchart_S82_subsets.pdf}\\
     \vspace{4.5cm}
     {(b) Stripe 82 Field}
@@ -317,7 +318,6 @@ Before any calculation or transformation is applied to the data from the HETDEX 
   \caption{Composition of datasets used for the different steps of this work. a) HETDEX Field. b) Stripe 82.}
   \label{fig:dataset_sizes}
 \end{figure}
-\end{comment}
 
 All the following transformations (feature selection, standardisation, and power transform of features) have been applied to the training and testing subsets before the training of the algorithms and models. 
 The validation subset was subject to the same transformations after the modelling stage.
