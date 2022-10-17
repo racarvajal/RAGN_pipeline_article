@@ -4,23 +4,23 @@ verbose: true
 
 ms_name: ML_pipeline
 
-tectonic_args: ["-Z", "shell-escape"]
+# tectonic_args: ["-Z", "shell-escape"]
 
-datasets:
-  10.5072/zenodo.1113173:
-    contents:
-        HETDEX_for_prediction.h5: src/data/HETDEX_for_prediction.h5
-        HETDEX_mags_imputed.h5: src/data/HETDEX_mags_imputed.h5
-        HETDEX_mags_non_imputed.h5: src/data/HETDEX_mags_non_imputed.h5
-        S82_for_prediction.h5: src/data/S82_for_prediction.h5
-        S82_mags_imputed.h5: src/data/S82_mags_imputed.h5
-        S82_mags_non_imputed.h5: src/data/S82_mags_non_imputed.h5
-        hlsp_agnsedatlas_multi_multi_mrk231_multi_v1_spec-obs.txt: src/data/hlsp_agnsedatlas_multi_multi_mrk231_multi_v1_spec-obs.txt
-        indices_calibration.txt: src/data/indices_calibration.txt
-        indices_test.txt: src/data/indices_test.txt
-        indices_train.txt: src/data/indices_train.txt
-        indices_train_test.txt: src/data/indices_train_test.txt
-        indices_validation.txt: src/data/indices_validation.txt
+# datasets:
+#   10.5072/zenodo.1113173:
+#     contents:
+#         HETDEX_for_prediction.h5: src/data/HETDEX_for_prediction.h5
+#         HETDEX_mags_imputed.h5: src/data/HETDEX_mags_imputed.h5
+#         HETDEX_mags_non_imputed.h5: src/data/HETDEX_mags_non_imputed.h5
+#         S82_for_prediction.h5: src/data/S82_for_prediction.h5
+#         S82_mags_imputed.h5: src/data/S82_mags_imputed.h5
+#         S82_mags_non_imputed.h5: src/data/S82_mags_non_imputed.h5
+#         hlsp_agnsedatlas_multi_multi_mrk231_multi_v1_spec-obs.txt: src/data/hlsp_agnsedatlas_multi_multi_mrk231_multi_v1_spec-obs.txt
+#         indices_calibration.txt: src/data/indices_calibration.txt
+#         indices_test.txt: src/data/indices_test.txt
+#         indices_train.txt: src/data/indices_train.txt
+#         indices_train_test.txt: src/data/indices_train_test.txt
+#         indices_validation.txt: src/data/indices_validation.txt
 
 dependencies:
     src/scripts/fig_bands_depth.py:
@@ -56,10 +56,11 @@ dependencies:
         - src/data/indices_validation.txt
         - src/scripts/global_functions.py
     src/scripts/fig_conf_matrix_radio_AGN_Stripe_82.py:
-        - src/data/HETDEX_for_prediction.h5
+        - src/data/S82_for_prediction.h5
         - src/scripts/global_functions.py
     src/scripts/fig_conf_matrix_radio_AGN_validation.py:
-        - src/scripts/global_variables.py
+        - src/data/HETDEX_for_prediction.h5
+        - src/data/indices_validation.txt
         - src/scripts/global_functions.py
     src/scripts/fig_conf_matrix_radio_validation.py:
         - src/data/HETDEX_for_prediction.h5

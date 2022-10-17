@@ -23,6 +23,14 @@ import global_variables as gv
 
 ##########################################
 ##########################################
+# Obtain classification metrics from confusion matrices
+def conf_mat_func(true_class_arr, predicted_class_arr):
+    cm = np.array([[np.sum(np.array(true_class_arr == 0) & np.array(predicted_class_arr == 0)),\
+                    np.sum(np.array(true_class_arr == 0) & np.array(predicted_class_arr == 1))],\
+                   [np.sum(np.array(true_class_arr == 1) & np.array(predicted_class_arr == 0)),\
+                    np.sum(np.array(true_class_arr == 1) & np.array(predicted_class_arr == 1))]])
+    return cm
+##########################################
 # Methods using Pycaret pipelines
 def get_final_column_names(pycaret_pipeline, sample_df, verbose=False):
     if isinstance(pycaret_pipeline, skp.Pipeline):
