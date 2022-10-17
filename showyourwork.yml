@@ -1,4 +1,6 @@
-version: 0.3.1
+version: 0.3.1.post1
+
+verbose: true
 
 ms_name: ML_pipeline
 
@@ -45,9 +47,6 @@ dependencies:
         - src/data/HETDEX_for_prediction.h5
         - src/data/indices_validation.txt
         - src/scripts/global_functions.py
-    src/scripts/fig_flowchart_HETDEX.py:
-    src/scripts/fig_flowchart_Stripe82.py:
-    src/scripts/fig_flowchart_pipeline.py:
     src/scripts/fig_hist_redshift_radio_AGN.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/S82_for_prediction.h5

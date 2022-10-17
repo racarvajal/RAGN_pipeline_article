@@ -17,7 +17,7 @@
 %
 \usepackage{graphicx,multirow,xcolor}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{txfonts,fontspec}
+\usepackage{txfonts}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\usepackage[options]{hyperref}
 \usepackage[hidelinks]{hyperref}
@@ -299,19 +299,17 @@ Given that we need to be able to compare the results from the training and appli
 
 Before any calculation or transformation is applied to the data from the HETDEX field, we split the labelled dataset into training, testing, calibration, and validation subsets. The early creation of these subsets helps avoid information leakage from the validation subset into the models. Initially, a $20 \%$ of the dataset has been reserved as validation data. From the remaining elements, an $80 \%$ of them have been used for training, and the rest of the data has been divided equally between calibration and test subsets (i.e. a $10 \%$ each). The splitting process and the number of elements for each subset are shown in Fig.~\ref{fig:dataset_sizes}. The use of these subsets will be shown in Sects.~\ref{sec:model_selection} and \ref{sec:models_training}.
 
-
+\begin{comment}
 \begin{figure}
   \centering
   \begin{minipage}{0.29\textwidth}
     \centering
-    \script{fig_flowchart_HETDEX.py}
     \includegraphics[width=0.99\textwidth]{figures/flowchart_HETDEX_subsets.pdf}\\
     {(a) HETDEX Field}
   \end{minipage}
   \hfill 
   \begin{minipage}{0.19\textwidth}
     \centering
-    \script{fig_flowchart_Stripe82.py}
     \includegraphics[width=0.80\textwidth]{figures/flowchart_S82_subsets.pdf}\\
     \vspace{4.5cm}
     {(b) Stripe 82 Field}
@@ -319,7 +317,7 @@ Before any calculation or transformation is applied to the data from the HETDEX 
   \caption{Composition of datasets used for the different steps of this work. a) HETDEX Field. b) Stripe 82.}
   \label{fig:dataset_sizes}
 \end{figure}
-
+\end{comment}
 
 All the following transformations (feature selection, standardisation, and power transform of features) have been applied to the training and testing subsets before the training of the algorithms and models. 
 The validation subset was subject to the same transformations after the modelling stage.
@@ -544,6 +542,7 @@ Subset                             & Threshold & F$_{\beta}$ & MCC       & Preci
 }
 \end{table}
 
+\begin{comment}
 \begin{figure}
   \centering
   \begin{minipage}{0.49\columnwidth}
@@ -569,6 +568,7 @@ Subset                             & Threshold & F$_{\beta}$ & MCC       & Preci
   The grey, dashed line shows the 1:1 relation while dot-dashed lines show the limits for outliers (cf. Eq.~\ref{eq:outlier_fraction}). Inset displays the distribution of $\Delta z^{\mathrm{N}}$ with a ${{<}\Delta z^{\mathrm{N}}{>} = 0.0236}$.}
   \label{fig:results_models_validation}
 \end{figure}
+\end{comment}
 
 \subsection{Radio detection}\label{sec:results_radio}
 
@@ -705,6 +705,7 @@ The distribution of the predicted redshifts for radio-AGN in HETDEX and Stripe 8
   \label{fig:hist_pred_z_unlabel_true_z_label}
 \end{figure}
 
+\begin{comment}
 \begin{figure*}
   \centering
   \begin{minipage}{0.20\textwidth}
@@ -736,7 +737,7 @@ The distribution of the predicted redshifts for radio-AGN in HETDEX and Stripe 8
   }
   \label{fig:conf_matx_results_radio_AGN}
 \end{figure*}
-
+\end{comment}
 
 \begin{table}
 \setlength{\tabcolsep}{3pt}
@@ -1375,6 +1376,7 @@ i       & 1943.07       & J     &  288.42       & W1    & 4010.09       & W4    
 
 \section{From Scores to Probabilities}\label{app:calibration_models}
 
+\begin{comment}
 \begin{figure}
   \centering
   \begin{minipage}{0.23\textwidth}
@@ -1393,7 +1395,9 @@ i       & 1943.07       & J     &  288.42       & W1    & 4010.09       & W4    
   \caption{Reliability curves for uncalibrated classifiers. Each line represents the calibration curve for each subset in HETDEX field. Data has been binned and each bin (represented by the points) has the same number of elements per curve. Diagonal, dashed line represents a perfectly calibrated model. a) AGN-galaxy classification model. b) Radio detection model.}
   \label{fig:calibration_curves_classification_pre}
 \end{figure}
+\end{comment}
 
+\begin{comment}
 \begin{figure}
   \centering
   \begin{minipage}{0.23\textwidth}
@@ -1412,6 +1416,7 @@ i       & 1943.07       & J     &  288.42       & W1    & 4010.09       & W4    
   \caption{Reliability curves for calibrated classifiers. a) AGN-galaxy classification model. b) Radio detection model. Details as in Fig.~\ref{fig:calibration_curves_classification_pre}}
   \label{fig:calibration_curves_classification_post}
 \end{figure}
+\end{comment}
 
 In general, classifiers deliver scores in the range [$0$, $1$], which could be associated to the probability of a studied source being part of the relevant class (in our work, AGN or radio detected). The classifier uses a threshold above which, any predicted element would be considered a positive instance. 
 
@@ -1465,6 +1470,7 @@ In Table~\ref{table:hyper_params_meta}, we present the optimised hyper-parameter
 
 \section{PR-curve threshold optimisation}\label{sec:app_pr_curve}
 
+\begin{comment}
 \begin{figure}
   \centering
   \begin{minipage}{0.23\textwidth}
@@ -1484,6 +1490,7 @@ In Table~\ref{table:hyper_params_meta}, we present the optimised hyper-parameter
   \caption{Precision-Recall curves for the AGN-Galaxy  (Left) and radio detection (Right) classification models.}
   \label{fig:PR_curves_classification}
 \end{figure}
+\end{comment}
 
 We want to improve the number of recovered elements in each classifier. This implies maximising the recall (Eq.~\ref{eq:recall}), done by decreasing the threshold by which a source is classified as a positive instances. Setting this threshold to its minimum, $0.0$, would help increase the recall. But every source would be predicted to be an AGN or detected on the radio regardless of their properties.% But it will also defeat the purpose of training and applying trained models. Every source would be predicted to be an AGN or to be detected on the radio regardless of their properties.
 
@@ -1493,6 +1500,7 @@ One statistical tool designed to optimise the classification threshold taking in
 
 Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z_base_HETDEX_high_z}, and \ref{fig:SHAP_decision_radio_base_HETDEX_high_z} show the decision plots for each of the base learners used in the prediction models of our pipeline (see Sect.~\ref{sec:shapley_values}). For the classification algorithms, the starting point of their predictions corresponds to the naive threshold ($0.5$) since no threshold optimisation was applied to them and only the scores are included in the stacking step, not the final classification they might provide.
 
+\begin{comment}
 \begin{figure}
   \centering
   \begin{minipage}{0.44\columnwidth}
@@ -1518,7 +1526,9 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \caption{SHAP decision plots for base AGN-Galaxy algorithms. Details as described in Figs.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}. Starting point of predictions is the naive classification threshold. From left to right and from top to bottom, each panel shows the results from \texttt{RF}, \texttt{GBC}, \texttt{ET}, and \texttt{XGBoost}.}
   \label{fig:SHAP_decision_AGN_base_HETDEX_high_z}
 \end{figure}
+\end{comment}
 
+\begin{comment}
 \begin{figure}
   \centering
   \begin{minipage}{0.44\columnwidth}
@@ -1544,7 +1554,9 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \caption{SHAP decision plots from base radio algorithms. Details as Figs.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z} and \ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}. Each panel with results for \texttt{XGBoost}, \texttt{ET}, \texttt{RF}, and \texttt{GBC}.}
   \label{fig:SHAP_decision_radio_base_HETDEX_high_z}
 \end{figure}
+\end{comment}
 
+\begin{comment}
 \begin{figure}
   \centering
   \begin{minipage}{0.44\columnwidth}
@@ -1570,6 +1582,7 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \caption{SHAP decision plots from base $z$ algorithms. Details as in Fig~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}. Each panel shows results for \texttt{XGBoost}, \texttt{GBR}, \texttt{CatBoost}, and \texttt{ET}.}
   \label{fig:SHAP_decision_z_base_HETDEX_high_z}
 \end{figure}
+\end{comment}
 
 \section{Prediction results for radio AGN}\label{sec:app_prediction_results}
 

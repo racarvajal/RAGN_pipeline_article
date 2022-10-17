@@ -1,17 +1,24 @@
+channels:
+  - conda-forge
+  - defaults
 dependencies:
-  - numpy=1.20.3
-  - pip=21.0.1
-  - python=3.8
+  - pip
+  - conda-forge::python_abi
+  - conda-forge::python=3.8
+  - conda-forge::numpy=1.20.3
   - scikit-learn=0.23.2
+  - conda-forge::matplotlib=3.6.1
+  - conda-forge::pytables
+  - conda-forge::pandas=1.4.4
+  - conda-forge::astropy
+  - conda-forge::catboost
+  - conda-forge::colorcet
+  - conda-forge::cmasher
+  - conda-forge::schemdraw
+  - conda-forge::mpl-scatter-density
   - pip:
-      - matplotlib=3.6.1
-      - pycaret=2.3.10
-      - pandas=1.4.4
-      - catboost
-      - xgboost=1.5.1
-      - fasttreeshap
-      - colorcet
-      - cmasher
-      - schemdraw
-      - mpl-scatter-density
       - chainconsumer
+      - lightgbm
+      - "xgboost==1.5.1"
+      - "pycaret==2.3.10"
+      - fasttreeshap
