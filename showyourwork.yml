@@ -9,6 +9,9 @@ ms_name: ML_pipeline
 # datasets:
 #   10.5072/zenodo.1113173:
 #     contents:
+#         classification_AGN_galaxy_ago_30_2022.pkl: src/data/models/classification_AGN_galaxy_ago_30_2022.pkl
+#         classification_LOFAR_detect_sep_07_2022.pkl: src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
+#         classification_LOFAR_detect_sep_07_2022.pkl: src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
 #         HETDEX_for_prediction.h5: src/data/HETDEX_for_prediction.h5
 #         HETDEX_mags_imputed.h5: src/data/HETDEX_mags_imputed.h5
 #         HETDEX_mags_non_imputed.h5: src/data/HETDEX_mags_non_imputed.h5
