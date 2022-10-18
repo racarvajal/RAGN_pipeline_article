@@ -311,7 +311,6 @@ Before any calculation or transformation is applied to the data from the HETDEX 
     \centering
     \includegraphics[width=0.80\textwidth]{figures/flowchart_S82_subsets.pdf}
     \vspace{4.5cm}\hfill\break
-    %\vspace{4.5cm}
     {(b) Stripe 82 Field}
   \end{minipage}
   \caption{Composition of datasets used for the different steps of this work. a) HETDEX Field. b) Stripe 82.}
@@ -698,6 +697,8 @@ The distribution of the predicted redshifts for radio-AGN in HETDEX and Stripe 8
   \caption{Redshift density distribution of the predicted radio-AGN within the unlabelled sources (clean histograms) in HETDEX (blue histograms) and Stripe 82 (purple histograms) and true redshifts from labelled radio-AGN (dashed histograms).}
   \label{fig:hist_pred_z_unlabel_true_z_label}
 \end{figure}
+
+Section~\ref{sec:discussion} explores the comparison of these results with previous works in the literature and discusses the main drivers (i.e. features) for the detection of these radio-AGN.
 
 \begin{figure*}
   \centering
@@ -1366,13 +1367,13 @@ i       & 1943.07       & J     &  288.42       & W1    & 4010.09       & W4    
 
 \begin{figure}
   \centering
-  \begin{minipage}{0.23\textwidth}
+  \begin{minipage}{0.24\textwidth}
     \centering
     \includegraphics[width=0.99\textwidth]{figures/calib_curves_pre_calib_AGN_galaxy.pdf}\hfill\break%\linebreak
     {(a) AGN-galaxy}
   \end{minipage}
   \hfill 
-  \begin{minipage}{0.23\textwidth}
+  \begin{minipage}{0.24\textwidth}
     \centering
     \includegraphics[width=0.99\textwidth]{figures/calib_curves_pre_calib_radio.pdf}\hfill\break%\linebreak
     {(b) Radio detection}
@@ -1383,13 +1384,13 @@ i       & 1943.07       & J     &  288.42       & W1    & 4010.09       & W4    
 
 \begin{figure}
   \centering
-  \begin{minipage}{0.23\textwidth}
+  \begin{minipage}{0.24\textwidth}
     \centering
     \includegraphics[width=0.99\textwidth]{figures/calib_curves_post_calib_AGN_galaxy.pdf}\hfill\break%\linebreak
     {(a) AGN-galaxy}
   \end{minipage}
   \hfill 
-  \begin{minipage}{0.23\textwidth}
+  \begin{minipage}{0.24\textwidth}
     \centering
     \includegraphics[width=0.99\textwidth]{figures/calib_curves_post_calib_radio.pdf}\hfill\break%\linebreak
     {(b) Radio detection}
@@ -1452,13 +1453,13 @@ In Table~\ref{table:hyper_params_meta}, we present the optimised hyper-parameter
 
 \begin{figure}
   \centering
-  \begin{minipage}{0.23\textwidth}
+  \begin{minipage}{0.24\textwidth}
     \centering
     \includegraphics[width=0.98\textwidth]{figures/PR_cal_curve_AGN_gal.pdf}\hfill\break
     {(a) AGN-galaxy} 
   \end{minipage}
   \hfill 
-  \begin{minipage}{0.23\textwidth}
+  \begin{minipage}{0.24\textwidth}
     \centering
     \includegraphics[width=0.98\textwidth]{figures/PR_cal_curve_radio.pdf}\hfill\break
     {(b) Radio detection}
@@ -1478,21 +1479,21 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
 
 \begin{figure}
   \centering
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_rf_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_gbc_HETDEX_highz.pdf}
   \end{minipage}\break%\%
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_et_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_xgboost_HETDEX_highz.pdf}
   \end{minipage}
@@ -1502,21 +1503,21 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
 
 \begin{figure}
   \centering
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_xgboost_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_et_HETDEX_highz.pdf}
   \end{minipage}\break%\%
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_rf_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_gbc_HETDEX_highz.pdf}
   \end{minipage}
@@ -1526,21 +1527,21 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
 
 \begin{figure}
   \centering
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_xgboost_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_gbr_HETDEX_highz.pdf}
   \end{minipage}\break%\%
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_catboost_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
-  \begin{minipage}{0.44\columnwidth}
+  \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_et_HETDEX_highz.pdf}
   \end{minipage}
