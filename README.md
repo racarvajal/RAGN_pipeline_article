@@ -1,6 +1,9 @@
+
+# Machine Learning Pipeline for the prediction of Radio Galaxies  
+
 <p align="center">
 <a href="https://github.com/showyourwork/showyourwork">
-<img width = "450" src="https://raw.githubusercontent.com/showyourwork/.github/main/images/showyourwork.png" alt="showyourwork"/>
+<img width = "180" src="https://raw.githubusercontent.com/showyourwork/.github/main/images/showyourwork.png" alt="showyourwork"/>
 </a>
 <br>
 <br>
@@ -15,4 +18,7 @@
 </a>
 </p>
 
-An open source scientific article created using the [showyourwork](https://github.com/showyourwork/showyourwork) workflow.
+An open source version of the article  
+__Developing a pipeline to predict high-redshift Radio Galaxies. Powerful Radio AGN selection with Machine Learning__  
+(R. Carvajal, I. Matute, J. Afonso, R. P. Norris, K. J. Luken, P. Sánchez-Sáez, P. Cunha, A. Humphrey, H. Messias, S. Amarantidis, and D. Barbosa)  
+created using the [showyourwork](https://github.com/showyourwork/showyourwork) workflow.
