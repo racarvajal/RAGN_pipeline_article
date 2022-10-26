@@ -7,7 +7,7 @@ import matplotlib.colors as mcolors
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from astropy.visualization import PowerStretch
 from astropy.visualization.mpl_normalize import ImageNormalize
-import colorcet as cc
+import cmasher as cmr
 import pandas as pd
 import mpl_scatter_density
 from chainconsumer import ChainConsumer
@@ -105,8 +105,6 @@ AB_lims_y = (-1.3, 1.7)
 contour_levels = [1, 2, 3]  # in sigmas
 
 num_levels_dens = 20
-cmap_cont = 'cet_coolwarm'
-cmap_agn  = 'cet_CET_C9'
 
 # norm_val  = mcolors.CenteredNorm(vcenter=0.5)
 try:
@@ -157,16 +155,16 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     points_B18 = np.array([[2.2, 2.2, 4.7, (y_Vega[-1] + 8.9) * 0.5], [y_Vega[-1], 0.5, 0.5, y_Vega[-1]]])
     
     axs[count].plot(points_M12[0] + 3.339 - 5.174, points_M12[1] + 2.699 - 3.339,\
-                    c=plt.get_cmap(cmap_agn)(0.01), zorder=1, lw=3, path_effects=gf.pe2)
-    axs[count].axhline(y=0.8 + 2.699 - 3.339, c=plt.get_cmap(cmap_agn)(0.35),\
+                    c=plt.get_cmap(gv.cmap_bands)(0.01), zorder=1, lw=3, path_effects=gf.pe2)
+    axs[count].axhline(y=0.8 + 2.699 - 3.339, c=plt.get_cmap(gv.cmap_bands)(0.35),\
                        zorder=1, lw=3, path_effects=gf.pe2)
     axs[count].plot(points_M16[0] + 3.339 - 5.174, points_M16[1] + 2.699 - 3.339,\
-                    c=plt.get_cmap(cmap_agn)(0.6), zorder=1, lw=3, ls=(0, (5, 5)), path_effects=gf.pe2)
+                    c=plt.get_cmap(gv.cmap_bands)(0.6), zorder=1, lw=3, ls=(0, (5, 5)), path_effects=gf.pe2)
     axs[count].plot(points_B18[0] + 3.339 - 5.174, points_B18[1] + 2.699 - 3.339,\
-                    c=plt.get_cmap(cmap_agn)(0.75), zorder=1, lw=3, path_effects=gf.pe2)
+                    c=plt.get_cmap(gv.cmap_bands)(0.75), zorder=1, lw=3, path_effects=gf.pe2)
     
-    colors_tmp = [mcolors.to_hex(plt.get_cmap(cmap_cont)(0.0)),\
-                                    mcolors.to_hex(plt.get_cmap(cmap_cont)(1.0))]
+    # colors_tmp = [mcolors.to_hex(plt.get_cmap(cmap_cont)(0.0)),\
+    #                                 mcolors.to_hex(plt.get_cmap(cmap_cont)(1.0))]
     corner_white = ChainConsumer()\
     .add_chain([x_axis_dens_AGN_HETDEX[count], y_axis_dens_AGN_HETDEX[count]], parameters=['r_z', 'W1_W2'], name='HETDEX MQC AGN')\
     .add_chain([x_axis_dens_AGN_S82[count], y_axis_dens_AGN_S82[count]], parameters=['r_z', 'W1_W2'], name='Stripe 82 MQC AGN')\
@@ -219,10 +217,10 @@ axins0.yaxis.set_ticks_position('left')
 clb_dens.ax.tick_params(labelsize=14)
 clb_dens.outline.set_linewidth(2.5)
 
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(cmap_agn)(0.01), label='M12', zorder=0)
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(cmap_agn)(0.35), label='S12', zorder=0)
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(cmap_agn)(0.60), label='M16', zorder=0)
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(cmap_agn)(0.75), label='B18', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_bands)(0.01), label='M12', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_bands)(0.35), label='S12', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_bands)(0.60), label='M16', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_bands)(0.75), label='B18', zorder=0)
     
 axs[3].plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), label='HETDEX', zorder=0)
 axs[3].plot([-3], [-3], marker=None, ls='-', lw=3.5, c='#1E88E5', label='MQC-SDSS\nHETDEX', zorder=0)

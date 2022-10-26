@@ -17,6 +17,7 @@ from pycaret import regression as pyr
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import matplotlib.cm as cm
+import matplotlib.colors as mcolors
 import matplotlib.patheffects as mpe
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import global_variables as gv
@@ -152,9 +153,15 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
     filt_pair_z   = np.isfinite(true_z) & np.isfinite(predicted_z)
     max_for_range = np.nanmax([np.nanmax(1 + true_z.loc[filt_pair_z]), np.nanmax(1 + predicted_z.loc[filt_pair_z])])
 
+    # Fix colormap to have 0=>white
+    cmap_m       = plt.get_cmap(cmap)
+    cmap_list    = [cmap_m(i) for i in range(cmap_m.N)]
+    cmap_list[0] = (1., 1., 1., 1.)
+    cmap_mod     = mcolors.LinearSegmentedColormap.from_list(cmap + '_mod', cmap_list, cmap_m.N)
+
     dens_1 = ax_pre.scatter_density((1 + true_z.sample(frac=1, random_state=gv.seed)),\
             (1 + predicted_z.sample(frac=1, random_state=gv.seed)),\
-            cmap=plt.get_cmap(cmap), zorder=0, dpi=dpi, norm=norm, alpha=0.93)
+            cmap=cmap_mod, zorder=0, dpi=dpi, norm=norm, alpha=0.93)
     
     ax_pre.axline((2., 2.), (3., 3.), ls='--', marker=None, c='Gray', alpha=0.8, lw=3.0, zorder=20)
     ax_pre.axline(xy1=(1., 1.15), xy2=(2., 2.3), ls='-.', marker=None, c='slateblue', alpha=0.6, lw=3.0, zorder=20)

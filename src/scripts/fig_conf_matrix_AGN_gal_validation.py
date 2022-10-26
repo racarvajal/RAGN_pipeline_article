@@ -3,7 +3,7 @@
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import colorcet as cc
+import cmasher as cmr
 import pandas as pd
 import paths
 import global_functions as gf
@@ -26,5 +26,7 @@ cm_AGN_gal = gf.conf_mat_func(catalog_HETDEX_df.loc[:, 'class'],
 fig = plt.figure(figsize=(6,5))
 ax1 = fig.add_subplot(111)
 ax1 = gf.plot_conf_mat(cm_AGN_gal, title='Validation set', axin=ax1, display_labels=['Galaxy', 'AGN'], log_stretch=False)
+ax1.texts[1].set_color('black')
+ax1.texts[2].set_color('black')
 ax1.texts[3].set_color('white')
 plt.savefig(paths.figures / 'conf_matrix_AGN_HETDEX_validation.pdf', bbox_inches='tight')

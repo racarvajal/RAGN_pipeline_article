@@ -44,8 +44,9 @@ cal_radio_thresh   = 0.3174334601810781
 high_z_limit       = 2.0  # 3.6
 
 # Colours and colormaps
-cmap_bands         = 'cmr.pride'
-cmap_shap          = 'cmr.guppy'  # cmr.pride, cet_CET_R3 cmr.wildfire cmr.guppy
-cmap_conf_matr     = 'cet_dimgray_r'
-cmap_z_plots       = 'cet_linear_kryw_5_100_c64_r'
-cmap_dens_plots    = 'cet_gray_r'
+cmap_bands         = 'cmr.rainforest'
+cmap_shap          = 'cmr.ember'  # cmr.pride, cet_CET_R3 cmr.wildfire cmr.guppy
+cmap_conf_matr     = 'cmr.neutral_r'
+cmap_z_plots       = 'cmr.fall_r'
+cmap_dens_plots    = 'cmr.neutral_r'
+cmap_hists         = 'cmr.fusion'

@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import mpl_scatter_density
-import colorcet as cc
+import cmasher as cmr
 import pandas as pd
 import paths
 import global_functions as gf

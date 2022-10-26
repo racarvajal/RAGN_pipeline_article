@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from sklearn.calibration import calibration_curve
-import colorcet as cc
+import cmasher as cmr
 import pandas as pd
 import paths
 import global_variables as gv

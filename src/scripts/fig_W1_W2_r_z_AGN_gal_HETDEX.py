@@ -9,7 +9,6 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import mpl_scatter_density
 from astropy.visualization import PowerStretch
 from astropy.visualization.mpl_normalize import ImageNormalize
-import colorcet as cc
 import cmasher as cmr
 import pandas as pd
 from chainconsumer import ChainConsumer
@@ -57,9 +56,6 @@ fig                = plt.figure(figsize=(7.2,6.5))
 ax1                = fig.add_subplot(111, xscale='linear', yscale='linear', projection='scatter_density')
 
 num_levels_dens    = 20
-cmap_cont          = 'cet_CET_R3'
-cmap_agn_limit     = 'cet_CET_C9'
-cmap_agn_gal       = 'cet_CET_D2'
 
 AB_lims_x          = (-2.5, 4.1)
 AB_lims_y          = (-1.3, 1.8)
@@ -84,16 +80,16 @@ corner_HETDEX = ChainConsumer()\
         name='HETDEX MQC AGN')\
         .add_chain(catalog_HETDEX_df.loc[filter_used_data & filter_gal_HETDEX, ['r_z', 'W1_W2']], 
         name='HETDEX SDSS Galaxies')\
-        .configure(shade=True, colors=[mcolors.to_hex(plt.get_cmap(cmap_agn_gal)(0.0)), 
-                                       mcolors.to_hex(plt.get_cmap(cmap_agn_gal)(1.0))], 
+        .configure(shade=True, colors=[mcolors.to_hex(plt.get_cmap(gv.cmap_hists)(0.2)), 
+                                       mcolors.to_hex(plt.get_cmap(gv.cmap_hists)(0.8))], 
                    sigmas=[0.01, 1, 2, 3], linewidths=3.5, shade_alpha=0.075)\
         .plotter.plot_contour(ax=ax1, parameter_x='r_z', parameter_y='W1_W2')  # Green AGN
 
 ax1.plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), 
         label=f'CW          -  N = {n_sources_CW:,}'.replace(',',' '), zorder=0)
-ax1.plot([-3], [-3], marker=None, ls='-', lw=2.0, c=plt.get_cmap(cmap_agn_gal)(0.0), 
+ax1.plot([-3], [-3], marker=None, ls='-', lw=2.0, c=plt.get_cmap(gv.cmap_hists)(0.2), 
         label=f'MQC AGN - N =      {np.sum(filter_used_data & filter_AGN_HETDEX):,}'.replace(',',' '), zorder=0)
-ax1.plot([-3], [-3], marker=None, ls='-', lw=2.0, c=plt.get_cmap(cmap_agn_gal)(1.0), 
+ax1.plot([-3], [-3], marker=None, ls='-', lw=2.0, c=plt.get_cmap(gv.cmap_hists)(0.8), 
         label=f'SDSS Gal  - N =      {np.sum(filter_used_data & filter_gal_HETDEX):,}'.replace(',',' '), zorder=0)
 
 # Colorbar density
@@ -116,7 +112,7 @@ y_Vega   = np.array(AB_lims_y) - vega_shift['W1mproPM'] + vega_shift['W2mproPM']
 points_B18 = np.array([[-0.45, -0.45, 1.8, 1.8], [y_Vega[-1], 0.1, 0.9, y_Vega[-1]]])
 ax1.plot(points_B18[0] + vega_shift['rmag'] - vega_shift['zmag'], 
         points_B18[1] + vega_shift['W1mproPM'] - vega_shift['W2mproPM'], 
-        label='This work', c=plt.get_cmap(cmap_agn_limit)(0.75), zorder=2, lw=3)
+        label='This work', c=plt.get_cmap(gv.cmap_bands)(0.75), zorder=2, lw=3)
 
 ax2 = ax1.twinx()
 ax2.set_ylim(tuple(np.array(ax1.get_ylim()) - 2.699 + 3.339))

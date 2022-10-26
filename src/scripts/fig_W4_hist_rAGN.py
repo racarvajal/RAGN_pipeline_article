@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-import colorcet as cc
+import cmasher as cmr
 import pandas as pd
 import paths
 import global_variables as gv
@@ -63,18 +63,18 @@ counts_S82_norad,    edges_S82_norad    = np.histogram(catalog_S82_df.loc[S82_pr
                                                        bins=full_z_bins)
 
 ax1.stairs(counts_HETDEX_radio / gv.area_HETDEX, edges_HETDEX_radio, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap('cet_bmy',3)(0.0), label='HETDEX', alpha=0.65)
+           fc=plt.get_cmap(gv.cmap_hists)(0.3), label='HETDEX', alpha=0.65)
 ax1.stairs(counts_S82_radio / gv.area_S82, edges_S82_radio, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap('cet_bmy',3)(0.5), label='S82', alpha=0.65)
+           fc=plt.get_cmap(gv.cmap_hists)(0.7), label='S82', alpha=0.65)
 
 ax1.stairs(counts_S82_norad / gv.area_S82, edges_S82_norad, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap('cet_bmy',3)(0.5), label='S82', hatch='//', alpha=0.65)
+           fc=plt.get_cmap(gv.cmap_hists)(0.7), label='S82', hatch='//', alpha=0.65)
 ax1.stairs(counts_HETDEX_norad / gv.area_HETDEX, edges_HETDEX_norad, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap('cet_bmy',3)(0.0), label='HETDEX', hatch='//', alpha=0.65)
+           fc=plt.get_cmap(gv.cmap_hists)(0.3), label='HETDEX', hatch='//', alpha=0.65)
 
 
-HETDEX_patch       = mpatches.Patch(fc=plt.get_cmap('cet_bmy',3)(0.0), ec='k', label='HETDEX', lw=2.0, alpha=0.65)
-S82_patch          = mpatches.Patch(fc=plt.get_cmap('cet_bmy',3)(0.5), ec='k', label='S82', lw=2.0, alpha=0.65)
+HETDEX_patch       = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.3), ec='k', label='HETDEX', lw=2.0, alpha=0.65)
+S82_patch          = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.7), ec='k', label='S82', lw=2.0, alpha=0.65)
 pred_patch         = mpatches.Patch(fc='None', ec='k', label='Pred AGN + Radio', lw=2.0)
 true_patch         = mpatches.Patch(fc='None', ec='k', label='Pred AGN + No Radio', hatch='///', lw=2.0)
 ax1.legend(handles=[HETDEX_patch, S82_patch, pred_patch, true_patch], loc=1, fontsize=16, ncol=1,

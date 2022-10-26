@@ -3,7 +3,7 @@
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import colorcet as cc
+import cmasher as cmr
 import pandas as pd
 import paths
 import global_functions as gf
@@ -29,4 +29,7 @@ ax1 = fig.add_subplot(111)
 ax1 = gf.plot_conf_mat(cm_rAGN, title='S82', axin=ax1,
                        display_labels=['No\nRadio AGN', 'Radio AGN'],
                        log_stretch=False)
+ax1.texts[1].set_color('black')
+ax1.texts[2].set_color('black')
+ax1.texts[3].set_color('black')
 plt.savefig(paths.figures / 'conf_matrix_rAGN_Stripe82.pdf', bbox_inches='tight')
