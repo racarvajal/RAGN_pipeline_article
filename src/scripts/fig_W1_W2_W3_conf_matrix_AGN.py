@@ -169,14 +169,14 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     .add_chain([x_axis_dens_AGN_HETDEX[count], y_axis_dens_AGN_HETDEX[count]], parameters=['r_z', 'W1_W2'], name='HETDEX MQC AGN')\
     .add_chain([x_axis_dens_AGN_S82[count], y_axis_dens_AGN_S82[count]], parameters=['r_z', 'W1_W2'], name='Stripe 82 MQC AGN')\
     .configure(shade=False, colors='#FFFFFF', sigmas=contour_levels,\
-               linewidths=4.5, shade_alpha=0.1, sigma2d=False, linestyles='-')\
+               linewidths=4.0, shade_alpha=0.1, sigma2d=False, linestyles='-')\
     .plotter.plot_contour(ax=axs[count], parameter_x='r_z', parameter_y='W1_W2')  # Green AGN
     
     corner_color = ChainConsumer()\
     .add_chain([x_axis_dens_AGN_HETDEX[count], y_axis_dens_AGN_HETDEX[count]], parameters=['r_z', 'W1_W2'], name='HETDEX MQC AGN')\
     .add_chain([x_axis_dens_AGN_S82[count], y_axis_dens_AGN_S82[count]], parameters=['r_z', 'W1_W2'], name='Stripe 82 MQC AGN')\
     .configure(shade=False, colors=['#1E88E5', '#D32F2F'], sigmas=contour_levels,\
-               linewidths=2.0, shade_alpha=0.1, sigma2d=False, linestyles='-')\
+               linewidths=1.75, shade_alpha=0.1, sigma2d=False, linestyles='-')\
     .plotter.plot_contour(ax=axs[count], parameter_x='r_z', parameter_y='W1_W2')  # Green AGN
     n_sources_HETDEX   = np.sum(cm_mat_AGN_filter_HETDEX[tuple(idx_ax)])
     n_sources_S82   = np.sum(cm_mat_AGN_filter_S82[tuple(idx_ax)])
