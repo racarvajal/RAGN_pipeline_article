@@ -122,7 +122,7 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     
     dens_plts[count] = axs[count].scatter_density(dens_plot_data_x, 
                                                   dens_plot_data_y, 
-                                                  cmap=plt.get_cmap(gv.cmap_dens_plots, num_levels_dens), 
+                                                  cmap=plt.get_cmap(gv.cmap_dens_plots), 
                                                   zorder=0, dpi=18, 
                                                   norm=norm_dens, alpha=1.0)
     
@@ -212,7 +212,7 @@ axins0 = inset_axes(axs[1], width='100%', height='100%', bbox_transform=axs[1].t
                     loc=1, bbox_to_anchor=(0.9, 0.08, 0.05, 0.85), borderpad=0)
 
 clb_dens    = fig.colorbar(dens_plts[1], cax=axins0, orientation='vertical',\
-                 cmap=plt.get_cmap(gv.cmap_dens_plots, num_levels_dens), norm=norm_dens)
+                 cmap=plt.get_cmap(gv.cmap_dens_plots), norm=norm_dens)
 axins0.yaxis.set_ticks_position('left')
 clb_dens.ax.tick_params(labelsize=14)
 clb_dens.outline.set_linewidth(2.5)

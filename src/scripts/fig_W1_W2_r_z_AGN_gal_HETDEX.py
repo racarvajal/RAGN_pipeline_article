@@ -71,7 +71,7 @@ dens_plot_data_y = (catalog_HETDEX_df.loc[filter_used_data, 'W1mproPM'] -\
                     catalog_HETDEX_df.loc[filter_used_data, 'W2mproPM'])
 
 dens_CW_HETDEX      = ax1.scatter_density(dens_plot_data_x, dens_plot_data_y,
-                             cmap=plt.get_cmap(gv.cmap_dens_plots, num_levels_dens),
+                             cmap=plt.get_cmap(gv.cmap_dens_plots),
                              zorder=0, dpi=30, norm=norm_dens, alpha=1.0)
 n_sources_CW     = np.nansum(filter_used_data)
 
