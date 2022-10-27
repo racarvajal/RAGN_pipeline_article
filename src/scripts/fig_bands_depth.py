@@ -135,7 +135,7 @@ ax1             = fig.add_subplot(111, xscale='log', yscale='linear')
 # Plot band limits in magnitude vs wavelength axes
 for count, (cent_pos, depth, band_width) in enumerate(zip(central_pos_um, depth_5sigma_AB, central_pos_width_um)):
     ax1.errorbar(cent_pos, depth, xerr=band_width/2, ls='None', marker='None',\
-         ecolor=plt.get_cmap(gv.cmap_bands, len(filter_names))(count / len(filter_names)),\
+         ecolor=plt.get_cmap(gv.cmap_bands, len(filter_names) + 3)((count + 1) / (len(filter_names) + 3)),\
               elinewidth=4, path_effects=gf.pe1, zorder=10)
 band_texts = []
 for count, filt_name in enumerate(filter_names):
