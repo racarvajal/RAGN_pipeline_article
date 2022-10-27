@@ -83,13 +83,13 @@ corner_HETDEX = ChainConsumer()\
         .configure(shade=True, colors=[mcolors.to_hex(plt.get_cmap(gv.cmap_hists)(0.2)), 
                                        mcolors.to_hex(plt.get_cmap(gv.cmap_hists)(0.8))], 
                    sigmas=[0.01, 1, 2, 3], linewidths=3.5, shade_alpha=0.075)\
-        .plotter.plot_contour(ax=ax1, parameter_x='r_z', parameter_y='W1_W2')  # Green AGN
+        .plotter.plot_contour(ax=ax1, parameter_x='r_z', parameter_y='W1_W2')
 
 ax1.plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), 
         label=f'CW          -  N = {n_sources_CW:,}'.replace(',',' '), zorder=0)
-ax1.plot([-3], [-3], marker=None, ls='-', lw=2.0, c=plt.get_cmap(gv.cmap_hists)(0.2), 
+ax1.plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_hists)(0.2), 
         label=f'MQC AGN - N =      {np.sum(filter_used_data & filter_AGN_HETDEX):,}'.replace(',',' '), zorder=0)
-ax1.plot([-3], [-3], marker=None, ls='-', lw=2.0, c=plt.get_cmap(gv.cmap_hists)(0.8), 
+ax1.plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_hists)(0.8), 
         label=f'SDSS Gal  - N =      {np.sum(filter_used_data & filter_gal_HETDEX):,}'.replace(',',' '), zorder=0)
 
 # Colorbar density
@@ -112,7 +112,7 @@ y_Vega   = np.array(AB_lims_y) - vega_shift['W1mproPM'] + vega_shift['W2mproPM']
 points_B18 = np.array([[-0.45, -0.45, 1.8, 1.8], [y_Vega[-1], 0.1, 0.9, y_Vega[-1]]])
 ax1.plot(points_B18[0] + vega_shift['rmag'] - vega_shift['zmag'], 
         points_B18[1] + vega_shift['W1mproPM'] - vega_shift['W2mproPM'], 
-        label='This work', c=plt.get_cmap(gv.cmap_bands)(0.75), zorder=2, lw=3)
+        label='This work', c=plt.get_cmap(gv.cmap_bands)(0.75), zorder=2, lw=3.5)
 
 ax2 = ax1.twinx()
 ax2.set_ylim(tuple(np.array(ax1.get_ylim()) - 2.699 + 3.339))
