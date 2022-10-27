@@ -217,14 +217,14 @@ axins0.yaxis.set_ticks_position('left')
 clb_dens.ax.tick_params(labelsize=14)
 clb_dens.outline.set_linewidth(2.5)
 
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_bands)(0.01), label='M12', zorder=0)
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_bands)(0.35), label='S12', zorder=0)
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_bands)(0.60), label='M16', zorder=0)
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_bands)(0.75), label='B18', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.01), label='M12', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.35), label='S12', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.60), label='M16', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.75), label='B18', zorder=0)
     
 axs[3].plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), label='HETDEX', zorder=0)
-axs[3].plot([-3], [-3], marker=None, ls='-', lw=3.5, c='#1E88E5', label='MQC-SDSS\nHETDEX', zorder=0)
-axs[3].plot([-3], [-3], marker=None, ls='-', lw=3.5, c='#D32F2F', label='MQC-SDSS\nS82', zorder=0)
+axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#1E88E5', label='MQC-SDSS\nHETDEX', zorder=0)
+axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#D32F2F', label='MQC-SDSS\nS82', zorder=0)
 
     
 axs[0].set_xlim(left=AB_lims_x[0], right=AB_lims_x[1])
