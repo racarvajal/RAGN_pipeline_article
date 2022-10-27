@@ -67,12 +67,14 @@ for count, band in enumerate(feats_2_use):
     
     counts_HETDEX, edges_HETDEX = np.histogram(catalog_HETDEX_df.loc[filt_lims_HETDEX, band], bins=mag_bins_both)
     counts_S82,    edges_S82    = np.histogram(catalog_S82_df.loc[filt_lims_S82, band], bins=mag_bins_both)
-        
-    axs[count].stairs(counts_HETDEX / gv.area_HETDEX, edges_HETDEX, fill=True, ec='k', lw=3.5,
-                          fc=plt.get_cmap(gv.cmap_bands, len(feats_2_use))(count), alpha=0.65, label=f'{band}')
-    axs[count].stairs(counts_S82 / gv.area_S82, edges_S82, fill=True, ec='k', lw=3.5,
-                          fc=plt.get_cmap(gv.cmap_bands, len(feats_2_use))(count),
-                          alpha=0.65, label=f'{band}', hatch='///')
+    
+    face_colour    = list(plt.get_cmap(gv.cmap_bands, len(feats_2_use) + 2)(count + 1))
+    face_colour[3] = 0.45  # alpha=0.65
+    face_colour    = tuple(face_colour)
+    axs[count].stairs(counts_HETDEX / gv.area_HETDEX, edges_HETDEX, fill=True, ec='k', lw=1.5,
+                          fc=face_colour, label=f'{band}')
+    axs[count].stairs(counts_S82 / gv.area_S82, edges_S82, fill=True, ec='k', lw=1.5,
+                          fc=face_colour, label=f'{band}', hatch='///')
     
     axs[count].tick_params(which='both', top=True, right=True, direction='in')
     axs[count].tick_params(axis='both', which='major', labelsize=20)
