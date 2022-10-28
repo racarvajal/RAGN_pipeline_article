@@ -145,9 +145,10 @@ for count, filt_name in enumerate(filter_names):
     if 'W2' in filt_name: centering = 'left'
     if 'y'  in filt_name: centering = 'left'
     if 'Ks' in filt_name: centering = 'left'
-    band_texts.append(ax1.annotate(filt_name.replace('-AW', '').replace('-CW', ''), (central_pos_um[count], depth_5sigma_AB[count]),\
-         textcoords='offset points', xytext=(-3, 3.5), fontsize=14,\
-         ha=centering, path_effects=gf.pe2, zorder=10, va=valign))
+    band_texts.append(ax1.annotate(filt_name.replace('-AW', '').replace('-CW', ''), 
+                     (central_pos_um[count], depth_5sigma_AB[count]), 
+                     textcoords='offset points', xytext=(-3, 3.5), fontsize=16, 
+                     ha=centering, path_effects=gf.pe2, zorder=10, va=valign))
 
 ax1.set_ylim(bottom=4.0, top=24.0)
 ax1.invert_yaxis()
@@ -159,10 +160,10 @@ lims_uJy = np.array(lims_AB.to(u.uJy).value)
 ax2.set_ylim(tuple(lims_uJy))
 ax2.tick_params(which='both', top=False, right=True, direction='in')
 ax2.tick_params(which='both', bottom=False, left=False, direction='in')
-ax2.tick_params(axis='both', which='major', labelsize=14)
+ax2.tick_params(axis='both', which='major', labelsize=20)
 ax2.tick_params(which='major', length=8, width=1.5)
 ax2.tick_params(which='minor', length=4, width=1.5)
-ax2.set_ylabel('$\mathrm{Flux}_{5\sigma\, \mathrm{Depth}}\, [\mu \mathrm{Jy}]$', size=18)
+ax2.set_ylabel('$\mathrm{Flux}_{5\sigma\, \mathrm{Depth}}\, [\mu \mathrm{Jy}]$', size=22)
 ax2.set_yscale('log')
 
 # Add extra axis in frequency units
@@ -172,10 +173,10 @@ lims_GHz = c.value * 1e-9 / (np.array(lims_um) * 1e-6)
 ax3.set_xlim(tuple(lims_GHz))
 ax3.tick_params(which='both', top=True, right=False, direction='in')
 ax3.tick_params(which='both', bottom=False, left=False, direction='in')
-ax3.tick_params(axis='both', which='major', labelsize=14)
+ax3.tick_params(axis='both', which='major', labelsize=20)
 ax3.tick_params(which='major', length=8, width=1.5)
 ax3.tick_params(which='minor', length=4, width=1.5)
-ax3.set_xlabel('$\mathrm{Frequency\, [GHz]}$', size=18)
+ax3.set_xlabel('$\mathrm{Frequency\, [GHz]}$', size=23)
 ax3.set_xscale('log')
 
 # Add AGN SED
@@ -201,19 +202,19 @@ for z in np.linspace(z_zero_proxy, max_z_plot, 8):
          zorder=0, color='Gray', lw=1, alpha=np.abs(1 - z / (max_z_plot + 2)), ls='--')
     y_pos = int(np.where(AGN_wave_rf.value * (1 + z) >= AGN_wave_rf.value[450])[0][0])
     ax2.annotate(f'z={z:.2f}', (AGN_wave_rf.value[450], (AGN_flux_uJy.value / (1 + z))[y_pos]),\
-         textcoords='offset points', xytext=(0, 0), fontsize=7,\
+         textcoords='offset points', xytext=(0, 0), fontsize=8,\
          ha='left', zorder=10, va='bottom', alpha=np.abs(1 - z / (max_z_plot + 2)))
 ax1.set_xlim(left=2e-1, right=5e6)
 
 ax1.tick_params(which='both', top=False, right=False, direction='in')
-ax1.tick_params(axis='both', which='major', labelsize=14)
+ax1.tick_params(axis='both', which='major', labelsize=20)
 ax1.tick_params(which='major', length=8, width=1.5)
 ax1.tick_params(which='minor', length=4, width=1.5)
-ax1.set_xlabel('$\mathrm{Wavelength}\, [\mu \mathrm{m}]$', size=18)
-ax1.set_ylabel('$m_{5\sigma\, \mathrm{Depth}}\, \mathrm{[AB]}$', size=18)
+ax1.set_xlabel('$\mathrm{Wavelength}\, [\mu \mathrm{m}]$', size=23)
+ax1.set_ylabel('$m_{5\sigma\, \mathrm{Depth}}\, \mathrm{[AB]}$', size=23)
 plt.setp(ax2.spines.values(), linewidth=3.5)
 plt.setp(ax2.spines.values(), linewidth=3.5)
-ax2.legend(loc=8, fontsize=12, title='Model AGN', title_fontsize=12)
+ax2.legend(loc=8, fontsize=18, title='Model AGN', title_fontsize=18)
 plt.tight_layout()
 
 ax1.set_zorder(ax2.get_zorder()+1)

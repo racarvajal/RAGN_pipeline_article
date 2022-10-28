@@ -46,15 +46,17 @@ ax1.plot(mean_pred_val_calib, fract_positiv_calib, ls='-', marker='s',\
          c=plt.get_cmap(gv.cmap_conf_matr)(0.6), lw=2.5, label='Calibration')
 ax1.plot(mean_pred_val_val, fract_positiv_val, ls='-', marker='p',\
          c=plt.get_cmap(gv.cmap_conf_matr)(0.3), lw=2.5, label='Validation')
-ax1.plot([0, 1], [0, 1], ls=':', c='k', label="Perfectly calibrated")
-ax1.set_xlabel('Predicted score', fontsize=20)
-ax1.set_ylabel('Fraction of positives', fontsize=20)
+ax1.plot([0, 1], [0, 1], ls=':', c='k', label="Perfectly\ncalibrated")
+ax1.set_xlabel('Predicted score', fontsize=36)
+ax1.set_ylabel('Fraction of positives', fontsize=36)
 ax1.tick_params(which='both', top=True, right=True, direction='in')
-ax1.tick_params(axis='both', which='major', labelsize=14)
+ax1.tick_params(axis='both', which='major', labelsize=30)
 ax1.tick_params(which='major', length=8, width=1.5)
 ax1.tick_params(which='minor', length=4, width=1.5)
 plt.setp(ax1.spines.values(), linewidth=2.5)
 plt.setp(ax1.spines.values(), linewidth=2.5)
-plt.legend(loc='best', fontsize=14, title='Sub-sets', title_fontsize=14)
+plt.legend(loc='best', fontsize=24, title='Sub-sets', title_fontsize=22, 
+           ncol=1, columnspacing=.25, handlelength=0.8, 
+           handletextpad=0.2, framealpha=0.75)
 fig.tight_layout()
 plt.savefig(paths.figures / 'calib_curves_post_calib_AGN_galaxy.pdf', bbox_inches='tight')

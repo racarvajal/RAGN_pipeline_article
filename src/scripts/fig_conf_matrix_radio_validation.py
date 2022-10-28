@@ -30,8 +30,12 @@ cm_radio[1, 1] -= 1
 
 fig = plt.figure(figsize=(6,5))
 ax1 = fig.add_subplot(111)
-ax1 = gf.plot_conf_mat(cm_radio, title='Validation set', axin=ax1, display_labels=['No\nRadio', 'Radio'], log_stretch=False)
+ax1 = gf.plot_conf_mat(cm_radio, 
+                       axin=ax1, 
+                       display_labels=['No\nRadio', 'Radio'], 
+                       title=None, 
+                       log_stretch=False)
 ax1.texts[1].set_color('black')
 ax1.texts[2].set_color('black')
-ax1.texts[3].set_color('black')
+ax1.texts[3].set_color('white')
 plt.savefig(paths.figures / 'conf_matrix_radio_HETDEX_validation.pdf', bbox_inches='tight')

@@ -189,7 +189,7 @@ It is worth noting the depth difference between VLAS82 and LoTSS-DR1 is $\sim$1.
 \begin{figure}
    \centering
    \script{fig_imputed_mags_histograms.py}
-   \includegraphics[width=0.95\columnwidth]{figures/hists_bands_norm_HETDEX_S82_imputed.pdf}
+   \includegraphics[width=0.99\columnwidth]{figures/hists_bands_norm_HETDEX_S82_imputed.pdf}
    \caption{Histograms of base collected non-radio bands for HETDEX (clean, background histograms) and Stripe 82 (dashed histograms) fields. Each panel, named in their upper left corner, shows the distribution of the number measured magnitudes of all detected sources divided by the total area of the selected field. The number in the upper right corner of each panel shows the number of measured magnitudes above $5{-}\sigma$ limit included in their corresponding histogram for each field.}
    \label{fig:hists_bands_HETDEX_S82}
 \end{figure}
@@ -897,7 +897,7 @@ C22    & 0.8789     & 0.4870    & 0.9526    & 0.8261 \\
 \begin{figure}
    \centering
    \script{fig_W1_W2_W3_conf_matrix_AGN.py}
-   \includegraphics[width=0.95\columnwidth]{figures/WISE_colour_colour_conf_matrix_AGN_HETDEX_val_S82_all.pdf}
+   \includegraphics[width=0.99\columnwidth]{figures/WISE_colour_colour_conf_matrix_AGN_HETDEX_val_S82_all.pdf}
    \caption{W1~-~W2, W2~-~W3 colour-colour diagrams for sources in the validation subset and in the labelled sources from Stripe 82 given their position in the AGN-galaxy confusion matrix (see, for HETDEX, rightmost panel of Fig.~\ref{fig:conf_matx_results_radio_AGN}). In the background, a density plot of all CW-detected sources in the full HETDEX field sample is displayed. The colour of each square represents the number of sources in that position of the parameter space, with darker squares having more sources (as defined in the colorbar of the upper-right panel). Contours represent the distribution of sources for each of the aforementioned subsets at $1$, $2$, and $3$ $\sigma$ levels (shades of blue, for validation set and shades of red for labelled Stripe 82 sources). Coloured, solid lines display the limits from the criteria for the detection of AGN described in Sect.~\ref{sec:previous_AGN_detection}.}
    \label{fig:W1_W2_W2_W3_AGN_pred_HETDEX_S82}
 \end{figure}
@@ -1043,7 +1043,7 @@ W1 - W2 &>& 0.35 \times (r - z) + 0.26\,,
 
 \begin{figure}
     \centering
-    \begin{minipage}{0.85\columnwidth}
+    \begin{minipage}{0.99\columnwidth}
     \script{fig_W1_W2_r_z_AGN_gal_HETDEX.py}
     \includegraphics[width=\textwidth]{figures/r_z_W1_W2_AGN_gal_HETDEX_nonimputed.pdf}
     \end{minipage}%\\%
@@ -1077,7 +1077,7 @@ One way to display these SHAP values is through the so-called decision plots. Th
 
 \begin{figure}[t]
     \centering
-    \begin{minipage}{0.65\columnwidth}
+    \begin{minipage}{0.75\columnwidth}
     \script{SHAP/fig_decision_AGN_gal_hiz_AGN_HETDEX.py}
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_meta_learner_HETDEX_highz.pdf}
     \end{minipage}%\\%
@@ -1126,7 +1126,7 @@ Feature             & SHAP value    & Feature           & SHAP value \\
 \begin{figure}
    \centering
    \script{SHAP/fig_decision_radio_hiz_AGN_HETDEX.py}
-   \includegraphics[width=0.60\columnwidth]{figures/SHAP/SHAP_decision_radio_meta_learner_HETDEX_highz.pdf}
+   \includegraphics[width=0.75\columnwidth]{figures/SHAP/SHAP_decision_radio_meta_learner_HETDEX_highz.pdf}
    \caption{Decision plot from the SHAP values for all features from the radio detection model in the $77$ high redshift ($z \geq 4$) spectroscopically confirmed AGN from HETDEX. Description as in Fig.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}.}
    \label{fig:SHAP_decision_radio_meta_HETDEX_high_z}
 \end{figure}
@@ -1134,7 +1134,7 @@ Feature             & SHAP value    & Feature           & SHAP value \\
 \begin{figure}
    \centering
    \script{SHAP/fig_decision_z_hiz_AGN_HETDEX.py}
-   \includegraphics[width=0.60\columnwidth]{figures/SHAP/SHAP_decision_z_meta_learner_HETDEX_highz.pdf}
+   \includegraphics[width=0.75\columnwidth]{figures/SHAP/SHAP_decision_z_meta_learner_HETDEX_highz.pdf}
    \caption{Decision plot from the SHAP values for all features from the redshift prediction model in the $77$ high redshift ($z \geq 4$) spectroscopically confirmed AGN from HETDEX. Description as in Fig.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}.}
    \label{fig:SHAP_decision_z_meta_HETDEX_high_z}
 \end{figure}
@@ -1327,7 +1327,7 @@ We present the distribution of magnitudes in both the HETDEX and Stripe 82 field
 \begin{figure}
    \centering
    \script{fig_nonimputed_mags_histograms.py}
-   \includegraphics[width=0.92\columnwidth]{figures/hists_bands_norm_HETDEX_S82_non_imputed.pdf}
+   \includegraphics[width=0.99\columnwidth]{figures/hists_bands_norm_HETDEX_S82_non_imputed.pdf}
    \caption{Histograms of base collected, non-imputed, non-radio bands for HETDEX (clean, background histograms) and Stripe 82 (dashed histograms). Each panel shows the distribution of measured magnitudes of detected sources divided by the total area of the field. The number in the upper right corner of each panel shows the number of measured magnitudes included in their corresponding histogram.}
    \label{fig:hists_bands_nonimp_HETDEX_S82}
 \end{figure}

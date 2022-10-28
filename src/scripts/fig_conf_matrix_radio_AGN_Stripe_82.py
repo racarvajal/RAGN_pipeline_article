@@ -26,8 +26,10 @@ cm_rAGN = gf.conf_mat_func(catalog_S82_df.loc[:, 'radio_AGN'],
 
 fig = plt.figure(figsize=(6,5))
 ax1 = fig.add_subplot(111)
-ax1 = gf.plot_conf_mat(cm_rAGN, title='S82', axin=ax1,
-                       display_labels=['No\nRadio AGN', 'Radio AGN'],
+ax1 = gf.plot_conf_mat(cm_rAGN, 
+                       axin=ax1,
+                       display_labels=['No\nRadio\nAGN', 'Radio\nAGN'], 
+                       title=None,
                        log_stretch=False)
 ax1.texts[1].set_color('black')
 ax1.texts[2].set_color('black')

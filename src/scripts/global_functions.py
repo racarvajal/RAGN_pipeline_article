@@ -108,7 +108,7 @@ pe2            = [mpe.Stroke(linewidth=3.0, foreground='white'),
                   mpe.Normal()]
 
 # Plot confusion matrix
-def plot_conf_mat(confusion_matrix, title, axin, display_labels=['0', '1'], cmap=gv.cmap_conf_matr, show_clb=False, log_stretch=False):
+def plot_conf_mat(confusion_matrix, axin, display_labels=['0', '1'], title=None, cmap=gv.cmap_conf_matr, show_clb=False, log_stretch=False):
     disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix, display_labels=display_labels)
 
     if log_stretch:
@@ -123,23 +123,23 @@ def plot_conf_mat(confusion_matrix, title, axin, display_labels=['0', '1'], cmap
     for text_val in disp_b.text_.flatten():
         text_val.set_fontsize(28)
     clb = plt.gca().images[-1].colorbar
-    clb.ax.tick_params(labelsize=14)
+    clb.ax.tick_params(labelsize=26)
     clb.ax.ticklabel_format(style='sci', scilimits=(0, 0))
     clb.outline.set_linewidth(2.5)
-    clb.ax.set_ylabel('Elements in bin', size=14)
+    clb.ax.set_ylabel('Elements in bin', size=20)
     if not show_clb:
         clb.remove()
 
     disp_b.im_.norm = norm
 
-    axin.xaxis.get_label().set_fontsize(16)
-    axin.yaxis.get_label().set_fontsize(16)
+    axin.xaxis.get_label().set_fontsize(26)
+    axin.yaxis.get_label().set_fontsize(26)
 
-    axin.tick_params(axis='both', which='major', labelsize=14)
+    axin.tick_params(axis='both', which='major', labelsize=20)
 
     plt.setp(axin.spines.values(), linewidth=2.5)
     plt.setp(axin.spines.values(), linewidth=2.5)
-    axin.set_title(title, fontsize=16)
+    axin.set_title(title, fontsize=22)
     plt.tight_layout()
     return axin
 
@@ -169,9 +169,9 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
 
     if show_clb:
         clb = plt.colorbar(dens_1, extend='neither', norm=norm, ticks=mtick.MaxNLocator(integer=True))
-        clb.ax.tick_params(labelsize=14)
+        clb.ax.tick_params(labelsize=24)
         clb.outline.set_linewidth(2.5)
-        clb.ax.set_ylabel('Elements per pixel', size=16, path_effects=pe2)
+        clb.ax.set_ylabel('Elements per pixel', size=24, path_effects=pe2)
 
     # Inset axis with residuals
     axins = inset_axes(ax_pre, width='35%', height='20%', loc=2)
@@ -179,20 +179,21 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
     axins.hist(res_z_z, histtype='stepfilled', fc='grey', ec='k', bins=50, lw=2.5)
     axins.axvline(x=np.nanpercentile(res_z_z, [15.9]), ls='--', lw=2.5, c='royalblue')
     axins.axvline(x=np.nanpercentile(res_z_z, [84.1]), ls='--', lw=2.5, c='royalblue')
-    axins.set_xlabel('$\Delta \mathit{z} / (1 + \mathit{z}_{\mathrm{True}})$', fontsize=10)
+    axins.set_xlabel('$\Delta \mathit{z} / (1 + \mathit{z}_{\mathrm{True}})$', 
+                    fontsize=19, path_effects=pe2)
     axins.tick_params(labelleft=False, labelbottom=True)
     axins.tick_params(which='both', top=True, right=True, direction='in')
-    axins.tick_params(axis='both', which='major', labelsize=10)
+    axins.tick_params(axis='both', which='major', labelsize=20)
     axins.tick_params(which='major', length=8, width=1.5)
     axins.tick_params(which='minor', length=4, width=1.5)
     plt.setp(axins.spines.values(), linewidth=2.5)
     plt.setp(axins.spines.values(), linewidth=2.5)
     axins.set_xlim(left=-0.9, right=0.9)
     ##
-    ax_pre.set_xlabel('$1 + \mathit{z}_{\mathrm{True}}$', fontsize=20)
-    ax_pre.set_ylabel('$1 + \mathit{z}_{\mathrm{Predicted}}$', fontsize=20)
+    ax_pre.set_xlabel('$1 + \mathit{z}_{\mathrm{True}}$', fontsize=30)
+    ax_pre.set_ylabel('$1 + \mathit{z}_{\mathrm{Predicted}}$', fontsize=30)
     ax_pre.tick_params(which='both', top=True, right=True, direction='in')
-    ax_pre.tick_params(axis='both', which='minor', labelsize=14)
+    ax_pre.tick_params(axis='both', which='minor', labelsize=24)
     ax_pre.tick_params(which='major', length=8, width=1.5)
     ax_pre.tick_params(which='minor', length=4, width=1.5)
     # ax_pre.xaxis.set_major_locator(mtick.MaxNLocator(integer=True))
@@ -203,36 +204,6 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
     plt.setp(ax_pre.spines.values(), linewidth=2.5)
     ax_pre.set_xlim(left=1., right=np.ceil(max_for_range))
     ax_pre.set_ylim(bottom=1., top=np.ceil(max_for_range))
-    ax_pre.set_title(title)
+    ax_pre.set_title(title, fontsize=22)
     plt.tight_layout()
     return ax_pre
-
-# Plot SHAP decision
-def plot_shap_decision(pred_type, model_name, shap_values, shap_explainer, col_names, ax, link, cmap=gv.cmap_shap, new_base_value=None, base_meta='', xlim=None):
-    if np.ndim(shap_values.values) == 2:
-        shap.plots.decision(base_value=shap_explainer.expected_value,
-                            shap_values=shap_values.values,
-                            feature_names=col_names.to_list(),
-                            link=link, plot_color=plt.get_cmap(cmap),
-                            highlight=None, auto_size_plot=False,
-                            show=False, xlim=xlim,
-                            feature_display_range=slice(-1, -(len(shap_values.feature_names) +1), -1),
-                            new_base_value=new_base_value)
-    if np.ndim(shap_values.values) > 2:
-        shap.plots.decision(base_value=shap_explainer.expected_value[-1],
-                            shap_values=(shap_values.values)[:, :, 1],
-                            feature_names=col_names.to_list(),
-                            link=link, plot_color=plt.get_cmap(cmap),
-                            highlight=None, auto_size_plot=False,
-                            show=False, xlim=None,
-                            feature_display_range=slice(-1, -(len(shap_values.feature_names) +1), -1),
-                            new_base_value=new_base_value)
-    ax.tick_params('x', labelsize=14)
-    ax.xaxis.get_offset_text().set_fontsize(14)
-    #ax1.xaxis.get_offset_text().set_position((0,1))
-    ax.tick_params('y', labelsize=20)
-    # plt.ticklabel_format(axis='x', style='sci', scilimits=(0,0))
-    ax.xaxis.label.set_size(20)
-    plt.title(f'{pred_type}: {base_meta}-learner - {model_name}', fontsize=16)
-    plt.tight_layout()
-    return ax

@@ -98,100 +98,6 @@ pe2            = [mpe.Stroke(linewidth=3.0, foreground='white'),
                   mpe.Stroke(foreground='white', alpha=1),
                   mpe.Normal()]
 
-# Plot confusion matrix
-def plot_conf_mat(confusion_matrix, title, axin, display_labels=['0', '1'], cmap=gv.cmap_conf_matr, show_clb=False, log_stretch=False):
-    disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix, display_labels=display_labels)
-
-    if log_stretch:
-        norm = ImageNormalize(stretch=LogStretch())
-    if not log_stretch:
-        norm = ImageNormalize(stretch=PowerStretch(0.35))
-
-    # NOTE: Fill all variables here with default values of the plot_confusion_matrix
-    disp_b = disp.plot(include_values=True, cmap=cm.get_cmap(cmap),\
-             ax=axin, xticks_rotation='horizontal', values_format=',')
-
-    for text_val in disp_b.text_.flatten():
-        text_val.set_fontsize(28)
-    clb = plt.gca().images[-1].colorbar
-    clb.ax.tick_params(labelsize=14)
-    clb.ax.ticklabel_format(style='sci', scilimits=(0, 0))
-    clb.outline.set_linewidth(2.5)
-    clb.ax.set_ylabel('Elements in bin', size=14)
-    if not show_clb:
-        clb.remove()
-
-    disp_b.im_.norm = norm
-
-    axin.xaxis.get_label().set_fontsize(16)
-    axin.yaxis.get_label().set_fontsize(16)
-
-    axin.tick_params(axis='both', which='major', labelsize=14)
-
-    plt.setp(axin.spines.values(), linewidth=2.5)
-    plt.setp(axin.spines.values(), linewidth=2.5)
-    axin.set_title(title, fontsize=16)
-    plt.tight_layout()
-    return axin
-
-# Plot true and estimated/predicted redshifts
-def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=gv.cmap_z_plots, show_clb=False, log_stretch=False):
-    if log_stretch:
-        norm = ImageNormalize(vmin=0., stretch=LogStretch())
-    if not log_stretch:
-        norm = ImageNormalize(vmin=0., stretch=PowerStretch(0.5))
-
-    filt_pair_z   = np.isfinite(true_z) & np.isfinite(predicted_z)
-    max_for_range = np.nanmax([np.nanmax(1 + true_z.loc[filt_pair_z]), np.nanmax(1 + predicted_z.loc[filt_pair_z])])
-
-    dens_1 = ax_pre.scatter_density((1 + true_z.sample(frac=1, random_state=gv.seed)),\
-            (1 + predicted_z.sample(frac=1, random_state=gv.seed)),\
-            cmap=plt.get_cmap(cmap), zorder=0, dpi=dpi, norm=norm, alpha=0.93)
-    
-    ax_pre.axline((2., 2.), (3., 3.), ls='--', marker=None, c='Gray', alpha=0.8, lw=3.0, zorder=20)
-    ax_pre.axline(xy1=(1., 1.15), xy2=(2., 2.3), ls='-.', marker=None, c='slateblue', alpha=0.6, lw=3.0, zorder=20)
-    ax_pre.axline(xy1=(1., 0.85), xy2=(2., 1.7), ls='-.', marker=None, c='slateblue', alpha=0.6, lw=3.0, zorder=20)
-
-    if show_clb:
-        clb = plt.colorbar(dens_1, extend='neither', norm=norm, ticks=mtick.MaxNLocator(integer=True))
-        clb.ax.tick_params(labelsize=14)
-        clb.outline.set_linewidth(2.5)
-        clb.ax.set_ylabel('Elements per pixel', size=16, path_effects=pe2)
-
-    # Inset axis with residuals
-    axins = inset_axes(ax_pre, width='35%', height='20%', loc=2)
-    res_z_z = (predicted_z - true_z) / (1 + true_z)
-    axins.hist(res_z_z, histtype='stepfilled', fc='grey', ec='k', bins=50, lw=2.5)
-    axins.axvline(x=np.nanpercentile(res_z_z, [15.9]), ls='--', lw=2.5, c='royalblue')
-    axins.axvline(x=np.nanpercentile(res_z_z, [84.1]), ls='--', lw=2.5, c='royalblue')
-    axins.set_xlabel('$\Delta \mathit{z} / (1 + \mathit{z}_{\mathrm{True}})$', fontsize=10)
-    axins.tick_params(labelleft=False, labelbottom=True)
-    axins.tick_params(which='both', top=True, right=True, direction='in')
-    axins.tick_params(axis='both', which='major', labelsize=10)
-    axins.tick_params(which='major', length=8, width=1.5)
-    axins.tick_params(which='minor', length=4, width=1.5)
-    plt.setp(axins.spines.values(), linewidth=2.5)
-    plt.setp(axins.spines.values(), linewidth=2.5)
-    axins.set_xlim(left=-0.9, right=0.9)
-    ##
-    ax_pre.set_xlabel('$1 + \mathit{z}_{\mathrm{True}}$', fontsize=20)
-    ax_pre.set_ylabel('$1 + \mathit{z}_{\mathrm{Predicted}}$', fontsize=20)
-    ax_pre.tick_params(which='both', top=True, right=True, direction='in')
-    ax_pre.tick_params(axis='both', which='minor', labelsize=14)
-    ax_pre.tick_params(which='major', length=8, width=1.5)
-    ax_pre.tick_params(which='minor', length=4, width=1.5)
-    # ax_pre.xaxis.set_major_locator(mtick.MaxNLocator(integer=True))
-    # ax_pre.yaxis.set_major_locator(mtick.MaxNLocator(integer=True))
-    ax_pre.xaxis.set_minor_formatter(mtick.ScalarFormatter(useMathText=False))
-    ax_pre.yaxis.set_minor_formatter(mtick.ScalarFormatter(useMathText=False))
-    plt.setp(ax_pre.spines.values(), linewidth=2.5)
-    plt.setp(ax_pre.spines.values(), linewidth=2.5)
-    ax_pre.set_xlim(left=1., right=np.ceil(max_for_range))
-    ax_pre.set_ylim(bottom=1., top=np.ceil(max_for_range))
-    ax_pre.set_title(title)
-    plt.tight_layout()
-    return ax_pre
-
 # Plot SHAP decision
 def plot_shap_decision(pred_type, model_name, shap_values, shap_explainer, col_names, ax, link, cmap=gv.cmap_shap, new_base_value=None, base_meta='', xlim=None):
     if np.ndim(shap_values.values) == 2:
@@ -212,12 +118,12 @@ def plot_shap_decision(pred_type, model_name, shap_values, shap_explainer, col_n
                             show=False, xlim=None,
                             feature_display_range=slice(-1, -(len(shap_values.feature_names) +1), -1),
                             new_base_value=new_base_value)
-    ax.tick_params('x', labelsize=14)
-    ax.xaxis.get_offset_text().set_fontsize(14)
+    ax.tick_params('x', labelsize=38)
+    ax.xaxis.get_offset_text().set_fontsize(28)
     #ax1.xaxis.get_offset_text().set_position((0,1))
-    ax.tick_params('y', labelsize=20)
+    ax.tick_params('y', labelsize=38)
     # plt.ticklabel_format(axis='x', style='sci', scilimits=(0,0))
-    ax.xaxis.label.set_size(20)
-    plt.title(f'{pred_type}: {base_meta}-learner - {model_name}', fontsize=16)
+    ax.xaxis.label.set_size(38)
+    plt.title(f'{pred_type}: {base_meta}-learner - {model_name}', fontsize=38)
     plt.tight_layout()
     return ax

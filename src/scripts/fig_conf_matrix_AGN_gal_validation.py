@@ -25,7 +25,11 @@ cm_AGN_gal = gf.conf_mat_func(catalog_HETDEX_df.loc[:, 'class'],
 
 fig = plt.figure(figsize=(6,5))
 ax1 = fig.add_subplot(111)
-ax1 = gf.plot_conf_mat(cm_AGN_gal, title='Validation set', axin=ax1, display_labels=['Galaxy', 'AGN'], log_stretch=False)
+ax1 = gf.plot_conf_mat(cm_AGN_gal, 
+                       axin=ax1, 
+                       display_labels=['Galaxy', 'AGN'], 
+                       title=None, 
+                       log_stretch=False)
 ax1.texts[1].set_color('black')
 ax1.texts[2].set_color('black')
 ax1.texts[3].set_color('white')

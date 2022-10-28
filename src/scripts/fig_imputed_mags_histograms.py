@@ -77,7 +77,7 @@ for count, band in enumerate(feats_2_use):
                           fc=face_colour, label=f'{band}', hatch='///')
     
     axs[count].tick_params(which='both', top=True, right=True, direction='in')
-    axs[count].tick_params(axis='both', which='major', labelsize=20)
+    axs[count].tick_params(axis='both', which='major', labelsize=22)
     axs[count].tick_params(which='major', length=8, width=1.5)
     axs[count].tick_params(which='minor', length=4, width=1.5)
     axs[count].xaxis.set_minor_locator(AutoMinorLocator())
@@ -97,11 +97,11 @@ for count, band in enumerate(feats_2_use):
     axs[0].invert_xaxis()
 HETDEX_patch = mpatches.Patch(fc='None', ec='k', label='HETDEX', lw=2.0)
 S82_patch    = mpatches.Patch(fc='None', ec='k', label='Stripe 82', hatch='///', lw=2.0)
-axs[len(feats_2_use) - 1].legend(handles=[HETDEX_patch, S82_patch], loc=3, fontsize=13.5,\
+axs[len(feats_2_use) - 1].legend(handles=[HETDEX_patch, S82_patch], loc=3, fontsize=14,\
                handletextpad=0.3, handlelength=1.0, borderpad=0.3)
 
-fig.supxlabel('$m\, \mathrm{[AB]}$', fontsize=20, x=0.52, y=0.045)
-fig.supylabel('Normalised frequency [$\mathrm{deg}^{-2}$]', fontsize=20, va='center', y=0.49, x=0.04)
+fig.supxlabel('$m\, \mathrm{[AB]}$', fontsize=26, x=0.52, y=0.045)
+fig.supylabel('Normalised frequency [$\mathrm{deg}^{-2}$]', fontsize=26, va='center', y=0.49, x=0.04)
 fig.tight_layout()
 plt.savefig(paths.figures / 'hists_bands_norm_HETDEX_S82_imputed.pdf', bbox_inches='tight')
 

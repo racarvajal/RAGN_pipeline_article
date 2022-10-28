@@ -180,28 +180,29 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     .plotter.plot_contour(ax=axs[count], parameter_x='r_z', parameter_y='W1_W2')  # Green AGN
     n_sources_HETDEX   = np.sum(cm_mat_AGN_filter_HETDEX[tuple(idx_ax)])
     n_sources_S82   = np.sum(cm_mat_AGN_filter_S82[tuple(idx_ax)])
-    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX}\nStripe 82-N = {n_sources_S82}', xy=(0.02, 0.96), xycoords='axes fraction', fontsize=18,\
-                            ha='left', va='top', path_effects=gf.pe2, zorder=11)
+    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX}\nStripe 82-N = {n_sources_S82}',
+                        xy=(0.02, 0.96), xycoords='axes fraction', fontsize=20, 
+                        ha='left', va='top', path_effects=gf.pe2, zorder=11)
     
     
     axs_twinx[count] = axs[count].twinx()
     axs_twinx[count].tick_params(which='both', top=False, right=True, direction='in')
     axs_twinx[count].tick_params(which='both', bottom=False, left=False, direction='in')
-    axs_twinx[count].tick_params(axis='both', which='major', labelsize=14)
+    axs_twinx[count].tick_params(axis='both', which='major', labelsize=20)
     axs_twinx[count].tick_params(which='major', length=8, width=1.5)
     axs_twinx[count].tick_params(which='minor', length=4, width=1.5)
     
     axs_twiny[count] = axs[count].twiny()
     axs_twiny[count].tick_params(which='both', top=True, right=False, direction='in')
     axs_twiny[count].tick_params(which='both', bottom=False, left=False, direction='in')
-    axs_twiny[count].tick_params(axis='both', which='major', labelsize=14)
+    axs_twiny[count].tick_params(axis='both', which='major', labelsize=20)
     axs_twiny[count].tick_params(which='major', length=8, width=1.5)
     axs_twiny[count].tick_params(which='minor', length=4, width=1.5)
     
     axs[count].tick_params(which='both', top=False, right=False,\
                             bottom=True, left=True, direction='in')
-    axs[count].tick_params(axis='both', which='major', labelsize=14)
-    axs[count].tick_params(axis='both', which='minor', labelsize=14)
+    axs[count].tick_params(axis='both', which='major', labelsize=20)
+    axs[count].tick_params(axis='both', which='minor', labelsize=20)
     axs[count].tick_params(which='major', length=8, width=1.5)
     axs[count].tick_params(which='minor', length=4, width=1.5)
     plt.setp(axs[count].spines.values(), linewidth=2.5)
@@ -214,15 +215,16 @@ axins0 = inset_axes(axs[1], width='100%', height='100%', bbox_transform=axs[1].t
 clb_dens    = fig.colorbar(dens_plts[1], cax=axins0, orientation='vertical',\
                  cmap=plt.get_cmap(gv.cmap_dens_plots), norm=norm_dens)
 axins0.yaxis.set_ticks_position('left')
-clb_dens.ax.tick_params(labelsize=14)
+clb_dens.ax.tick_params(labelsize=20)
 clb_dens.outline.set_linewidth(2.5)
+
+axs[0].plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), label='HETDEX', zorder=0)
 
 axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.01), label='M12', zorder=0)
 axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.35), label='S12', zorder=0)
 axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.60), label='M16', zorder=0)
 axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.75), label='B18', zorder=0)
     
-axs[3].plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), label='HETDEX', zorder=0)
 axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#1E88E5', label='MQC-SDSS\nHETDEX', zorder=0)
 axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#D32F2F', label='MQC-SDSS\nS82', zorder=0)
 
@@ -242,20 +244,21 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     axs_twinx[count].set_ylim(tuple(np.array(axs[0].get_ylim()) - 2.699 + 3.339))
     axs_twiny[count].set_xlim(tuple(np.array(axs[0].get_xlim()) - 3.339 + 5.174))
 
-axs[0].set_ylabel('Galaxy', fontsize=18, rotation='horizontal', labelpad=35)
-axs[2].set_xlabel('Galaxy', fontsize=18)
-axs[2].set_ylabel('AGN', fontsize=18, rotation='horizontal', labelpad=25)
-axs[3].set_xlabel('AGN', fontsize=18)
+axs[0].set_ylabel('Galaxy', fontsize=22, rotation='horizontal', labelpad=35)
+axs[2].set_xlabel('Galaxy', fontsize=22)
+axs[2].set_ylabel('AGN', fontsize=22, rotation='horizontal', labelpad=25)
+axs[3].set_xlabel('AGN', fontsize=22)
 
-axs_twinx[1].set_ylabel('$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[Vega]}$', size=20, y=0.10)
-axs_twiny[0].set_xlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[Vega]}$', size=20, x=1.05)
+axs_twinx[1].set_ylabel('$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[Vega]}$', size=26, y=0.10)
+axs_twiny[0].set_xlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[Vega]}$', size=26, x=1.05)
 
-axs[2].legend(loc=4, fontsize=14, ncol=2, columnspacing=.5, handletextpad=0.2, handlelength=0.8, framealpha=0.95)
-axs[3].legend(loc=4, fontsize=14, ncol=1, columnspacing=.5, handletextpad=0.2, handlelength=0.8, framealpha=0.95)
+axs[0].legend(loc=4, fontsize=18, ncol=1, columnspacing=.25, handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+axs[2].legend(loc=4, fontsize=18, ncol=2, columnspacing=.25, handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+axs[3].legend(loc=4, fontsize=17, ncol=2, columnspacing=.25, handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 
-fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\nPredicted values', fontsize=20, ha='left', x=0.46, y=0.05)
-fig.supylabel('True values\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', fontsize=20, x=0.09, y=0.55, va='center')
-fig.suptitle('AGN prediction', fontsize=16, x=0.55)
+fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\nPredicted values', fontsize=25, ha='left', x=0.46, y=0.05)
+fig.supylabel('True values\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', fontsize=26, x=0.09, y=0.55, va='center')
+# fig.suptitle('AGN prediction', fontsize=20, x=0.55)
 fig.tight_layout()
 save_filename = f'WISE_colour_colour_conf_matrix_AGN_HETDEX_val_S82_all.pdf'
 plt.savefig(paths.figures / save_filename, bbox_inches='tight')
