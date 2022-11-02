@@ -59,8 +59,8 @@ ax1.tick_params(which='major', length=8, width=1.5)
 ax1.tick_params(which='minor', length=4, width=1.5)
 plt.setp(ax1.spines.values(), linewidth=2.5)
 plt.setp(ax1.spines.values(), linewidth=2.5)
-plt.legend(loc='best', fontsize=24, title='Sub-sets', title_fontsize=22, 
+plt.legend(loc='best', fontsize=25, title='Sub-sets', title_fontsize=25, 
            ncol=1, columnspacing=.25, handlelength=0.8, 
-           handletextpad=0.2, framealpha=0.75)
+           handletextpad=0.1, framealpha=0.55)
 fig.tight_layout()
 plt.savefig(paths.figures / 'calib_curves_post_calib_radio.pdf', bbox_inches='tight')
