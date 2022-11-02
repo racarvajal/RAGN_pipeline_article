@@ -62,11 +62,11 @@ viz_test        = PrecisionRecallDisplay(precision=prec_test_cal,       recall=r
 viz_train_test  = PrecisionRecallDisplay(precision=prec_train_test_cal, recall=recall_train_test_cal)
 viz_calib       = PrecisionRecallDisplay(precision=prec_calib_cal,      recall=recall_calib_cal)
 viz_val         = PrecisionRecallDisplay(precision=prec_validation_cal, recall=recall_validation_cal)
-viz_train.plot(ax=ax1,       lw=3.5, c=cm.get_cmap(gv.cmap_bands)(0.0), alpha=0.75, label="Training")
-viz_test.plot(ax=ax1,        lw=3.5, c=cm.get_cmap(gv.cmap_bands)(0.3), alpha=0.75, label="Test")
-viz_train_test.plot(ax=ax1,  lw=3.5, c=cm.get_cmap(gv.cmap_bands)(0.5), alpha=0.75, label="Train+Test")
-viz_calib.plot(ax=ax1,       lw=3.5, c=cm.get_cmap(gv.cmap_bands)(0.7), alpha=0.75, label="Calibration")
-viz_val.plot(ax=ax1,         lw=3.5, c=cm.get_cmap(gv.cmap_bands)(0.9), alpha=0.75, label="Validation")
+viz_train.plot(ax=ax1,       lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.0), alpha=0.75, label="Training")
+viz_test.plot(ax=ax1,        lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.3), alpha=0.75, label="Test")
+viz_train_test.plot(ax=ax1,  lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.5), alpha=0.75, label="Train+Test")
+viz_calib.plot(ax=ax1,       lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.7), alpha=0.75, label="Calibration")
+viz_val.plot(ax=ax1,         lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.9), alpha=0.75, label="Validation")
 
 no_skill_train      = np.sum(catalog_HETDEX_df.loc[train_idx, 'class'] == 1)       / len(catalog_HETDEX_df.loc[train_idx, 'class'])
 no_skill_test       = np.sum(catalog_HETDEX_df.loc[test_idx, 'class'] == 1)        / len(catalog_HETDEX_df.loc[test_idx, 'class'])
@@ -78,7 +78,7 @@ ax1.plot([0, 1], [no_skill_test,       no_skill_test],       ls='--', marker=Non
 ax1.plot([0, 1], [no_skill_train_test, no_skill_train_test], ls='--', marker=None, c=cm.get_cmap(gv.cmap_bands)(0.6), alpha=0.4, lw=3.5)
 ax1.plot([0, 1], [no_skill_calib,      no_skill_calib],      ls='--', marker=None, c=cm.get_cmap(gv.cmap_bands)(0.8), alpha=0.4, lw=3.5)
 ax1.plot([0, 1], [no_skill_val,        no_skill_val],        ls='--', marker=None, c=cm.get_cmap(gv.cmap_bands)(1.0), alpha=0.4, lw=3.5)
-ax1.plot([1, 1], [1, 1], ls=':', marker=None, c='Gray', alpha=0.9, lw=3.5, label='No Skill', zorder=0)
+ax1.plot([1, 1], [1, 1], ls=':', marker=None, c='Gray', alpha=0.9, lw=4.5, label='No Skill', zorder=0)
 
 ax1.set_xlabel('Recall', fontsize=36)
 ax1.set_ylabel('Precision', fontsize=36)
@@ -88,8 +88,8 @@ ax1.tick_params(which='major', length=8, width=1.5)
 ax1.tick_params(which='minor', length=4, width=1.5)
 plt.setp(ax1.spines.values(), linewidth=3.0)
 plt.setp(ax1.spines.values(), linewidth=3.0)
-plt.legend(loc=6, fontsize=24, title='AGN/Galaxy classification', 
-           title_fontsize=21, ncol=2, columnspacing=.25, handlelength=0.8, 
+plt.legend(loc=6, fontsize=25, title='AGN/Galaxy classification', 
+           title_fontsize=24, ncol=2, columnspacing=.25, handlelength=0.8, 
            handletextpad=0.2, framealpha=0.75)
 ax1.set_aspect('equal', 'datalim')
 # ax1.set_title('Calibrated PR curve. HETDEX field.', fontsize=16)
