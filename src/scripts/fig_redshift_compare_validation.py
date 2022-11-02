@@ -25,7 +25,7 @@ catalog_HETDEX_df['is_AGN'] = np.array(catalog_HETDEX_df.loc[:, 'class'] == 1)
 filter_rAGN = np.array(catalog_HETDEX_df.loc[:, 'is_AGN'] == 1) &\
               np.array(catalog_HETDEX_df.loc[:, 'LOFAR_detect'] == 1)
 
-fig             = plt.figure(figsize=(7.5,6))
+fig             = plt.figure(figsize=(7.6,6))
 ax1             = fig.add_subplot(111, projection='scatter_density', xscale='log', yscale='log')
 _ = gf.plot_redshift_compare(catalog_HETDEX_df.loc[filter_rAGN, 'Z'], catalog_HETDEX_df.loc[filter_rAGN, 'pred_Z'],\
                       ax_pre=ax1, title=None, dpi=10, show_clb=True, log_stretch=False)

@@ -24,7 +24,7 @@ catalog_HETDEX_df = catalog_HETDEX_df.loc[validation_idx]
 filter_rAGN = np.array(catalog_HETDEX_df.loc[:, 'pred_prob_class'] == 1) &\
               np.array(catalog_HETDEX_df.loc[:, 'pred_prob_radio'] == 1)
 
-fig             = plt.figure(figsize=(6.8,5.3))
+fig             = plt.figure(figsize=(7.1,5.8))
 ax1             = fig.add_subplot(111, projection='scatter_density', xscale='log', yscale='log')
 _ = gf.plot_redshift_compare(catalog_HETDEX_df.loc[filter_rAGN, 'Z'], catalog_HETDEX_df.loc[filter_rAGN, 'pred_Z'],\
                       ax_pre=ax1, title=None, dpi=10, show_clb=True, log_stretch=False)

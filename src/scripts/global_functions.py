@@ -169,9 +169,9 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
 
     if show_clb:
         clb = plt.colorbar(dens_1, extend='neither', norm=norm, ticks=mtick.MaxNLocator(integer=True))
-        clb.ax.tick_params(labelsize=24)
+        clb.ax.tick_params(labelsize=26)
         clb.outline.set_linewidth(2.5)
-        clb.ax.set_ylabel('Elements per pixel', size=24, path_effects=pe2)
+        clb.ax.set_ylabel('Elements per pixel', size=28, path_effects=pe2)
 
     # Inset axis with residuals
     axins = inset_axes(ax_pre, width='35%', height='20%', loc=2)
@@ -183,17 +183,18 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
                     fontsize=19, path_effects=pe2)
     axins.tick_params(labelleft=False, labelbottom=True)
     axins.tick_params(which='both', top=True, right=True, direction='in')
-    axins.tick_params(axis='both', which='major', labelsize=20)
+    axins.tick_params(axis='both', which='major', labelsize=19)
     axins.tick_params(which='major', length=8, width=1.5)
     axins.tick_params(which='minor', length=4, width=1.5)
     plt.setp(axins.spines.values(), linewidth=2.5)
     plt.setp(axins.spines.values(), linewidth=2.5)
     axins.set_xlim(left=-0.9, right=0.9)
     ##
-    ax_pre.set_xlabel('$1 + \mathit{z}_{\mathrm{True}}$', fontsize=30)
-    ax_pre.set_ylabel('$1 + \mathit{z}_{\mathrm{Predicted}}$', fontsize=30)
+    ax_pre.set_xlabel('$1 + \mathit{z}_{\mathrm{True}}$', fontsize=32)
+    ax_pre.set_ylabel('$1 + \mathit{z}_{\mathrm{Predicted}}$', fontsize=32)
     ax_pre.tick_params(which='both', top=True, right=True, direction='in')
-    ax_pre.tick_params(axis='both', which='minor', labelsize=24)
+    ax_pre.tick_params(axis='both', which='minor', labelsize=24.5)
+    ax_pre.tick_params(axis='both', which='major', labelsize=24.5)
     ax_pre.tick_params(which='major', length=8, width=1.5)
     ax_pre.tick_params(which='minor', length=4, width=1.5)
     # ax_pre.xaxis.set_major_locator(mtick.MaxNLocator(integer=True))
