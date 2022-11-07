@@ -199,6 +199,8 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
     ax_pre.tick_params(which='minor', length=4, width=1.5)
     # ax_pre.xaxis.set_major_locator(mtick.MaxNLocator(integer=True))
     # ax_pre.yaxis.set_major_locator(mtick.MaxNLocator(integer=True))
+    ax_pre.xaxis.set_major_formatter(mtick.ScalarFormatter(useMathText=False))
+    ax_pre.yaxis.set_major_formatter(mtick.ScalarFormatter(useMathText=False))
     ax_pre.xaxis.set_minor_formatter(mtick.ScalarFormatter(useMathText=False))
     ax_pre.yaxis.set_minor_formatter(mtick.ScalarFormatter(useMathText=False))
     plt.setp(ax_pre.spines.values(), linewidth=2.5)
