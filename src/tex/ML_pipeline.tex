@@ -35,7 +35,7 @@
 
    \title{Developing a pipeline to predict high-redshift Radio Galaxies}
 
-   \subtitle{Powerful Radio AGN selection with Machine Learning}
+   \subtitle{Selection of Powerful Radio AGN with Machine Learning}
 
    \author{R. Carvajal\inst{1, 2}
           \and
@@ -51,19 +51,16 @@
           \and
           P. Cunha\inst{7, 8}
           \and
-          %A. Humphrey\inst{7, 9}
-          %\and
-          H. Messias\inst{9, 10}
+          A. Humphrey\inst{7, 9}
           \and
-          S. Amarantidis\inst{11, 1}
+          H. Messias\inst{10, 11}
+          \and
+          S. Amarantidis\inst{12, 1}
           \and
           D. Barbosa\inst{1, 2}
-          \and
-          friends.
           }
 
-   \institute{Instituto de Astrof\'isica e Ci\^encias do Espa\c{c}o, Universidade de Lisboa, OAL, Tapada da Ajuda, PT1349-018 Lisbon, Portugal\\
-              \email{racarvajal@fc.ul.pt}
+   \institute{Instituto de Astrof\'isica e Ci\^encias do Espa\c{c}o, Universidade de Lisboa, OAL, Tapada da Ajuda, PT1349-018 Lisbon, Portugal \email{racarvajal@fc.ul.pt}
          \and
              Departamento de F\'isica, Faculdade de Ci\^encias, Universidade de Lisboa, Edifício C8, Campo Grande, PT1749-016 Lisbon, Portugal
         \and
@@ -79,8 +76,8 @@
         \and
             Departamento de F\'isica e Astronomia, Faculdade de Ci\^encias, Universidade do Porto, Rua do Campo Alegre 687, PT4169-007 Porto, Portugal
         \and
-            %DTx – Digital Transformation CoLAB, Building 1, Azur\'em Campus, University of Minho, 4800-058 Guimar\~{a}es, Portugal
-        %\and
+            DTx – Digital Transformation CoLAB, Building 1, Azur\'em Campus, University of Minho, 4800-058 Guimar\~{a}es, Portugal
+        \and
             Joint ALMA Observatory, Alonso de C\'ordova 3107, Vitacura 763-0355, Santiago, Chile
         \and
             European Southern Observatory, Alonso de C\'ordova 3107, Vitacura, Casilla 19001, Santiago de Chile, Chile
@@ -96,20 +93,19 @@
   \abstract
   % context heading (optional)
   % {} leave it empty if necessary  
-   {The study of Active Galactic Nuclei (AGN) is fundamental to discern formation and growth of supermassive black holes (SMBH) and their connection with star-formation history and galaxy evolution. Powerful radio emission from AGN traces the largest structures in the Universe and, given their associated radiative and kinetic energy, is a prime feedback candidate to understand correlations between properties of the SMBH and the host galaxy. Much is left to understand about mechanisms and conditions that trigger jetted radio emission in AGN. In order to understand their role in cosmic evolution, we need to extract demographic estimates along cosmic times. This is of particular relevance in the Epoch of Reionization (EoR; ${z{>}6-7}$), when the first signs of the SMBH-host connection are though to start. But few AGN have been identified in the EoR of which only a small fraction have radio detections.
+   {The study of Active Galactic Nuclei (AGN) is fundamental to discern formation and growth of supermassive black holes (SMBH) and their connection with star-formation history and galaxy evolution. Powerful radio emission from AGN traces the largest structures in the Universe and, given their associated radiative and kinetic energy, is a prime feedback candidate to understand correlations between properties of the SMBH and the host galaxy. Much is left to understand about mechanisms and conditions that trigger jetted radio emission in AGN. In order to understand their role in cosmic evolution, we need to extract demographic estimates along cosmic times. This is of particular relevance in the Epoch of Reionization (EoR; ${z{>}6-7}$), when the first signs of the SMBH-host connection are \textbf{thought} to start. But few AGN have been identified in the EoR, of which only a small fraction have radio detections.
    }
   % aims heading (mandatory)
-   {We want to develop a method to predict the AGN nature of a source, its radio detectability and its redshift. This increased number of radio AGN across cosmic times will allow us to improve our knowledge of accretion power into SMBH, the origin and triggers of radio emission and its impact on galaxy evolution.   
+   {\textbf{The goal of our project is} to develop a method to predict the AGN nature of a source, its radio detectability and its redshift. \textbf{This will increase the number of radio AGN across cosmic times, allowing us to improve} our knowledge of accretion power into SMBH, the origin and triggers of radio emission and its impact on galaxy evolution.   
    }
   % methods heading (mandatory)
-   {We developed a pipeline of thee stacked Machine Learning (ML) models which predicts the odds of a source to be an AGN and to be detected in some radio surveys. Also, it can estimate redshift values for the predicted radio-detected AGN. These ML models have been trained with multi-wavelength data from near infrared-selected sources in The Hobby-Eberly Telescope Dark Energy Experiment (HETDEX) Spring Field. We have aimed to preserve the largest coverage in parameter space, which involves minimal cleaning of the datasets. Training, testing and validation of the prediction pipeline were carried out in the HETDEX Spring field. Further validation was performed on near infrared-selected sources in the Stripe 82 field.
-   %The developed models do not need a thorough cleaning of the involved datasets.
+   {We developed a pipeline of three stacked Machine Learning (ML) models which predicts the \textbf{probability} of a source to be an AGN and to be detected in \textbf{specific} radio surveys. Also, it can estimate redshift values for the predicted radio-detected AGN. These ML models have been trained with multi-wavelength data from near infrared-selected sources in The Hobby-Eberly Telescope Dark Energy Experiment (HETDEX) Spring Field. We have aimed to preserve the largest coverage in parameter space, which involves minimal cleaning of the datasets. Training, testing and validation of the prediction pipeline were carried out in the HETDEX Spring field. Further validation was performed on near infrared-selected sources in the Stripe 82 field.
    }
   % results heading (mandatory)
-   {In the HETDEX Spring field, we recover 93\% of the originally-labelled AGN and, from the predicted AGN, we recover 63\% of previously-detected radio sources. For Stripe 82, these numbers are 87\% and 67\%, respectively. Feature importance analysis highlights the importance of near- and mid-IR colours not only to select AGN but also for their radio detection.
+   {In the HETDEX Spring field, we recover $93\%$ of the originally-labelled AGN and, from the predicted AGN, we recover $63\%$ of previously-detected radio sources. For Stripe 82, these numbers are $87\%$ and $67\%$, respectively. Feature importance analysis highlights the \textbf{significance} of near- and mid-IR colours not only to select AGN but also \textbf{to identify their radio nature and redshift value.}
    }
   % conclusions heading (optional), leave it empty if necessary 
-   {The use of stacking in ML models shows a perceivable improvement in the prediction power of our pipeline. This is relevant for the radio detection prediction where it is the first time, to our best knowledge, that has been achieved based only on photometric data. The use of traditional ML models (in contrast to Deep Learning techniques) allows for the analysis of the impact that features have on the predictions. This can give insight into the potential physical interplay between the properties of radio AGN.}
+   {The use of stacking in ML models shows a perceivable improvement in the prediction power of our pipeline. This is relevant for the radio detection prediction where it is the first time, to our best knowledge, that has been achieved based only on photometric data. The use of \textbf{tree-based} ML models (in contrast to Deep Learning techniques) allows for the analysis of the impact that features have on the predictions. This can give insight into the potential physical interplay between the properties of radio AGN.}
 
    \keywords{Galaxies: active -- Radio continuum: galaxies -- Galaxies: high-redshift -- Catalogs -- Methods: statistical.
                }
@@ -1578,4 +1574,4 @@ The columns shown in the prediction results are described.
 
 \end{document}
 
-%%%% End of aa.dem
+%%%% End of ML_pipeline.tex
