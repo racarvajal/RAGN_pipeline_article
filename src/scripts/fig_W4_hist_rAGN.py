@@ -61,16 +61,22 @@ counts_HETDEX_norad, edges_HETDEX_norad = np.histogram(catalog_HETDEX_df.loc[HET
                                                        bins=full_z_bins)
 counts_S82_norad,    edges_S82_norad    = np.histogram(catalog_S82_df.loc[S82_pred_AGN_norad_filter * ~S82_known_filter, 'W4mag'],
                                                        bins=full_z_bins)
+colour_a    = list(plt.get_cmap(gv.cmap_hists)(0.3))
+colour_b    = list(plt.get_cmap(gv.cmap_hists)(0.7))
+colour_a[3] = 0.65
+colour_b[3] = 0.65
+colour_a    = tuple(colour_a)
+colour_b    = tuple(colour_b)
 
-ax1.stairs(counts_HETDEX_radio / gv.area_HETDEX, edges_HETDEX_radio, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap(gv.cmap_hists)(0.3), label='HETDEX', alpha=0.65)
-ax1.stairs(counts_S82_radio / gv.area_S82, edges_S82_radio, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap(gv.cmap_hists)(0.7), label='S82', alpha=0.65)
+ax1.stairs(counts_HETDEX_radio / gv.area_HETDEX, edges_HETDEX_radio, fill=True, ec='k', lw=1.5,\
+           fc=colour_a, label='HETDEX')
+ax1.stairs(counts_S82_radio / gv.area_S82, edges_S82_radio, fill=True, ec='k', lw=1.5,\
+           fc=colour_b, label='S82')
 
-ax1.stairs(counts_S82_norad / gv.area_S82, edges_S82_norad, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap(gv.cmap_hists)(0.7), label='S82', hatch='//', alpha=0.65)
-ax1.stairs(counts_HETDEX_norad / gv.area_HETDEX, edges_HETDEX_norad, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap(gv.cmap_hists)(0.3), label='HETDEX', hatch='//', alpha=0.65)
+ax1.stairs(counts_S82_norad / gv.area_S82, edges_S82_norad, fill=True, ec='k', lw=1.5,\
+           fc=colour_b, label='S82', hatch='///')
+ax1.stairs(counts_HETDEX_norad / gv.area_HETDEX, edges_HETDEX_norad, fill=True, ec='k', lw=1.5,\
+           fc=colour_a, label='HETDEX', hatch='///')
 
 
 HETDEX_patch       = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.3), ec='k', label='HETDEX', lw=2.0, alpha=0.65)

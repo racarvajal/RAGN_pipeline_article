@@ -60,15 +60,21 @@ counts_HETDEX_true, edges_HETDEX_true = np.histogram(catalog_HETDEX_df.loc[HETDE
                                                      bins=full_z_bins)
 counts_S82_true,    edges_S82_true    = np.histogram(catalog_S82_df.loc[S82_true_rAGN_filter * S82_known_filter, 'Z'],
                                                      bins=full_z_bins)
+colour_a    = list(plt.get_cmap(gv.cmap_hists)(0.3))
+colour_b    = list(plt.get_cmap(gv.cmap_hists)(0.7))
+colour_a[3] = 0.65
+colour_b[3] = 0.65
+colour_a    = tuple(colour_a)
+colour_b    = tuple(colour_b)
 
-ax1.stairs(counts_HETDEX_pred / gv.area_HETDEX, edges_HETDEX_pred, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap(gv.cmap_hists)(0.3), label='HETDEX', alpha=0.65)
-ax1.stairs(counts_S82_pred / gv.area_S82, edges_S82_pred, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap(gv.cmap_hists)(0.7), label='S82', alpha=0.65)
-ax1.stairs(counts_HETDEX_true / gv.area_HETDEX, edges_HETDEX_true, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap(gv.cmap_hists)(0.3), label='HETDEX', hatch='//', alpha=0.65)
-ax1.stairs(counts_S82_true / gv.area_S82, edges_S82_true, fill=True, ec='k', lw=3.5,\
-           fc=plt.get_cmap(gv.cmap_hists)(0.7), label='S82', hatch='//', alpha=0.65)
+ax1.stairs(counts_HETDEX_pred / gv.area_HETDEX, edges_HETDEX_pred, fill=True, ec='k', lw=1.5,\
+           fc=colour_a, label='HETDEX')
+ax1.stairs(counts_S82_pred / gv.area_S82, edges_S82_pred, fill=True, ec='k', lw=1.5,\
+           fc=colour_b, label='S82')
+ax1.stairs(counts_HETDEX_true / gv.area_HETDEX, edges_HETDEX_true, fill=True, ec='k', lw=1.5,\
+           fc=colour_a, label='HETDEX', hatch='///')
+ax1.stairs(counts_S82_true / gv.area_S82, edges_S82_true, fill=True, ec='k', lw=1.5,\
+           fc=colour_b, label='S82', hatch='///')
 
 
 HETDEX_patch       = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.3), ec='k', label='HETDEX', lw=2.0, alpha=0.65)
