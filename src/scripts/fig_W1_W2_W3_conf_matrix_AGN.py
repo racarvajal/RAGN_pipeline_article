@@ -180,7 +180,7 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     .plotter.plot_contour(ax=axs[count], parameter_x='r_z', parameter_y='W1_W2')  # Green AGN
     n_sources_HETDEX   = np.sum(cm_mat_AGN_filter_HETDEX[tuple(idx_ax)])
     n_sources_S82   = np.sum(cm_mat_AGN_filter_S82[tuple(idx_ax)])
-    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX}\nStripe 82-N = {n_sources_S82}',
+    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX:,}\nStripe 82-N = {n_sources_S82:,}'.replace(',',' '),
                         xy=(0.02, 0.96), xycoords='axes fraction', fontsize=20, 
                         ha='left', va='top', path_effects=gf.pe2, zorder=11)
     
@@ -262,4 +262,3 @@ fig.supylabel('True values\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$'
 fig.tight_layout()
 save_filename = f'WISE_colour_colour_conf_matrix_AGN_HETDEX_val_S82_all.pdf'
 plt.savefig(paths.figures / save_filename, bbox_inches='tight')
-plt.show()
