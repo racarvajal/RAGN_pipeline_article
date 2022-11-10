@@ -99,13 +99,15 @@ pe2            = [mpe.Stroke(linewidth=3.0, foreground='white'),
                   mpe.Normal()]
 
 # Plot SHAP decision
-def plot_shap_decision(pred_type, model_name, shap_values, shap_explainer, col_names, ax, link, cmap=gv.cmap_shap, new_base_value=None, base_meta='', xlim=None):
+def plot_shap_decision(pred_type, model_name, shap_values, shap_explainer,
+                       col_names, ax, link, cmap=gv.cmap_shap, 
+                       new_base_value=None, base_meta='', xlim=None, highlight=None):
     if np.ndim(shap_values.values) == 2:
         shap.plots.decision(base_value=shap_explainer.expected_value,
                             shap_values=shap_values.values,
                             feature_names=col_names.to_list(),
                             link=link, plot_color=plt.get_cmap(cmap),
-                            highlight=None, auto_size_plot=False,
+                            highlight=highlight, auto_size_plot=False,
                             show=False, xlim=xlim,
                             feature_display_range=slice(-1, -(len(shap_values.feature_names) +1), -1),
                             new_base_value=new_base_value)
@@ -114,7 +116,7 @@ def plot_shap_decision(pred_type, model_name, shap_values, shap_explainer, col_n
                             shap_values=(shap_values.values)[:, :, 1],
                             feature_names=col_names.to_list(),
                             link=link, plot_color=plt.get_cmap(cmap),
-                            highlight=None, auto_size_plot=False,
+                            highlight=highlight, auto_size_plot=False,
                             show=False, xlim=None,
                             feature_display_range=slice(-1, -(len(shap_values.feature_names) +1), -1),
                             new_base_value=new_base_value)

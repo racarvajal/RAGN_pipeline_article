@@ -19,7 +19,7 @@ model_radio_name  = paths.data / 'models' / gv.radio_model
 radio_det_full    = pyc.load_model(model_radio_name, verbose=False)
 radio_det_clf     = radio_det_full.named_steps['trained_model'].estimators_[3]
 
-feats_2_use       = ['ID', 'class', 'Z', 'band_num', 
+feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 'band_num', 
                      'W4mag', 'g_r', 'r_i', 'r_z', 'i_z', 'i_y', 
                      'z_y', 'z_W1', 'y_J', 'y_W1', 'J_H', 'H_K', 
                      'K_W3', 'K_W4', 'W1_W2', 'W2_W3']
@@ -30,10 +30,11 @@ catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
 filter_hiz        = np.array(catalog_HETDEX_df.loc[:, 'Z'] >= 4.0) &\
                     np.array(catalog_HETDEX_df.loc[:, 'class'] == 1)
 catalog_HETDEX_df = catalog_HETDEX_df.loc[filter_hiz]
+filter_radio      = np.array(catalog_HETDEX_df.loc[:, 'LOFAR_detect'] == 1)
 
 base_models_radio = gf.get_base_estimators_names(radio_det_full)
 reduced_data_df   = gf.preprocess_data(radio_det_full, 
-                                       catalog_HETDEX_df.drop(columns=['class', 'Z']),
+                                       catalog_HETDEX_df.drop(columns=['class', 'Z', 'LOFAR_detect']),
                                                               base_models_radio)
 reduced_cols      = reduced_data_df.columns.drop(base_models_radio)
 
@@ -51,5 +52,5 @@ fig               = plt.figure(figsize=(size_side,size_side * 3/2))
 ax1               = fig.add_subplot(111, xscale='linear', yscale='linear')
 _ = gf.plot_shap_decision('Radio detection', 'gbc', shap_values_radio, explainer_radio, 
                           reduced_cols, ax1, 'logit', new_base_value=base_logit_radio, 
-                          base_meta='Base')
+                          base_meta='Base', highlight=filter_radio)
 plt.savefig(paths.figures / 'SHAP/SHAP_decision_radio_base_gbc_HETDEX_highz.pdf', bbox_inches='tight')
