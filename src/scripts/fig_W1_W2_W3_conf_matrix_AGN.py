@@ -57,7 +57,7 @@ for col in feats_2_use[1::]:
 n_rows = 2
 n_cols = 2
 
-fig             = plt.figure(figsize=(5 * n_cols, 5 * n_rows), constrained_layout=False)
+fig             = plt.figure(figsize=(5 * n_cols, 4.5 * n_rows), constrained_layout=False)
 
 grid            = fig.add_gridspec(ncols=n_cols, nrows=n_rows, width_ratios=[1]*n_cols,\
                                    height_ratios=[1]*n_rows, hspace=0.0, wspace=0.0)
