@@ -62,8 +62,8 @@ for count, band in enumerate(feats_2_use):
         axs[count] = fig.add_subplot(grid[int(np.floor(count / n_cols)), int(count % n_cols)],
                                      sharex=axs[0], sharey=axs[0])
     
-    filt_lims_HETDEX = np.array(catalog_HETDEX_df.loc[:, band] != mag_cols_lim[band]) & np.isfinite(catalog_HETDEX_df.loc[:, band])
-    filt_lims_S82    = np.array(catalog_S82_df.loc[:, band] != mag_cols_lim[band]) & np.isfinite(catalog_S82_df.loc[:, band])
+    filt_lims_HETDEX = np.array(catalog_HETDEX_df.loc[:, band] < mag_cols_lim[band]) & np.isfinite(catalog_HETDEX_df.loc[:, band])
+    filt_lims_S82    = np.array(catalog_S82_df.loc[:, band] < mag_cols_lim[band]) & np.isfinite(catalog_S82_df.loc[:, band])
     
     counts_HETDEX, edges_HETDEX = np.histogram(catalog_HETDEX_df.loc[filt_lims_HETDEX, band], bins=mag_bins_both)
     counts_S82,    edges_S82    = np.histogram(catalog_S82_df.loc[filt_lims_S82, band], bins=mag_bins_both)
