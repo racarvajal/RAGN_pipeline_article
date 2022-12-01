@@ -64,7 +64,7 @@ viz_calib       = PrecisionRecallDisplay(precision=prec_calib_cal,      recall=r
 viz_val         = PrecisionRecallDisplay(precision=prec_validation_cal, recall=recall_validation_cal)
 viz_train.plot(ax=ax1,     lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.0), alpha=0.75, label="Training")
 viz_val.plot(ax=ax1,       lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.3), alpha=0.75, label="Validation")
-viz_train_val.plot(ax=ax1, lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.5), alpha=0.75, label="Train+Validation")
+viz_train_val.plot(ax=ax1, lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.5), alpha=0.75, label="Train+\nValidation")
 viz_calib.plot(ax=ax1,     lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.7), alpha=0.75, label="Calibration")
 viz_test.plot(ax=ax1,      lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.9), alpha=0.75, label="Test")
 
@@ -88,7 +88,7 @@ ax1.tick_params(which='major', length=8, width=1.5)
 ax1.tick_params(which='minor', length=4, width=1.5)
 plt.setp(ax1.spines.values(), linewidth=3.0)
 plt.setp(ax1.spines.values(), linewidth=3.0)
-plt.legend(loc=6, fontsize=25, title='AGN/Galaxy classification', 
+plt.legend(loc=6, fontsize=25, title='AGN/Galaxy\nclassification', 
            title_fontsize=24, ncol=2, columnspacing=.25, handlelength=0.8, 
            handletextpad=0.2, framealpha=0.75)
 ax1.set_aspect('equal', 'datalim')
