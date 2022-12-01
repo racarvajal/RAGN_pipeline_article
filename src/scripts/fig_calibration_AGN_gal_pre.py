@@ -45,7 +45,7 @@ ax1.plot(mean_pred_val_train_validation, fract_positiv_train_validation, ls='-',
 ax1.plot(mean_pred_val_calib, fract_positiv_calib, ls='-', marker='s',\
          c=plt.get_cmap(gv.cmap_conf_matr)(0.6), lw=2.5, label='Calibration')
 ax1.plot(mean_pred_val_test, fract_positiv_test, ls='-', marker='p',\
-         c=plt.get_cmap(gv.cmap_conf_matr)(0.3), lw=2.5, label='test')
+         c=plt.get_cmap(gv.cmap_conf_matr)(0.3), lw=2.5, label='Test')
 ax1.plot([0, 1], [0, 1], ls=':', c='k', label="Perfectly\ncalibrated")
 ax1.set_xlabel('Predicted score', fontsize=36)
 ax1.set_ylabel('Fraction of positives', fontsize=36)
