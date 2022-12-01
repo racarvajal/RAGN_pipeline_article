@@ -14,7 +14,7 @@ plt.rcParams['text.usetex'] = True
 
 file_name_HETDEX = paths.data / 'HETDEX_for_prediction.h5'
 file_name_S82    = paths.data / 'S82_for_prediction.h5'
-validation_idx   = np.loadtxt(paths.data / 'indices_validation.txt')
+test_idx         = np.loadtxt(paths.data / 'indices_test.txt')
 
 feats_2_use      = ['ID', 'class', 'pred_prob_class',
                     'pred_prob_radio', 'W4mag']

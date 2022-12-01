@@ -27,7 +27,7 @@ for key in mag_cols_lim.keys():
 
 file_name_HETDEX = paths.data / 'HETDEX_for_prediction.h5'
 file_name_S82    = paths.data / 'S82_for_prediction.h5'
-validation_idx   = np.loadtxt(paths.data / 'indices_validation.txt')
+test_idx        = np.loadtxt(paths.data / 'indices_test.txt')
 
 feats_2_use      = ['ID', 'class', 'pred_prob_class', 'pred_prob_radio', 
                     'Z', 'pred_Z', 'W1mproPM', 'W2mproPM', 'W3mag']
@@ -37,7 +37,7 @@ catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
 filter_known_HTDX = np.array(catalog_HETDEX_df.loc[:, 'class'] == 0) |\
                     np.array(catalog_HETDEX_df.loc[:, 'class'] == 1)
 unknown_HTDX_df   = catalog_HETDEX_df.loc[~filter_known_HTDX].copy()
-catalog_HETDEX_df = catalog_HETDEX_df.loc[validation_idx]
+catalog_HETDEX_df = catalog_HETDEX_df.loc[test_idx]
 
 catalog_S82_df    = pd.read_hdf(file_name_S82, key='df').loc[:, feats_2_use]
 catalog_S82_df    = catalog_S82_df.set_index(keys=['ID'])
@@ -260,5 +260,5 @@ fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\nPredicted va
 fig.supylabel('True values\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', fontsize=26, x=0.09, y=0.55, va='center')
 # fig.suptitle('AGN prediction', fontsize=20, x=0.55)
 fig.tight_layout()
-save_filename = f'WISE_colour_colour_conf_matrix_AGN_HETDEX_val_S82_all.pdf'
+save_filename = f'WISE_colour_colour_conf_matrix_AGN_HETDEX_test_S82_all.pdf'
 plt.savefig(paths.figures / save_filename, bbox_inches='tight')

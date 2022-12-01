@@ -12,13 +12,13 @@ mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
 file_name_HETDEX = paths.data / 'HETDEX_for_prediction.h5'
-validation_idx   = np.loadtxt(paths.data / 'indices_validation.txt')
+test_idx         = np.loadtxt(paths.data / 'indices_test.txt')
 
 feats_2_use      = ['ID', 'class', 'pred_prob_class']
 
 catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
-catalog_HETDEX_df = catalog_HETDEX_df.loc[validation_idx]
+catalog_HETDEX_df = catalog_HETDEX_df.loc[test_idx]
 
 cm_AGN_gal = gf.conf_mat_func(catalog_HETDEX_df.loc[:, 'class'], 
                               catalog_HETDEX_df.loc[:, 'pred_prob_class'])
@@ -33,4 +33,4 @@ ax1 = gf.plot_conf_mat(cm_AGN_gal,
 ax1.texts[1].set_color('black')
 ax1.texts[2].set_color('black')
 ax1.texts[3].set_color('white')
-plt.savefig(paths.figures / 'conf_matrix_AGN_HETDEX_validation.pdf', bbox_inches='tight')
+plt.savefig(paths.figures / 'conf_matrix_AGN_HETDEX_test.pdf', bbox_inches='tight')

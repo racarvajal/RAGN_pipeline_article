@@ -22,7 +22,7 @@ ms_name: ML_pipeline
 #         indices_calibration.txt: src/data/indices_calibration.txt
 #         indices_test.txt: src/data/indices_test.txt
 #         indices_train.txt: src/data/indices_train.txt
-#         indices_train_test.txt: src/data/indices_train_test.txt
+#         indices_train_validation.txt: src/data/indices_train_validation.txt
 #         indices_validation.txt: src/data/indices_validation.txt
 
 dependencies:
@@ -32,25 +32,25 @@ dependencies:
         - src/scripts/global_functions.py
     src/scripts/fig_calibration_AGN_gal_post.py:
         - src/data/HETDEX_for_prediction.h5
-        - src/data/indices_train_test.txt
+        - src/data/indices_train_validation.txt
         - src/data/indices_calibration.txt
         - src/data/indices_validation.txt
         - src/scripts/global_variables.py
     src/scripts/fig_calibration_AGN_gal_pre.py:
         - src/data/HETDEX_for_prediction.h5
-        - src/data/indices_train_test.txt
+        - src/data/indices_train_validation.txt
         - src/data/indices_calibration.txt
         - src/data/indices_validation.txt
         - src/scripts/global_variables.py
     src/scripts/fig_calibration_radio_post.py:
         - src/data/HETDEX_for_prediction.h5
-        - src/data/indices_train_test.txt
+        - src/data/indices_train_validation.txt
         - src/data/indices_calibration.txt
         - src/data/indices_validation.txt
         - src/scripts/global_variables.py
     src/scripts/fig_calibration_radio_pre.py:
         - src/data/HETDEX_for_prediction.h5
-        - src/data/indices_train_test.txt
+        - src/data/indices_train_validation.txt
         - src/data/indices_calibration.txt
         - src/data/indices_validation.txt
         - src/scripts/global_variables.py
@@ -88,14 +88,14 @@ dependencies:
         - src/data/HETDEX_for_prediction.h5
         - src/data/indices_train.txt
         - src/data/indices_test.txt
-        - src/data/indices_train_test.txt
+        - src/data/indices_train_validation.txt
         - src/data/indices_calibration.txt
         - src/data/indices_validation.txt
     src/scripts/fig_PR_curve_radio.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/indices_train.txt
         - src/data/indices_test.txt
-        - src/data/indices_train_test.txt
+        - src/data/indices_train_validation.txt
         - src/data/indices_calibration.txt
         - src/data/indices_validation.txt
     src/scripts/fig_redshift_compare_rAGN_Stripe_82.py:

@@ -12,33 +12,33 @@ rule flowchart_S82:
 
 rule conf_mat_AGN_val:
     output:
-        "src/tex/figures/conf_matrix_AGN_HETDEX_validation.pdf"
+        "src/tex/figures/conf_matrix_AGN_HETDEX_test.pdf"
     script:
-        "src/scripts/fig_conf_matrix_AGN_gal_validation.py"
+        "src/scripts/fig_conf_matrix_AGN_gal_test.py"
 
 rule conf_mat_radio_val:
     output:
-        "src/tex/figures/conf_matrix_radio_HETDEX_validation.pdf"
+        "src/tex/figures/conf_matrix_radio_HETDEX_test.pdf"
     script:
-        "src/scripts/fig_conf_matrix_radio_validation.py"
+        "src/scripts/fig_conf_matrix_radio_test.py"
 
 rule redshift_compare_val:
     output:
-        "src/tex/figures/compare_redshift_HETDEX_validation.pdf"
+        "src/tex/figures/compare_redshift_HETDEX_test.pdf"
     script:
-        "src/scripts/fig_redshift_compare_validation.py"
+        "src/scripts/fig_redshift_compare_test.py"
 
 rule conf_mat_radio_AGN_HETDEX:
     output:
-        "src/tex/figures/conf_matrix_rAGN_HETDEX_validation.pdf"
+        "src/tex/figures/conf_matrix_rAGN_HETDEX_test.pdf"
     script:
-        "src/scripts/fig_conf_matrix_radio_AGN_validation.py"
+        "src/scripts/fig_conf_matrix_radio_AGN_test.py"
 
 rule redshift_compare_HETDEX:
     output:
-        "src/tex/figures/compare_redshift_rAGN_HETDEX_validation.pdf"
+        "src/tex/figures/compare_redshift_rAGN_HETDEX_test.pdf"
     script:
-        "src/scripts/fig_redshift_compare_rAGN_validation.py"
+        "src/scripts/fig_redshift_compare_rAGN_test.py"
 
 rule conf_mat_radio_AGN_S82:
     output:
