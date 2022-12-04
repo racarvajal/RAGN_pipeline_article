@@ -211,3 +211,58 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
     ax_pre.set_title(title, fontsize=22)
     plt.tight_layout()
     return ax_pre
+
+# Plot predicted scores (or Z) vs number of measured bands per source
+def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, dpi=10, cmap=gv.cmap_z_plots, show_clb=False, log_stretch=False):
+    if log_stretch:
+        norm = ImageNormalize(vmin=0., stretch=LogStretch())
+    if not log_stretch:
+        norm = ImageNormalize(vmin=0., stretch=PowerStretch(0.5))
+
+    filt_vals     = np.isfinite(pred_scores) & np.isfinite(band_num)
+    min_x         = np.nanmin(pred_scores.loc[filt_vals])
+    min_y         = np.nanmin(band_num.loc[filt_vals])
+    max_x         = np.nanmax(pred_scores.loc[filt_vals])
+    max_y         = np.nanmax(band_num.loc[filt_vals])
+
+    # Fix colormap to have 0=>white
+    cmap_m       = plt.get_cmap(cmap)
+    cmap_list    = [cmap_m(i) for i in range(cmap_m.N)]
+    cmap_list[0] = (1., 1., 1., 1.)
+    cmap_mod     = mcolors.LinearSegmentedColormap.from_list(cmap + '_mod', cmap_list, cmap_m.N)
+
+    dens_1 = ax_pre.scatter_density(pred_scores.sample(frac=1, random_state=gv.seed), 
+                                    band_num.sample(frac=1, random_state=gv.seed), 
+                                    cmap=cmap_mod, zorder=0, dpi=dpi, norm=norm, alpha=0.96)
+    
+    # ax_pre.axline((2., 2.), (3., 3.), ls='--', marker=None, c='Gray', alpha=0.8, lw=3.0, zorder=20)
+    # ax_pre.axline(xy1=(1., 1.15), xy2=(2., 2.3), ls='-.', marker=None, c='slateblue', alpha=0.6, lw=3.0, zorder=20)
+    # ax_pre.axline(xy1=(1., 0.85), xy2=(2., 1.7), ls='-.', marker=None, c='slateblue', alpha=0.6, lw=3.0, zorder=20)
+
+    if show_clb:
+        clb = plt.colorbar(dens_1, extend='neither', norm=norm, ticks=mtick.MaxNLocator(integer=True))
+        clb.ax.tick_params(labelsize=26)
+        clb.outline.set_linewidth(2.5)
+        clb.ax.set_ylabel('Elements per pixel', size=28, path_effects=pe2)
+
+    ax_pre.set_xlabel('$\mathtt{band\_num}$', fontsize=32)
+    ax_pre.set_ylabel('$\mathrm{Score}$', fontsize=32)
+    ax_pre.tick_params(which='both', top=True, right=True, direction='in')
+    ax_pre.tick_params(axis='both', which='minor', labelsize=24.5)
+    ax_pre.tick_params(axis='both', which='major', labelsize=24.5)
+    ax_pre.tick_params(which='major', length=8, width=1.5)
+    ax_pre.tick_params(which='minor', length=4, width=1.5)
+    # ax_pre.xaxis.set_major_locator(mtick.MaxNLocator(integer=True))
+    # ax_pre.yaxis.set_major_locator(mtick.MaxNLocator(integer=True))
+    ax_pre.xaxis.set_major_formatter(mtick.ScalarFormatter(useMathText=False))
+    ax_pre.yaxis.set_major_formatter(mtick.ScalarFormatter(useMathText=False))
+    ax_pre.xaxis.set_minor_formatter(mtick.ScalarFormatter(useMathText=False))
+    ax_pre.yaxis.set_minor_formatter(mtick.ScalarFormatter(useMathText=False))
+    plt.setp(ax_pre.spines.values(), linewidth=2.5)
+    plt.setp(ax_pre.spines.values(), linewidth=2.5)
+    ax_pre.set_xlim(left=np.floor(min_x)-1, right=np.ceil(max_x))
+    # ax_pre.set_ylim(bottom=np.floor(min_y), top=np.ceil(max_y))
+    ax_pre.set_ylim(bottom=-0.1, top=1.1)
+    ax_pre.set_title(title, fontsize=22)
+    plt.tight_layout()
+    return ax_pre
