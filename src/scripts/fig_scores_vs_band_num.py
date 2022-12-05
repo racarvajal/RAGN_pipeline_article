@@ -68,4 +68,4 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
                        meanline=True, widths=0.4, boxprops=boxprops, whiskerprops=whiskerprops, 
                        capprops=capprops, meanprops=meanprops, medianprops=medianprops)
 
-plt.savefig(paths.figures / 'prob_class_band_num_rAGN_HETDEX_test.pdf', bbox_inches='tight')
+plt.savefig(paths.figures / 'predicted_probs_band_num_HETDEX_test.pdf', bbox_inches='tight')
