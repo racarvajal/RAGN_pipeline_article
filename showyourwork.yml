@@ -34,45 +34,45 @@ dependencies:
         - src/data/HETDEX_for_prediction.h5
         - src/data/indices_train_validation.txt
         - src/data/indices_calibration.txt
-        - src/data/indices_validation.txt
+        - src/data/indices_test.txt
         - src/scripts/global_variables.py
     src/scripts/fig_calibration_AGN_gal_pre.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/indices_train_validation.txt
         - src/data/indices_calibration.txt
-        - src/data/indices_validation.txt
+        - src/data/indices_test.txt
         - src/scripts/global_variables.py
     src/scripts/fig_calibration_radio_post.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/indices_train_validation.txt
         - src/data/indices_calibration.txt
-        - src/data/indices_validation.txt
+        - src/data/indices_test.txt
         - src/scripts/global_variables.py
     src/scripts/fig_calibration_radio_pre.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/indices_train_validation.txt
         - src/data/indices_calibration.txt
-        - src/data/indices_validation.txt
+        - src/data/indices_test.txt
         - src/scripts/global_variables.py
-    src/scripts/fig_conf_matrix_AGN_gal_validation.py:
+    src/scripts/fig_conf_matrix_AGN_gal_test.py:
         - src/data/HETDEX_for_prediction.h5
-        - src/data/indices_validation.txt
+        - src/data/indices_test.txt
         - src/scripts/global_functions.py
     src/scripts/fig_conf_matrix_radio_AGN_Stripe_82.py:
         - src/data/S82_for_prediction.h5
         - src/scripts/global_functions.py
-    src/scripts/fig_conf_matrix_radio_AGN_validation.py:
+    src/scripts/fig_conf_matrix_radio_AGN_test.py:
         - src/data/HETDEX_for_prediction.h5
-        - src/data/indices_validation.txt
+        - src/data/indices_test.txt
         - src/scripts/global_functions.py
-    src/scripts/fig_conf_matrix_radio_validation.py:
+    src/scripts/fig_conf_matrix_radio_test.py:
         - src/data/HETDEX_for_prediction.h5
-        - src/data/indices_validation.txt
+        - src/data/indices_test.txt
         - src/scripts/global_functions.py
     src/scripts/fig_hist_redshift_radio_AGN.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/S82_for_prediction.h5
-        - src/data/indices_validation.txt
+        - src/data/indices_test.txt
         - src/scripts/global_variables.py
     src/scripts/fig_imputed_mags_histograms.py:
         - src/data/HETDEX_mags_imputed.h5
@@ -101,13 +101,17 @@ dependencies:
     src/scripts/fig_redshift_compare_rAGN_Stripe_82.py:
         - src/data/S82_for_prediction.h5
         - src/scripts/global_functions.py
-    src/scripts/fig_redshift_compare_rAGN_validation.py:
+    src/scripts/fig_redshift_compare_rAGN_test.py:
         - src/data/HETDEX_for_prediction.h5
-        - src/data/indices_validation.txt
+        - src/data/indices_test.txt
         - src/scripts/global_functions.py
-    src/scripts/fig_redshift_compare_validation.py:
+    src/scripts/fig_redshift_compare_test.py:
         - src/data/HETDEX_for_prediction.h5
-        - src/data/indices_validation.txt
+        - src/data/indices_test.txt
+        - src/scripts/global_functions.py
+    src/scripts/fig_scores_vs_band_num.py:
+        - src/data/HETDEX_for_prediction.h5
+        - src/data/indices_test.txt
         - src/scripts/global_functions.py
     src/scripts/fig_W1_W2_W3_conf_matrix_AGN.py:
         - src/data/HETDEX_for_prediction.h5
