@@ -46,13 +46,14 @@ capprops      = dict(linewidth=2.0)
 meanprops     = dict(linewidth=2.0)
 medianprops   = dict(linewidth=2.0)
 
+xlabels       = [None, None, '$\mathtt{band\_num}$']
 ylabels       = ['$\mathrm{AGN\:prob.}$', '$\mathrm{Radio\:prob.}$', '$\mathrm{Redshift}$']
 
 for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_use_3]):
     _ = gf.plot_scores_band_num(catalog_HETDEX_df.loc[filter_rAGN, 'band_num'],
                             catalog_HETDEX_df.loc[filter_rAGN, score_to_use], 
                             ax_pre=axs[count], title=None, dpi=5, show_clb=True, 
-                            log_stretch=False, xlabel='$\mathtt{band\_num}$', 
+                            log_stretch=False, xlabel=xlabels[count], 
                             ylabel=ylabels[count])
 
     all_scores    = []

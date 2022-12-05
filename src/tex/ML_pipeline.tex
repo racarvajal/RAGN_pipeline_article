@@ -471,7 +471,7 @@ For the redshift prediction problem, we tested five regressors as well: \texttt{
 
 These algorithms were selected given that they offer some tools to interpret the global and local influence of the input features in the training and predictions (cf. Sect.~\ref{sec:introduction} and \ref{sec:model_explain}).
 
-\textbf{All the algorithms selected for this work fall into the broad family of Tree-Based models. }
+\textbf{All the algorithms selected for this work fall into the broad family of Tree-Based models. Forest models (\texttt{RF} and \texttt{ET}) rely on a collection of decision trees to, after applying a majority vote, predict either a class or a continuum value. Each of these decision trees uses a different, randomly-selected sub-set of features to make a decision on the training set \citep{Breiman2001}. Opposite to forests, Gradient Boosting models (\texttt{GBC}, \texttt{GBR}, \texttt{XGBoost} and \texttt{CatBoost}) apply decision trees sequentially to improve the quality of the previous predictions \citep{10.1214/aos/1013203451, FRIEDMAN2002367}.}
 
 \subsection{Training of models}\label{sec:models_training}
 
@@ -947,6 +947,16 @@ AGN sources with a spectroscopic redshift detected in the LoTSS DR1 ($6,811$ sou
 The differences between these results and those obtained from the application of our models (individually and as part of the prediction pipeline) might be due to the differences in the creation of the training sets. \citet{2019A&A...622A...3D} use information from all available sources in the HETDEX field for training the redshift GP whilst our redshift model has been only trained on radio detected AGN, giving it the opportunity to focus its parameter exploration only on these sources.
 
 Finally, \citet{2022A&A...666A..87C} also produced photometric redshift predictions for almost $3\,500\,000$ sources (stars, galaxies, and QSO) as part of their pipeline (see Sect.~\ref{sec:previous_AGN_detection}). They combined three algorithms for their predictions: \texttt{XGBoost}, \texttt{CatBoost}, and \texttt{LightGBM} \citep{NIPS2017_6449f44a}. This lead to ${\sigma_{\mathrm{NMAD}} = 0.018}$ and ${\eta = 2 \%}$. As with previous examples, the differences with our results can be a consequence of the number of training samples. Also, in the case of \citet{2022A&A...666A..87C}, they applied an additional post-processing step to the redshift predictions attempting to fix the values of outliers.
+
+\subsection{Influence of data imputation}\label{sec:band_num_trends}
+
+\begin{figure}
+  \centering
+    \script{fig_scores_vs_band_num.py}
+    \includegraphics[width=0.99\columnwidth]{figures/predicted_probs_band_num_HETDEX_test.pdf}
+  \caption{W4 magnitudes density distribution of the predicted radio-AGN  (clean histograms) in HETDEX (ochre histograms) and Stripe 82 (blue histograms) and W4 magnitudes from predicted AGN that are predicted to not have radio detection (dashed histograms).}
+  \label{fig:probs_band_num_test}
+\end{figure}
 
 \subsection{Model explanations}\label{sec:model_explain}
 

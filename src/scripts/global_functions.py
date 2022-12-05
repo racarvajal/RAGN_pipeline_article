@@ -241,7 +241,7 @@ def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, dpi=10, cmap
     # ax_pre.axline(xy1=(1., 0.85), xy2=(2., 1.7), ls='-.', marker=None, c='slateblue', alpha=0.6, lw=3.0, zorder=20)
 
     if show_clb:
-        clb = plt.colorbar(dens_1, extend='neither', norm=norm, 
+        clb = plt.colorbar(dens_1, extend='neither', norm=norm, ax=ax_pre, 
                            ticks=mtick.MaxNLocator(nbins=5, integer=True, prune='lower'))
         clb.ax.tick_params(labelsize=26)
         clb.outline.set_linewidth(2.5)
