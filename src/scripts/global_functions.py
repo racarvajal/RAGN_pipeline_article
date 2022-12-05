@@ -214,7 +214,8 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
 
 # Plot predicted scores (or Z) vs number of measured bands per source
 def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, dpi=10, cmap=gv.cmap_z_plots, 
-                         show_clb=False, log_stretch=False, xlabel=None, ylabel=None):
+                         show_clb=False, log_stretch=False, xlabel=None, ylabel=None, 
+                         top_plot=True, bottom_plot=True):
     if log_stretch:
         norm = ImageNormalize(vmin=0., stretch=LogStretch())
     if not log_stretch:
@@ -246,8 +247,8 @@ def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, dpi=10, cmap
         clb.ax.tick_params(labelsize=26)
         clb.outline.set_linewidth(2.5)
         clb.ax.set_ylabel('Sources per pixel', size=28, path_effects=pe2)
-
-    ax_pre.set_xlabel(xlabel, fontsize=30)
+    if bottom_plot:
+        ax_pre.set_xlabel(xlabel, fontsize=30)
     ax_pre.set_ylabel(ylabel, fontsize=30)
     ax_pre.tick_params(which='both', top=True, right=True, direction='in')
     ax_pre.tick_params(axis='both', which='minor', labelsize=24.5)
@@ -262,8 +263,11 @@ def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, dpi=10, cmap
     ax_pre.yaxis.set_minor_formatter(mtick.ScalarFormatter(useMathText=False))
     plt.setp(ax_pre.spines.values(), linewidth=2.5)
     plt.setp(ax_pre.spines.values(), linewidth=2.5)
-    ax_pre.set_xlim(left=np.floor(min_x)-0.5, right=np.ceil(max_x)+0.5)
+    if top_plot:
+        ax_pre.set_xlim(left=np.floor(min_x)-0.5, right=np.ceil(max_x)+0.5)
     ax_pre.set_ylim(bottom=np.floor(min_y)-0.1, top=np.ceil(max_y)+0.1)
+    if not bottom_plot:
+        ax_pre.xaxis.set_ticklabels([])
     #ax_pre.set_ylim(bottom=-0.1, top=1.1)
     ax_pre.set_title(title, fontsize=22)
     plt.tight_layout()
