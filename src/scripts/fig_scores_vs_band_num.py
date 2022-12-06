@@ -70,7 +70,7 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
                        capprops=capprops, meanprops=meanprops, medianprops=medianprops)
     for count_b, num in enumerate(vals_band_num):
         filter_band_n      = np.array(catalog_HETDEX_df.loc[:, 'band_num'] == num)
-        axs[count].annotate(text=f'{np.sum(filter_rAGN[count] * filter_band_n):,}'.replace(',', ' '), 
+        axs[count].annotate(text=f'{np.sum(filter_rAGN[count] * filter_band_n):,}'.replace(',', '$\,$'), 
                             xy=(num, 0.83 * np.nanmax(np.hstack(all_scores))), 
                             xycoords='data', fontsize=18, ha='center', va='top', 
                             rotation='vertical', path_effects=gf.pe2)

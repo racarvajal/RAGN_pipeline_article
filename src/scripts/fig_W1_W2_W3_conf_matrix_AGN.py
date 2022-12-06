@@ -180,7 +180,7 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     .plotter.plot_contour(ax=axs[count], parameter_x='r_z', parameter_y='W1_W2')  # Green AGN
     n_sources_HETDEX   = np.sum(cm_mat_AGN_filter_HETDEX[tuple(idx_ax)])
     n_sources_S82   = np.sum(cm_mat_AGN_filter_S82[tuple(idx_ax)])
-    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX:,}\nStripe 82-N = {n_sources_S82:,}'.replace(',',' '),
+    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX:,}\nStripe 82-N = {n_sources_S82:,}'.replace(',','$\,$'),
                         xy=(0.02, 0.96), xycoords='axes fraction', fontsize=20, 
                         ha='left', va='top', path_effects=gf.pe2, zorder=11)
     
@@ -212,8 +212,9 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
 axins0 = inset_axes(axs[1], width='100%', height='100%', bbox_transform=axs[1].transAxes,\
                     loc=1, bbox_to_anchor=(0.9, 0.08, 0.05, 0.85), borderpad=0)
 
-clb_dens    = fig.colorbar(dens_plts[1], cax=axins0, orientation='vertical',\
-                 cmap=plt.get_cmap(gv.cmap_dens_plots), norm=norm_dens)
+clb_dens    = fig.colorbar(dens_plts[1], cax=axins0, orientation='vertical', 
+                           cmap=plt.get_cmap(gv.cmap_dens_plots), 
+                           norm=norm_dens, format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
 axins0.yaxis.set_ticks_position('left')
 clb_dens.ax.tick_params(labelsize=20)
 clb_dens.outline.set_linewidth(2.5)

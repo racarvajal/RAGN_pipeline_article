@@ -89,9 +89,9 @@ for count, band in enumerate(feats_2_use):
         plt.setp(axs[count].get_xticklabels(), visible=False)
     axs[count].annotate(text=f'{mag_cols_names[band]}', xy=(0.02, 0.9),\
                          xycoords='axes fraction', fontsize=18, ha='left', va='top', path_effects=pe2)
-    axs[count].annotate(text=f'HETDEX N={np.sum(filt_lims_HETDEX):,}'.replace(',',' '), xy=(0.98, 0.9),\
+    axs[count].annotate(text=f'HETDEX N={np.sum(filt_lims_HETDEX):,}'.replace(',','$\,$'), xy=(0.98, 0.9),\
                          xycoords='axes fraction', fontsize=16, ha='right', va='top', path_effects=pe2)
-    axs[count].annotate(text=f'S82 N={np.sum(filt_lims_S82):,}'.replace(',',' '), xy=(0.98, 0.7),\
+    axs[count].annotate(text=f'S82 N={np.sum(filt_lims_S82):,}'.replace(',','$\,$'), xy=(0.98, 0.7),\
                          xycoords='axes fraction', fontsize=16, ha='right', va='top', path_effects=pe2)
     axs[0].set_xlim(left=np.floor(min_magnitude), right=np.ceil(max_magnitude))
     axs[0].invert_xaxis()

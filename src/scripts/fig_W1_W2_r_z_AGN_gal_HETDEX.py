@@ -86,18 +86,19 @@ corner_HETDEX = ChainConsumer()\
         .plotter.plot_contour(ax=ax1, parameter_x='r_z', parameter_y='W1_W2')
 
 ax1.plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), 
-        label=f'CW          -  N = {n_sources_CW:,}'.replace(',',' '), zorder=0)
+        label=f'CW          -  N = {n_sources_CW:,}'.replace(',','$\,$'), zorder=0)
 ax1.plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_hists)(0.2), 
-        label=f'MQC AGN - N =      {np.sum(filter_used_data & filter_AGN_HETDEX):,}'.replace(',',' '), zorder=0)
+        label=f'MQC AGN - N =      {np.sum(filter_used_data & filter_AGN_HETDEX):,}'.replace(',','$\,$'), zorder=0)
 ax1.plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_hists)(0.8), 
-        label=f'SDSS Gal  - N =      {np.sum(filter_used_data & filter_gal_HETDEX):,}'.replace(',',' '), zorder=0)
+        label=f'SDSS Gal  - N =      {np.sum(filter_used_data & filter_gal_HETDEX):,}'.replace(',','$\,$'), zorder=0)
 
 # Colorbar density
 axins0 = inset_axes(ax1, width='100%', height='100%', bbox_transform=ax1.transAxes,
                     loc=1, bbox_to_anchor=(0.9, 0.15, 0.05, 0.80), borderpad=0)
 clb_dens    = fig.colorbar(dens_CW_HETDEX, cax=axins0, orientation='vertical', 
-                           cmap=plt.get_cmap(gv.cmap_dens_plots, num_levels_dens),
-                        norm=norm_dens, extend='max')
+                           cmap=plt.get_cmap(gv.cmap_dens_plots, num_levels_dens), 
+                           norm=norm_dens, extend='max', 
+                           format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
 axins0.yaxis.set_ticks_position('left')
 clb_dens.ax.tick_params(labelsize=20)
 clb_dens.outline.set_linewidth(2.5)
