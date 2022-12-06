@@ -312,16 +312,16 @@ Before any calculation or transformation is applied to the data from the HETDEX 
 
 \begin{figure}
   \centering
-  \begin{minipage}{0.29\textwidth}
+  \begin{minipage}{0.65\columnwidth}
     \centering
     \includegraphics[width=0.99\textwidth]{figures/flowchart_HETDEX_subsets.pdf}\hfill\break
     {(a) HETDEX Field}
   \end{minipage}
   \hfill
-  \begin{minipage}{0.19\textwidth}
+  \begin{minipage}{0.34\columnwidth}
     \centering
-    \includegraphics[width=0.80\textwidth]{figures/flowchart_S82_subsets.pdf}
-    \vspace{4.5cm}\hfill\break
+    \includegraphics[width=0.99\textwidth]{figures/flowchart_S82_subsets.pdf}
+    \vspace{3.6cm}\hfill\break
     {(b) Stripe 82 Field}
   \end{minipage}
   \caption{Composition of datasets used for the different steps of this work. a) HETDEX Field. b) Stripe 82.}
@@ -950,21 +950,23 @@ Finally, \citet{2022A&A...666A..87C} also produced photometric redshift predicti
 
 \subsection{Influence of data imputation}\label{sec:band_num_trends}
 
-\textbf{One effect which might influence the training of the models and, consequently, the prediction for new sources is related to the imputation of missing values (cf. Sect.~\ref{sec:data_collection}). In Fig.~\ref{fig:probs_band_num_test}, we have plotted the distributions of predicted scores (for classification) and predicted redshift values as a function of the number of measured bands (\texttt{band\_num}) for each step of the pipeline as applied to the test sub-set.}
+\textbf{One effect which might influence the training of the models and, consequently, the prediction for new sources is related to the imputation of missing values (cf. Sect.~\ref{sec:data_collection}). In Fig.~\ref{fig:probs_band_num_test}, we have plotted the distributions of predicted scores (for classification models) and predicted redshift values as a function of the number of measured bands (\texttt{band\_num}) for each step of the pipeline as applied to the test sub-set.}
 
 \begin{figure}
   \centering
     \script{fig_scores_vs_band_num.py}
     \includegraphics[width=0.99\columnwidth]{figures/predicted_probs_band_num_HETDEX_test.pdf}
-  \caption{\textbf{Evolution of predicted probabilities (top: probability to be AGN, middle: probability of AGN to be detected in radio) and redshift values for radio-detected AGN (bottom panel) with the number of observed bands in all sources in the test set. Background density plot (following the colour coding in the colorbars) show the location of the predicted values. Overlaid boxplots display the main statistics for each number of measured bands. Black rectangles encompass sources in the second and the third quartiles. Vertical lines show the place of sources from the first and fourth quartiles. Orange lines represent the median value of the sample and dashed, green lines indicate their mean values. On top of each boxplot, the written value corresponds to the number of sources considered to create each set of statistics.}}
+  \caption{\textbf{Evolution of predicted probabilities (top: probability to be AGN, middle: probability of AGN to be detected in radio) and redshift values for radio-detected AGN (bottom panel) as a function of the number of observed bands in all sources in the test set. Background density plot (following the colour coding in the colorbars) show the location of the predicted values. Overlaid boxplots display the main statistics for each number of measured bands. Black rectangles encompass sources in the second and the third quartiles. Vertical lines show the place of sources from the first and fourth quartiles. Orange lines represent the median value of the sample and dashed, green lines indicate their mean values. On top of each boxplot, the two written values correspond to the most relevant metric for the prediction (top and middle panels, recall, and bottom panel, $\sigma_{\mathrm{NMAD}}$) followed by the number of sources considered to create each set of statistics.}}
   \label{fig:probs_band_num_test}
 \end{figure}
 
-\textbf{The top panel of Fig.~\ref{fig:probs_band_num_test} shows the influence of the degree of imputation in the classification between AGN and galaxies. For most of the bins, predicted scores are distributed close to the extremes, without any noticeable trend (other than that given by the number of sources).}
+\textbf{The top panel of Fig.~\ref{fig:probs_band_num_test} shows the influence of the degree of imputation in the classification between AGN and galaxies. For most of the bins, predicted scores are distributed close to the extremes, without any noticeable trend (other than that given by the number of sources in each \texttt{band\_num} value).}
 
-\textbf{The case of radio detection classification is somewhat different. For more than $8$ detected bands, the scores tend to increase towards a radio-detection prediction. This evolution might be an effect of an overall increase of the flux in every band which will, naturally, imply a higher probability of a radio detection.}
+\textbf{The case of radio detection classification is somewhat different. For more than $8$ detected bands (i.e. $\mathtt{band\_num} > 8$), the scores tend to increase towards a radio-detection prediction. This evolution might be an effect of an overall increase of the flux in every band which will, naturally, imply a higher probability of a radio detection as well.}
 
 \textbf{Finally, a similar effect can be seen with the evolution of predicted redshift values for radio-detected AGN. Despite the lower number of available sources, it is possible to recognise that sources with higher number of available measurements are predicted to have lower redshift values. Sources that are closer to us have higher probabilities to be detected in a large number of bands. Thus, it is expected that our model predicts lower redshift values for the most measured sources in the field.}
+
+\textbf{What Fig.~\ref{fig:probs_band_num_test} delivers as main result is the fact that }
 
 \subsection{Model explanations}\label{sec:model_explain}
 
@@ -1471,7 +1473,7 @@ Parameter                           & Value             & Parameter             
 \hline
 \end{tabular}
 }
-\tablefoot{This table shows the parameters which were subject to tuning. Remaining hyper-parameters used their default values.}
+\tablefoot{This table shows the parameters which were subject to tuning. Remaining hyper-parameters used their default values \textbf{as defined by their developers}.}
 \end{table}
 
 In Table~\ref{table:hyper_params_meta}, we present the optimised hyper-parameters from our meta-learners. For all three instances of modelling (AGN-Galaxy, radio detection, and redshift), hyper-parameters were optimized using the \verb|SkoptSearch| algorithm embedded in the package \verb|tune-sklearn|\footnote{\url{https://github.com/ray-project/tune-sklearn}} \citep[\texttt{v0.4.1};][]{head_tim_2021_5565057}, which implements a bayesian search in the hyper-parameter space.
