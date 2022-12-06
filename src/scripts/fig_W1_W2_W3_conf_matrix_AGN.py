@@ -216,6 +216,7 @@ clb_dens    = fig.colorbar(dens_plts[1], cax=axins0, orientation='vertical',
                            cmap=plt.get_cmap(gv.cmap_dens_plots), 
                            norm=norm_dens, format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
 axins0.yaxis.set_ticks_position('left')
+axins0.yaxis.set_ticklabels(axins0.yaxis.get_ticklabels(), path_effects=gf.pe2)
 clb_dens.ax.tick_params(labelsize=20)
 clb_dens.outline.set_linewidth(2.5)
 
