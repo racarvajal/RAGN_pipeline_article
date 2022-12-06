@@ -15,8 +15,9 @@ plt.rcParams['text.usetex'] = True
 file_name_HETDEX = paths.data / 'HETDEX_for_prediction.h5'
 test_idx         = np.loadtxt(paths.data / 'indices_test.txt')
 
-feats_2_use      = ['ID', 'pred_prob_class', 'pred_prob_radio', 
-                    'Prob_AGN', 'Prob_radio', 'Z', 'pred_Z', 'band_num']
+feats_2_use      = ['ID', 'class', 'LOFAR_detect', 'pred_prob_class', 
+                    'pred_prob_radio', 'Prob_AGN', 'Prob_radio', 
+                    'Z', 'pred_Z', 'band_num']
 
 catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
@@ -26,10 +27,13 @@ score_to_use_1    = 'Prob_AGN'  # 'Prob_AGN', 'Prob_radio', 'pred_Z'
 score_to_use_2    = 'Prob_radio'  # 'Prob_AGN', 'Prob_radio', 'pred_Z'
 score_to_use_3    = 'pred_Z'  # 'Prob_AGN', 'Prob_radio', 'pred_Z'
 
+true_value        = ['class', 'LOFAR_detect', 'Z']
+predicted_value   = ['pred_prob_class', 'pred_prob_radio', 'pred_Z']
+
 filter_rAGN = [np.ones_like(catalog_HETDEX_df.loc[:, score_to_use_1]).astype(bool),
-               np.array(catalog_HETDEX_df.loc[:, 'pred_prob_class'] == 1),
-               np.array(catalog_HETDEX_df.loc[:, 'pred_prob_class'] == 1) &\
-               np.array(catalog_HETDEX_df.loc[:, 'pred_prob_radio'] == 1)]
+               np.array(catalog_HETDEX_df.loc[:, predicted_value[0]] == 1),
+               np.array(catalog_HETDEX_df.loc[:, predicted_value[0]] == 1) &\
+               np.array(catalog_HETDEX_df.loc[:, predicted_value[1]] == 1)]
 
 fig             = plt.figure(figsize=(9.5, 10))
 grid            = fig.add_gridspec(ncols=1, nrows=3, height_ratios=[1, 1, 1],
@@ -70,8 +74,18 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
                        capprops=capprops, meanprops=meanprops, medianprops=medianprops)
     for count_b, num in enumerate(vals_band_num):
         filter_band_n      = np.array(catalog_HETDEX_df.loc[:, 'band_num'] == num)
+        if count in [0, 1]:
+            tmp_conf_mat = gf.conf_mat_func(catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, true_value[count]], 
+                                            catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, predicted_value[count]])
+            tmp_metric   = gf.Recall_from_CM(tmp_conf_mat)
+        if count == 2:
+            tmp_metric   = gf.sigma_nmad(catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, true_value[count]], 
+                                         catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, predicted_value[count]])
+        axs[count].annotate(text=f'{tmp_metric:.2f} -'.replace('nan', ' '), xy=(num, 0.725 * np.nanmax(np.hstack(all_scores))), 
+                            xycoords='data', fontsize=18, ha='center', va='top',  rotation='vertical', 
+                            path_effects=gf.pe2)
         axs[count].annotate(text=f'{np.sum(filter_rAGN[count] * filter_band_n):,}'.replace(',', '$\,$'), 
-                            xy=(num, 0.83 * np.nanmax(np.hstack(all_scores))), 
+                            xy=(num, 0.935 * np.nanmax(np.hstack(all_scores))), 
                             xycoords='data', fontsize=18, ha='center', va='top', 
                             rotation='vertical', path_effects=gf.pe2)
 
