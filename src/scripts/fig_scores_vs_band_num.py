@@ -31,7 +31,7 @@ filter_rAGN = [np.ones_like(catalog_HETDEX_df.loc[:, score_to_use_1]).astype(boo
                np.array(catalog_HETDEX_df.loc[:, 'pred_prob_class'] == 1) &\
                np.array(catalog_HETDEX_df.loc[:, 'pred_prob_radio'] == 1)]
 
-fig             = plt.figure(figsize=(10, 10))
+fig             = plt.figure(figsize=(9.5, 10))
 grid            = fig.add_gridspec(ncols=1, nrows=3, height_ratios=[1, 1, 1],
                                    hspace=0.0, wspace=0.0)
 axs             = {}
@@ -71,7 +71,7 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
     for count_b, num in enumerate(vals_band_num):
         filter_band_n      = np.array(catalog_HETDEX_df.loc[:, 'band_num'] == num)
         axs[count].annotate(text=f'{np.sum(filter_rAGN[count] * filter_band_n):,}'.replace(',', ' '), 
-                            xy=(num, 0.75 * np.nanmax(np.hstack(all_scores))), 
+                            xy=(num, 0.83 * np.nanmax(np.hstack(all_scores))), 
                             xycoords='data', fontsize=18, ha='center', va='top', 
                             rotation='vertical', path_effects=gf.pe2)
 

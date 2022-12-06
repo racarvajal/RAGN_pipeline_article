@@ -243,7 +243,8 @@ def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, dpi=10, cmap
 
     if show_clb:
         clb = plt.colorbar(dens_1, extend='neither', norm=norm, ax=ax_pre, 
-                           ticks=mtick.MaxNLocator(nbins=5, integer=True, prune='lower'))
+                           ticks=mtick.MaxNLocator(nbins=5, integer=True, prune='lower'), 
+                           format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
         clb.ax.tick_params(labelsize=26)
         clb.outline.set_linewidth(2.5)
         clb.ax.set_ylabel('Sources per pixel', size=28, path_effects=pe2)
