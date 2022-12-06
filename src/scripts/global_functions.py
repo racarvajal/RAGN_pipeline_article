@@ -31,6 +31,29 @@ def conf_mat_func(true_class_arr, predicted_class_arr):
                    [np.sum(np.array(true_class_arr == 1) & np.array(predicted_class_arr == 0)),\
                     np.sum(np.array(true_class_arr == 1) & np.array(predicted_class_arr == 1))]])
     return cm
+
+def flatten_CM(cm_array, **kwargs):
+    try:
+        TN, FP, FN, TP = cm_array.flatten().astype('float32')
+    except:
+        TN, FP, FN, TP = cm_array.flatten()
+    return TN, FP, FN, TP
+
+# Recall
+def Recall_from_CM(cm_array, **kwargs):
+    TN, FP, FN, TP = flatten_CM(cm_array)
+    Recall = TP / (TP + FN)
+    return Recall
+##########################################
+# Define metrics for regression
+def sigma_nmad(z_true, z_pred, **kwargs):
+    dif  = (z_true - z_pred)
+    frac = dif / (1 + z_true).values
+    try:
+        med  = np.nanmedian(np.abs(frac)).astype('float32')
+    except:
+        med  = np.nanmedian(np.abs(frac))
+    return 1.48 * med
 ##########################################
 # Methods using Pycaret pipelines
 def get_final_column_names(pycaret_pipeline, sample_df, verbose=False):
