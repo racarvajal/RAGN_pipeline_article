@@ -73,8 +73,8 @@ for count, band in enumerate(feats_2_use):
     face_colour    = tuple(face_colour)
     axs[count].stairs(counts_HETDEX / gv.area_HETDEX, edges_HETDEX, fill=True, ec='k', lw=1.5,
                           fc=face_colour, label=f'{band}')
-    axs[count].stairs(counts_S82 / gv.area_S82, edges_S82, fill=True, ec='k', lw=1.5,
-                          fc=face_colour, label=f'{band}', hatch='///')
+    axs[count].stairs(counts_S82 / gv.area_S82, edges_S82, fill=False, ec='brown', lw=1.5,
+                          fc=face_colour, label=f'{band}')
     
     axs[count].tick_params(which='both', top=True, right=True, direction='in')
     axs[count].tick_params(axis='both', which='major', labelsize=22)
@@ -88,15 +88,15 @@ for count, band in enumerate(feats_2_use):
     if count < (len(feats_2_use) - n_cols):
         plt.setp(axs[count].get_xticklabels(), visible=False)
     axs[count].annotate(text=f'{mag_cols_names[band]}', xy=(0.02, 0.9),\
-                         xycoords='axes fraction', fontsize=18, ha='left', va='top', path_effects=pe2)
+                         xycoords='axes fraction', fontsize=20, ha='left', va='top', path_effects=pe2)
     axs[count].annotate(text=f'HETDEX N={np.sum(filt_lims_HETDEX):,}'.replace(',','$\,$'), xy=(0.98, 0.9),\
                          xycoords='axes fraction', fontsize=16, ha='right', va='top', path_effects=pe2)
     axs[count].annotate(text=f'S82 N={np.sum(filt_lims_S82):,}'.replace(',','$\,$'), xy=(0.98, 0.7),\
                          xycoords='axes fraction', fontsize=16, ha='right', va='top', path_effects=pe2)
     axs[0].set_xlim(left=np.floor(min_magnitude), right=np.ceil(max_magnitude))
     axs[0].invert_xaxis()
-HETDEX_patch = mpatches.Patch(fc='None', ec='k', label='HETDEX', lw=2.0)
-S82_patch    = mpatches.Patch(fc='None', ec='k', label='Stripe 82', hatch='///', lw=2.0)
+HETDEX_patch = mpatches.Patch(fc='None', ec='k', label='HETDEX', lw=2.5)
+S82_patch    = mpatches.Patch(fc='None', ec='brown', label='Stripe 82', lw=2.5)
 axs[len(feats_2_use) - 1].legend(handles=[HETDEX_patch, S82_patch], loc=3, fontsize=14,\
                handletextpad=0.3, handlelength=1.0, borderpad=0.3)
 
