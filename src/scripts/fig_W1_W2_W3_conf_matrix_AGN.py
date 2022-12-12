@@ -4,7 +4,8 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+#from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 from astropy.visualization import PowerStretch
 from astropy.visualization.mpl_normalize import ImageNormalize
 import cmasher as cmr
@@ -108,7 +109,7 @@ num_levels_dens = 20
 
 # norm_val  = mcolors.CenteredNorm(vcenter=0.5)
 try:
-    norm_dens = ImageNormalize(vmin=0, vmax=500, stretch=PowerStretch(0.35))
+    norm_dens = ImageNormalize(vmin=0, vmax=1000, stretch=PowerStretch(0.35))
 except:
     pass
 # norm_cont = ImageNormalize(vmin=contour_levels[0], vmax=contour_levels[-1], stretch=PowerStretch(0.35)) # PowerStretch(0.35), LogStretch()
@@ -209,18 +210,24 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     plt.setp(axs[count].spines.values(), linewidth=2.5)
 
 # Colorbar density
-axins0 = inset_axes(axs[1], width='100%', height='100%', bbox_transform=axs[1].transAxes,\
-                    loc=1, bbox_to_anchor=(0.9, 0.08, 0.05, 0.85), borderpad=0)
+#axins0 = inset_axes(axs[1], width='100%', height='100%', bbox_transform=axs[1].transAxes,\
+#                    loc=1, bbox_to_anchor=(0.9, 0.08, 0.05, 0.85), borderpad=0)
+axins0 = make_axes_locatable(axs[1])
 
-clb_dens    = fig.colorbar(dens_plts[1], cax=axins0, orientation='vertical', 
-                           cmap=plt.get_cmap(gv.cmap_dens_plots), 
+#clb_dens    = fig.colorbar(dens_plts[1], cax=axins0, orientation='vertical', 
+#                           cmap=plt.get_cmap(gv.cmap_dens_plots), 
+#                           norm=norm_dens)#, format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
+clb_dens    = fig.colorbar(dens_plts[1], cax=axs[1].inset_axes((0.9, 0.08, 0.05, 0.85)), 
+                           orientation='vertical', cmap=plt.get_cmap(gv.cmap_dens_plots), 
                            norm=norm_dens, format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
-axins0.yaxis.set_ticks_position('left')
-axins0.yaxis.set_ticklabels(axins0.yaxis.get_ticklabels(), path_effects=gf.pe2)
+#axins0.yaxis.set_ticks_position('left')
+#axins0.yaxis.set_ticklabels(axins0.yaxis.get_ticklabels(), path_effects=gf.pe2)
+clb_dens.ax.yaxis.set_ticks_position('left')
+clb_dens.ax.yaxis.set_ticklabels(clb_dens.ax.yaxis.get_ticklabels(), path_effects=gf.pe2)
 clb_dens.ax.tick_params(labelsize=20)
 clb_dens.outline.set_linewidth(2.5)
 
-axs[0].plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), label='HETDEX', zorder=0)
+axs[1].plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), label='HETDEX', zorder=0)
 
 axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.01), label='M12', zorder=0)
 axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.35), label='S12', zorder=0)
@@ -230,7 +237,6 @@ axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_band
 axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#1E88E5', label='MQC-SDSS\nHETDEX', zorder=0)
 axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#D32F2F', label='MQC-SDSS\nS82', zorder=0)
 
-    
 axs[0].set_xlim(left=AB_lims_x[0], right=AB_lims_x[1])
 axs[0].set_ylim(bottom=AB_lims_y[0], top=AB_lims_y[1])
     
@@ -254,13 +260,19 @@ axs[3].set_xlabel('AGN', fontsize=22)
 axs_twinx[1].set_ylabel('$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[Vega]}$', size=26, y=0.10)
 axs_twiny[0].set_xlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[Vega]}$', size=26, x=1.05)
 
-axs[0].legend(loc=4, fontsize=18, ncol=1, columnspacing=.25, handletextpad=0.2, handlelength=0.8, framealpha=0.75)
-axs[2].legend(loc=4, fontsize=18, ncol=2, columnspacing=.25, handletextpad=0.2, handlelength=0.8, framealpha=0.75)
-axs[3].legend(loc=4, fontsize=17, ncol=2, columnspacing=.25, handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+axs[1].legend(loc=8, fontsize=18, ncol=1, columnspacing=.25, 
+              handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+axs[2].legend(loc=4, fontsize=18, ncol=1, columnspacing=.25, 
+              handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+axs[3].legend(loc=4, fontsize=17, ncol=2, columnspacing=.25, 
+              handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 
-fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\nPredicted values', fontsize=25, ha='left', x=0.46, y=0.05)
-fig.supylabel('True values\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', fontsize=26, x=0.09, y=0.55, va='center')
+fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\nPredicted values', 
+              fontsize=25, ha='left', x=0.46, y=0.05)
+fig.supylabel('True values\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', 
+              fontsize=26, x=0.09, y=0.55, va='center', ha='center')
 # fig.suptitle('AGN prediction', fontsize=20, x=0.55)
 fig.tight_layout()
 save_filename = f'WISE_colour_colour_conf_matrix_AGN_HETDEX_test_S82_all.pdf'
 plt.savefig(paths.figures / save_filename, bbox_inches='tight')
+

@@ -107,7 +107,7 @@
    {We developed a pipeline of three stacked Machine Learning (ML) models which predicts the \textbf{probability} of a source to be an AGN and to be detected in \textbf{specific} radio surveys. Also, it can estimate redshift values for the predicted radio-detected AGN. These ML models\textbf{, which combine predictions from the algorithms \texttt{Random Forest}, \texttt{Extra Trees}, \texttt{Gradient Boosting Classifier}, \texttt{Gradient Boosting Regressor}, \texttt{CatBoost}, and \texttt{XGBoost},} have been trained with multi-wavelength data from near infrared-selected sources in The Hobby-Eberly Telescope Dark Energy Experiment (HETDEX) Spring Field. We have aimed to preserve the largest coverage in parameter space, which involves minimal cleaning of the datasets. Training, \textbf{testing, calibration} and \textbf{validation} of the prediction pipeline were carried out in the HETDEX Spring field. Further \textbf{validation} was performed on near infrared-selected sources in the Stripe 82 field.
    }
   % results heading (mandatory)
-   {In the HETDEX Spring field, we recover $93\%$ of the originally-labelled AGN and, from the predicted AGN, we recover $63\%$ of previously-detected radio sources. For Stripe 82, these numbers are $87\%$ and $67\%$, respectively. Feature importance analysis highlights the \textbf{significance} of near- and mid-IR colours not only to select AGN but also \textbf{to identify their radio nature and redshift value.}
+   {In the HETDEX Spring field, we recover $94\%$ of the \textbf{initially}-labelled AGN and, from the predicted AGN, we recover $60\%$ of previously-detected radio sources. For Stripe 82, these numbers are $90\%$ and $63\%$, respectively. Feature importance analysis \textbf{stresses} the \textbf{significance} of near- and mid-IR colours not only to select AGN but also \textbf{to identify their radio nature and redshift value.}
    }
   % conclusions heading (optional), leave it empty if necessary 
    {The use of \textbf{generalised} stacking in ML models shows a perceivable improvement in the prediction power of our pipeline. This is relevant for the radio detection prediction where it is the first time, to our best knowledge, that has been achieved based only on photometric data. \textbf{Tree-based} ML models (in contrast to Deep Learning techniques) \textbf{facilitate the analysis of} the impact that features have on the predictions. This \textbf{fact} can give insight into the potential physical interplay between the properties of radio AGN.}
@@ -126,30 +126,27 @@ Active Galactic Nuclei (AGN) are instrumental to determine the nature, growth, a
 Although radio emission can trace high star-formation in galaxies, above certain luminosities \citep[e.g. $\mathrm{log}L_{1.4\mathrm{GHz}} {>} 25\,\mathrm{W\, Hz^{-1}}$,][]{2021MNRAS.503.1780J} it is a prime tracer of the powerful jet emission originated  close to the SMBH in AGN \citep[Radio Galaxies,][]{2014ARA&A..52..589H}. Traditionally, these powerful radio galaxies (RG\textbf{s}) were used to pinpoint AGN activity but have been superseded in the last decades by optical, NIR\textbf{, and X-ray} surveys. In fact, RG\textbf{s} in the high redshift Universe \textbf{($z > 2$)} have been identified and studied only through the follow-up of AGN selected at shorter wavelengths \citep[optical, NIR, millimetre, and X-rays, e.g.][]{2006ApJ...652..157M, 2020A&A...637A..84P, 2021MNRAS.501.3833D}.
 The landscape is quickly changing and the advent of new radio instruments and surveys has allowed the detection of larger numbers of RGs \citep[e.g.][]{2018MNRAS.475.3429W, 2020A&A...642A.107C}. Some of these surveys are: the Faint Images of the Radio Sky at Twenty-Centimetres \citep[FIRST;][]{2015ApJ...801...26H}, the Evolutionary Map of the Universe \citep[EMU;][]{2011PASA...28..215N}, the Very Large Array Sky Survey \citep[VLASS;][]{2020RNAAS...4..175G}, and the LOFAR Two-metre Sky Survey \citep[LoTSS;][]{2019A&A...622A...1S}. 
 
-One of the ultimate goals is to detect powerful RGs in the Epoch of Reionization (EoR) that could be used to trace the neutral gas distribution during this critical phase of the Universe \citep[e.g.][]{2004NewAR..48.1029C, 2013MNRAS.435..460J}.
-Simulations  have shown that as much as a few hundreds of RGs per deg$^2$ could be present in the EoR \citep[][]{2019MNRAS.485.2694A, 2019MNRAS.482....2B, 2021MNRAS.503.3492T} and detectable with present and future deep observations --e.g. Square Kilometre Array (SKA), which is projected to have $\mu$Jy sensitivity levels \citep{2015aska.confE..67P}--.
-These expectations collide with the most recent observational compilations \citep[e.g.][]{2020ARA&A..58...27I, 2020MNRAS.494..789R}, where only ${\sim}300$ have been confirmed to exist at redshifts higher than $z{\sim}6$ over thousands of sq. degrees. This disagreement might well be just due to the limits of current selection techniques and a better understanding of the high-$z$ RGs might require alternative approaches.
+One of the ultimate goals is to detect powerful RGs in the Epoch of Reionization (EoR) that could be used to trace the neutral gas distribution during this critical phase of the Universe \citep[e.g.][]{2004NewAR..48.1029C, 2013MNRAS.435..460J}. Simulations  have shown that as much as a few hundreds of RGs per deg$^2$ could be present in the EoR \citep[][]{2019MNRAS.485.2694A, 2019MNRAS.482....2B, 2021MNRAS.503.3492T} and detectable with present and future deep observations --e.g. Square Kilometre Array (SKA), which is projected to have $\mu$Jy sensitivity levels \citep{2015aska.confE..67P}--. These expectations collide with the most recent observational compilations \citep[e.g.][]{2020ARA&A..58...27I, 2020MNRAS.494..789R}, where only ${\sim}300$ have been confirmed to exist at redshifts higher than $z{\sim}6$ over thousands of sq. degrees. This disagreement might well be just due to the limits of current selection techniques and a better understanding of the high-$z$ RGs might require alternative approaches.
 
 The selection of AGN candidates has had success in the X-rays and radio wavebands as they dominate the emission above certain luminosities. Unfortunately, deep X-ray surveys are limited in area and only ${\sim}10\%$ of AGN have strong radio emissions linked to jets \citep[e.g.][]{1993MNRAS.263..461P, 2019NatAs...3...48S, 2021MNRAS.506.5888M} at any given time. In fact, the precise triggering mechanisms and duty cycle for jetted emission are still unclear \citep{2015aska.confE..71A, 2022MNRAS.510.1163P}.
 
 Radio colours, also calculated in the form of spectral indices, have been proposed as a tool to identify the origin of the radio emission \citep{2000A&A...354..423L}, while recently \citet{2019A&A...622A..17S} has shown that a  slight correlation exists between radio spectral index and radio luminosity for AGN.
-The largest number of candidates have been selected through the compilation of multiwavelength energy distributions (SED) for millions of sources \citep{2018ARA&A..56..625H, 2020PhDT.........3P}.  Of particular relevance for AGN are the near-IR colours where \textit{Spitzer} \citep{2004ApJS..154....1W} and especially  the Wide-field Infrared Survey Explorer \citep[\textit{WISE};][]{2010AJ....140.1868W} have opened a window for the detection of AGN over the whole sky, including the elusive fraction of heavily obscured ones \citep[e.g.][]{2012ApJ...753...30S, 2012MNRAS.426.3271M, 2017ApJ...836..182J, 2018ApJS..234...23A, 2021ApJ...922..179B}. The success of the NIR selection depends to a grand extent to a less severe effect of dust extinction at those wavelengths and to the characteristic power-law emission of the dust heated by the AGN. Radio wavelengths are in principle ideal to select AGN due to not being affected by dust obscuration. 
+The largest number of candidates have been selected through the compilation of multiwavelength energy distributions (SED) for millions of sources \citep{2018ARA&A..56..625H, 2020PhDT.........3P}.  Of particular relevance for AGN are the near-IR colours where \textit{Spitzer} \citep{2004ApJS..154....1W} and especially  the Wide-field Infrared Survey Explorer \citep[\textit{WISE};][]{2010AJ....140.1868W} have opened a window for the detection of AGN over the whole sky, including the elusive fraction of heavily obscured ones \citep[e.g.][]{2012ApJ...753...30S, 2012MNRAS.426.3271M, 2017ApJ...836..182J, 2018ApJS..234...23A, 2021ApJ...922..179B}. The success of the NIR selection depends\textbf{,} to a grand extent\textbf{, of} a less severe effect of dust extinction at those wavelengths and to the characteristic power-law emission of the dust heated by the AGN. Radio wavelengths are\textbf{,} in principle\textbf{,} ideal to select AGN due to not being affected by dust obscuration. 
 
-Regardless of the radio nature of an AGN, extensive spectroscopic follow-up measurements have allowed the confirmation of the estimated redshifts for ${\sim} 800\,000$ AGN over large areas of the sky \citep{2021arXiv210512985F}. Spectroscopic surveys have also contributed on their own to the detection of AGN activity through the analysis of line ratio as is the case of the BPT diagram \citep*{1981PASP...93....5B}. However, their determination can take a long time and high-quality observations, which are not always available for all sources, rendering them not suited for large-sky catalogues. Photometric classification and redshifts (photo-$z$), where the multi-wavelength photometry of the source is compared to known objects or templates, are a viable option to understand the source nature and distribution across cosmic time \citep{1957AJ.....62....6B, 2019NatAs...3..212S}. Using this method, redshift estimations have been obtained for galaxies \citep[e.g.][]{2021A&A...654A.101H}, and AGN \citep[e.g.][]{2017ApJ...850...66A}. Photo-$z$ models include also drop-out techniques where a specific colour is used to select sources in a given redshift interval and therefore highly efficient at generating rough redshifts of large samples. It has been mainly used to generate and study high-redshift sources or candidates that, otherwise, would not have enough information to produce a precise redshift value \citep[e.g.][]{2020ApJ...902..112B, 2020A&A...633A.160C, 2022arXiv221106915S}. But traditional photo-$z$ estimations are computationally expensive since they rely on the best solution search within a grid of templates and models. In general, the computational cost scales linearly with the template grid and the number of sources
-and therefore becomes unfeasible for large catalogues (${\gtrsim}10^{7}$). Thus, to reach a result in such cases, High-Performance Computing facilities are needed as shown, for instance, from the tests done by \citet{2021ApJ...916...43G}. 
+Regardless of the radio nature of an AGN, extensive spectroscopic follow-up measurements have allowed the confirmation of the estimated redshifts for ${\sim} 800\,000$ AGN over large areas of the sky \citep{2021arXiv210512985F}. Spectroscopic surveys have also contributed on their own to the detection of AGN activity through the analysis of line ratio as is the case of the BPT diagram \citep*{1981PASP...93....5B}. However, their determination can take a long time and high-quality observations, which are not always available for all sources, rendering them not suited for large-sky catalogues. Photometric classification and redshifts (photo-$z$), where the multi-wavelength photometry of the source is compared to known objects or templates, are a viable option to understand the source nature and distribution across cosmic time \citep{1957AJ.....62....6B, 2019NatAs...3..212S}. Using this method, redshift estimations have been obtained for galaxies \citep[e.g.][]{2021A&A...654A.101H}, and AGN \citep[e.g.][]{2017ApJ...850...66A}. Traditional photo-$z$ estimations are computationally expensive since they rely on the best solution search within a grid of templates and models. In general, the computational cost scales linearly with the template grid and the number of sources and therefore becomes unfeasible for large catalogues (${\gtrsim}10^{7}$). Thus, to reach a result in such cases, High-Performance Computing facilities are needed as shown, for instance, from the tests done by \citet{2021ApJ...916...43G}. \textbf{One way to avoid the use of high computational costs is through the use of} drop-out techniques where a specific colour is used to select sources in a given redshift interval and therefore highly efficient at generating rough redshifts of large samples. \textbf{The drop-out technique} has been mainly used to generate and study high-redshift sources or candidates that, otherwise, would not have enough information to produce a precise redshift value \citep[e.g.][]{2020ApJ...902..112B, 2020A&A...633A.160C, 2022arXiv221106915S}.
 
 Alternative statistical and computational methods can analyse thousands or millions of elements and find relevant trends among their properties. One branch of these techniques can, using previously-\textbf{modelled} data, predict the behaviour new data will have --i.e. the values of their properties--. This is what has been called Machine Learning \citep[ML;][]{5392560}.
 
-In Astronomy, ML has been used with much success in a wide range of subjects, such as redshift determination, morphological classification, emission prediction, anomaly detection, observations planning, and more \citep[\textbf{e.g.}][]{2010IJMPD..19.1049B, 2019arXiv190407248B}. 
-Traditional ML models are, in general, only fed with measurements and not with prior knowledge of physical rules \citep{Desai2021}, they do not need to check the consistency of the predictions or \textbf{the} results they provide. \textbf{As a consequence of this, prediction times of traditional ML methods are typically less than physically-based methods.}
+In Astronomy, ML has been used with much success in a wide range of subjects, such as redshift determination, morphological classification, emission prediction, anomaly detection, observations planning, and more \citep[\textbf{e.g.}][]{2010IJMPD..19.1049B, 2019arXiv190407248B}. Traditional ML models are, in general, only fed with measurements and not with prior knowledge of physical rules \citep{Desai2021}, they do not need to check the consistency of the predictions or \textbf{the} results they provide. \textbf{As a consequence of this, prediction times of traditional ML methods are typically less than physically-based methods.}
 
 Despite the large number of applications it might have, one important criticism that ML has received is related to the lack of interpretability --or explainability, as it is called in ML jargon-- of the derived models, trends, and correlations. Most ML models, after taking a series of measurements and properties as input, deliver a prediction of a different property. But they cannot provide coefficients or an analytical expression, that might allow to create a rule for future predictions \citep{goebel2018explainable}. One important counter-example of this fact is the use of Symbolic Regression \citep[e.g.][]{2020arXiv200611287C, 2021ApJ...915...71V}. This implies that, for most ML models, it is not a simple task to understand which properties, and to what extent, help predict and interpret another attribute. This fact hinders our capability to understand the results in physical terms.
 
 Recent work has been done to overcome the lack of explainability in ML models. The most widely used assessment is done with Feature Importance \citep{10.1007/978-3-030-10925-7_40, 9007737}, both global and local \citep{Saarela2021}. Game theory based analyses, like the Shapley analysis \citep{Shapley_article}, have also been used to understand feature importance in Astrophysics \citep[e.g.][]{2021MNRAS.507.1468M, 2022MNRAS.515.5285D, 2021Galax...9...86C, 2022MNRAS.509.3441A, 2022MNRAS.516.4716A}. 
 
 A further complication is that astronomical data \textbf{can be} very heterogeneous. 
-Surveys and instruments gather data from many different areas in the sky and with very different sensitivities and observational properties. This severely complicates most astronomical analyses, but in particular ML methods, as they are driven most of the time completely by the data.
-This will be alleviated in next-generation observatories and surveys --e.g. SKA, LSST, etc.-- where observations will be carried out homogeneously over very large areas.
+Surveys and instruments gather data from many different areas in the sky and with very different sensitivities and observational properties. This severely complicates most astronomical analyses, but in particular ML methods, as they are driven most of the time completely by the data. This \textbf{is expected to} be alleviated in next-generation observatories and surveys --e.g. SKA, LSST, etc.-- where observations will be carried out homogeneously over very large areas.
+
+\textbf{Future observatories and surveys will deliver immense datasets. One option to analyse such observations (in particular, in radio wavelengths) is through the use of object-finding procedures \citep[e.g.][]{1996A&AS..117..393B, 2020ASPC..527..461B, 2012MNRAS.425..979H, 2015ascl.soft02007M, 2018A&C....23...92C} and then, using additional tools, confirm the nature of such objects. The use of object-detection tools over large areas of the sky will have a very high cost, both in time and in computational resources \citep{2019MNRAS.484.2793V}. An alternative to this method is using alreay-available multi-wavelength data to determine, as precisely as needed, the likelihood of a known source to be detected in a specific wavelength as a consequence of hosting an AGN \citep[see, for instance,][]{2022arXiv221201915P}. With the use of existing data, ML can help speeding this process up via the training of models that can detect sources in large radio surveys \citep[see, for an example of the efforts done to achieve this goal,][]{2015PASA...32...37H, 2021MNRAS.500.3821B}.}
 
 In this work, we aim to identify candidates of high-redshift radio-detected AGN which can be extracted from heterogeneous large-area surveys using a fraction of the time of traditional techniques. We developed a series of ML models to predict, separately, the detection of AGN, the detection of the radio signal from AGN, and the redshift values of radio-detected AGN. Furthermore, we tested the performance of these models without applying a large number of previous cleaning steps (e.g. removing sources or reducing the studied area to increase the fraction of sources fully detected on every survey or homogenise measured ranges of observed properties for different classes of sources), which reduce considerably the size of the training sets. The compiled catalogue of candidates can help using data from future large-sky surveys more efficiently, as observational and analytical efforts can be focused on the areas in which AGN have been predicted to exist. This work is an extension of the results presented by \citet{2021Galax...9...86C}, who produced and analysed the predictions of photometric redshifts for confirmed AGN in a specific area of the sky. We seek to test such models by training them in an area with homogeneous coverage in several surveys and applying them in a different area with data that is not necessarily of the same quality in a sequential way, taking the results from the previous model as input. The approach taken by this work might help filling the gap of radio detection determination. The analysis of radio detections has been centred around the assumption of existing radio emission. In our case, we want to take this determination one step back and estimate whether there might, or not, be a radio measurement.
 
@@ -182,13 +179,13 @@ This method of imputation has been successfully applied and tested, recently, by
 In this way, observations from $12$ non-radio bands were gathered (as listed in Table~\ref{table:used_bands}). 
 The magnitude density distribution for the sample from the HETDEX and S82 fields\textbf{, without any imputation, is shown in Fig.~\ref{fig:hists_bands_nonimp_HETDEX_S82}. After imputation, the distribution of magnitudes changes, as} shown in Fig.~\ref{fig:hists_bands_HETDEX_S82}. Each panel of the figure shows the number of sources which have a measurement above its $5{-}\sigma$ limit in such band. 
 Additionally, a representation of the observational $5{-}\sigma$ limits of the bands and surveys used in this work is presented in Fig.~\ref{fig:surveys_depth_HETDEX}. 
-It is worth noting the depth difference between VLAS82 and LoTSS-DR1 is ${\sim}1.5$\,mag for a typical synchrotron emitting source ($F_\nu \propto \nu^{\alpha}$ with $\alpha=-0.8)$\textbf{, allowing the latter survey reach fainter sources}.% We elaborate on the implications of this difference in Sect.~??.
+It is worth noting the depth difference between VLAS82 and LoTSS-DR1 is ${\sim}1.5$\,mag for a typical synchrotron emitting source ($F_\nu \propto \nu^{\alpha}$ with $\alpha {=}-0.8)$\textbf{, allowing the latter survey reach fainter sources}.% We elaborate on the implications of this difference in Sect.~??.
 
 \begin{figure}
   \centering
   \script{fig_nonimputed_mags_histograms.py}
   \includegraphics[width=0.99\columnwidth]{figures/hists_bands_norm_HETDEX_S82_non_imputed.pdf}
-  \caption{Histograms of base collected, non-imputed, non-radio bands for HETDEX (clean, background histograms) and Stripe 82 (\textbf{empty, brown} histograms). Each panel shows the distribution of measured magnitudes of detected sources divided by the total area of the field. The number in the upper right corner of each panel shows the number of measured magnitudes included in their corresponding histogram.}
+  \caption{Histograms of base collected, non-imputed, non-radio bands for HETDEX (clean, background histograms) and Stripe 82 (\textbf{empty, brown} histograms). Each panel shows the distribution of measured magnitudes of detected sources divided by the total area of the field. Dashed, vertical lines represent the $5{-}\sigma$ magnitude limit for each band. The number in the upper right corner of each panel shows the number of measured magnitudes included in their corresponding histogram.}
   \label{fig:hists_bands_nonimp_HETDEX_S82}
 \end{figure}
 
@@ -206,7 +203,7 @@ It is worth noting the depth difference between VLAS82 and LoTSS-DR1 is ${\sim}1
 \label{table:used_bands}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.80\columnwidth}{!}{
-\begin{tabular}{c c}        % centered columns (4 columns)
+\begin{tabular}{c c}        % centered columns (2 columns)
 \hline\hline                 % inserts double horizontal lines   
 Survey             & Band (Column name)\tablefootmark{a} \\
 \hline
@@ -231,13 +228,12 @@ AllWISE (AW)     & W3 (\texttt{W3mag}), W4 (\texttt{W4mag}) \\
    \label{fig:surveys_depth_HETDEX}
 \end{figure}
 
-AGN labels and red\textbf{s}hift information was obtained by cross-matching (with \textbf{a} 5\arcsec \textbf{search} radius) the catalogue with the Million Quasar Catalog\footnote{\url{http://quasars.org/milliquas.htm}} \citep[MQC, v7.4d;][]{2021arXiv210512985F}, which lists information from more than \textbf{$1\,500\,000$} objects that have been classified as optical QSO, AGN or Blazars\textbf{. Sources listed in the MQC may have additional counterpart information, including} radio or X-ray associations. 
-For the purposes of this work, only sources with secure spectroscopic redshifts were used. The matching yielded $28\,251$ ($2\,800$) spectroscopically confirmed AGN in HETDEX (Stripe 82). 
+AGN labels and red\textbf{s}hift information was obtained by cross-matching (with \textbf{a} 5\arcsec \textbf{search} radius) the catalogue with the Million Quasar Catalog\footnote{\url{http://quasars.org/milliquas.htm}} \citep[MQC, v7.4d;][]{2021arXiv210512985F}, which lists information from more than \textbf{$1\,500\,000$} objects that have been classified as optical QSO, AGN or Blazars\textbf{. Sources listed in the MQC may have additional counterpart information, including} radio or X-ray associations. For the purposes of this work, only sources with secure spectroscopic redshifts were used. The matching yielded $54\,519$ spectroscopically confirmed AGN in HETDEX and $20\,456$ \textbf{confirmed AGN in} Stripe 82.
 
 Similarly, the sources in our parent catalogue were cross-matched
 with the Sloan Digital Sky Survey Data Release 16 \citep[SDSS-DR16;][]{2020ApJS..249....3A}. This was done solely to determine which sources have been spectroscopically classified as galaxies (\verb|spClass == GALAXY|). 
 For most of these galaxies, SDSS-DR16 lists a spectroscopic redshift value, which will be used in some stages of this work. In the HETDEX field,
-SDSS-DR16 provides $55\,158$ spectroscopically confirmed galaxies. \textbf{In the Stripe 82 field, SDSS-DR16 identifies $504$ galaxies spectroscopically}. \textbf{Given that MQC has access to more AGN detection methods than SDSS, w}hen sources were identified as both galaxies (in SDSS-DR16) and AGN (in the MQC), a final label of AGN was given. 
+SDSS-DR16 provides $103\,964$ spectroscopically confirmed galaxies. \textbf{In the Stripe 82 field, SDSS-DR16 identifies $5\,233$ galaxies spectroscopically}. \textbf{Given that MQC has access to more AGN detection methods than SDSS, w}hen sources were identified as both galaxies (in SDSS-DR16) and AGN (in the MQC), a final label of AGN was given. 
 A description of the number of elements in each field and the multi-wavelength counterparts found for them is presented in Table~\ref{table:composition_catalogue}.
 
 \begin{table}
@@ -246,19 +242,19 @@ A description of the number of elements in each field and the multi-wavelength c
 \label{table:composition_catalogue}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.55\columnwidth}{!}{
-\begin{tabular}{c c c}        % centered columns (4 columns)
+\begin{tabular}{c c c}        % centered columns (3 columns)
 \hline\hline                 % inserts double horizontal lines  
-                & HETDEX        & Stripe82      \\
-Survey          &               &               \\
+                &  HETDEX        &  Stripe82     \\
+Survey          &                &               \\
 \hline
-CatWISE2020     & $6\,729\,647$ & $369\,093$    \\
-AllWISE         & $3\,411\,563$ & $186\,773$    \\
-Pan-STARRS      & $2\,835\,272$ & $182\,123$    \\
-2MASS           & $315\,444$    & $26\,554$     \\
-LoTSS           & $339\,408$    & \ldots        \\
-VLAS82          & \ldots        & $15\,392$     \\
-MQC (AGN)       & $28\,251$     & $2\,800$      \\
-SDSS (Galaxy)   & $55\,158$     & $504$         \\
+CatWISE2020     & $15\,136\,878$ & $3\,590\,306$ \\
+AllWISE         & $7\,634\,480$  & $1\,813\,383$ \\
+Pan-STARRS      & $6\,258\,101$  & $1\,749\,346$ \\
+2MASS           & $687\,352$     & $250\,467$    \\
+LoTSS           & $342\,832$     & \ldots        \\
+VLAS82          & \ldots         & $15\,625$     \\
+MQC (AGN)       & $54\,519$      & $20\,456$     \\
+SDSS (Galaxy)   & $103\,964$     & $5\,233$      \\
 \hline
 \hline                                   %inserts single line
 \end{tabular}
@@ -301,8 +297,6 @@ In an attempt to extract the largest available amount of information from the da
 \end{figure}
 
 \textbf{In broad terms, our goal with the classification models is to recover the largest number of elements from the positive classes (\texttt{class = 1} and \texttt{LOFAR$\_$detect = 1}). For the regression model, we aim to retrieve predictions as close as the originally fed redshift values.}
-{\color{red} I am not completely sure of the wording of this paragraph. 
-But it is needed to understand what metrics we are using during this work.}
 
 In general, classification models provide a final score in the range [$0$, $1$], which can only be associated to a true probability after a careful calibration  \citep{10.1214/17-EJS1338SI, pmlr-v54-kull17a}. Calibration of these scores can be done by applying a transformation to their values. For our work, we will apply a Beta transformation\footnote{\textbf{Beta transformation functions have the general form $\mu_{beta}(S;a,b,c) = \frac{1}{1 + 1 / \left(e^{c} \frac{S^{a}}{(1 - S)^{b}}\right)}$, with $S$ being the score from the classifier and $a,b,c$, free parameters to be optimised.}}. This type of transformation allows to re-distribute the scores of a classifier allowing them to get closer to the definition of probability. Further details of this calibration are given in the Appendix~\ref{app:calibration_models}.
 
@@ -339,9 +333,9 @@ ML algorithms, as with most data analysis tools, require execution times which i
 To avoid redundancy, the process starts discarding features that have a high correlation with another property of the dataset.
 For this, we calculated Pearson's correlation matrix for the full train+\textbf{validation} dataset \textbf{only} and selected the pairs of features that showed a correlation factor higher than $\rho = 0.75$\footnote{\textbf{A value of $\rho = 0.75$ is a compromise between very stringent thresholds (e.g. $\rho = 0.5$) and more relaxed values (e.g. $\rho \approx 0.9$). For an explanation on how to consider different correlation values, see, for instance \citet{Ratner2009}}}. From each pair, we discarded the feature with the lowest relative standard deviation \citep[RSD;][]{johnson1964statistics}. The RSD is defined as the ratio between the standard deviation of a set and its mean value. A feature which covers a small portion of its probable values (i.e. low coverage of parameter space, and lower RSD) will give less information to a model than one with largely spread values.
 
-After this, we repeat this procedure but using the Predictive Power Score \citep[PPS, \texttt{v1.2.0};][]{PPSsoftware}. PPS helps reveal non-linear or non-monotonic patterns among features which might not be unveiled by traditional correlation factors. PPS achieves this by creating two models (a decision tree) per pair of columns in the dataset. One model has one of the features of the pair as training data and the other feature as the target. The second model does the same but inverts the order of the features. The comparison of the results from such models with a naive prediction (always predicting the median of the target or the most common class) lead to the assessment of the predicting power of each feature. As with Pearson's correlation\textbf{, and to keep a consistent behaviour between both methods}, if $\mathrm{PPS} > 0.75$ for a model, the target feature can be discarded from the dataset.
+%After this, we repeat this procedure but using the Predictive Power Score \citep[PPS, \texttt{v1.2.0};][]{PPSsoftware}. PPS helps reveal non-linear or non-monotonic patterns among features which might not be unveiled by traditional correlation factors. PPS achieves this by creating two models (a decision tree) per pair of columns in the dataset. One model has one of the features of the pair as training data and the other feature as the target. The second model does the same but inverts the order of the features. The comparison of the results from such models with a naive prediction (always predicting the median of the target or the most common class) lead to the assessment of the predicting power of each feature. As with Pearson's correlation\textbf{, and to keep a consistent behaviour between both methods}, if $\mathrm{PPS} > 0.75$ for a model, the target feature can be discarded from the dataset.
 
-A third and final step was applied to the data for optimising the final number of used features. The Boruta method \citep{JSSv036i11} and its Python implementation\footnote{\texttt{v0.3}; \url{https://github.com/scikit-learn-contrib/boruta_py}} were developed to discard features that do not add extra information to the training of a ML model. Boruta creates additional features with randomly-sorted versions of the quantities present in a dataset. Then, it runs a simple training procedure and calculates which feature is more helpful to the training: the randomised or the original version. If the original feature performs worse than its shuffled copy, it can be safely discarded from the dataset reducing its size without a major loss of relevant information.
+%A third and final step was applied to the data for optimising the final number of used features. The Boruta method \citep{JSSv036i11} and its Python implementation\footnote{\texttt{v0.3}; \url{https://github.com/scikit-learn-contrib/boruta_py}} were developed to discard features that do not add extra information to the training of a ML model. Boruta creates additional features with randomly-sorted versions of the quantities present in a dataset. Then, it runs a simple training procedure and calculates which feature is more helpful to the training: the randomised or the original version. If the original feature performs worse than its shuffled copy, it can be safely discarded from the dataset reducing its size without a major loss of relevant information.
 
 For each model, the process of feature selection begins with $79$ base features and three targets (\verb|class|, \verb|LOFAR_detect|, and $z$). Feature selection is run, independently, for each trained model (i.e. AGN-Galaxy classification, radio detection, and redshift predictions), delivering three different sets of features.
 
@@ -499,24 +493,24 @@ In the present section, we report the results from the training of the different
 The three models are chained afterwards in sequential mode to create a pipeline, and related metrics, for the prediction of radio-AGN activity. Novel predictions were obtained from the application of such pipeline to unlabelled sources from both the HETDEX and Stripe\,82 fields. 
 
 \subsection{AGN-Galaxy classification}\label{sec:results_agn}
-Feature selection was applied to the train+\textbf{validation} subset with $66\,727$ confirmed elements (galaxies from SDSS DR16 and AGN from MQC, i.e. \texttt{class == 0} or \texttt{class == 1}). After the selection procedure described in Sect.~\ref{sec:feat_selection}, $16$ features were selected for training: \verb|W4mag|, \verb|g_r|\textbf{,} \verb|g_J|, \verb|r_i|, \verb|r_z|, \verb|r_W1|, \verb|i_z|, \verb|i_y|, \verb|z_y|, \verb|y_J|, \verb|y_W2|, \verb|J_H|, \verb|H_K|, \verb|K_W3|, \verb|W1_W2|, and \verb|W1_W3|. The target feature is \verb|class|.
+Feature selection was applied to the train+\textbf{validation} subset with $66\,727$ confirmed elements (galaxies from SDSS DR16 and AGN from MQC, i.e. \texttt{class == 0} or \texttt{class == 1}). After the selection procedure described in Sect.~\ref{sec:feat_selection}, $18$ features were selected for training: \verb|W4mag|, \verb|Kmag|, \verb|g_r|\textbf{,} \verb|r_i|, \verb|r_z|, \verb|r_J|, \verb|r_W1|, \verb|i_z|, \verb|i_y|, \verb|z_y|, \verb|y_J|, \verb|y_W2|, \verb|J_H|, \verb|H_K|, \verb|H_W3|, \verb|W1_W2|, \verb|W1_W3|, and \verb|W3_W4|. The target feature is \verb|class|.
 
-The results of model testing for the AGN-galaxy classification are reported in Table~\ref{table:fit_AGN_models}. The \verb|CatBoost| algorithm provides the best metric values (highest mean rank) and is therefore selected as the  meta-model. \verb|XGBoost|, \verb|ET|, \verb|GBC|, and \verb|RF| were used as base learners.
+The results of model testing for the AGN-galaxy classification are reported in Table~\ref{table:fit_AGN_models}. The \verb|CatBoost| algorithm provides the best metric values (highest mean rank) and is therefore selected as the  meta-model. \verb|XGBoost|, \verb|RF|, \verb|ET|, and \verb|GBC| were used as base learners.
 
 \begin{table}
   \caption{Best performing models for the AGN-galaxy classification}             % title of Table
   \label{table:fit_AGN_models}      % is used to refer this table in the text
   \centering                          % used for centering table
   \resizebox{0.88\columnwidth}{!}{
-  \begin{tabular}{c c c c c c}        % centered columns (4 columns)
+  \begin{tabular}{c c c c c c}        % centered columns (6 columns)
   \hline\hline                 % inserts double horizontal lines   
-  Model               & F$_{\beta}$   & MCC    & Precision   & Recall & Mean rank \\
+  Model             & F$_{\beta}$ & MCC    & Precision  & Recall & Mean rank \\
   \hline
-  \texttt{CatBoost}   & 0.9356        & 0.9049 & 0.9476      & 0.9259 & 1.25      \\
-  \texttt{XGBoost}    & 0.9324        & 0.9005 & 0.9461      & 0.9215 & 2.25      \\
-  \texttt{ET}         & 0.9321        & 0.9000 & 0.9459      & 0.9210 & 3.25      \\
-  \texttt{RF}         & 0.9321        & 0.9005 & 0.9484      & 0.9190 & 2.50      \\
-  \texttt{GBC}        & 0.9283        & 0.8942 & 0.9419      & 0.9173 & 5.00      \\
+  \texttt{CatBoost} & 0.9433      & 0.9145 & 0.9482     & 0.9394 & 1.00      \\
+  \texttt{XGBoost}  & 0.9412      & 0.9113 & 0.9468     & 0.9366 & 2.25      \\
+  \texttt{RF}       & 0.9405      & 0.9108 & 0.9482     & 0.9343 & 2.50      \\
+  \texttt{ET}       & 0.9387      & 0.9075 & 0.9442     & 0.9341 & 4.00      \\
+  \texttt{GBC}      & 0.9355      & 0.9032 & 0.9434     & 0.9292 & 5.00      \\
   \hline                                   %inserts single line
   \end{tabular}
   }
@@ -524,12 +518,12 @@ The results of model testing for the AGN-galaxy classification are reported in T
   }
   \end{table}
 
-The optimisation of the PR curve for the calibrated predictor provides an optimal threshold for this algorithm of $0.39889$. This value was used for the AGN-Galaxy model throughout this work.
+The optimisation of the PR curve for the calibrated predictor provides an optimal threshold for this algorithm of $0.40655$. This value was used for the AGN-Galaxy model throughout this work.
 
-The results of the application of the stacked and calibrated model for the \textbf{testing} subset are presented in Table~\ref{table:fit_AGN_results}. The metrics are shown for the use of two different thresholds, the naive value of $0.5$ and the  PR-derived value of $0.39889$. The confusion matrix (calculated on the \textbf{testing} dataset) is shown in the upper left panel of Fig.~\ref{fig:results_models_test}. 
+The results of the application of the stacked and calibrated model for the \textbf{testing} subset are presented in Table~\ref{table:fit_AGN_results}. The metrics are shown for the use of two different thresholds, the naive value of $0.5$ and the  PR-derived value of $0.40655$. The confusion matrix (calculated on the \textbf{testing} dataset) is shown in the upper left panel of Fig.~\ref{fig:results_models_test}. 
 
-The scores for the three subsets are very similar with no substantial over-fitting tracked by the \textbf{testing} set score.
-Overall, the pipeline is able to separate AGN from galaxies with a very high (recall ${\gtrsim} 92\%$) success rate.
+%The scores for the three subsets are very similar with no substantial over-fitting tracked by the \textbf{testing} set score.
+Overall, the pipeline is able to separate AGN from galaxies with a very high (recall ${\gtrsim} 94\%$) success rate.
 
 \begin{table}
 \setlength{\tabcolsep}{3pt}
@@ -537,18 +531,16 @@ Overall, the pipeline is able to separate AGN from galaxies with a very high (re
 \label{table:fit_AGN_results}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.90\columnwidth}{!}{
-\begin{tabular}{c c c c c c}        % centered columns (4 columns)
+\begin{tabular}{c c c c c c}        % centered columns (6 columns)
 \hline\hline                 % inserts double horizontal lines   
-Subset                             & Threshold & F$_{\beta}$ & MCC       & Precision & Recall    \\
+Subset                            & Threshold & F$_{\beta}$ & MCC     & Precision & Recall \\
 \hline
-%\multirow{2}{*}{Training}           & Naive     & 0.9772    & 0.9658    & 0.9791  & 0.9756    \\
-%                                    & PR        & 0.9775    & 0.9654    & 0.9734  & 0.9809    \\
-\multirow{2}{*}{Test}               & Naive     & 0.9353    & 0.9037    & 0.9437  & 0.9285    \\
-                                    & PR        & 0.9364    & 0.9035    & 0.9344  & 0.9381    \\
-\multirow{2}{*}{HETDEX-pipeline}    & Naive     & 0.9353    & 0.9037    & 0.9437  & 0.9285    \\
-                                    & PR        & 0.9364    & 0.9035    & 0.9344  & 0.9381    \\
-\multirow{2}{*}{S82-pipeline}       & Naive     & 0.9073    & 0.6278    & 0.9827  & 0.8532    \\
-                                    & PR        & 0.9206    & 0.6507    & 0.9793  & 0.8771    \\
+\multirow{2}{*}{Test}             & Naive     & 0.9421      & 0.9125  & 0.9465    & 0.9385 \\
+                                  & PR        & 0.9424      & 0.9120  & 0.9413    & 0.9432 \\
+\multirow{2}{*}{HETDEX-pipeline}  & Naive     & 0.9421      & 0.9125  & 0.9465    & 0.9385 \\
+                                  & PR        & 0.9424      & 0.9120  & 0.9413    & 0.9432 \\
+\multirow{2}{*}{S82-pipeline}     & Naive     & 0.9254      & 0.7183  & 0.9734    & 0.8893 \\
+                                  & PR        & 0.9296      & 0.7228  & 0.9697    & 0.8988 \\
 \hline                                   %inserts single line
 \end{tabular}
 }
@@ -573,37 +565,37 @@ Subset                             & Threshold & F$_{\beta}$ & MCC       & Preci
   \end{minipage}%
   \caption{Performance of individual models when applied to the HETDEX \textbf{test} subset. a): confusion matrix for AGN-galaxy classification. 
   b): Same as a), but for radio detection. c): Density plot comparison between original and the predicted redshifts. 
-  The grey, dashed line shows the 1:1 relation while dot-dashed lines show the limits for outliers (cf. Eq.~\ref{eq:outlier_fraction}). Inset displays the distribution of $\Delta z^{\mathrm{N}}$ with a ${{<}\Delta z^{\mathrm{N}}{>} = 0.0236}$.}
+  The grey, dashed line shows the 1:1 relation while dot-dashed lines show the limits for outliers (cf. Eq.~\ref{eq:outlier_fraction}). Inset displays the distribution of $\Delta z^{\mathrm{N}}$ with a ${{<}\Delta z^{\mathrm{N}}{>} = 0.0207}$.}
   \label{fig:results_models_test}
 \end{figure}
 
 \subsection{Radio detection}\label{sec:results_radio}
 
 Training of the radio detection model was applied only to sources confirmed to be AGN (\texttt{class == 1}).
-Feature selection was applied to the train+\textbf{validation} subset, with $22\,601$ confirmed AGN. 
-The target feature is \verb|LOFAR_detect| and the base of selected features are:  \verb|band_num|, \verb|W4mag|, \verb|g_r|, \verb|r_i|, \verb|r_z|, \verb|i_z|, \verb|i_y|, \verb|z_y|, \verb|z_W1|, \verb|y_J|, \verb|y_W1|, \verb|J_H|, \verb|H_K|, \verb|K_W3|, \verb|K_W4|, \verb|W1_W2|, and \verb|W2_W3|.
+Feature selection was applied to the train+\textbf{validation} subset, with $43\,615$ confirmed AGN. 
+The target feature is \verb|LOFAR_detect| and the base of selected features are:  \verb|band_num|, \verb|W4mag|, \verb|g_r|, \verb|g_i|, \verb|r_i|, \verb|r_z|, \verb|i_z|, \verb|z_y|, \verb|z_W1|, \verb|y_J|, \verb|y_W1|, \verb|J_H|, \verb|H_K|, \verb|K_W3|, \verb|K_W4|, \verb|W1_W2|, and \verb|W2_W3|.
 
 The performance of the tested algorithms is shown in Table~\ref{table:fit_radio_models}. 
-In this case, \verb|CatBoost| also shows the highest mean rank. For this reason, we used it as the meta-learner and \verb|XGBoost|, \verb|RF|, \verb|ET|, and \verb|GBC| were selected as base-learners.
+In this case, \verb|GBC| shows the highest mean rank. For this reason, we used it as the meta-learner and \verb|XGBoost|, \verb|CatBoost|, \verb|RF|, and \verb|ET| were selected as base-learners.
 
-The scores from the stacked classifier are fully concentrated at around $0.5$. This might be interpreted as a sign that the model is not able to classify with strong certainty the studied sources.
+% The scores from the stacked classifier are fully concentrated at around $0.5$. This might be interpreted as a sign that the model is not able to classify with strong certainty the studied sources.
 
-The optimal threshold for this model is found to be ${\sim}0.31743$ with mild effect on the metrics when compared to the naive classification.
+The optimal threshold for this model is found to be ${\sim}0.20126$ with mild effect on the metrics when compared to the naive classification.
 
 \begin{table}
 \caption{Best performing models the radio detection classification}             % title of Table
 \label{table:fit_radio_models}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.88\columnwidth}{!}{
-\begin{tabular}{c c c c c c }        % centered columns (4 columns)
+\begin{tabular}{c c c c c c}        % centered columns (6 columns)
 \hline\hline                 % inserts double horizontal lines   
 Model               & F$_{\beta}$   & MCC    & Precision   & Recall & Mean rank \\
 \hline
-\texttt{XGBoost}    & 0.5527        & 0.4225 & 0.6657      & 0.4848 & 3.50      \\
-\texttt{CatBoost}   & 0.5634        & 0.4507 & 0.7061      & 0.4830 & 1.25      \\
-\texttt{RF}         & 0.5558        & 0.4375 & 0.6912      & 0.4787 & 2.75      \\
-\texttt{ET}         & 0.5480        & 0.4319 & 0.6919      & 0.4680 & 3.75      \\
-\texttt{GBC}        & 0.5433        & 0.4348 & 0.7054      & 0.4567 & 3.75      \\
+\texttt{XGBoost}    & 0.3617        & 0.3472 & 0.6226      & 0.2688 & 3.25      \\
+\texttt{CatBoost}   & 0.3618        & 0.3571 & 0.6525      & 0.2645 & 2.00      \\
+\texttt{GBC}        & 0.3645        & 0.3652 & 0.6718      & 0.2645 & 1.50      \\
+\texttt{RF}         & 0.3606        & 0.3556 & 0.6505      & 0.2637 & 3.50      \\
+\texttt{ET}         & 0.3453        & 0.3429 & 0.6442      & 0.2498 & 4.75      \\
 \hline                                   %inserts single line
 \end{tabular}
 }
@@ -617,18 +609,16 @@ Algorithms are sorted by decreasing recall values.}
 \label{table:fit_radio_results}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.90\columnwidth}{!}{
-\begin{tabular}{c c c c c c}        % centered columns (4 columns)
+\begin{tabular}{c c c c c c}        % centered columns (6 columns)
 \hline\hline                 % inserts double horizontal lines   
 Subset                             & Threshold & F$_{\beta}$ & MCC  & Precision & Recall   \\
 \hline
-%\multirow{2}{*}{Training}           & Naive     & 0.7719    & 0.7515 & 0.9994   & 0.6497   \\
-%                                    & PR        & 0.8360    & 0.7517 & 0.7474   & 0.9268   \\
-\multirow{2}{*}{Test}               & Naive     & 0.5495    & 0.4346 & 0.6790   & 0.4747   \\
-                                    & PR        & 0.6127    & 0.4412 & 0.5843   & 0.6465   \\
-\multirow{2}{*}{HETDEX-pipeline}    & Naive     & 0.5270    & 0.4219 & 0.6680   & 0.4487   \\
-                                    & PR        & 0.5995    & 0.4347 & 0.5651   & 0.6313   \\
-\multirow{2}{*}{S82-pipeline}       & Naive     & 0.5690    & 0.4043 & 0.6330   & 0.5252   \\
-                                    & PR        & 0.6086    & 0.3935 & 0.5476   & 0.6704   \\
+\multirow{2}{*}{Test}               & Naive     & 0.3455    & 0.3363 & 0.6279   & 0.2519   \\
+                                    & PR        & 0.4797    & 0.3583 & 0.3796   & 0.6136   \\
+\multirow{2}{*}{HETDEX-pipeline}    & Naive     & 0.3182    & 0.3223 & 0.6320   & 0.2256   \\
+                                    & PR        & 0.4707    & 0.3545 & 0.3747   & 0.5973   \\
+\multirow{2}{*}{S82-pipeline}       & Naive     & 0.2859    & 0.2485 & 0.2402   & 0.3393   \\
+                                    & PR        & 0.1962    & 0.1865 & 0.1069   & 0.6335   \\
 \hline                                   %inserts single line
 \end{tabular}
 }
@@ -640,7 +630,7 @@ Finally, the stacked model metrics and confusion matrix are shown in Table~\ref{
 \subsection{Redshift predictions}\label{sec:results_redshift}
 
 The redshift value prediction model was applied to sources confirmed to be radio-detected AGN (i.e. \texttt{class~==~1} and \texttt{radio\_detect~==~1}).
-Feature selection \textbf{(cf. Sect.~\ref{sec:feat_selection})} was applied to the train+\textbf{validation} subset, with $6\,856$ sources\textbf{, leading to the selection of} $18$ features. The target feature is \verb|Z| and the selected base features are \verb|band_num|, \verb|W4mag|, \verb|g_r|, \verb|g_J|, \verb|g_W1|, \verb|r_i|, \verb|r_z|, \verb|i_z|, \verb|i_y|, \verb|z_y| \verb|y_J|, \verb|y_W1|, \verb|J_H|, \verb|H_K|, \verb|K_W3|, \verb|K_W4|, \verb|W1_W2|, and \verb|W1_W3|.
+Feature selection \textbf{(cf. Sect.~\ref{sec:feat_selection})} was applied to the train+\textbf{validation} subset, with $6\,679$ sources\textbf{, leading to the selection of} $17$ features. The target feature is \verb|Z| and the selected base features are \verb|band_num|, \verb|W4mag|, \verb|g_r|, \verb|g_J|, \verb|r_i|, \verb|r_z|, \verb|i_z|, \verb|i_y|, \verb|z_y|, \verb|y_J|, \verb|y_W1|, \verb|J_H|, \verb|H_K|, \verb|K_W3|, \verb|K_W4|, \verb|W1_W2|, and \verb|W1_W3|.
 \\
 \begin{table}
 \setlength{\tabcolsep}{3pt}
@@ -648,15 +638,15 @@ Feature selection \textbf{(cf. Sect.~\ref{sec:feat_selection})} was applied to t
 \label{table:fit_redshift_models}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.85\columnwidth}{!}{
-\begin{tabular}{c c c c c c c }        % centered columns (4 columns)
+\begin{tabular}{c c c c c c c}        % centered columns (7 columns)
 \hline\hline                 % inserts double horizontal lines   
 Model               & $\sigma_{\mathrm{MAD}}$   & $\sigma_{\mathrm{NMAD}}$  & $\sigma_{z}$  & $\sigma_{z}^{\mathrm{N}}$ & $\eta$ & Mean rank \\
 \hline
-\texttt{RF}         & 0.1711                    & 0.0770                    & 0.4296        & 0.1990                    & 0.2026 & 2.0       \\
-\texttt{ET}         & 0.1862                    & 0.0867                    & 0.4266        & 0.1897                    & 0.2065 & 2.0       \\
-\texttt{CatBoost}   & 0.2181                    & 0.1007                    & 0.4145        & 0.1880                    & 0.2283 & 2.2       \\
-\texttt{XGBoost}    & 0.2325                    & 0.1079                    & 0.4320        & 0.1965                    & 0.2386 & 3.8       \\
-\texttt{GBR}        & 0.2860                    & 0.1339                    & 0.4721        & 0.2122                    & 0.3057 & 5.0       \\
+\texttt{RF}         & 0.1884                    & 0.0818                    & 0.4413        & 0.2095                    & 0.2159 & 1.8       \\
+\texttt{ET}         & 0.2035                    & 0.0904                    & 0.4409        & 0.2005                    & 0.2263 & 2.0       \\
+\texttt{CatBoost}   & 0.2295                    & 0.1091                    & 0.4249        & 0.1978                    & 0.2432 & 2.2       \\
+\texttt{XGBoost}    & 0.2374                    & 0.1110                    & 0.4579        & 0.2147                    & 0.2549 & 4.0       \\
+\texttt{GBR}        & 0.2929                    & 0.1372                    & 0.4701        & 0.2192                    & 0.3165 & 5.0       \\
 \hline                                   %inserts single line
 \end{tabular}
 }
@@ -670,20 +660,19 @@ Likewise, the comparison between the original and predicted redshifts is shown i
 
 \begin{table}
 \setlength{\tabcolsep}{3pt}
-\caption{Redshift prediction metrics for the \textbf{test} subset for HETDEX \& Stripe 82 as discussed in Sect.~\ref{sec:results_prediction_pipeline}.}             % title of Table
+\caption{Redshift prediction metrics for the \textbf{test} subset for HETDEX \textbf{and} Stripe 82 as discussed in Sect.~\ref{sec:results_prediction_pipeline}.}             % title of Table
 \label{table:fit_redshift_results}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.93\columnwidth}{!}{
-\begin{tabular}{c c c c c c}        % centered columns (4 columns)
+\begin{tabular}{c c c c c c}        % centered columns (6 columns)
 \hline\hline                 % inserts double horizontal lines   
 Subset                 & $\sigma_{\mathrm{MAD}}$ & $\sigma_{\mathrm{NMAD}}$ & $\sigma_{z}$ & $\sigma_{z}^{\mathrm{N}}$ & $\eta$ \\
 \hline
-%Train                   & 0.0706    & 0.0331     & 0.1461  & 0.0538       & 0.0238 \\
-\textbf{Test}           & 0.1650    & 0.0762     & 0.4079  & 0.1968       & 0.1860 \\
-HETDEX-pipeline (Naive) & 0.1331    & 0.0698     & 0.3706  & 0.2121       & 0.1665 \\
-HETDEX-pipeline (PR)    & 0.1570    & 0.0742     & 0.4193  & 0.2524       & 0.1830 \\
-S82-pipeline (Naive)    & 0.1397    & 0.0812     & 0.4614  & 0.2396       & 0.2131 \\
-S82-pipeline (PR)       & 0.1594    & 0.0840     & 0.4866  & 0.2495       & 0.2221 \\
+\textbf{Test}           & 0.1490    & 0.0638     & 0.3883  & 0.1851       & 0.1611 \\
+HETDEX-pipeline (Naive) & 0.0961    & 0.0575     & 0.3656  & 0.1978       & 0.1655 \\
+HETDEX-pipeline (PR)    & 0.1637    & 0.0710     & 0.4368  & 0.2741       & 0.1864 \\
+S82-pipeline (Naive)    & 0.1376    & 0.0778     & 0.4303  & 0.2208       & 0.2311 \\
+S82-pipeline (PR)       & 0.1897    & 0.0861     & 0.4598  & 0.2486       & 0.2355 \\
 \hline                                   %inserts single line
 \end{tabular}
 }
@@ -699,7 +688,7 @@ As the metrics discussed in the previous sections correspond to each individual 
 Overall, we observe slightly worse combined metrics  with respect to the ones calculated for individual models. This degradation is understood by the fact that the pipeline is composed of three sequential models, where the uncertainties of a given model are carried over to the following step. Therefore, the final combined metrics incorporate the uncertainties in three models, as opposed to the individual metrics for each model.
 A small sample of the output of the pipeline for five high-$z$ labelled radio AGN sources in HETDEX and Stripe\,82 are shown in Tables~\ref{table:pred_radio_AGN_known_HETDEX} and \ref{table:pred_radio_AGN_known_S82} respectively.
 
-The application of the prediction pipeline to the unlabelled sources from the HETDEX field led to $880\,363$ predicted AGN, from which $84\,650$ were predicted to be radio detected. The pipeline predicts\textbf{,} as well\textbf{,} $50\,963$ AGN in the unlabelled data from Stripe 82, being $6\,430$ of them candidates to be detected in the radio \textbf{(to the detection level of LoTSS)}. 
+The application of the prediction pipeline to the unlabelled sources from the HETDEX field led to $1\,773\,658$ predicted AGN, from which $184\,206$ were predicted to be radio detected. The pipeline predicts\textbf{,} as well\textbf{,} $437\,631$ AGN in the unlabelled data from Stripe 82, being $61\,162$ of them candidates to be detected in the radio \textbf{(to the detection level of LoTSS)}. 
 The distribution of the predicted redshifts for radio-AGN in HETDEX and Stripe 82 is presented in  Fig.~\ref{fig:hist_pred_z_unlabel_true_z_label}. The pipeline outputs for a small sample of the predicted radio AGN are presented in Tables~\ref{table:pred_radio_AGN_unknown_HETDEX} and \ref{table:pred_radio_AGN_unknown_S82} for HETDEX and Stripe\, 82 respectively.
 
 \begin{figure}
@@ -746,14 +735,14 @@ Section~\ref{sec:discussion} explores the comparison of these results with previ
 \label{table:fit_radio_AGN_results}      % reference of table in the text
 \centering                          % used for centering table
 \resizebox{0.90\columnwidth}{!}{
-\begin{tabular}{c c c c c c}        % centered columns (4 columns)
+\begin{tabular}{c c c c c c}        % centered columns (6 columns)
 \hline\hline                 % inserts double horizontal lines   
 Subset                                  & Threshold & F$_{\beta}$ & MCC      & Precision  & Recall    \\
 \hline
-\multirow{2}{*}{HETDEX-\textbf{test}}   & Naive     & 0.4529    & 0.4335    & 0.6026    & 0.3758    \\
-                                        & PR        & 0.5320    & 0.4784    & 0.5136    & 0.5482    \\
-\multirow{2}{*}{S82-labelled sources}   & Naive     & 0.5035    & 0.3773    & 0.6283    & 0.4325    \\
-                                        & PR        & 0.5580    & 0.3768    & 0.5445    & 0.5696    \\
+\multirow{2}{*}{HETDEX-\textbf{test}}   & Naive     & 0.2692    & 0.3051    & 0.5616    & 0.1882    \\
+                                        & PR        & 0.4213    & 0.3820    & 0.3421    & 0.5209    \\
+\multirow{2}{*}{S82-labelled sources}   & Naive     & 0.2569    & 0.2252    & 0.2366    & 0.2766    \\
+                                        & PR        & 0.1880    & 0.1741    & 0.1056    & 0.5287    \\
 \hline                                   %inserts single line
 \end{tabular}
 }
@@ -768,14 +757,14 @@ Subset                                  & Threshold & F$_{\beta}$ & MCC      & P
 \begin{tabular}{lrrrrrrrrrrrcr}
 \hline
 \hline
-ID &     RA\_ICRS &    DE\_ICRS &  band\_num &  class &  Score\_AGN &  Prob\_AGN &  radio\_detect &  Score\_radio &  Prob\_radio &  Score\_rAGN &  Prob\_rAGN &      $z$ &  pred\_$z$ \\
+ID &     RA\_ICRS &    DE\_ICRS &  band\_num &  class &  Score\_AGN &  Prob\_AGN &  LOFAR\_detect &  Score\_radio &  Prob\_radio &  Score\_rAGN &  Prob\_rAGN &      $z$ &  pred\_$z$ \\
    &     (deg) &    (deg) &    &    &    &    &    &    &    &    &    &        &    \\
 \hline
-1984719 &  183.907364 &  54.993698 &         9 &    1.0 &   0.940852 &  0.931245 &             1 &     0.500004 &    0.536316 &    0.470430 &   0.499442 &  4.107 &  3.9193 \\
-4899124 &  212.012451 &  53.865086 &         9 &    1.0 &   0.942937 &  0.933366 &             0 &     0.500001 &    0.506320 &    0.471469 &   0.472582 &  4.064 &  3.8688 \\
-4875703 &  223.858124 &  48.950409 &         9 &    1.0 &   0.453879 &  0.480690 &             1 &     0.499981 &    0.328632 &    0.226930 &   0.157970 &  3.501 &  3.7079 \\
-4823244 &  164.099503 &  53.425781 &         9 &    1.0 &   0.668701 &  0.679886 &             0 &     0.500004 &    0.539034 &    0.334353 &   0.366481 &  4.144 &  3.7028 \\
-4867638 &  215.540436 &  46.992298 &         9 &    1.0 &   0.815232 &  0.812277 &             1 &     0.500004 &    0.531783 &    0.407619 &   0.431955 &  3.812 &  3.6490 \\
+3295052 &  218.988235 &  49.088448 &         9 &    1.0 &   0.534343 &  0.815832 &             0 &     0.314569 &    0.325591 &    0.168088 &   0.265628 &  3.917 &  3.9756 \\
+7657509  &  198.170349 &  46.279938 &         9 &    1.0 &   0.575088 &  0.958352 &             0 &     0.383779 &    0.383065 &    0.220707 &   0.367111 &  3.980 &  3.9642 \\
+9404714  &  204.337143 &  56.558025 &         7 &    1.0 &   0.566396 &  0.941846 &             0 &     0.179768 &    0.202402 &    0.101820 &   0.190632 &  4.455 &  3.9581 \\
+13593863 &  216.168320 &  51.924206 &         9 &    1.0 &   0.554763 &  0.910092 &             0 &     0.298800 &    0.312021 &    0.165763 &   0.283968 &  3.939 &  3.8918 \\
+12216282 &  219.634567 &  48.304298 &         9 &    1.0 &   0.581679 &  0.967781 &             0 &     0.208687 &    0.230346 &    0.121389 &   0.222924 &  3.838 &  3.8043 \\
 \hline
 \end{tabular}
 }
@@ -793,11 +782,11 @@ ID &     RA\_ICRS &    DE\_ICRS &  band\_num &  class &  Score\_AGN &  Prob\_AGN
 ID &     RA\_ICRS &   DE\_ICRS &  band\_num &  class &  Score\_AGN &  Prob\_AGN &  radio\_detect &  Score\_radio &  Prob\_radio &  Score\_rAGN &  Prob\_rAGN &      Z &  pred\_Z \\
   &     (deg) &   (deg) &    &    &    &   &    &    &    &    &    &       &    \\
 \hline
-285477 &   32.679794 & -0.305035 &         6 &    1.0 &   0.984232 &  0.978272 &             1 &     0.499984 &    0.354852 &    0.492100 &   0.347141 &  4.65000 &  4.3429 \\
-82649  &   18.964045 &  0.141527 &         7 &    0.0 &   0.460473 &  0.487001 &             0 &     0.499981 &    0.332664 &    0.230228 &   0.162008 &  0.86623 &  3.8709 \\
-249970 &  345.687500 & -0.556187 &         9 &    1.0 &   0.878216 &  0.870433 &             0 &     0.500005 &    0.539939 &    0.439112 &   0.469981 &  3.76100 &  3.6731 \\
-60228  &   16.550922 &  0.322279 &         9 &    1.0 &   0.989221 &  0.984400 &             0 &     0.500025 &    0.710150 &    0.494635 &   0.699072 &  3.11000 &  3.4812 \\
-94386  &  335.210785 &  0.996780 &         9 &    1.0 &   0.975818 &  0.968469 &             0 &     0.500002 &    0.516335 &    0.487911 &   0.500054 &  2.60100 &  3.2640 \\
+3301527 &  346.665192 &  1.148655 &         9 &    1.0 &   0.550975 &  0.896749 &             0 &     0.646490 &    0.582458 &    0.356200 &   0.522319 &  3.648 &  3.8355 \\
+2166190 &  344.498627 &  0.279335 &         9 &    1.0 &   0.522884 &  0.735562 &             0 &     0.196523 &    0.218707 &    0.102759 &   0.160872 &  3.768 &  3.7566 \\
+834857  &   21.023815 & -0.735512 &         9 &    1.0 &   0.579592 &  0.965043 &             0 &     0.403482 &    0.398881 &    0.233855 &   0.384938 &  4.073 &  3.7495 \\
+794288  &   21.752874 & -0.766390 &        12 &    1.0 &   0.568310 &  0.945940 &             0 &     0.820163 &    0.717190 &    0.466107 &   0.678419 &  4.105 &  3.7306 \\
+3321399 &  347.853729 &  1.164612 &         9 &    1.0 &   0.560881 &  0.928371 &             0 &     0.327241 &    0.336359 &    0.183543 &   0.312266 &  3.429 &  3.7115 \\
 \hline
 \end{tabular}
 }
@@ -816,11 +805,11 @@ ID &     RA\_ICRS &   DE\_ICRS &  band\_num &  class &  Score\_AGN &  Prob\_AGN 
 ID &   RA\_ICRS &  DE\_ICRS &  band\_num &  Score\_AGN &  Prob\_AGN &  radio\_detect &  Score\_radio &  Prob\_radio &  Score\_rAGN &  Prob\_rAGN &  pred\_Z \\
   &     (deg) &   (deg) &    &    &    &    &    &   &   &    &   \\
 \hline
-4786343 &  228.154526 &  54.541595 &         8 &   0.991423 &  0.987216 &             0 &     0.499991 &    0.420465 &    0.495703 &   0.415090 &  4.3900 \\
-5389236 &  200.398926 &  56.027981 &         8 &   0.700025 &  0.708180 &             0 &     0.499991 &    0.415148 &    0.350006 &   0.293999 &  4.3898 \\
-2217066 &  202.498444 &  47.053791 &         8 &   0.639387 &  0.653307 &             0 &     0.499982 &    0.339984 &    0.319682 &   0.222114 &  4.2667 \\
-3410222 &  201.309235 &  53.746429 &         8 &   0.941747 &  0.932154 &             0 &     0.500017 &    0.645880 &    0.470889 &   0.602060 &  4.2466 \\
-4777479 &  196.633072 &  54.290443 &         8 &   0.740830 &  0.744960 &             0 &     0.500041 &    0.817717 &    0.370446 &   0.609167 &  4.2408 \\
+2967269  &  177.579330 &  55.263523 &         8 &   0.526304 &  0.761713 &             0 &     0.240652 &    0.260191 &    0.126656 &   0.198190 &  4.0430 \\
+3553346  &  173.142654 &  56.124008 &         8 &   0.490827 &  0.428097 &             0 &     0.190459 &    0.212843 &    0.093482 &   0.091118 &  4.0288 \\
+14754823 &  219.060349 &  56.363590 &         9 &   0.496982 &  0.491001 &             0 &     0.246332 &    0.265387 &    0.122422 &   0.130305 &  4.0273 \\
+15038313 &  210.385498 &  56.002258 &         9 &   0.528156 &  0.775097 &             1 &     0.269456 &    0.286236 &    0.142315 &   0.221861 &  4.0213 \\
+7489690  &  199.620728 &  48.416069 &         8 &   0.511700 &  0.638115 &             0 &     0.195617 &    0.217833 &    0.100097 &   0.139002 &  4.0208 \\
 \hline
 \end{tabular}
 }
@@ -837,11 +826,11 @@ ID &   RA\_ICRS &  DE\_ICRS &  band\_num &  Score\_AGN &  Prob\_AGN &  radio\_de
 ID &     RA\_ICRS &   DE\_ICRS &  band\_num &  Score\_AGN &  Prob\_AGN &  radio\_detect &  Score\_radio &  Prob\_radio &  Score\_rAGN &  Prob\_rAGN &  pred\_Z \\
   &   (deg) &  (deg) &    &   &    &   &    &    &    &   &    \\
 \hline
-93880  &  336.481232 & -0.450324 &         8 &   0.981570 &  0.975110 &             0 &     0.499980 &    0.326225 &    0.490766 &   0.318106 &  4.1903 \\
-189511 &  340.342285 &  0.029702 &         8 &   0.996063 &  0.993517 &             0 &     0.500005 &    0.542653 &    0.498037 &   0.539135 &  4.1879 \\
-292357 &  334.276093 &  0.683840 &         8 &   0.986278 &  0.980749 &             0 &     0.499980 &    0.321438 &    0.493119 &   0.315250 &  4.1307 \\
-62613  &  333.105591 &  1.223353 &         8 &   0.729516 &  0.734764 &             0 &     0.499982 &    0.341621 &    0.364745 &   0.251011 &  4.1023 \\
-177651 &  340.529358 &  0.491929 &         8 &   0.954704 &  0.945525 &             0 &     0.500002 &    0.518154 &    0.477354 &   0.489928 &  4.0898 \\
+1501923 &  342.026154 & -0.231510 &        12 &   0.489753 &  0.417276 &             0 &     0.297311 &    0.310730 &    0.145609 &   0.129660 &  4.0336 \\
+772344  &  340.411560 & -0.783064 &        12 &   0.523335 &  0.739117 &             0 &     0.554466 &    0.514472 &    0.290172 &   0.380255 &  3.9941 \\
+3367860 &   14.692464 &  1.201838 &         9 &   0.494900 &  0.469615 &             0 &     0.287230 &    0.301940 &    0.142150 &   0.141796 &  3.9860 \\
+2914714 &   23.260157 &  0.850109 &         7 &   0.497903 &  0.500466 &             0 &     0.207451 &    0.229171 &    0.103291 &   0.114692 &  3.9783 \\
+241117  &  348.178162 & -1.187135 &         5 &   0.497577 &  0.497115 &             0 &     0.264277 &    0.281609 &    0.131498 &   0.139992 &  3.9613 \\
 \hline
 \end{tabular}
 }
@@ -877,26 +866,26 @@ Overall, the poorer performance of the colour selection with respect to the mode
 \label{table:previous_AGN_methods}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.62\columnwidth}{!}{
-\begin{tabular}{c c c c c}        % centered columns (4 columns)
+\begin{tabular}{c c c c c}        % centered columns (5 columns)
 \hline\hline  
 \multicolumn{5}{c}{\textbf{Test} set} \\
-Method\tablefootmark{a} & F$_{\beta}$  & MCC       & Precision & Recall \\
+Method\tablefootmark{a} & F$_{\beta}$  & MCC    & Precision & Recall \\
 \hline
-S12       & 0.8124     & 0.7272    & 0.8474    & 0.7855 \\
-M12       & 0.5075     & 0.5154    & 0.9856    & 0.3623 \\
-M16       & 0.6718     & 0.6360    & 0.9608    & 0.5381 \\
-B18       & 0.8056     & 0.7587    & 0.9572    & 0.7124 \\
-This work & 0.8751     & 0.8064    & 0.8536    & 0.8936 \\
+S12       & 0.8185      & 0.7924    & 0.8384    & 0.8027 \\
+M12       & 0.4936      & 0.5058    & 0.9917    & 0.3488 \\
+M16       & 0.6527      & 0.6215    & 0.9689    & 0.5140 \\
+B18       & 0.7988      & 0.7534    & 0.9653    & 0.6991 \\
+This work & 0.8762      & 0.8051    & 0.8471    & 0.9019 \\
 \hline\\[0.5em]
 \hline\hline
 \multicolumn{5}{c}{Stripe 82 (labelled)} \\
-Method & F$_{\beta}$  & MCC       & Precision & Recall \\
+Method & F$_{\beta}$   & MCC       & Precision & Recall \\
 \hline
-S12       & 0.7938     & 0.3731    & 0.9522    & 0.6979 \\
-M12       & 0.4449     & 0.2438    & 0.9953    & 0.3054 \\
-M16       & 0.6479     & 0.3430    & 0.9888    & 0.5043 \\
-B18       & 0.7680     & 0.4428    & 0.9902    & 0.6479 \\
-This work & 0.8789     & 0.4870    & 0.9526    & 0.8261 \\
+S12       & 0.8243     & 0.4374    & 0.9254    & 0.7561 \\
+M12       & 0.4224     & 0.2694    & 0.9954    & 0.2862 \\
+M16       & 0.5985     & 0.3580    & 0.9867    & 0.4517 \\
+B18       & 0.7534     & 0.4793    & 0.9858    & 0.6305 \\
+This work & 0.8899     & 0.5478    & 0.9272    & 0.8613 \\
 \hline
 \end{tabular}
 }
@@ -926,13 +915,12 @@ These values, lower than the works described here, can be fully understood given
 
 We have not found in the literature any work attempting the prediction of AGN radio detection at any level and therefore this is the first attempt at doing so. In the literature we do find several correlations between the AGN radio emission and that at other wavelengths \citep[e.g. with infrared emission,][]{1985ApJ...298L...7H, 1992ARA&A..30..575C} and substantial effort has been done towards classifying radio galaxies based upon their morphology \citep[e.g.][FRI, FRII, bent jets, etc.]{2017ApJS..230...20A, 2019MNRAS.482.1211W} and its connection to environment \citep{2008A&ARv..15...67M, 2022A&ARv..30....6M}. None of these extensive works has directly focused on the a priori presence or absence of radio emission above a certain threshold. Therefore, the results presented here are the first attempt at such an effort.
 
-The ${\sim} 2$x success rate of the pipeline to identify radio emission in AGN (${\sim} 63\%$ recall and ${\sim} 57\%$ precision; see Table~\ref{table:fit_radio_AGN_results}) with the respect to a 'no-skill' or random (${\sim}30 \%$) selection, 
-provides the opportunity to understand what the model has learned from the data and, therefore, gain some insight into the nature or triggering mechanisms of the radio emission. We, therefore, reserve the discussion of the most important features, and the linked physical processes, driving the pipeline improved predictions to Sect.~\ref{sec:feat_importances}. 
+The ${\sim} 2$x success rate of the pipeline to identify radio emission in AGN (${\sim} 52.09\%$ recall and ${\sim} 52.87\%$ precision; see Table~\ref{table:fit_radio_AGN_results}) with the respect to a 'no-skill' or random (${\sim}30 \%$) selection, provides the opportunity to understand what the model has learned from the data and, therefore, gain some insight into the nature or triggering mechanisms of the radio emission. We, therefore, reserve the discussion of the most important features, and the linked physical processes, driving the pipeline improved predictions to Sect.~\ref{sec:feat_importances}. 
 
 
 \subsubsection{Redshift value prediction}\label{sec:previous_z_values}
 
-We compare our results to that from \citet[][Stripe 82X]{2017ApJ...850...66A} where the authors analysed multi-wavelength data from more than $6\,100$ X-ray detected AGN from the $31.3\, \mathrm{deg}^{2}$ of the Stripe 82X survey. They obtained photometric redshifts for almost $6\,000$ of these sources using the template-based fitting code \verb|LePhare| \citep{1999MNRAS.310..540A, 2006A&A...457..841I}. Their results present a normalised median absolute deviation of $\sigma_{\mathrm{NMAD}} = 0.062$ and an outlier fraction of $\eta = 13.69 \%$, values which are similar to our results in HETDEX (the training field) and Stripe 82 except for a better outlier fraction ($\eta_{S82}=22.21\%$). A fairer comparison would require to look at the \textbf{testing} metrics in Table~\ref{table:fit_redshift_results} where both the $\sigma_{\mathrm{NMAD}}$ and outlier fraction show comparable results ($\sigma_{\mathrm{NMAD}} = 0.076$, $\eta = 18.6$\%).
+We compare our results to that from \citet[][Stripe 82X]{2017ApJ...850...66A} where the authors analysed multi-wavelength data from more than $6\,100$ X-ray detected AGN from the $31.3\, \mathrm{deg}^{2}$ of the Stripe 82X survey. They obtained photometric redshifts for almost $6\,000$ of these sources using the template-based fitting code \verb|LePhare| \citep{1999MNRAS.310..540A, 2006A&A...457..841I}. Their results present a normalised median absolute deviation of $\sigma_{\mathrm{NMAD}} = 0.062$ and an outlier fraction of $\eta = 13.69 \%$, values which are similar to our results in HETDEX (the training field) and Stripe 82 except for a better outlier fraction ($\eta_{S82}=22.21\%$). A fairer comparison would require to look at the \textbf{testing} metrics in Table~\ref{table:fit_redshift_results} where both the $\sigma_{\mathrm{NMAD}}$ and outlier fraction show comparable results ($\sigma_{\mathrm{NMAD}} = 0.086$, $\eta = 23.5$\%).
 
 On the ML side, we compare our results to those produced by \citet{2021Galax...9...86C}, with $\sigma_{\mathrm{NMAD}} = 0.1197$ and $\eta = 29.72 \%$, and find that our redshift prediction model improves by at least $60 \%$ for any given metric.
 The source of improvement is probably related to the different set of features used (colours vs ratios) and the more specific population of radio-AGN used to train our models.
@@ -971,14 +959,14 @@ Finally, \citet{2022A&A...666A..87C} also produced photometric redshift predicti
 \subsection{Model explanations}\label{sec:model_explain}
 
 Given the success of the models and pipeline in classifying AGN, their radio detectability and redshift with the provided set of observables, knowing the relative weights that they have in the decision-making process is of utmost relevance. In this way, physical insight might be gained about the triggers of AGN and radio activity and its connection to their host.
-Therefore, we have estimated both local and global feature importances for the individual models and the combined pipeline. Global importances were retrieved using the so-called 'decrease in impurity' approach \citep[see, for example,][]{Breiman2001}. Local importances have been determined via Shapley values. A more detailed description of what these importances are and how they are calculated is given in the following sections.
+Therefore, we have estimated both local and global feature importances for the individual models and the combined pipeline. Global importances were retrieved using the so-called `decrease in impurity' approach \citep[see, for example,][]{Breiman2001}. Local importances have been determined via Shapley values. A more detailed description of what these importances are and how they are calculated is given in the following sections.
 
 \subsubsection{Global feature importances}\label{sec:feat_importances}
 
 Overall, mean or global feature importances can be retrieved, without additional calculations, from models that are based on Decision Trees \citep[e.g. Random Forests and Boosting models,][]{Breiman2001, breiman2003manual}. All algorithms selected in this work (\verb|RF|, \verb|CatBoost|, \verb|XGBoost|, \verb|ET|, \verb|GBR|, and \verb|GBC|) belong to that class. For each feature, the decrease in impurity (a term frequently used in the literature related to Machine Learning) of the dataset is calculated for all the nodes of the tree in which that feature is used. Features with the highest impurity decrease will be more important for the model \citep{NIPS2013_e3796ae8}\footnote{For some models that are not based on Decision Trees, feature importances can be obtained from the coefficients that the training process delivers for each feature. These coefficients are related to the level to which each quantity is scaled to obtain a final prediction (as in the coefficients from a polynomial regression).}.
 
 Insight into the decision-making of the pipeline can only rely on the specific weight of the original set of features (see Sect.~\ref{sec:feat_selection}). Table ~\ref{table:feat_importances} presents the ranked combined importances from the observables selected in each of the three sequential models that compose the pipeline. They have been combined using the importances from the meta-learner (as shown in Table~\ref{table:base_feat_importances}) and that of base-learners. The derived importances will be dependent on the dataset used, including any imputation for the missing data, and the details of the models, i.e. algorithms used and stacking procedure. 
-We first notice in Table~\ref{table:feat_importances} that the order of the features is different for all three models. This \textbf{fact} reinforces the need, as stated in Sect.~\ref{sec:ML_training}, of developing separate models for each of the prediction stages of this work that would evaluate the best feature weights for the related classification or regression task. 
+We first notice in Table~\ref{table:feat_importances} that the order of the features is different for all three models. This \textbf{difference} reinforces the need, as stated in Sect.~\ref{sec:ML_training}, of developing separate models for each of the prediction stages of this work that would evaluate the best feature weights for the related classification or regression task. 
 
 \begin{table}
 \setlength{\tabcolsep}{2.9pt}
@@ -986,37 +974,37 @@ We first notice in Table~\ref{table:feat_importances} that the order of the feat
 \label{table:feat_importances}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.97\columnwidth}{!}{
-\begin{tabular}{c c c c c c}        % centered columns (4 columns)
+\begin{tabular}{c c c c c c}        % centered columns (6 columns)
 \hline\hline                 % inserts double horizontal lines   
 \multicolumn{6}{c}{AGN-Galaxy (meta-model: \texttt{CatBoost})} \\
-Feature             & Importance    & Feature               & Importance    & Feature               & Importance \\
+Feature             & Importance    & Feature               & Importance    & Feature              & Importance \\
 \hline
-\texttt{W1\_W2}     & 29.835        & \texttt{r\_i}         & 5.096         & \texttt{K\_W3}        & 2.935      \\
-\texttt{r\_z}       &  8.123        & \texttt{r\_W1}        & 4.582         & \texttt{H\_K}         & 2.608      \\
-\texttt{g\_r}       &  8.029        & \texttt{i\_y}         & 4.578         & \texttt{J\_H}         & 2.263      \\
-\texttt{W1\_W3}     &  7.872        & \texttt{z\_y}         & 3.663         & \texttt{W4mag}        & 1.173      \\
-\texttt{y\_W2}      &  6.544        & \texttt{i\_z}         & 3.526         &                       &            \\
-\texttt{g\_J}       &  5.921        & \texttt{y\_J}         & 3.253         &                       &            \\[0.5em]
+\texttt{W1\_W2}     & 51.296        & \texttt{r\_i}         & 2.928         & \texttt{Kmag}        & 1.287      \\
+\texttt{r\_z}       & 10.029        & \texttt{r\_W1}        & 2.822         & \texttt{W3\_W4}      & 0.821      \\
+\texttt{g\_r}       &  6.681        & \texttt{i\_z}         & 2.099         & \texttt{W4mag}       & 0.820      \\
+\texttt{W1\_W3}     &  5.491        & \texttt{H\_K}         & 1.999         & \texttt{H\_W3}       & 0.731      \\
+\texttt{y\_W2}      &  5.221        & \texttt{r\_J}         & 1.529         & \texttt{z\_y}        & 0.681      \\
+\texttt{y\_J}       &  3.590        & \texttt{i\_y}         & 1.479         & \texttt{J\_H}        & 0.496      \\[0.5em]
 \hline\hline
 \multicolumn{6}{c}{Radio detection (meta-model: \texttt{CatBoost})} \\
-Feature             & Importance    & Feature               & Importance    & Feature               & Importance \\
+Feature             & Importance    & Feature               & Importance    & Feature              & Importance \\
 \hline
-\texttt{K\_W3}      & 27.938        & \texttt{r\_z}         & 4.374         & \texttt{i\_y}         & 3.118      \\
-\texttt{W4mag}      & 13.542        & \texttt{y\_W1}        & 3.723         & \texttt{band\_num}    & 2.899      \\
-\texttt{W2\_W3}     &  9.343        & \texttt{z\_W1}        & 3.623         & \texttt{K\_W4}        & 2.442      \\
-\texttt{y\_J}       &  5.603        & \texttt{z\_y}         & 3.445         & \texttt{H\_K}         & 1.809      \\
-\texttt{g\_r}       &  5.348        & \texttt{r\_i}         & 3.423         & \texttt{J\_H}         & 1.694      \\
-\texttt{W1\_W2}     &  4.526        & \texttt{i\_z}         & 3.151         &                       &            \\[0.5em]
+\texttt{W2\_W3}     & 10.830        & \texttt{z\_W1}        & 7.249         & \texttt{W4mag}       & 3.004      \\
+\texttt{W1\_W2}     &  8.692        & \texttt{i\_z}         & 7.197         & \texttt{K\_W4}       & 1.915      \\
+\texttt{y\_J}       &  8.085        & \texttt{r\_i}         & 7.088         & \texttt{band\_num}   & 1.065      \\
+\texttt{g\_r}       &  7.672        & \texttt{z\_y}         & 7.045         & \texttt{J\_H}        & 1.046      \\
+\texttt{g\_i}       &  7.289        & \texttt{r\_z}         & 6.936         & \texttt{H\_K}        & 0.952      \\
+\texttt{K\_W3}      &  7.251        & \texttt{y\_W1}        & 6.684         &                      &            \\[0.5em]
 \hline\hline
 \multicolumn{6}{c}{Redshift prediction (meta-model: \texttt{RF})} \\
-Feature             & Importance    & Feature               & Importance    & Feature               & Importance \\
+Feature             & Importance    & Feature               & Importance    & Feature              & Importance \\
 \hline
-\texttt{W1\_W3}     & 30.701        & \texttt{W4mag}        & 4.625         & \texttt{y\_J}         & 2.420    \\
-\texttt{H\_K}       & 14.222        & \texttt{g\_W1}        & 3.603         & \texttt{i\_y}         & 1.681    \\
-\texttt{y\_W1}      & 11.477        & \texttt{r\_z}         & 2.791         & \texttt{K\_W3}        & 1.015    \\
-\texttt{W1\_W2}     &  6.872        & \texttt{r\_i}         & 2.769         & \texttt{g\_J}         & 1.013    \\
-\texttt{band\_num}  &  5.145        & \texttt{z\_y}         & 2.690         & \texttt{K\_W4}        & 1.013    \\
-\texttt{g\_r}       &  4.762        & \texttt{i\_z}         & 2.645         & \texttt{J\_H}         & 0.557    \\
+\texttt{W1\_W3}     & 35.572        & \texttt{r\_z}         & 3.018         & \texttt{g\_J}        & 1.215    \\
+\texttt{H\_K}       & 13.526        & \texttt{z\_y}         & 3.000         & \texttt{i\_y}        & 1.162    \\
+\texttt{y\_W1}      & 12.608        & \texttt{band\_num}    & 2.896         & \texttt{K\_W3}       & 1.000    \\
+\texttt{W1\_W2}     &  6.358        & \texttt{r\_i}         & 2.827         & \texttt{K\_W4}       & 0.925    \\
+\texttt{W4mag}      &  4.984        & \texttt{y\_J}         & 2.784         & \texttt{J\_H}        & 0.762    \\
+\texttt{g\_r}       &  4.954        & \texttt{i\_z}         & 2.408         &                      &          \\
 \hline
 \end{tabular}
 }
@@ -1034,27 +1022,27 @@ Feature             & Importance    & Feature               & Importance    & Fe
   \multicolumn{4}{c}{AGN-Galaxy model (\texttt{CatBoost})} \\
   Feature             & Importance    & Feature           & Importance \\
   \hline
-  \texttt{gbc}        & 16.682        & \texttt{xgboost}  & 9.057      \\
-  \texttt{rf}         &  9.136        & \texttt{et}       & 6.314      \\
-  \multicolumn{3}{r}{Remaining feature importances:} & 58.811 \\[0.2em]
+  \texttt{gbc}        & 41.172        & \texttt{rf}       & 12.373      \\
+  \texttt{et}         & 18.362        & \texttt{xgboost}  & 10.368      \\
+  \multicolumn{3}{r}{Remaining feature importances:} & 17.725 \\[0.2em]
   \hline\hline
   \multicolumn{4}{c}{Radio detection model (\texttt{CatBoost})} \\
   
   Feature             & Importance    & Feature           & Importance \\
   \hline
-  \texttt{xgboost}    & 70.780        & \texttt{rf}       & 7.775      \\
-  \texttt{et}         &  9.142        & \texttt{gbc}      & 7.093      \\
+  \texttt{rf}         & 13.030        & \texttt{et}       & 8.922      \\
+  \texttt{catboost}   &  9.896        & \texttt{xgboost}  & 4.334      \\
   %\hline
-  \multicolumn{3}{r}{Remaining importances:} & 5.21 \\[0.2em]
+  \multicolumn{3}{r}{Remaining importances:} & 63.818 \\[0.2em]
   \hline\hline
   \multicolumn{4}{c}{Redshift prediction model (\texttt{RF})} \\
   
   Feature             & Importance    & Feature           & Importance \\
   \hline
-  \texttt{gbr}        & 30.564        & \texttt{catboost} & 14.698    \\
-  \texttt{xgboost}    & 26.503        & \texttt{et}       &  8.295    \\
+  \texttt{gbr}        & 48.485        & \texttt{catboost} &  4.551    \\
+  \texttt{xgboost}    & 28.712        & \texttt{et}       &  3.623    \\
   %\hline
-  \multicolumn{3}{r}{Remaining importances:} & 19.094 \\
+  \multicolumn{3}{r}{Remaining importances:} & 14.629 \\
   \hline
   \end{tabular}
   }
@@ -1092,7 +1080,7 @@ One of the main potential uses of the pipeline is its capability to pinpoint rad
   \label{fig:hist_W4_nonimputed_pred_radio_non_radio_AGN}
 \end{figure}
 
-Finally, the redshift prediction model shows again that the final estimate is mostly driven by the results of the base learners, accounting for ${\sim} 80\%$ of the predicting power. The overall combined importance of features shows also in this case a strong dependence on several near-IR colours of which W1~-~W3 is the most relevant one. 
+Finally, the redshift prediction model shows again that the final estimate is mostly driven by the results of the base learners, accounting for ${\sim} 85\%$ of the predicting power. The overall combined importance of features shows also in this case a strong dependence on several near-IR colours of which W1~-~W3 is the most relevant one. 
 The model still relies, to a lesser extent, on a broad range of optical features needed to trace the broad range of redshift possibilities ($z \in [0,6]$).% Understandably,  the high-$z$ model emphasises more on the information provided by the redder bands.
 
 
@@ -1102,7 +1090,7 @@ The model still relies, to a lesser extent, on a broad range of optical features
 The combination of Shapley values with several other model explanation methods  was used by \citet[][]{NIPS2017_7062} to create the SHapley Additive exPlanations (SHAP) values. In this work, SHAP values were calculated using the python package \verb|SHAP|\footnote{\url{https://github.com/slundberg/shap}} and, in particular, its module for Tree-based predictors \citep{lundberg2020local2global}.
 To speed calculations up, the package \verb|FastTreeSHAP|\footnote{\url{https://github.com/linkedin/fasttreeshap}} \citep[\texttt{v0.1.2};][]{2021arXiv210909847Y} was also used, which allows for multi-thread runs. 
 
-One way to display these SHAP values is through the so-called decision plots. They can show how individual predictions are driven by the inclusion of each feature. Besides determining the most relevant properties that help the model make a decision, it is possible to detect sources that follow different prediction paths which could be, eventually and upon further examination, labelled as outliers. An example of this decision plot, linked to the AGN-Galaxy classification, is shown in Fig.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z} for a subsample of the high-redshift (${z \geq 4.0}$) spectroscopically classified AGN in the HETDEX field ($77$ sources). The different features used by the meta-learner are stacked on the vertical axis with increasing weight and these final weight are sumarized in Table~\ref{table:base_shap_values}. Similarly, SHAP decision plots for the radio-detection and redshift prediction are presented in Figs.~\ref{fig:SHAP_decision_radio_meta_HETDEX_high_z} and \ref{fig:SHAP_decision_z_meta_HETDEX_high_z}, respectively.
+One way to display these SHAP values is through the so-called decision plots. They can show how individual predictions are driven by the inclusion of each feature. Besides determining the most relevant properties that help the model make a decision, it is possible to detect sources that follow different prediction paths which could be, eventually and upon further examination, labelled as outliers. An example of this decision plot, linked to the AGN-Galaxy classification, is shown in Fig.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z} for a subsample of the high-redshift (${z \geq 4.0}$) spectroscopically classified AGN in the HETDEX field ($131$ sources). The different features used by the meta-learner are stacked on the vertical axis with increasing weight and these final weight are sumarized in Table~\ref{table:base_shap_values}. Similarly, SHAP decision plots for the radio-detection and redshift prediction are presented in Figs.~\ref{fig:SHAP_decision_radio_meta_HETDEX_high_z} and \ref{fig:SHAP_decision_z_meta_HETDEX_high_z}, respectively.
 
 \begin{figure}[t]
     \centering
@@ -1110,13 +1098,13 @@ One way to display these SHAP values is through the so-called decision plots. Th
     \script{SHAP/fig_decision_AGN_gal_hiz_AGN_HETDEX.py}
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_meta_learner_HETDEX_highz.pdf}
     \end{minipage}%\\%
-    \caption{Decision plot from SHAP values for AGN-Galaxy classification from the $77$ high redshift ($z \geq 4$) spectroscopically confirmed AGN in HETDEX. Horizontal axis represents the model's output with a starting value for each source centred on the selected threshold for classification. Vertical axis shows features used in the model sorted, from top to bottom, by decreasing mean absolute SHAP value. Each prediction is represented by a coloured line corresponding to its final predicted value as shown by the colorbar at the top. Moving from the bottom of the plot to the top, SHAP values for each feature are added to the previous value in order to highlight how each feature contributes to the overall prediction. \textbf{Predictions for sources detected by LOFAR are highlighted with a dotted, dashed line.}}
+    \caption{Decision plot from SHAP values for AGN-Galaxy classification from the $131$ high redshift ($z \geq 4$) spectroscopically confirmed AGN in HETDEX. Horizontal axis represents the model's output with a starting value for each source centred on the selected threshold for classification. Vertical axis shows features used in the model sorted, from top to bottom, by decreasing mean absolute SHAP value. Each prediction is represented by a coloured line corresponding to its final predicted value as shown by the colorbar at the top. Moving from the bottom of the plot to the top, SHAP values for each feature are added to the previous value in order to highlight how each feature contributes to the overall prediction. \textbf{Predictions for sources detected by LOFAR are highlighted with a dotted, dashed line.}}
    \label{fig:SHAP_decision_AGN_meta_HETDEX_high_z}
 \end{figure}
 
 \begin{table}[b]
 \setlength{\tabcolsep}{2.9pt}
-\caption{SHAP values \textbf{(rescaled to add to $100$)} for base algorithms in each prediction step for observed features using $77$ spectroscopically confirmed AGN at high redshift values ($z > 4$).}             % title of Table
+\caption{SHAP values \textbf{(rescaled to add to $100$)} for base algorithms in each prediction step for observed features using $131$ spectroscopically confirmed AGN at high redshift values ($z > 4$).}             % title of Table
 \label{table:base_shap_values}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.68\columnwidth}{!}{
@@ -1125,27 +1113,27 @@ One way to display these SHAP values is through the so-called decision plots. Th
 \multicolumn{4}{c}{AGN-Galaxy model (\texttt{CatBoost})}             \\
 Feature             & SHAP value    & Feature           & SHAP value \\
 \hline
-\texttt{rf}         & 19.662        & \texttt{et}       & 16.828     \\
-\texttt{gbc}        & 18.249        & \texttt{xgboost}  & 5.379      \\
-\multicolumn{3}{r}{Remaining SHAP values:} & 39.882 \\[0.2em]
+\texttt{gbc}        & 28.725        & \texttt{et}       & 22.888     \\
+\texttt{rf}         & 23.566        & \texttt{xgboost}  &  6.884      \\
+\multicolumn{3}{r}{Remaining SHAP values:} & 17.937 \\[0.2em]
 \hline\hline
 \multicolumn{4}{c}{Radio detection model (\texttt{CatBoost})}        \\
 
 Feature             & SHAP value    & Feature           & SHAP value \\
 \hline
-\texttt{xgboost}    & 33.961        & \texttt{rf}       & 19.807     \\
-\texttt{et}         & 23.383        & \texttt{gbc}      & 15.657     \\
+\texttt{rf}         & 11.829        & \texttt{catboost} &  5.444     \\
+\texttt{xgboost}    &  9.947        & \texttt{et}       &  4.098     \\
 %\hline
-\multicolumn{3}{r}{Remaining SHAP values:} & 7.192 \\[0.2em]
+\multicolumn{3}{r}{Remaining SHAP values:} & 68.682 \\[0.2em]
 \hline\hline
 \multicolumn{4}{c}{Redshift prediction model (\texttt{RF})}          \\
 
 Feature             & SHAP value    & Feature           & SHAP value \\
 \hline
-\texttt{xgboost}    & 33.528        & \texttt{catboost} & 16.742     \\
-\texttt{gbr}        & 27.147        & \texttt{et}       &  7.960     \\
+\texttt{xgboost}    & 43.019        & \texttt{catboost} &  4.810     \\
+\texttt{gbr}        & 32.416        & \texttt{et}       &  2.457     \\
 %\hline
-\multicolumn{3}{r}{Remaining SHAP values:} & 14.623                  \\
+\multicolumn{3}{r}{Remaining SHAP values:} & 17.298                  \\
 \hline
 \end{tabular}
 }
@@ -1158,7 +1146,7 @@ Feature             & SHAP value    & Feature           & SHAP value \\
    \script{SHAP/fig_decision_radio_hiz_AGN_HETDEX.py}
    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_meta_learner_HETDEX_highz.pdf}
    \end{minipage}
-   \caption{Decision plot from the SHAP values for all features from the radio detection model in the $77$ high redshift ($z \geq 4$) spectroscopically confirmed AGN from HETDEX. Description as in Fig.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}.}
+   \caption{Decision plot from the SHAP values for all features from the radio detection model in the $131$ high redshift ($z \geq 4$) spectroscopically confirmed AGN from HETDEX. Description as in Fig.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}.}
    \label{fig:SHAP_decision_radio_meta_HETDEX_high_z}
 \end{figure}
 
@@ -1168,57 +1156,57 @@ Feature             & SHAP value    & Feature           & SHAP value \\
    \script{SHAP/fig_decision_z_hiz_AGN_HETDEX.py}
    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_meta_learner_HETDEX_highz.pdf}
    \end{minipage}
-   \caption{Decision plot from the SHAP values for all features from the redshift prediction model in the $77$ high redshift ($z \geq 4$) spectroscopically confirmed AGN from HETDEX. Description as in Fig.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}.}
+   \caption{Decision plot from the SHAP values for all features from the redshift prediction model in the $131$ high redshift ($z \geq 4$) spectroscopically confirmed AGN from HETDEX. Description as in Fig.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}.}
    \label{fig:SHAP_decision_z_meta_HETDEX_high_z}
 \end{figure}
 
-As it can be seen, for the three models, base learners have the highest influence. This \textbf{result} raises the question of what drives these individual base predictions. Appendix~\ref{sec:app_shap_base} includes SHAP decision plots for all base learners used in this work. Additionally, and to be able to compare these results with the features importances from Sect.~\ref{sec:feat_importances}, we constructed Table~\ref{table:shap_values_combined}, which displays the combined SHAP values of base and meta learners but, in this case, for the same $77$ high-redshift confirmed AGN (with $32$ \textbf{of them} detected by LoTSS). Table~\ref{table:shap_values_combined} shows, as Table~\ref{table:feat_importances}, that the colour W1~-~W2 is the most important discriminator between AGN and Galaxies for this specific set of sources. The importance of the rest of the features is mixed similar colours are located on the top spots (e.g. g~-~r, r~-~z or y~-~W2).
+As it can be seen, for the three models, base learners \textbf{are amongst the features with} the highest influence. This \textbf{result} raises the question of what drives these individual base predictions. Appendix~\ref{sec:app_shap_base} includes SHAP decision plots for all base learners used in this work. Additionally, and to be able to compare these results with the features importances from Sect.~\ref{sec:feat_importances}, we constructed Table~\ref{table:shap_values_combined}, which displays the combined SHAP values of base and meta learners but, in this case, for the same $131$ high-redshift confirmed AGN (with $32$ \textbf{of them} detected by LoTSS). Table~\ref{table:shap_values_combined} shows, as Table~\ref{table:feat_importances}, that the colour W1~-~W2 is the most important discriminator between AGN and Galaxies for this specific set of sources. The importance of the rest of the features is mixed\textbf{, where} similar colours are located on the top spots (e.g. g~-~r, r~-~z or W1~-~W3).
 
 \begin{table}
 \setlength{\tabcolsep}{2.9pt}
-\caption{Combined and normalised \textbf{(rescaled to add to $100$)} mean absolute SHAP values for observed features from the three models using $77$ spectroscopically confirmed AGN at high redshift values ($z \geq 4$).}             % title of Table
+\caption{Combined and normalised \textbf{(rescaled to add to $100$)} mean absolute SHAP values for observed features from the three models using $131$ spectroscopically confirmed AGN at high redshift values ($z \geq 4$).}             % title of Table
 \label{table:shap_values_combined}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.97\columnwidth}{!}{
-\begin{tabular}{c c c c c c}        % centered columns (4 columns)
+\begin{tabular}{c c c c c c}        % centered columns (6 columns)
 \hline\hline                 % inserts double horizontal lines   
 \multicolumn{6}{c}{AGN-Galaxy model} \\
 Feature             & SHAP value    & Feature               & SHAP value    & Feature               & SHAP value \\
 \hline
-\texttt{W1\_W2}     & 21.295        & \texttt{r\_i}         & 5.794         & \texttt{K\_W3}        & 2.492      \\
-\texttt{g\_r}       & 12.561        & \texttt{i\_y}         & 5.290         & \texttt{J\_H}         & 1.279      \\
-\texttt{r\_z}       &  9.155        & \texttt{i\_z}         & 4.982         & \texttt{W4mag}        & 1.033      \\
-\texttt{g\_J}       &  8.474        & \texttt{r\_W1}        & 4.922         & \texttt{H\_K}         & 0.804      \\
-\texttt{W1\_W3}     &  7.852        & \texttt{z\_y}         & 4.335         &                       &            \\
-\texttt{y\_W2}      &  6.272        & \texttt{y\_J}         & 3.460         &                       &            \\[0.5em]
+\texttt{W1\_W2}     & 25.433        & \texttt{r\_W1}        & 4.913         & \texttt{H\_W3}        & 1.193      \\
+\texttt{g\_r}       & 14.348        & \texttt{i\_z}         & 4.512         & \texttt{H\_K}         & 0.921      \\
+\texttt{r\_z}       & 12.767        & \texttt{r\_i}         & 4.050         & \texttt{J\_H}         & 0.686      \\
+\texttt{W1\_W3}     &  9.008        & \texttt{r\_J}         & 3.821         & \texttt{W4mag}        & 0.591      \\
+\texttt{i\_y}       &  6.077        & \texttt{y\_J}         & 3.794         & \texttt{Kmag}         & 0.567      \\
+\texttt{y\_W2}      &  5.165        & \texttt{z\_y}         & 1.598         & \texttt{W3\_W4}       & 0.556      \\[0.5em]
 \hline\hline
 \multicolumn{6}{c}{Radio detection model} \\
 Feature             & SHAP value    & Feature               & SHAP value    & Feature               & SHAP value \\
 \hline
-\texttt{g\_r}       & 19.751        & \texttt{band\_num}    & 4.682         & \texttt{i\_z}         & 2.935      \\
-\texttt{W2\_W3}     & 16.513        & \texttt{r\_i}         & 4.450         & \texttt{i\_y}         & 2.853      \\
-\texttt{K\_W3}      & 13.051        & \texttt{y\_W1}        & 3.968         & \texttt{K\_W4}        & 0.838      \\
-\texttt{y\_J}       &  9.303        & \texttt{z\_W1}        & 3.713         & \texttt{H\_K}         & 0.501      \\
-\texttt{r\_z}       &  5.663        & \texttt{z\_y}         & 3.419         & \texttt{J\_H}         & 0.250      \\
-\texttt{W1\_W2}     &  4.932        & \texttt{W4mag}        & 3.177         &                       &            \\[0.5em]
+\texttt{W2\_W3}     & 16.386        & \texttt{z\_W1}        & 5.670         & \texttt{band\_num}    & 2.475      \\
+\texttt{g\_i}       & 14.155        & \texttt{r\_z}         & 4.578         & \texttt{W4mag}        & 1.729      \\
+\texttt{g\_r}       & 13.246        & \texttt{y\_W1}        & 4.445         & \texttt{K\_W4}        & 1.236      \\
+\texttt{K\_W3}      &  8.923        & \texttt{r\_i}         & 4.438         & \texttt{H\_K}         & 0.387      \\
+\texttt{y\_J}       &  7.645        & \texttt{i\_z}         & 4.015         & \texttt{J\_H}         & 0.294      \\
+\texttt{W1\_W2}     &  6.418        & \texttt{z\_y}         & 3.959         &                       &            \\[0.5em]
 \hline\hline
 \multicolumn{6}{c}{Redshift prediction model} \\
 Feature             & SHAP value    & Feature               & SHAP value    & Feature               & SHAP value \\
 \hline
-\texttt{g\_r}       & 29.526        & \texttt{band\_num}    & 3.241         & \texttt{i\_z}         & 2.230    \\
-\texttt{W1\_W3}     & 19.062        & \texttt{g\_W1}        & 2.640         & \texttt{y\_J}         & 1.785    \\
-\texttt{y\_W1}      & 13.717        & \texttt{i\_y}         & 2.571         & \texttt{g\_J}         & 1.464    \\
-\texttt{W1\_W2}     &  7.646        & \texttt{W4mag}        & 2.516         & \texttt{K\_W3}        & 1.004    \\
-\texttt{r\_z}       &  3.793        & \texttt{H\_K}         & 2.420         & \texttt{K\_W4}        & 0.252    \\
-\texttt{z\_y}       &  3.653        & \texttt{r\_i}         & 2.319         & \texttt{J\_H}         & 0.161    \\
+\texttt{g\_r}       & 28.671        & \texttt{H\_K}         & 2.817         & \texttt{y\_J}         & 1.708    \\
+\texttt{W1\_W3}     & 17.252        & \texttt{i\_z}         & 2.582         & \texttt{i\_y}         & 1.515    \\
+\texttt{y\_W1}      & 14.196        & \texttt{r\_i}         & 2.500         & \texttt{K\_W3}        & 0.914    \\
+\texttt{W1\_W2}     &  8.679        & \texttt{band\_num}    & 2.320         & \texttt{K\_W4}        & 0.312    \\
+\texttt{r\_z}       &  7.250        & \texttt{W4mag}        & 2.300         & \texttt{J\_H}         & 0.111    \\
+\texttt{z\_y}       &  4.691        & \texttt{g\_J}         & 2.182         &                       &          \\
 \hline
 \end{tabular}
 }
 \end{table}
 
-For the radio classification step of the pipeline, we find that metrics linked to those $77$ high-$z$ AGN perform at the same level as the overall population. As introduced in Sect.~\ref{sec:results_radio}, radio-detection model shows difficulties when producing a classification based on the provided dataset. This \textbf{issue} is reflected in the narrow decision margin for the non-calibrated stacked model (see model output values --x-axis-- close to $\sim0.5$ in Fig.~\ref{fig:SHAP_decision_radio_meta_HETDEX_high_z}). The improved metrics with respect to the 'no-skill' ones do indicate that the model has learned some connections between the data and the radio emission. Feature importance has changed when compared to the overall population. If the radio emission observed from these sources were exclusively due to SF, this would imply star formation rates (SFR) of several hundred $M_\sun$\,yr$^{-1}$. This \textbf{explanation} can not be completely ruled out from the model side but some contribution of radio emission from the AGN is expected. The detailed analysis of the exact contribution for the SF and AGN component will be left for a forthcoming publication (Carvajal et al. \textbf{in preparation}). 
+For the radio classification step of the pipeline, we find that \textbf{features} linked to those $131$ high-$z$ AGN perform at the same level as \textbf{for} the overall population. As introduced in Sect.~\ref{sec:results_radio}, radio-detection model shows difficulties when producing a classification based on the provided dataset. This \textbf{issue} is reflected in the narrow decision margin for the non-calibrated stacked model (see model output values --x-axis-- close to $\sim0.5$ in Fig.~\ref{fig:SHAP_decision_radio_meta_HETDEX_high_z}). The improved metrics with respect to the 'no-skill' ones do indicate that the model has learned some connections between the data and the radio emission. Feature importance has changed when compared to the overall population. If the radio emission observed from these sources were exclusively due to SF, this would imply star formation rates (SFR) of several hundred $M_\sun$\,yr$^{-1}$. This \textbf{explanation} can not be completely ruled out from the model side but some contribution of radio emission from the AGN is expected. The detailed analysis of the exact contribution for the SF and AGN component will be left for a forthcoming publication (Carvajal et al. \textbf{in preparation}). 
 
-Another relevant observation is that, unlike the radio meta learner, radio base models show that their predicted scores range between $0$ and $1$. These results reinforce the argument that using ensemble ML can help improving predictions and insights that can be obtained from the models.
+%Another relevant observation is that, unlike the radio meta learner, radio base models show that their predicted scores range between $0$ and $1$. These results reinforce the argument that using ensemble ML can help improving predictions and insights that can be obtained from the models.
 
 \subsection{Expectactions for future surveys}\label{sec:future_surveys}
 
@@ -1239,9 +1227,9 @@ In order to implement these changes, we are also working on the extension of the
 
 In this work, we have created a series of Machine Learning models in order to produce a set of predicted detections of radio AGN, along with their predicted photometric redshift values.
 
-For training the models, we used multi-wavelength data from more than \textbf{$60\,000$} spectroscopically identified infrared-detected sources in the HETDEX field (which contains, in total, more than \textbf{$6\,000\,000$} detections) and created stacked models, which used the input from base algorithms to improve the knowledge available to a meta-learner and arrive to more reliable predictions.
+For training the models, we used multi-wavelength data from more than \textbf{$150\,000$} spectroscopically identified infrared-detected sources in the HETDEX field (which contains, in total, more than \textbf{$15\,000\,000$} detections) and created stacked models, which used the input from base algorithms to improve the knowledge available to a meta-learner and arrive to more reliable predictions.
 
-These models were applied, sequentially, to $6\,646\,238$ infrared detections in the HETDEX Spring field that do not show a spectroscopic classification as either galaxy or AGN, arriving to the creation of $84\,650$ radio AGN candidates with their corresponding predicted redshift values. Additionally, we applied the models to $365\,789$ infrared detections in the Stripe 82 field with no spectroscopic classification, obtaining $6\,430$ new radio AGN candidates with their predicted redshift values.
+These models were applied, sequentially, to $14\,978\,395$ infrared detections in the HETDEX Spring field that do not show a spectroscopic classification as either galaxy or AGN, arriving to the creation of $184\,206$ radio AGN candidates with their corresponding predicted redshift values. Additionally, we applied the models to $3\,564\,617$ infrared detections in the Stripe 82 field with no spectroscopic classification, obtaining $61\,162$ new radio AGN candidates with their predicted redshift values.
 
 
 We have, then, applied a number of analyses on the models to understand the influence of the observed properties from the studied sources over the predictions and their confidence levels. In particular, the use of Shapley values gives the opportunity to extract the influence that the feature set has for each individual prediction.
@@ -1252,8 +1240,8 @@ From the application of the prediction pipeline on labelled and unlabelled sourc
 \begin{itemize}
 %\item In general, the use of Machine Learning techniques allows to obtain results in a fraction of the time that traditional methods could take and allow for the extraction of information from very large datasets. In some cases, this includes the training times.
 \item \textbf{Generalised} stacking is a useful procedure which collects results from individual ML algorithms into a single model that can outperform each of the individual models. This technique also helps prevent the inclusion of biases introduced by the use of individual algorithms. \textbf{We have shown that the inclusion of generalised stacking in the identification of radio-detected AGN can help improve the detection rates in the classification steps and the prediction values in the regression stage of our pipeline.}
-\item Classification between AGN and galaxies derived from our model is in line with previous works. Our pipeline is able to retrieve $94\%$ of previously-classified AGN from HETDEX \textbf{(recall $= 0.938$, precision $= 0.934$, F$_{\beta} = 0.936$, MCC $= 0.904$)} and $88\%$ of AGN in the Stripe 82 field \textbf{(recall $= 0.877$, precision $= 0.979$, F$_{\beta} = 0.921$, MCC $= 0.651$)}.
-\item Radio detection classification for predicted AGN has proven to be highly demanding in terms of data needed for creating the models. Thanks to the use of the techniques shown in this article (i.e. feature \textbf{creation and selection}, \textbf{generalised} stacking, probability calibration, and threshold optimisation), we are able to retrieve $63\%$ of previously-known radio-detected AGN in the HETDEX field \textbf{(recall $= 0.631$, precision $= 0.565$, F$_{\beta} = 0.60$, MCC $= 0.435$)} and $67\%$ of these sources in the Stripe 82 field \textbf{(recall $= 0.670$, precision $= 0.548$, F$_{\beta} = 0.609$, MCC $= 0.394$)}. These rates improve upon a purely random selection.
+\item Classification between AGN and galaxies derived from our model is in line with previous works. Our pipeline is able to retrieve $94\%$ of previously-classified AGN from HETDEX \textbf{(recall $= 0.943$, precision $= 0.941$, F$_{\beta} = 0.942$, MCC $= 0.912$)} and $90\%$ of AGN in the Stripe 82 field \textbf{(recall $= 0.899$, precision $= 0.970$, F$_{\beta} = 0.930$, MCC $= 0.723$)}.
+\item Radio detection classification for predicted AGN has proven to be highly demanding in terms of data needed for creating the models. Thanks to the use of the techniques shown in this article (i.e. feature \textbf{creation and selection}, \textbf{generalised} stacking, probability calibration, and threshold optimisation), we are able to retrieve $61\%$ of previously-known radio-detected AGN in the HETDEX field \textbf{(recall $= 0.614$, precision $= 0.380$, F$_{\beta} = 0.480$, MCC $= 0.358$)} and $63\%$ of these sources in the Stripe 82 field \textbf{(recall $= 0.634$, precision $= 0.107$, F$_{\beta} = 0.196$, MCC $= 0.187$)}. These rates improve upon a purely random selection.
 \item The prediction of redshift values for sources classified to be radio-detected AGN can deliver results that are in line with works that use either traditional or ML methods.
 \item \textbf{Our models (classfication and regression) can be applied to areas of the sky which have different radio coverage from that used for training} without a strong degradation of the prediction results. This can lead to the use of our pipeline over very distinct datasets \textbf{(in radio and multi-wavelength coverage)} expecting to recover the sources predicted to be radio-detected AGN with a high probability.
 \item Machine Learning models cannot be only used for a direct prediction of a value (or a set of value). They can also be subject to analyses that allow to extract additional results\textbf{. We took advantage of this fact by using global and local feature importances to derive} novel colour-colour AGN selection methods.
@@ -1303,7 +1291,7 @@ Table~\ref{table:feature_names_in_work} presents the names (and what they repres
 \label{table:feature_names_in_work}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.99\columnwidth}{!}{
-\begin{tabular}{c c c c c c}        % centered columns (4 columns)
+\begin{tabular}{c c c c c c}        % centered columns (6 columns)
 \hline\hline                 % inserts double horizontal lines   
 \multicolumn{6}{c}{Photometry measurements (magnitudes and fluxes)} \\
 Code name       & Feature   & Code name     & Feature   & Code name         & Feature \\
@@ -1369,23 +1357,23 @@ The number of valid measurements in Fig.~\ref{fig:hists_bands_nonimp_HETDEX_S82}
 \label{table:magnitude_density}      % is used to refer this table in the text
 \centering                          % used for centering table
 \resizebox{0.90\columnwidth}{!}{
-\begin{tabular}{c c c c c c c c}        % centered columns (4 columns)
+\begin{tabular}{c c c c c c c c}        % centered columns (8 columns)
 \hline\hline                 % inserts double horizontal lines   
 \multicolumn{8}{c}{HETDEX Field} \\
 Band    & Density         & Band  & Density         & Band  & Density         & Band  & Density       \\
         & (deg$^{-2}$)    &       & (deg$^{-2}$)    &       & (deg$^{-2}$)    &       & (deg$^{-2}$)  \\
 \hline
-g       & 3\,677.83       & z     & 5\,761.96       & H     &     743.55      & W2    & 15\,871.81    \\
-r       & 5\,380.13       & y     & 3\,646.31       & Ks    &     743.78      & W3    &  8\,045.81    \\
-i       & 6\,506.82       & J     &    743.55       & W1    & 15\,866.31      & W4    &  8\,045.91    \\[0.25em]
+g       &  7\,414.88      & z     & 11\,848.10      & H     &  1\,496.05      & W2    & 35\,700.18    \\
+r       & 10\,904.02      & y     &  7\,473.89      & Ks    &  1\,496.05      & W3    & 16\,492.13    \\
+i       & 13\,215.32      & J     &  1\,496.05      & W1    & 35\,700.18      & W4    & 16\,491.77    \\[0.25em]
 \hline\hline
 \multicolumn{8}{c}{Stripe 82 Field} \\
 Band    & Density         & Band  & Density         & Band  & Density         & Band  & Density       \\
         & (deg$^{-2}$)    &       & (deg$^{-2}$)    &       & (deg$^{-2}$)    &       & (deg$^{-2}$)  \\
 \hline
-g       & 1\,064.16       & z     & 1\,707.54       & H     &    288.49       & W2    & 4\,011.88     \\
-r       & 1\,578.39       & y     & 1\,143.03       & Ks    &    288.59       & W3    & 2\,018.49     \\
-i       & 1\,943.07       & J     &    288.42       & W1    & 4\,010.09       & W4    & 2\,027.99     \\
+g       &  9\,541.04      & z     & 15\,309.34      & H     &  2\,553.32      & W2    & 32\,025.05    \\
+r       & 14\,081.59      & y     & 10\,319.86      & Ks    &  2\,553.32      & W3    & 18\,105.29    \\
+i       & 17\,255.67      & J     &  2\,553.32      & W1    & 39\,025.01      & W4    & 18\,201.67    \\
 \hline
 \end{tabular}
 }
@@ -1435,7 +1423,7 @@ Therefore, in order to retrieve joint scores and treat them as probabilities, sc
 
 Calibration of these scores can be done by applying a transformation to their values. For our work, we will apply a Beta transformation. It allows to re-distribute the scores of a classifier allowing them to get closer to the definition of probability \citep{10.1214/17-EJS1338SI, pmlr-v54-kull17a}. Calibration steps in our workflow have been applied using the Python package \verb|betacal|. In the case of the radio detection model, the new scores have a wider range than the original, uncalibrated scores.%, but still not covering the full range $[0,1]$, a sign of the lack of strong confidence in the stacked model to predict the radio detection of sources.
 
-When obtaining the BSS values for both classification, the AGN-Galaxy classifier has a score of ${\mathrm{BSS} = -0.017}$, demonstrating that no major changes were applied to the distribution of scores. For the radio detection classifier, the score is ${\mathrm{BSS} = -0.072}$. Even though the \textbf{BSS values} are slightly negative, we keep them since their range of values now can be compared and combined with additional probabilities.
+When obtaining the BSS values for both classification, the AGN-Galaxy classifier has a score of ${\mathrm{BSS} = -0.003}$, demonstrating that no major changes were applied to the distribution of scores. For the radio detection classifier, the score is ${\mathrm{BSS} = 0.204}$. Even though the \textbf{BSS value is} slightly negative \textbf{for the AGN-Galaxy classifier}, we keep \textbf{it} since \textbf{its} range of values now can be compared and combined with additional probabilities. \textbf{In the case of the radio detection classifier, the improvement is reflected by the BSS value.}
 
 Calibration (or reliability) plots show how well calibrated the predicted scores of a classifier are by displaying the fraction of sources that are part of a given class as a function of the predicted probability. A perfectly calibrated classifier would have all its prediction lying in the ${x{=}y}$ line. The magnitude of the deviations from that line give information of the miscalibration a model has \citep[see, for instance,][]{ReliabilityofReliabilityDiagrams, VanCalster2019}. In Fig.~\ref{fig:calibration_curves_classification_pre}, we present the reliability curves for the uncalibrated classifiers and, in Fig.~\ref{fig:calibration_curves_classification_post}, for their calibrated versions.
 
@@ -1452,24 +1440,26 @@ Calibration (or reliability) plots show how well calibrated the predicted scores
 \multicolumn{4}{c}{AGN-Galaxy model (\texttt{CatBoost})}                                                \\
 Parameter                           & Value             & Parameter                     & Value         \\
 \hline
-\texttt{learning\_rate}             & 0.0563            & \texttt{random\_strength}     & 1.0           \\
-\texttt{depth}                      & 6                 & \texttt{l2\_leaf\_reg}        & 3             \\[0.2em]
+\texttt{learning\_rate}             & 0.0075            & \texttt{random\_strength}     & 0.7538        \\
+\texttt{depth}                      & 6                 & \texttt{l2\_leaf\_reg}        & 20            \\[0.2em]
 \hline\hline
-\multicolumn{4}{c}{Radio detection model (\texttt{CatBoost})}                                           \\
+\multicolumn{4}{c}{Radio detection model (\texttt{GradientBoosting})}                                           \\
 
 Parameter                           & Value             & Parameter                     & Value         \\
 \hline
-\texttt{learning\_rate}             & $1 \times10^{-6}$ & \texttt{random\_strength}     & 0.1           \\
-\texttt{depth}                      & 7                 & \texttt{l2\_leaf\_reg}        & 10            \\[0.2em]
+\texttt{n\_estimators}              & 187               & \texttt{min\_samples\_leaf}   & 2             \\
+\texttt{learning\_rate}             & 0.0560            & \texttt{max\_depth}           & 9             \\
+\texttt{subsample}                  & 0.3387            & \texttt{max\_features}        & 0.5248        \\
+\texttt{min\_samples\_split}        & 5                 &                               &               \\[0.2em]
 \hline\hline
 \multicolumn{4}{c}{Redshift prediction model (\texttt{RF})}                                             \\
 
 Parameter                           & Value             & Parameter                     & Value         \\
 \hline
-\texttt{n\_estimators}              & 50                & \texttt{bootstrap}            & \texttt{True} \\
-\texttt{max\_depth}                 & 8                 & \texttt{criterion}            & \texttt{mae}  \\
-\texttt{min\_impurity\_decrease}    & 0.0001            & \texttt{min\_samples\_split}  & 10            \\
-\texttt{max\_features}              & 0.33              & \texttt{min\_samples\_leaf}   & 4             \\
+\texttt{n\_estimators}              & 187               & \texttt{criterion}            & \texttt{mae}  \\
+\texttt{max\_depth}                 & 9                 & \texttt{min\_samples\_split}  & 3             \\
+\texttt{max\_features}              & 0.6346            & \texttt{min\_samples\_leaf}   & 5             \\
+\texttt{bootstrap}                  & \texttt{False}    &                               &               \\
 \hline
 \end{tabular}
 }
@@ -1510,12 +1500,12 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \centering
   \begin{minipage}{0.49\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_rf_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_xgboost_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
   \begin{minipage}{0.49\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_gbc_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_rf_HETDEX_highz.pdf}
   \end{minipage}\break%\%
   \begin{minipage}{0.49\columnwidth}
     \centering
@@ -1524,9 +1514,9 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \hfill
   \begin{minipage}{0.49\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_xgboost_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_gbc_HETDEX_highz.pdf}
   \end{minipage}
-  \caption{SHAP decision plots for base AGN-Galaxy algorithms. Details as described in Figs.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}. Starting point of predictions is the naive classification threshold. From left to right and from top to bottom, each panel shows the results from \texttt{RF}, \texttt{GBC}, \texttt{ET}, and \texttt{XGBoost}.}
+  \caption{SHAP decision plots for base AGN-Galaxy algorithms. Details as described in Figs.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}. Starting point of predictions is the naive classification threshold. From left to right and from top to bottom, each panel shows the results from \texttt{XGBoost}, \texttt{RF}, \texttt{ET}, and \texttt{GBC}.}
   \label{fig:SHAP_decision_AGN_base_HETDEX_high_z}
 \end{figure}
 
@@ -1539,7 +1529,7 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \hfill
   \begin{minipage}{0.49\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_et_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_catboost_HETDEX_highz.pdf}
   \end{minipage}\break%\%
   \begin{minipage}{0.49\columnwidth}
     \centering
@@ -1548,14 +1538,23 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \hfill
   \begin{minipage}{0.49\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_gbc_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_et_HETDEX_highz.pdf}
   \end{minipage}
-  \caption{SHAP decision plots from base radio algorithms. Details as Figs.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z} and \ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}. Each panel with results for \texttt{XGBoost}, \texttt{ET}, \texttt{RF}, and \texttt{GBC}.}
+  \caption{SHAP decision plots from base radio algorithms. Details as Figs.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z} and \ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}. Each panel with results for \texttt{XGBoost}, \texttt{CatBoost}, \texttt{RF}, and \texttt{ET}.}
   \label{fig:SHAP_decision_radio_base_HETDEX_high_z}
 \end{figure}
 
 \begin{figure}
   \centering
+  \begin{minipage}{0.49\columnwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_et_HETDEX_highz.pdf}
+  \end{minipage}%\\%
+  \hfill
+  \begin{minipage}{0.49\columnwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_catboost_HETDEX_highz.pdf}
+  \end{minipage}\break%\%
   \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_xgboost_HETDEX_highz.pdf}
@@ -1564,17 +1563,8 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \begin{minipage}{0.49\columnwidth}
     \centering
     \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_gbr_HETDEX_highz.pdf}
-  \end{minipage}\break%\%
-  \begin{minipage}{0.49\columnwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_catboost_HETDEX_highz.pdf}
-  \end{minipage}%\\%
-  \hfill
-  \begin{minipage}{0.49\columnwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_et_HETDEX_highz.pdf}
   \end{minipage}
-  \caption{SHAP decision plots from base $z$ algorithms. Details as in Fig~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}. Each panel shows results for \texttt{XGBoost}, \texttt{GBR}, \texttt{CatBoost}, and \texttt{ET}.}
+  \caption{SHAP decision plots from base $z$ algorithms. Details as in Fig~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}. Each panel shows results for \texttt{ET}, \texttt{CatBoost}, \texttt{XGBoost}, and \texttt{GBR}.}
   \label{fig:SHAP_decision_z_base_HETDEX_high_z}
 \end{figure}
 

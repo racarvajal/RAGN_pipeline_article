@@ -95,7 +95,7 @@ ax1.tick_params(which='major', length=8, width=1.5)
 ax1.tick_params(which='minor', length=4, width=1.5)
 plt.setp(ax1.spines.values(), linewidth=3.0)
 plt.setp(ax1.spines.values(), linewidth=3.0)
-plt.legend(loc=3, fontsize=25, title='Radio detection\nclassification', 
+plt.legend(loc='best', fontsize=25, title='Radio detection\nclassification', 
             title_fontsize=24, ncol=2, columnspacing=.25, handlelength=0.8, 
             handletextpad=0.2, framealpha=0.75)
 ax1.set_aspect('equal', 'datalim')

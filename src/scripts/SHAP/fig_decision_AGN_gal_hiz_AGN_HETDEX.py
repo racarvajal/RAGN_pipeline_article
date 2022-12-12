@@ -18,10 +18,11 @@ file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.h5'
 model_AGN_name    = paths.data / 'models' / gv.AGN_gal_model
 AGN_gal_clf       = pyc.load_model(model_AGN_name, verbose=False)
 
-feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 'W4mag',
-                     'g_r', 'g_J', 'r_i', 'r_z', 'r_W1', 
-                     'i_z', 'i_y', 'z_y', 'y_J', 'y_W2', 
-                     'J_H', 'H_K', 'K_W3', 'W1_W2', 'W1_W3']
+feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 
+                     'W4mag', 'Kmag', 'g_r', 'r_i', 'r_z', 
+                     'r_J', 'r_W1', 'i_z', 'i_y', 'z_y', 
+                     'y_J', 'y_W2', 'J_H', 'H_K', 'H_W3', 
+                     'W1_W2', 'W1_W3', 'W3_W4']
 
 catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
@@ -45,10 +46,11 @@ explainer_AGN     = fasttreeshap.TreeExplainer(AGN_gal_clf.named_steps['trained_
                                                algorithm='auto', n_jobs=12)
 shap_values_AGN   = explainer_AGN(reduced_data_df, check_additivity=False)
 
+xlims_plt         = (0.38, 0.62)
 size_side         = 8
 fig               = plt.figure(figsize=(size_side,size_side * 3/2))
 ax1               = fig.add_subplot(111, xscale='linear', yscale='linear')
 _ = gf.plot_shap_decision('AGN/Galaxy class', 'CatBoost', shap_values_AGN, explainer_AGN, 
                           reduced_cols, ax1, 'logit', new_base_value=base_logit_AGN, 
-                          base_meta='Meta', highlight=filter_radio)
+                          base_meta='Meta', xlim=xlims_plt, highlight=filter_radio)
 plt.savefig(paths.figures / 'SHAP/SHAP_decision_AGN_meta_learner_HETDEX_highz.pdf', bbox_inches='tight')

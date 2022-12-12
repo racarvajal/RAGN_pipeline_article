@@ -88,17 +88,17 @@ rule PR_curve_radio:
     script:
         "src/scripts/fig_PR_curve_radio.py"
 
+rule decision_AGN_xgboost:
+    output:
+        "src/tex/figures/SHAP/SHAP_decision_AGN_base_xgboost_HETDEX_highz.pdf"
+    script:
+        "src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_xgboost.py"
+
 rule decision_AGN_rf:
     output:
         "src/tex/figures/SHAP/SHAP_decision_AGN_base_rf_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_rf.py"
-
-rule decision_AGN_gbc:
-    output:
-        "src/tex/figures/SHAP/SHAP_decision_AGN_base_gbc_HETDEX_highz.pdf"
-    script:
-        "src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_gbc.py"
 
 rule decision_AGN_et:
     output:
@@ -106,11 +106,11 @@ rule decision_AGN_et:
     script:
         "src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_et.py"
 
-rule decision_AGN_xgboost:
+rule decision_AGN_gbc:
     output:
-        "src/tex/figures/SHAP/SHAP_decision_AGN_base_xgboost_HETDEX_highz.pdf"
+        "src/tex/figures/SHAP/SHAP_decision_AGN_base_gbc_HETDEX_highz.pdf"
     script:
-        "src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_xgboost.py"
+        "src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_gbc.py"
 
 rule decision_radio_xgboost:
     output:
@@ -118,11 +118,11 @@ rule decision_radio_xgboost:
     script:
         "src/scripts/SHAP/fig_decision_radio_hiz_AGN_xgboost.py"
 
-rule decision_radio_et:
+rule decision_radio_catboost:
     output:
-        "src/tex/figures/SHAP/SHAP_decision_radio_base_et_HETDEX_highz.pdf"
+        "src/tex/figures/SHAP/SHAP_decision_radio_base_catboost_HETDEX_highz.pdf"
     script:
-        "src/scripts/SHAP/fig_decision_radio_hiz_AGN_et.py"
+        "src/scripts/SHAP/fig_decision_radio_hiz_AGN_catboost.py"
 
 rule decision_radio_rf:
     output:
@@ -130,11 +130,23 @@ rule decision_radio_rf:
     script:
         "src/scripts/SHAP/fig_decision_radio_hiz_AGN_rf.py"
 
-rule decision_radio_gbc:
+rule decision_radio_et:
     output:
-        "src/tex/figures/SHAP/SHAP_decision_radio_base_gbc_HETDEX_highz.pdf"
+        "src/tex/figures/SHAP/SHAP_decision_radio_base_et_HETDEX_highz.pdf"
     script:
-        "src/scripts/SHAP/fig_decision_radio_hiz_AGN_gbc.py"
+        "src/scripts/SHAP/fig_decision_radio_hiz_AGN_et.py"
+
+rule decision_redshift_et:
+    output:
+        "src/tex/figures/SHAP/SHAP_decision_z_base_et_HETDEX_highz.pdf"
+    script:
+        "src/scripts/SHAP/fig_decision_z_hiz_AGN_et.py"
+
+rule decision_redshift_catboost:
+    output:
+        "src/tex/figures/SHAP/SHAP_decision_z_base_catboost_HETDEX_highz.pdf"
+    script:
+        "src/scripts/SHAP/fig_decision_z_hiz_AGN_catboost.py"
 
 rule decision_redshift_xgboost:
     output:
@@ -147,15 +159,3 @@ rule decision_redshift_gbr:
         "src/tex/figures/SHAP/SHAP_decision_z_base_gbr_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_z_hiz_AGN_gbr.py"
-
-rule decision_redshift_catboost:
-    output:
-        "src/tex/figures/SHAP/SHAP_decision_z_base_catboost_HETDEX_highz.pdf"
-    script:
-        "src/scripts/SHAP/fig_decision_z_hiz_AGN_catboost.py"
-
-rule decision_redshift_et:
-    output:
-        "src/tex/figures/SHAP/SHAP_decision_z_base_et_HETDEX_highz.pdf"
-    script:
-        "src/scripts/SHAP/fig_decision_z_hiz_AGN_et.py"

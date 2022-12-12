@@ -37,5 +37,5 @@ ax1 = gf.plot_conf_mat(cm_radio,
                        log_stretch=False)
 ax1.texts[1].set_color('black')
 ax1.texts[2].set_color('black')
-ax1.texts[3].set_color('white')
+ax1.texts[3].set_color('black')
 plt.savefig(paths.figures / 'conf_matrix_radio_HETDEX_test.pdf', bbox_inches='tight')

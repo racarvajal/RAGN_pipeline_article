@@ -13,9 +13,9 @@ area_COSMOS         = 4  # Not real value. Placeholder
 # Model names with train, test, calibration, and validation sub-sets
 # Stacked models
 star_model         = 'classification_star_no_star_ago_29_2022'
-AGN_gal_model      = 'classification_AGN_galaxy_ago_30_2022'
-radio_model        = 'classification_LOFAR_detect_sep_07_2022'
-full_z_model       = 'regression_z_sep_09_2022'
+AGN_gal_model      = 'classification_AGN_galaxy_dec_13_2022'
+radio_model        = 'classification_LOFAR_detect_dec_14_2022'
+full_z_model       = 'regression_z_dec_15_2022'
 # Calibrated models
 cal_str_model      = 'cal_classification_star_no_star_ago_29_2022.joblib'
 cal_AGN_gal_model  = 'cal_classification_AGN_galaxy_ago_30_2022.joblib'
@@ -34,12 +34,12 @@ naive_radio_thresh = 0.5
 # Values obtained with train, test, calibration, and validation sub-sets
 # PR-optimised models (with train+test sub-set)
 star_thresh        = 0.1873511777
-AGN_thresh         = 0.4347533096
-radio_thresh       = 0.4999910122
+AGN_thresh         = 0.4933696292
+radio_thresh       = 0.1253210681
 # Calibrated and PR-optimised models (with calibration sub-set)
 cal_str_thresh     = 0.6007345636412931
-cal_AGN_thresh     = 0.39889114096089423
-cal_radio_thresh   = 0.3174334601810781
+cal_AGN_thresh     = 0.40655238948425537
+cal_radio_thresh   = 0.20125615854582377
 # High redshift limit
 high_z_limit       = 2.0  # 3.6
 

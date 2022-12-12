@@ -75,7 +75,7 @@ for count, band in enumerate(feats_2_use):
                           fc=face_colour, label=f'{band}')
     axs[count].stairs(counts_S82 / gv.area_S82, edges_S82, fill=False, ec='brown', lw=1.5,
                           fc=face_colour, label=f'{band}')
-    
+    axs[count].axvline(x=mag_cols_lim[band], ls='--', color='grey', lw=1.5)
     axs[count].tick_params(which='both', top=True, right=True, direction='in')
     axs[count].tick_params(axis='both', which='major', labelsize=22)
     axs[count].tick_params(which='major', length=8, width=1.5)

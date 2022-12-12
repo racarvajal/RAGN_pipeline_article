@@ -18,10 +18,11 @@ file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.h5'
 model_radio_name  = paths.data / 'models' / gv.radio_model
 radio_det_clf     = pyc.load_model(model_radio_name, verbose=False)
 
-feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 'band_num', 
-                     'W4mag', 'g_r', 'r_i', 'r_z', 'i_z', 'i_y', 
-                     'z_y', 'z_W1', 'y_J', 'y_W1', 'J_H', 'H_K', 
-                     'K_W3', 'K_W4', 'W1_W2', 'W2_W3']
+feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 
+                     'band_num', 'W4mag', 'g_r', 'g_i', 
+                     'r_i', 'r_z', 'i_z', 'z_y', 'z_W1', 
+                     'y_J', 'y_W1', 'J_H', 'H_K', 'K_W3', 
+                     'K_W4', 'W1_W2', 'W2_W3']
 
 catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
@@ -49,7 +50,7 @@ xlims_plt         = (0.4999, 0.5001)
 size_side         = 8
 fig               = plt.figure(figsize=(size_side,size_side * 3/2))
 ax1               = fig.add_subplot(111, xscale='linear', yscale='linear')
-_ = gf.plot_shap_decision('Radio detection', 'CatBoost', shap_values_radio, explainer_radio, 
+_ = gf.plot_shap_decision('Radio detection', 'GradientBoosting', shap_values_radio, explainer_radio, 
                           reduced_cols, ax1, 'logit', new_base_value=base_logit_radio, 
-                          base_meta='Meta', xlim=xlims_plt, highlight=filter_radio)
+                          base_meta='Meta', highlight=filter_radio)
 plt.savefig(paths.figures / 'SHAP/SHAP_decision_radio_meta_learner_HETDEX_highz.pdf', bbox_inches='tight')

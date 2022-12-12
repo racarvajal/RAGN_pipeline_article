@@ -81,7 +81,7 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
         if count == 2:
             tmp_metric   = gf.sigma_nmad(catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, true_value[count]], 
                                          catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, predicted_value[count]])
-        axs[count].annotate(text=f'{tmp_metric:.2f} -'.replace('nan', ' '), xy=(num, 0.725 * np.nanmax(np.hstack(all_scores))), 
+        axs[count].annotate(text=f'{tmp_metric:.2f} -'.replace('nan', ' '), xy=(num, 0.7 * np.nanmax(np.hstack(all_scores))), 
                             xycoords='data', fontsize=18, ha='center', va='top',  rotation='vertical', 
                             path_effects=gf.pe2)
         axs[count].annotate(text=f'{np.sum(filter_rAGN[count] * filter_band_n):,}'.replace(',', '$\,$'), 

@@ -68,7 +68,7 @@ ax1.tick_params(which='major', length=8, width=1.5)
 ax1.tick_params(which='minor', length=4, width=1.5)
 plt.setp(ax1.spines.values(), linewidth=2.5)
 plt.setp(ax1.spines.values(), linewidth=2.5)
-ax1.set_xlim(left=min_x * 0.99999, right=max_x * 1.00001)
+#ax1.set_xlim(left=min_x * 0.99999, right=max_x * 1.00001)
 ax1.xaxis.get_offset_text().set_fontsize(26)
 plt.legend(loc='best', fontsize=25, title='Sub-sets', title_fontsize=25, 
            ncol=1, columnspacing=.25, handlelength=0.8, 

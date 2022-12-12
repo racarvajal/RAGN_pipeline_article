@@ -55,6 +55,7 @@ ax1.tick_params(which='major', length=8, width=1.5)
 ax1.tick_params(which='minor', length=4, width=1.5)
 plt.setp(ax1.spines.values(), linewidth=2.5)
 plt.setp(ax1.spines.values(), linewidth=2.5)
+ax1.set_xlim(left=0.38, right=0.61)
 plt.legend(loc='best', fontsize=25, title='Sub-sets', title_fontsize=25, 
            ncol=1, columnspacing=.25, handlelength=0.8, 
            handletextpad=0.1, framealpha=0.55)

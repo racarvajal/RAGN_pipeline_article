@@ -30,6 +30,15 @@ dependencies:
         - src/data/hlsp_agnsedatlas_multi_multi_mrk231_multi_v1_spec-obs.txt
         - src/scripts/global_variables.py
         - src/scripts/global_functions.py
+    src/scripts/fig_flowchart_HETDEX.py:
+        - src/data/indices_known.txt
+        - src/data/indices_train.txt
+        - src/data/indices_test.txt
+        - src/data/indices_train_validation.txt
+        - src/data/indices_calibration.txt
+        - src/data/indices_validation.txt
+    src/scripts/fig_flowchart_Stripe82.py:
+        - src/data/S82_for_prediction.h5
     src/scripts/fig_calibration_AGN_gal_post.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/indices_train_validation.txt
@@ -132,6 +141,16 @@ dependencies:
         - src/data/models/classification_AGN_galaxy_ago_30_2022.pkl
         - src/scripts/global_functions.py
         - src/scripts/global_variables.py
+    src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_xgboost.py:
+        - src/data/HETDEX_for_prediction.h5
+        - src/data/models/classification_AGN_galaxy_ago_30_2022.pkl
+        - src/scripts/global_functions.py
+        - src/scripts/global_variables.py
+    src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_rf.py:
+        - src/data/HETDEX_for_prediction.h5
+        - src/data/models/classification_AGN_galaxy_ago_30_2022.pkl
+        - src/scripts/global_functions.py
+        - src/scripts/global_variables.py
     src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_et.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/models/classification_AGN_galaxy_ago_30_2022.pkl
@@ -142,32 +161,7 @@ dependencies:
         - src/data/models/classification_AGN_galaxy_ago_30_2022.pkl
         - src/scripts/global_functions.py
         - src/scripts/global_variables.py
-    src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_rf.py:
-        - src/data/HETDEX_for_prediction.h5
-        - src/data/models/classification_AGN_galaxy_ago_30_2022.pkl
-        - src/scripts/global_functions.py
-        - src/scripts/global_variables.py
-    src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_xgboost.py:
-        - src/data/HETDEX_for_prediction.h5
-        - src/data/models/classification_AGN_galaxy_ago_30_2022.pkl
-        - src/scripts/global_functions.py
-        - src/scripts/global_variables.py
     src/scripts/SHAP/fig_decision_radio_hiz_AGN_HETDEX.py:
-        - src/data/HETDEX_for_prediction.h5
-        - src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
-        - src/scripts/global_functions.py
-        - src/scripts/global_variables.py
-    src/scripts/SHAP/fig_decision_radio_hiz_AGN_et.py:
-        - src/data/HETDEX_for_prediction.h5
-        - src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
-        - src/scripts/global_functions.py
-        - src/scripts/global_variables.py
-    src/scripts/SHAP/fig_decision_radio_hiz_AGN_gbc.py:
-        - src/data/HETDEX_for_prediction.h5
-        - src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
-        - src/scripts/global_functions.py
-        - src/scripts/global_variables.py
-    src/scripts/SHAP/fig_decision_radio_hiz_AGN_rf.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
         - src/scripts/global_functions.py
@@ -177,12 +171,22 @@ dependencies:
         - src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
         - src/scripts/global_functions.py
         - src/scripts/global_variables.py
-    src/scripts/SHAP/fig_decision_z_hiz_AGN_HETDEX.py:
+    src/scripts/SHAP/fig_decision_radio_hiz_AGN_catboost.py:
         - src/data/HETDEX_for_prediction.h5
-        - src/data/models/regression_z_sep_09_2022.pkl
+        - src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
         - src/scripts/global_functions.py
         - src/scripts/global_variables.py
-    src/scripts/SHAP/fig_decision_z_hiz_AGN_catboost.py:
+    src/scripts/SHAP/fig_decision_radio_hiz_AGN_rf.py:
+        - src/data/HETDEX_for_prediction.h5
+        - src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
+        - src/scripts/global_functions.py
+        - src/scripts/global_variables.py
+    src/scripts/SHAP/fig_decision_radio_hiz_AGN_et.py:
+        - src/data/HETDEX_for_prediction.h5
+        - src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
+        - src/scripts/global_functions.py
+        - src/scripts/global_variables.py
+    src/scripts/SHAP/fig_decision_z_hiz_AGN_HETDEX.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/models/regression_z_sep_09_2022.pkl
         - src/scripts/global_functions.py
@@ -192,12 +196,17 @@ dependencies:
         - src/data/models/regression_z_sep_09_2022.pkl
         - src/scripts/global_functions.py
         - src/scripts/global_variables.py
-    src/scripts/SHAP/fig_decision_z_hiz_AGN_gbr.py:
+    src/scripts/SHAP/fig_decision_z_hiz_AGN_catboost.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/models/regression_z_sep_09_2022.pkl
         - src/scripts/global_functions.py
         - src/scripts/global_variables.py
     src/scripts/SHAP/fig_decision_z_hiz_AGN_xgboost.py:
+        - src/data/HETDEX_for_prediction.h5
+        - src/data/models/regression_z_sep_09_2022.pkl
+        - src/scripts/global_functions.py
+        - src/scripts/global_variables.py
+    src/scripts/SHAP/fig_decision_z_hiz_AGN_gbr.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/models/regression_z_sep_09_2022.pkl
         - src/scripts/global_functions.py

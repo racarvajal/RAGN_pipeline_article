@@ -19,10 +19,9 @@ model_z_name      = paths.data / 'models' / gv.full_z_model
 redshift_reg      = pyr.load_model(model_z_name, verbose=False)
 
 feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 'pred_Z',
-                     'band_num', 'W4mag', 'g_r', 'g_J', 'g_W1', 
-                     'r_i', 'r_z', 'i_z', 'i_y', 'z_y', 'y_J', 
-                     'y_W1', 'J_H', 'H_K', 'K_W3', 'K_W4', 
-                     'W1_W2', 'W1_W3']
+                     'band_num', 'W4mag', 'g_r', 'g_J', 'r_i', 
+                     'r_z', 'i_z', 'i_y', 'z_y', 'y_J', 'y_W1', 
+                     'J_H', 'H_K', 'K_W3', 'K_W4', 'W1_W2', 'W1_W3']
 
 catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])

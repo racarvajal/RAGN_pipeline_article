@@ -17,12 +17,13 @@ plt.rcParams['text.usetex'] = True
 file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.h5'
 model_AGN_name    = paths.data / 'models' / gv.AGN_gal_model
 AGN_gal_full      = pyc.load_model(model_AGN_name, verbose=False)
-AGN_gal_clf       = AGN_gal_full.named_steps['trained_model'].estimators_[1]
+AGN_gal_clf       = AGN_gal_full.named_steps['trained_model'].estimators_[2]
 
-feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 'W4mag',
-                     'g_r', 'g_J', 'r_i', 'r_z', 'r_W1', 
-                     'i_z', 'i_y', 'z_y', 'y_J', 'y_W2', 
-                     'J_H', 'H_K', 'K_W3', 'W1_W2', 'W1_W3']
+feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 
+                     'W4mag', 'Kmag', 'g_r', 'r_i', 'r_z', 
+                     'r_J', 'r_W1', 'i_z', 'i_y', 'z_y', 
+                     'y_J', 'y_W2', 'J_H', 'H_K', 'H_W3', 
+                     'W1_W2', 'W1_W3', 'W3_W4']
 
 catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
