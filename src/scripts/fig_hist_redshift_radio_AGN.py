@@ -67,10 +67,10 @@ colour_b[3] = 0.65
 colour_a    = tuple(colour_a)
 colour_b    = tuple(colour_b)
 
-ax1.stairs(counts_HETDEX_pred / gv.area_HETDEX, edges_HETDEX_pred, fill=True, ec='k', lw=1.5,\
-           fc=colour_a, label='HETDEX')
 ax1.stairs(counts_S82_pred / gv.area_S82, edges_S82_pred, fill=True, ec='k', lw=1.5,\
            fc=colour_b, label='S82')
+ax1.stairs(counts_HETDEX_pred / gv.area_HETDEX, edges_HETDEX_pred, fill=True, ec='k', lw=1.5,\
+           fc=colour_a, label='HETDEX')
 ax1.stairs(counts_HETDEX_true / gv.area_HETDEX, edges_HETDEX_true, fill=True, ec='k', lw=1.5,\
            fc=colour_a, label='HETDEX', hatch='///')
 ax1.stairs(counts_S82_true / gv.area_S82, edges_S82_true, fill=True, ec='k', lw=1.5,\
