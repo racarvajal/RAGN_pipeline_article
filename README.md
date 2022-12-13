@@ -13,12 +13,12 @@
 <a href="https://github.com/racarvajal/RAGN_pipeline_article/raw/main-pdf/arxiv.tar.gz">
 <img src="https://img.shields.io/badge/article-tarball-blue.svg?style=flat" alt="Article tarball"/>
 </a>
-<a href="https://github.com/racarvajal/RAGN_pipeline_article/raw/main-pdf/ms.pdf">
+<a href="https://github.com/racarvajal/RAGN_pipeline_article/raw/main-pdf/ML_pipeline.pdf">
 <img src="https://img.shields.io/badge/article-pdf-blue.svg?style=flat" alt="Read the article"/>
 </a>
 </p>
 
 An open source version of the article  
-__Developing a pipeline to predict high-redshift Radio Galaxies. Powerful Radio AGN selection with Machine Learning__  
-(R. Carvajal, I. Matute, J. Afonso, R. P. Norris, K. J. Luken, P. Sánchez-Sáez, P. Cunha, A. Humphrey, H. Messias, S. Amarantidis, and D. Barbosa)  
+__Selection of Powerful Radio Galaxies with Machine Learning__  
+(R. Carvajal, I. Matute, J. Afonso, R. P. Norris, K. J. Luken, P. Sánchez-Sáez, P. Cunha, A. Humphrey, H. Messias, S. Amarantidis, D. Barbosa, and H. A. Cruz)  
 created using the [showyourwork](https://github.com/showyourwork/showyourwork) workflow.
