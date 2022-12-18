@@ -41,7 +41,7 @@ fig             = plt.figure(figsize=(7,6))
 ax1             = fig.add_subplot(111)
 
 ax1.plot(mean_pred_val_train_validation, fract_positiv_train_validation, ls='-',\
-         marker='o', c=plt.get_cmap(gv.cmap_conf_matr)(1.0), lw=2.5, label='Train+validation')
+         marker='o', c=plt.get_cmap(gv.cmap_conf_matr)(1.0), lw=2.5, label='Train+\nvalidation')
 ax1.plot(mean_pred_val_calib, fract_positiv_calib, ls='-', marker='s',\
          c=plt.get_cmap(gv.cmap_conf_matr)(0.6), lw=2.5, label='Calibration')
 ax1.plot(mean_pred_val_test, fract_positiv_test, ls='-', marker='p',\
@@ -56,7 +56,7 @@ ax1.tick_params(which='minor', length=4, width=1.5)
 plt.setp(ax1.spines.values(), linewidth=2.5)
 plt.setp(ax1.spines.values(), linewidth=2.5)
 plt.legend(loc='best', fontsize=25, title='Sub-sets', title_fontsize=25, 
-           ncol=1, columnspacing=.25, handlelength=0.8, 
+           ncol=2, columnspacing=.25, handlelength=0.8, 
            handletextpad=0.1, framealpha=0.55)
 fig.tight_layout()
 plt.savefig(paths.figures / 'calib_curves_post_calib_AGN_galaxy.pdf', bbox_inches='tight')

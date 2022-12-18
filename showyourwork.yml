@@ -191,7 +191,7 @@ dependencies:
         - src/data/models/regression_z_sep_09_2022.pkl
         - src/scripts/global_functions.py
         - src/scripts/global_variables.py
-    src/scripts/SHAP/fig_decision_z_hiz_AGN_et.py:
+    src/scripts/SHAP/fig_decision_z_hiz_AGN_rf.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/models/regression_z_sep_09_2022.pkl
         - src/scripts/global_functions.py

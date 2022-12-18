@@ -46,7 +46,7 @@ explainer_radio   = fasttreeshap.TreeExplainer(radio_det_clf.named_steps['traine
                                                algorithm='auto', n_jobs=12)
 shap_values_radio = explainer_radio(reduced_data_df, check_additivity=False)
 
-xlims_plt         = (0.4999, 0.5001)
+xlims_plt         = (0.49985, 0.50015)
 size_side         = 8
 fig               = plt.figure(figsize=(size_side,size_side * 3/2))
 ax1               = fig.add_subplot(111, xscale='linear', yscale='linear')

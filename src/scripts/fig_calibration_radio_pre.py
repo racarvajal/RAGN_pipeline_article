@@ -71,7 +71,7 @@ plt.setp(ax1.spines.values(), linewidth=2.5)
 #ax1.set_xlim(left=min_x * 0.99999, right=max_x * 1.00001)
 ax1.xaxis.get_offset_text().set_fontsize(26)
 plt.legend(loc='best', fontsize=25, title='Sub-sets', title_fontsize=25, 
-           ncol=1, columnspacing=.25, handlelength=0.8, 
+           ncol=2, columnspacing=.25, handlelength=0.8, 
            handletextpad=0.1, framealpha=0.55)
 fig.tight_layout()
 plt.savefig(paths.figures / 'calib_curves_pre_calib_radio.pdf', bbox_inches='tight')

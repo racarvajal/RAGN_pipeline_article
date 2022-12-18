@@ -19,10 +19,10 @@ model_AGN_name    = paths.data / 'models' / gv.AGN_gal_model
 AGN_gal_clf       = pyc.load_model(model_AGN_name, verbose=False)
 
 feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 
-                     'W4mag', 'Kmag', 'g_r', 'r_i', 'r_z', 
-                     'r_J', 'r_W1', 'i_z', 'i_y', 'z_y', 
-                     'y_J', 'y_W2', 'J_H', 'H_K', 'H_W3', 
-                     'W1_W2', 'W1_W3', 'W3_W4']
+                     'band_num', 'W4mag', 'g_r', 'r_i', 
+                     'r_J', 'i_z', 'i_y',  'z_y', 'z_W2', 
+                     'y_J', 'y_W1', 'y_W2', 'J_H', 'H_K', 
+                     'H_W3', 'W1_W2', 'W1_W3', 'W3_W4']
 
 catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
@@ -46,7 +46,7 @@ explainer_AGN     = fasttreeshap.TreeExplainer(AGN_gal_clf.named_steps['trained_
                                                algorithm='auto', n_jobs=12)
 shap_values_AGN   = explainer_AGN(reduced_data_df, check_additivity=False)
 
-xlims_plt         = (0.38, 0.62)
+xlims_plt         = (0.49987, 0.50013)
 size_side         = 8
 fig               = plt.figure(figsize=(size_side,size_side * 3/2))
 ax1               = fig.add_subplot(111, xscale='linear', yscale='linear')

@@ -136,11 +136,11 @@ rule decision_radio_et:
     script:
         "src/scripts/SHAP/fig_decision_radio_hiz_AGN_et.py"
 
-rule decision_redshift_et:
+rule decision_redshift_rf:
     output:
-        "src/tex/figures/SHAP/SHAP_decision_z_base_et_HETDEX_highz.pdf"
+        "src/tex/figures/SHAP/SHAP_decision_z_base_rf_HETDEX_highz.pdf"
     script:
-        "src/scripts/SHAP/fig_decision_z_hiz_AGN_et.py"
+        "src/scripts/SHAP/fig_decision_z_hiz_AGN_rf.py"
 
 rule decision_redshift_catboost:
     output:

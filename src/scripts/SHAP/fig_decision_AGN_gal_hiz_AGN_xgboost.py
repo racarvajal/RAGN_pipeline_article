@@ -20,10 +20,10 @@ AGN_gal_full      = pyc.load_model(model_AGN_name, verbose=False)
 AGN_gal_clf       = AGN_gal_full.named_steps['trained_model'].estimators_[0]
 
 feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 
-                     'W4mag', 'Kmag', 'g_r', 'r_i', 'r_z', 
-                     'r_J', 'r_W1', 'i_z', 'i_y', 'z_y', 
-                     'y_J', 'y_W2', 'J_H', 'H_K', 'H_W3', 
-                     'W1_W2', 'W1_W3', 'W3_W4']
+                     'band_num', 'W4mag', 'g_r', 'r_i', 
+                     'r_J', 'i_z', 'i_y',  'z_y', 'z_W2', 
+                     'y_J', 'y_W1', 'y_W2', 'J_H', 'H_K', 
+                     'H_W3', 'W1_W2', 'W1_W3', 'W3_W4']
 
 catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
