@@ -18,7 +18,8 @@ validation_idx       = np.loadtxt(paths.data / 'indices_validation.txt')
 calibration_idx      = np.loadtxt(paths.data / 'indices_calibration.txt')
 test_idx             = np.loadtxt(paths.data / 'indices_test.txt')
 
-size_labelled        = len(labelled_idx)
+# size_labelled        = len(labelled_idx)  # Sources are incorrect
+size_labelled        = 118_734
 size_unlabelled      = full_size_HTDX - size_labelled
 size_train_val       = len(train_validation_idx)
 size_train_val_cal   = size_train_val + len(calibration_idx)
