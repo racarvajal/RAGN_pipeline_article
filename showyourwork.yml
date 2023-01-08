@@ -4,6 +4,9 @@ verbose: true
 
 ms_name: ML_pipeline
 
+stamp:
+  enabled: false
+
 # tectonic_args: ["-Z", "shell-escape"]
 
 # datasets:
