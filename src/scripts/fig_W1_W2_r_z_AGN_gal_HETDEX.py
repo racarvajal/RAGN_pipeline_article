@@ -6,7 +6,6 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
-import mpl_scatter_density
 from astropy.visualization import PowerStretch
 from astropy.visualization.mpl_normalize import ImageNormalize
 import cmasher as cmr
@@ -53,7 +52,7 @@ filter_valid_colours  = np.isfinite(catalog_HETDEX_df.loc[:, 'W1mproPM'] - catal
 filter_used_data      = filter_valid_colours & filter_imputed_HETDEX
 
 fig                = plt.figure(figsize=(7.2,6.5))
-ax1                = fig.add_subplot(111, xscale='linear', yscale='linear', projection='scatter_density')
+ax1                = fig.add_subplot(111, xscale='linear', yscale='linear')
 
 num_levels_dens    = 20
 
@@ -70,9 +69,9 @@ dens_plot_data_x = (catalog_HETDEX_df.loc[filter_used_data, 'rmag'] -\
 dens_plot_data_y = (catalog_HETDEX_df.loc[filter_used_data, 'W1mproPM'] -\
                     catalog_HETDEX_df.loc[filter_used_data, 'W2mproPM'])
 
-dens_CW_HETDEX      = ax1.scatter_density(dens_plot_data_x, dens_plot_data_y,
-                             cmap=plt.get_cmap(gv.cmap_dens_plots),
-                             zorder=0, dpi=30, norm=norm_dens, alpha=1.0)
+_, _, _, dens_CW_HETDEX = ax1.hist2d(dens_plot_data_x, dens_plot_data_y, 
+                                     bins=[200, 200], cmin=1, norm=norm_dens, 
+                                     cmap=plt.get_cmap(gv.cmap_dens_plots), zorder=0)
 n_sources_CW     = np.nansum(filter_used_data)
 
 corner_HETDEX = ChainConsumer()\

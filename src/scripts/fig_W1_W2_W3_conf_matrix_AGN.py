@@ -10,7 +10,6 @@ from astropy.visualization import PowerStretch
 from astropy.visualization.mpl_normalize import ImageNormalize
 import cmasher as cmr
 import pandas as pd
-import mpl_scatter_density
 from chainconsumer import ChainConsumer
 import paths
 import global_variables as gv
@@ -116,16 +115,13 @@ except:
 
 for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     if count == 0:
-        axs[count] = fig.add_subplot(grid[tuple(idx_ax)], projection='scatter_density')
+        axs[count] = fig.add_subplot(grid[tuple(idx_ax)])
     if count != 0:
-        axs[count] = fig.add_subplot(grid[tuple(idx_ax)], projection='scatter_density',\
-                                          sharex=axs[0], sharey=axs[0])
+        axs[count] = fig.add_subplot(grid[tuple(idx_ax)], sharex=axs[0], sharey=axs[0])
     
-    dens_plts[count] = axs[count].scatter_density(dens_plot_data_x, 
-                                                  dens_plot_data_y, 
-                                                  cmap=plt.get_cmap(gv.cmap_dens_plots), 
-                                                  zorder=0, dpi=18, 
-                                                  norm=norm_dens, alpha=1.0)
+    _, _, _, dens_plts[count] = axs[count].hist2d(dens_plot_data_x, dens_plot_data_y, 
+                                                  bins=[50, 150], cmin=1, norm=norm_dens,
+                                                  cmap=plt.get_cmap(gv.cmap_dens_plots))
     
     x_axis_dens_AGN_HETDEX[count] = (catalog_HETDEX_df[cm_mat_AGN_filter_HETDEX[tuple(idx_ax)] ]['W2mproPM'] -\
                catalog_HETDEX_df[cm_mat_AGN_filter_HETDEX[tuple(idx_ax)] ]['W3mag'])

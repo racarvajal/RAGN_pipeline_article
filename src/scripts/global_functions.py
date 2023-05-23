@@ -175,7 +175,11 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
         norm = ImageNormalize(vmin=0., stretch=PowerStretch(0.5))
 
     filt_pair_z   = np.isfinite(true_z) & np.isfinite(predicted_z)
-    max_for_range = np.nanmax([np.nanmax(1 + true_z.loc[filt_pair_z]), np.nanmax(1 + predicted_z.loc[filt_pair_z])])
+    min_for_range = np.nanmin([np.nanmin(1 + true_z.loc[filt_pair_z]), 
+                               np.nanmin(1 + predicted_z.loc[filt_pair_z])])
+    max_for_range = np.nanmax([np.nanmax(1 + true_z.loc[filt_pair_z]), 
+                               np.nanmax(1 + predicted_z.loc[filt_pair_z])])
+    bins_z        = np.logspace(np.log10(min_for_range), np.log10(max_for_range), num=4*dpi)       
 
     # Fix colormap to have 0=>white
     cmap_m       = plt.get_cmap(cmap)
@@ -183,16 +187,15 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
     cmap_list[0] = (1., 1., 1., 1.)
     cmap_mod     = mcolors.LinearSegmentedColormap.from_list(cmap + '_mod', cmap_list, cmap_m.N)
 
-    dens_1 = ax_pre.scatter_density((1 + true_z.sample(frac=1, random_state=gv.seed)),\
-            (1 + predicted_z.sample(frac=1, random_state=gv.seed)),\
-            cmap=cmap_mod, zorder=0, dpi=dpi, norm=norm, alpha=0.93)
+    _, _, _, hist_sources_rGal = ax_pre.hist2d((1 + true_z), (1 + predicted_z), 
+                                               bins=bins_z, cmin=1, cmap=cmap_mod, norm=norm)
     
     ax_pre.axline((2., 2.), (3., 3.), ls='--', marker=None, c='Gray', alpha=0.8, lw=3.0, zorder=20)
     ax_pre.axline(xy1=(1., 1.15), xy2=(2., 2.3), ls='-.', marker=None, c='slateblue', alpha=0.6, lw=3.0, zorder=20)
     ax_pre.axline(xy1=(1., 0.85), xy2=(2., 1.7), ls='-.', marker=None, c='slateblue', alpha=0.6, lw=3.0, zorder=20)
 
     if show_clb:
-        clb = plt.colorbar(dens_1, extend='neither', norm=norm, ticks=mtick.MaxNLocator(integer=True))
+        clb = plt.colorbar(hist_sources_rGal, extend='neither', norm=norm, ticks=mtick.MaxNLocator(integer=True))
         clb.ax.tick_params(labelsize=26)
         clb.outline.set_linewidth(2.5)
         clb.ax.set_ylabel('Elements per pixel', size=28, path_effects=pe2)
@@ -236,7 +239,7 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
     return ax_pre
 
 # Plot predicted scores (or Z) vs number of measured bands per source
-def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, dpi=10, cmap=gv.cmap_z_plots, 
+def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, bins=10, cmap=gv.cmap_z_plots, 
                          show_clb=False, log_stretch=False, xlabel=None, ylabel=None, 
                          top_plot=True, bottom_plot=True):
     if log_stretch:
@@ -255,10 +258,9 @@ def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, dpi=10, cmap
     cmap_list    = [cmap_m(i) for i in range(cmap_m.N)]
     cmap_list[0] = (1., 1., 1., 1.)
     cmap_mod     = mcolors.LinearSegmentedColormap.from_list(cmap + '_mod', cmap_list, cmap_m.N)
-
-    dens_1 = ax_pre.scatter_density(pred_scores.sample(frac=1, random_state=gv.seed), 
-                                    band_num.sample(frac=1, random_state=gv.seed), 
-                                    cmap=cmap_mod, zorder=0, dpi=dpi, norm=norm, alpha=1.0)
+    
+    _, _, _, dens_1 = ax_pre.hist2d(pred_scores, band_num, bins=bins, cmin=1, 
+                                    norm=norm, cmap=cmap_mod, zorder=0)
     
     # ax_pre.axline((2., 2.), (3., 3.), ls='--', marker=None, c='Gray', alpha=0.8, lw=3.0, zorder=20)
     # ax_pre.axline(xy1=(1., 1.15), xy2=(2., 2.3), ls='-.', marker=None, c='slateblue', alpha=0.6, lw=3.0, zorder=20)

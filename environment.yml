@@ -15,7 +15,6 @@ dependencies:
   - conda-forge::colorcet
   - conda-forge::cmasher
   - conda-forge::schemdraw
-  - conda-forge::mpl-scatter-density
   - pip:
       - chainconsumer
       - lightgbm
