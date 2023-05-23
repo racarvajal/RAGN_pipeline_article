@@ -20,5 +20,5 @@
 
 An open source version of the article  
 __Selection of Powerful Radio Galaxies with Machine Learning__  
-(R. Carvajal, I. Matute, J. Afonso, R. P. Norris, K. J. Luken, P. Sánchez-Sáez, P. Cunha, A. Humphrey, H. Messias, S. Amarantidis, D. Barbosa, and H. A. Cruz)  
+(R. Carvajal, I. Matute, J. Afonso, R. P. Norris, K. J. Luken, P. Sánchez-Sáez, P. Cunha, A. Humphrey, H. Messias, S. Amarantidis, D. Barbosa, H. A. Cruz, H. Miranda, A. Paulino-Afonso, and C. Pappalardo)  
 created using the [showyourwork](https://github.com/showyourwork/showyourwork) workflow.
