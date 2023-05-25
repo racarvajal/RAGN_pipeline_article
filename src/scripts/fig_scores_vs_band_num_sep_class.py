@@ -93,6 +93,7 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
         axs[count].boxplot(all_scores_low, positions=vals_band_num_low, showfliers=False, showmeans=True, 
                        meanline=True, widths=0.4, boxprops=boxprops, whiskerprops=whiskerprops, 
                        capprops=capprops, meanprops=meanprops, medianprops=medianprops)
+        axs[count].axhline(y=cal_thresh[count], ls='--', c='gray', lw=2.0)
 
     if count in [2]:
         vals_band_num = np.unique(catalog_HETDEX_df.loc[filter_rAGN[count], 'band_num'])
