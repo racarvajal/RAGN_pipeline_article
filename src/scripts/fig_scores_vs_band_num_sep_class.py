@@ -80,32 +80,57 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
 
         all_scores_up     = []
         all_scores_low    = []
+        sizes_up          = []
+        sizes_low         = []
         for count_b, num in enumerate(vals_band_num_up):
             filter_band_n      = np.array(catalog_HETDEX_df.loc[:, 'band_num'] == num)
-            all_scores_up.append(catalog_HETDEX_df.loc[filt_up_score * filter_band_n, score_to_use])
+            all_scores_up.append(catalog_HETDEX_df.loc[filter_rAGN[count] * filt_up_score * filter_band_n, 
+                                                       score_to_use])
+            sizes_up.append(np.sum(filter_rAGN[count] * filt_up_score * filter_band_n))
         for count_b, num in enumerate(vals_band_num_low):
             filter_band_n      = np.array(catalog_HETDEX_df.loc[:, 'band_num'] == num)
-            all_scores_low.append(catalog_HETDEX_df.loc[filt_low_score * filter_band_n, score_to_use])
+            all_scores_low.append(catalog_HETDEX_df.loc[filter_rAGN[count] * filt_low_score * filter_band_n, 
+                                                        score_to_use])
+            sizes_low.append(np.sum(filter_rAGN[count] * filt_low_score * filter_band_n))
 
-        axs[count].boxplot(all_scores_up, positions=vals_band_num_up, showfliers=False, showmeans=True, 
-                       meanline=True, widths=0.4, boxprops=boxprops, whiskerprops=whiskerprops, 
-                       capprops=capprops, meanprops=meanprops, medianprops=medianprops)
-        axs[count].boxplot(all_scores_low, positions=vals_band_num_low, showfliers=False, showmeans=True, 
-                       meanline=True, widths=0.4, boxprops=boxprops, whiskerprops=whiskerprops, 
-                       capprops=capprops, meanprops=meanprops, medianprops=medianprops)
+        axs[count].boxplot(all_scores_up, positions=vals_band_num_up, showfliers=False, 
+                           showmeans=True, meanline=True, widths=0.4, boxprops=boxprops, 
+                           whiskerprops=whiskerprops, capprops=capprops, meanprops=meanprops, 
+                           medianprops=medianprops)
+        axs[count].boxplot(all_scores_low, positions=vals_band_num_low, showfliers=False, 
+                           showmeans=True, meanline=True, widths=0.4, boxprops=boxprops, 
+                           whiskerprops=whiskerprops, capprops=capprops, meanprops=meanprops, 
+                           medianprops=medianprops)
         axs[count].axhline(y=cal_thresh[count], ls='--', c='gray', lw=2.0)
+        for count_b, num in enumerate(vals_band_num_up):
+            str_b = f'{sizes_up[count_b]:,}'.replace(',', '$\,$')
+            axs[count].annotate(text=str_b, xy=(num, 1.270),xycoords='data', 
+                                fontsize=18, ha='center', va='top', 
+                                rotation='vertical', path_effects=gf.pe2)
+        for count_b, num in enumerate(vals_band_num_low):
+            str_b = f'{sizes_low[count_b]:,}'.replace(',', '$\,$')
+            axs[count].annotate(text=str_b, xy=(num, 0.000), xycoords='data', 
+                                fontsize=18, ha='center', va='top', 
+                                rotation='vertical', path_effects=gf.pe2)
 
     if count in [2]:
         vals_band_num = np.unique(catalog_HETDEX_df.loc[filter_rAGN[count], 'band_num'])
 
         all_scores    = []
+        sizes_z       = []
         for count_b, num in enumerate(vals_band_num):
             filter_band_n      = np.array(catalog_HETDEX_df.loc[:, 'band_num'] == num)
             all_scores.append(catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, score_to_use])
+            sizes_z.append(np.sum(filter_rAGN[count] * filter_band_n))
 
         axs[count].boxplot(all_scores, positions=vals_band_num, showfliers=False, showmeans=True, 
                             meanline=True, widths=0.4, boxprops=boxprops, whiskerprops=whiskerprops, 
                             capprops=capprops, meanprops=meanprops, medianprops=medianprops)
+        y_lims = axs[count].get_ylim()
+        for count_b, num in enumerate(vals_band_num):
+            str_b = f'{sizes_z[count_b]:,}'.replace(',', '$\,$')
+            axs[count].annotate(text=str_b, xy=(num, 0.935 * y_lims[1]), xycoords='data', 
+                                fontsize=18, ha='center', va='top', rotation='vertical', path_effects=gf.pe2)
     # for count_b, num in enumerate(vals_band_num):
     #     filter_band_n      = np.array(catalog_HETDEX_df.loc[:, 'band_num'] == num)
     #     if count in [0, 1]:
@@ -129,6 +154,8 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
     #                         rotation='vertical', path_effects=gf.pe2)
 
 axs[0].set_xlim(left=1.5, right=12.5)
+for count in [0, 1]:
+    axs[count].set_ylim(bottom=-0.3, top=1.3)
 axs[2].set_xticks(np.unique(catalog_HETDEX_df.loc[:, 'band_num']))
 axs[2].set_xticklabels(np.unique(catalog_HETDEX_df.loc[:, 'band_num']))
 plt.savefig(paths.figures / 'predicted_probs_band_num_HETDEX_test_sep_class.pdf', bbox_inches='tight')
