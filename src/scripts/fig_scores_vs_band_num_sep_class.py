@@ -131,31 +131,12 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
             str_b = f'{sizes_z[count_b]:,}'.replace(',', '$\,$')
             axs[count].annotate(text=str_b, xy=(num, 0.935 * y_lims[1]), xycoords='data', 
                                 fontsize=18, ha='center', va='top', rotation='vertical', path_effects=gf.pe2)
-    # for count_b, num in enumerate(vals_band_num):
-    #     filter_band_n      = np.array(catalog_HETDEX_df.loc[:, 'band_num'] == num)
-    #     if count in [0, 1]:
-    #         tmp_conf_mat = gf.conf_mat_func(catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, 
-    #                                                               true_value[count]], 
-    #                                         catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, 
-    #                                                               predicted_value[count]])
-    #         tmp_metric   = gf.Recall_from_CM(tmp_conf_mat)
-    #     if count == 2:
-    #         tmp_metric   = gf.sigma_nmad(catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, 
-    #                                                            true_value[count]], 
-    #                                      catalog_HETDEX_df.loc[filter_rAGN[count] * filter_band_n, 
-    #                                                            predicted_value[count]])
-    #     axs[count].annotate(text=f'{tmp_metric:.2f} -'.replace('nan', ' '), 
-    #                         xy=(num, 0.7 * np.nanmax(np.hstack(all_scores))), 
-    #                         xycoords='data', fontsize=18, ha='center', va='top',  rotation='vertical', 
-    #                         path_effects=gf.pe2)
-    #     axs[count].annotate(text=f'{np.sum(filter_rAGN[count] * filter_band_n):,}'.replace(',', '$\,$'), 
-    #                         xy=(num, 0.935 * np.nanmax(np.hstack(all_scores))), 
-    #                         xycoords='data', fontsize=18, ha='center', va='top', 
-    #                         rotation='vertical', path_effects=gf.pe2)
 
 axs[0].set_xlim(left=1.5, right=12.5)
 for count in [0, 1]:
     axs[count].set_ylim(bottom=-0.3, top=1.3)
+used_x_ticks = np.unique(catalog_HETDEX_df.loc[:, 'band_num'])
+str_x_ticks  = [rf'${tick}$' for tick in used_x_ticks]
 axs[2].set_xticks(np.unique(catalog_HETDEX_df.loc[:, 'band_num']))
-axs[2].set_xticklabels(np.unique(catalog_HETDEX_df.loc[:, 'band_num']))
+axs[2].set_xticklabels(str_x_ticks)
 plt.savefig(paths.figures / 'predicted_probs_band_num_HETDEX_test_sep_class.pdf', bbox_inches='tight')

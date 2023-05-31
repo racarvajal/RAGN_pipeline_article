@@ -101,6 +101,8 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
                             rotation='vertical', path_effects=gf.pe2)
 
 axs[0].set_xlim(left=1.5, right=12.5)
+used_x_ticks = np.unique(catalog_HETDEX_df.loc[:, 'band_num'])
+str_x_ticks  = [rf'${tick}$' for tick in used_x_ticks]
 axs[2].set_xticks(np.unique(catalog_HETDEX_df.loc[:, 'band_num']))
 axs[2].set_xticklabels(np.unique(catalog_HETDEX_df.loc[:, 'band_num']))
 plt.savefig(paths.figures / 'predicted_probs_band_num_HETDEX_test.pdf', bbox_inches='tight')
