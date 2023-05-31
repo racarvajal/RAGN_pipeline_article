@@ -17,7 +17,6 @@ dependencies:
       - "matplotlib==3.6.1"
       - "pandas==1.4.4"
       - "scikit-learn==0.23.2"
-      - chainconsumer
       - lightgbm
       - "xgboost==1.5.1"
       - "pycaret==2.3.10"

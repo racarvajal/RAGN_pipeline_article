@@ -10,7 +10,6 @@ from astropy.visualization import PowerStretch
 from astropy.visualization.mpl_normalize import ImageNormalize
 import cmasher as cmr
 import pandas as pd
-from chainconsumer import ChainConsumer
 import paths
 import global_variables as gv
 import global_functions as gf
@@ -81,15 +80,15 @@ dens_plot_data_x = (unknown_HTDX_df.loc[filt_colours_m * filt_plot, 'W2mproPM'] 
 dens_plot_data_y = (unknown_HTDX_df.loc[filt_colours_m * filt_plot, 'W1mproPM'] -\
                     unknown_HTDX_df.loc[filt_colours_m * filt_plot, 'W2mproPM'])
 
-cm_mat_AGN_filter_HETDEX = np.array([[(np.array(catalog_HETDEX_df['class'] == 0)   & np.array(catalog_HETDEX_df['pred_prob_class'] == 0)),\
-                                      (np.array(catalog_HETDEX_df['class'] == 0)   & np.array(catalog_HETDEX_df['pred_prob_class'] == 1))],\
-                                     [(np.array(catalog_HETDEX_df['class'] == 1)   & np.array(catalog_HETDEX_df['pred_prob_class'] == 0)),\
-                                      (np.array(catalog_HETDEX_df['class'] == 1)   & np.array(catalog_HETDEX_df['pred_prob_class'] == 1))]])
+cm_mat_AGN_filter_HETDEX = np.array([[(np.array(catalog_HETDEX_df['class'] == 0)   & np.array(catalog_HETDEX_df['pred_prob_class'] == 0)),
+                                      (np.array(catalog_HETDEX_df['class'] == 0)   & np.array(catalog_HETDEX_df['pred_prob_class'] == 1))],
+                                      [(np.array(catalog_HETDEX_df['class'] == 1)   & np.array(catalog_HETDEX_df['pred_prob_class'] == 0)),
+                                       (np.array(catalog_HETDEX_df['class'] == 1)   & np.array(catalog_HETDEX_df['pred_prob_class'] == 1))]])
 
-cm_mat_AGN_filter_S82    = np.array([[(np.array(catalog_S82_df['class'] == 0)   & np.array(catalog_S82_df['pred_prob_class'] == 0)),\
-                                      (np.array(catalog_S82_df['class'] == 0)   & np.array(catalog_S82_df['pred_prob_class'] == 1))],\
-                                     [(np.array(catalog_S82_df['class'] == 1)   & np.array(catalog_S82_df['pred_prob_class'] == 0)),\
-                                      (np.array(catalog_S82_df['class'] == 1)   & np.array(catalog_S82_df['pred_prob_class'] == 1))]])
+cm_mat_AGN_filter_S82    = np.array([[(np.array(catalog_S82_df['class'] == 0)   & np.array(catalog_S82_df['pred_prob_class'] == 0)),
+                                      (np.array(catalog_S82_df['class'] == 0)   & np.array(catalog_S82_df['pred_prob_class'] == 1))],
+                                      [(np.array(catalog_S82_df['class'] == 1)   & np.array(catalog_S82_df['pred_prob_class'] == 0)),
+                                       (np.array(catalog_S82_df['class'] == 1)   & np.array(catalog_S82_df['pred_prob_class'] == 1))]])
 
 dens_plts = {}
 cont_plts = {}
@@ -160,28 +159,59 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     axs[count].plot(points_B18[0] + 3.339 - 5.174, points_B18[1] + 2.699 - 3.339,\
                     c=plt.get_cmap(gv.cmap_bands)(0.75), zorder=1, lw=3, path_effects=gf.pe2)
     
-    # colors_tmp = [mcolors.to_hex(plt.get_cmap(cmap_cont)(0.0)),\
-    #                                 mcolors.to_hex(plt.get_cmap(cmap_cont)(1.0))]
-    corner_white = ChainConsumer()\
-    .add_chain([x_axis_dens_AGN_HETDEX[count], y_axis_dens_AGN_HETDEX[count]], parameters=['r_z', 'W1_W2'], name='HETDEX MQC AGN')\
-    .add_chain([x_axis_dens_AGN_S82[count], y_axis_dens_AGN_S82[count]], parameters=['r_z', 'W1_W2'], name='Stripe 82 MQC AGN')\
-    .configure(shade=False, colors='#FFFFFF', sigmas=contour_levels,\
-               linewidths=2.75, shade_alpha=0.1, sigma2d=False, linestyles='-')\
-    .plotter.plot_contour(ax=axs[count], parameter_x='r_z', parameter_y='W1_W2')  # Green AGN
+    min_X  = np.nanmin([np.nanmin(x_axis_dens_AGN_HETDEX[count]), np.nanmin(x_axis_dens_AGN_S82[count])])
+    max_X  = np.nanmax([np.nanmax(x_axis_dens_AGN_HETDEX[count]), np.nanmax(x_axis_dens_AGN_S82[count])])
+    min_Y  = np.nanmin([np.nanmin(y_axis_dens_AGN_HETDEX[count]), np.nanmin(y_axis_dens_AGN_S82[count])])
+    max_Y  = np.nanmax([np.nanmax(y_axis_dens_AGN_HETDEX[count]), np.nanmax(y_axis_dens_AGN_S82[count])])
+    n_bins = [50, 75]
+    bins_X = np.linspace(min_X, max_X, n_bins[1])
+    bins_Y = np.linspace(min_Y, max_Y, n_bins[0])
+
+    sigmas_perc     = [0.6826, 0.9545, 0.9973]  # [0.6826, 0.9545, 0.9973, 0.99994, 0.99999]
+    sigmas_perc_inv = [1. - sigma for sigma in sigmas_perc][::-1]  # 1, 2, 3 sigma
+
+    nstep = 4
+    seq_cont   = np.logspace(-1.5, 0.0, nstep)
+    seq_cont   = np.insert(seq_cont, 0, 0.0)
+    seq_fill   = np.logspace(-1.5, 0.0, nstep+2)
+    seq_fill   = np.insert(seq_fill, 0, 0.0)
+
+    cm_gradient_HETDEX = gf.create_colour_gradient('#1E88E5')
+    cm_gradient_S82    = gf.create_colour_gradient('#D32F2F')
+
+    H_HETDEX, xedges_HETDEX, yedges_HETDEX = np.histogram2d(x_axis_dens_AGN_HETDEX[count], 
+                                       y_axis_dens_AGN_HETDEX[count], bins=n_bins)
+    H_S82, xedges_S82, yedges_S82 = np.histogram2d(x_axis_dens_AGN_S82[count], 
+                                       y_axis_dens_AGN_S82[count], bins=n_bins)
+
+    H_HETDEX_smooth = gf.clean_and_smooth_matrix(H_HETDEX, sigma=0.9)
+    H_S82_smooth    = gf.clean_and_smooth_matrix(H_S82, sigma=0.9)
+
+    Z_HETDEX = (H_HETDEX_smooth.T - H_HETDEX_smooth.T.min())/(H_HETDEX_smooth.T.max() - H_HETDEX_smooth.T.min())
+    Z_S82    = (H_S82_smooth.T - H_S82_smooth.T.min())/(H_S82_smooth.T.max() - H_S82_smooth.T.min())
+
+    # fix probable lines not closing
+    Z_HETDEX, x_centers_HETDEX, y_centers_HETDEX = gf.pad_matrix_zeros(Z_HETDEX, xedges_HETDEX, yedges_HETDEX)
+    Z_S82,    x_centers_S82,    y_centers_S82    = gf.pad_matrix_zeros(Z_S82, xedges_S82, yedges_S82)
+
+    CS_HETDEX_f = axs[count].contourf(x_centers_HETDEX, y_centers_HETDEX, Z_HETDEX, levels=sigmas_perc_inv,
+                                      colors=cm_gradient_HETDEX(seq_fill[::-1]), extend='max', 
+                                      alpha=0.2, antialiased=True)
+    CS_HETDEX = axs[count].contour(x_centers_HETDEX, y_centers_HETDEX, Z_HETDEX, levels=sigmas_perc_inv,
+                                   colors=cm_gradient_HETDEX(seq_cont[::-1]), linewidths=2.5)
+
+    CS_S82_f = axs[count].contourf(x_centers_S82, y_centers_S82, Z_S82, levels=sigmas_perc_inv, 
+                                   colors=cm_gradient_S82(seq_fill[::-1]), extend='max', 
+                                   alpha=0.2, antialiased=True)
+    CS_S82 = axs[count].contour(x_centers_S82, y_centers_S82, Z_S82, levels=sigmas_perc_inv, 
+                                colors=cm_gradient_S82(seq_cont[::-1]), linewidths=2.5)
     
-    corner_color = ChainConsumer()\
-    .add_chain([x_axis_dens_AGN_HETDEX[count], y_axis_dens_AGN_HETDEX[count]], parameters=['r_z', 'W1_W2'], name='HETDEX MQC AGN')\
-    .add_chain([x_axis_dens_AGN_S82[count], y_axis_dens_AGN_S82[count]], parameters=['r_z', 'W1_W2'], name='Stripe 82 MQC AGN')\
-    .configure(shade=False, colors=['#1E88E5', '#D32F2F'], sigmas=contour_levels,\
-               linewidths=1.75, shade_alpha=0.1, sigma2d=False, linestyles='-')\
-    .plotter.plot_contour(ax=axs[count], parameter_x='r_z', parameter_y='W1_W2')  # Green AGN
     n_sources_HETDEX   = np.sum(cm_mat_AGN_filter_HETDEX[tuple(idx_ax)])
     n_sources_S82   = np.sum(cm_mat_AGN_filter_S82[tuple(idx_ax)])
     axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX:,}\nStripe 82-N = {n_sources_S82:,}'.replace(',','$\,$'),
                         xy=(0.02, 0.96), xycoords='axes fraction', fontsize=20, 
                         ha='left', va='top', path_effects=gf.pe2, zorder=11)
-    
-    
+
     axs_twinx[count] = axs[count].twinx()
     axs_twinx[count].tick_params(which='both', top=False, right=True, direction='in')
     axs_twinx[count].tick_params(which='both', bottom=False, left=False, direction='in')

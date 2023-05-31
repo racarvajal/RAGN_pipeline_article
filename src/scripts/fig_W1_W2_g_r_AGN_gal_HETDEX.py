@@ -10,7 +10,7 @@ from astropy.visualization import PowerStretch
 from astropy.visualization.mpl_normalize import ImageNormalize
 import cmasher as cmr
 import pandas as pd
-from chainconsumer import ChainConsumer
+import global_functions as gf
 import global_variables as gv
 
 mpl.rcdefaults()
@@ -74,15 +74,59 @@ _, _, _, dens_CW_HETDEX = ax1.hist2d(dens_plot_data_x, dens_plot_data_y,
                                      cmap=plt.get_cmap(gv.cmap_dens_plots), zorder=0)
 n_sources_CW     = np.nansum(filter_used_data)
 
-corner_HETDEX = ChainConsumer()\
-        .add_chain(catalog_HETDEX_df.loc[filter_used_data & filter_AGN_HETDEX,  ['g_r', 'W1_W2']], 
-        name='HETDEX MQC AGN')\
-        .add_chain(catalog_HETDEX_df.loc[filter_used_data & filter_gal_HETDEX, ['g_r', 'W1_W2']], 
-        name='HETDEX SDSS Galaxies')\
-        .configure(shade=True, colors=[mcolors.to_hex(plt.get_cmap(gv.cmap_hists)(0.2)), 
-                                       mcolors.to_hex(plt.get_cmap(gv.cmap_hists)(0.8))], 
-                   sigmas=[1, 2, 3], linewidths=3.5, shade_alpha=0.075)\
-        .plotter.plot_contour(ax=ax1, parameter_x='g_r', parameter_y='W1_W2')
+min_X  = np.nanmin(catalog_HETDEX_df.loc[filter_used_data, 'g_r'])
+max_X  = np.nanmax(catalog_HETDEX_df.loc[filter_used_data, 'g_r'])
+min_Y  = np.nanmin(catalog_HETDEX_df.loc[filter_used_data, 'W1_W2'])
+max_Y  = np.nanmax(catalog_HETDEX_df.loc[filter_used_data, 'W1_W2'])
+n_bins = [50, 75]
+bins_X = np.linspace(min_X, max_X, n_bins[1])
+bins_Y = np.linspace(min_Y, max_Y, n_bins[0])
+
+sigmas_perc     = [0.6826, 0.9545, 0.9973]  # [0.6826, 0.9545, 0.9973, 0.99994, 0.99999]
+sigmas_perc_inv = [1. - sigma for sigma in sigmas_perc][::-1]  # 1, 2, 3 sigma
+
+nstep = 4
+seq_cont   = np.logspace(-1.5, 0.0, nstep)
+seq_cont   = np.insert(seq_cont, 0, 0.0)
+seq_fill   = np.logspace(-1.5, 0.0, nstep+2)
+seq_fill   = np.insert(seq_fill, 0, 0.0)
+
+cm_gradient_AGN = gf.create_colour_gradient(mcolors.to_hex(plt.get_cmap(gv.cmap_hists)(0.2)))
+cm_gradient_Gal = gf.create_colour_gradient(mcolors.to_hex(plt.get_cmap(gv.cmap_hists)(0.8)))
+
+H_AGN, xedges_AGN, yedges_AGN = np.histogram2d(catalog_HETDEX_df.loc[filter_used_data & filter_AGN_HETDEX, 'g_r'], 
+                                   catalog_HETDEX_df.loc[filter_used_data & filter_AGN_HETDEX, 'W1_W2'], bins=n_bins)
+H_Gal, xedges_Gal, yedges_Gal = np.histogram2d(catalog_HETDEX_df.loc[filter_used_data & filter_gal_HETDEX, 'g_r'], 
+                                   catalog_HETDEX_df.loc[filter_used_data & filter_gal_HETDEX, 'W1_W2'], bins=n_bins)
+
+H_AGN_smooth = gf.clean_and_smooth_matrix(H_AGN, sigma=0.9)
+H_Gal_smooth = gf.clean_and_smooth_matrix(H_Gal, sigma=0.9)
+
+Z_AGN = (H_AGN_smooth.T - H_AGN_smooth.T.min())/(H_AGN_smooth.T.max() - H_AGN_smooth.T.min())
+Z_Gal = (H_Gal_smooth.T - H_Gal_smooth.T.min())/(H_Gal_smooth.T.max() - H_Gal_smooth.T.min())
+
+# fix probable lines not closing
+Z_AGN, x_centers_AGN, y_centers_AGN = gf.pad_matrix_zeros(Z_AGN, xedges_AGN, yedges_AGN)
+Z_Gal, x_centers_Gal, y_centers_Gal = gf.pad_matrix_zeros(Z_Gal, xedges_Gal, yedges_Gal)
+
+CS_AGN_f = ax1.contourf(x_centers_AGN, y_centers_AGN, Z_AGN, levels=sigmas_perc_inv, 
+                            colors=cm_gradient_AGN(seq_fill[::-1]), extend='max', 
+                            alpha=0.2, antialiased=True)
+CS_AGN = ax1.contour(x_centers_AGN, y_centers_AGN, Z_AGN, levels=sigmas_perc_inv, 
+                         colors=cm_gradient_AGN(seq_cont[::-1]), linewidths=2.5)
+for count in np.arange(1):  # times to run nex command, more labels
+    labels_AGN = ax1.clabel(CS_AGN, CS_AGN.levels, inline=True, fmt=gf.fmt, 
+                            fontsize=10, inline_spacing=-8)
+    [txt.set_bbox(dict(boxstyle='square, pad=0', fc='None', ec='None')) for txt in labels_AGN]
+
+CS_Gal_f = ax1.contourf(x_centers_Gal, y_centers_Gal, Z_Gal, levels=sigmas_perc_inv, 
+                            colors=cm_gradient_Gal(seq_fill[::-1]), extend='max', 
+                            alpha=0.2, antialiased=True)
+CS_Gal = ax1.contour(x_centers_Gal, y_centers_Gal, Z_Gal, levels=sigmas_perc_inv, 
+                         colors=cm_gradient_Gal(seq_cont[::-1]), linewidths=2.5)
+labels_Gal = ax1.clabel(CS_Gal, CS_Gal.levels, inline=True, fmt=gf.fmt, 
+                        fontsize=10, inline_spacing=-8)
+[txt.set_bbox(dict(boxstyle='square, pad=0', fc='None', ec='None')) for txt in labels_Gal]
 
 ax1.plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), 
         label=f'CW          -  N = {n_sources_CW:,}'.replace(',','$\,$'), zorder=0)

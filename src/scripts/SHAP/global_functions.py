@@ -129,3 +129,47 @@ def plot_shap_decision(pred_type, model_name, shap_values, shap_explainer,
     plt.title(f'{pred_type}: {base_meta}-learner - {model_name}', fontsize=38)
     plt.tight_layout()
     return ax
+
+##########################################
+# Methods for contour plots
+
+def create_colour_gradient(colour_hex):
+    colour_rgb = mcolors.to_rgb(colour_hex)
+    colour_rgb_darker = list(colour_rgb)
+    colour_rgb_bright = list([cut_rgb_val(value * 1.5) for value in list(colour_rgb)])
+    colour_rgb_darker = list([value * 0.7 for value in colour_rgb_darker])
+    colour_rgb_bright = tuple(colour_rgb_bright)
+    colour_rgb_darker = tuple(colour_rgb_darker)
+    colours      = [colour_rgb_darker, colour_rgb_bright] # first color is darker
+    cm_gradient = mcolors.LinearSegmentedColormap.from_list(f'gradient_{colour_hex}', colours, N=50)
+    return cm_gradient
+
+def clean_and_smooth_matrix(matrix, sigma=0.9):
+    matrix[~np.isfinite(matrix)] = 0
+    matrix_smooth = gaussian_filter(matrix, sigma=0.9)
+    matrix_smooth[~np.isfinite(matrix_smooth)] = 0
+    return matrix_smooth
+
+def pad_matrix_zeros(matrix, xedges, yedges):  # Pads matrices and creates centred edges
+    x_centres = 0.5 * (xedges[:-1] + xedges[1:])
+    y_centres = 0.5 * (yedges[:-1] + yedges[1:])
+    matrix    = np.pad(matrix, ((1, 1), (1, 1)), mode='constant', constant_values=(0,))
+    x_centres = np.pad(x_centres, (1, 1), mode='constant', constant_values=(xedges[0], xedges[-1]))
+    y_centres = np.pad(y_centres, (1, 1), mode='constant', constant_values=(yedges[0], yedges[-1]))
+    return matrix, x_centres, y_centres
+
+def fmt(x):
+    x = x * 100.
+    x = 100. - x
+    s = f'{x:.2f}'
+    if s.endswith('0'):
+        s = f'{x:.0f}'
+    return rf'${s} \%$' if plt.rcParams['text.usetex'] else f'{s} %'
+
+def cut_rgb_val(val):
+    if val < 0.0:
+        return 0.0
+    if val > 1.0:
+        return 1.0
+    else:
+        return val
