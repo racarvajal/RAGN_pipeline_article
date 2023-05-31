@@ -14,7 +14,7 @@ import global_functions as gf
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
-file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.h5'
+file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.parquet'
 model_radio_name  = paths.data / 'models' / gv.radio_model
 radio_det_clf     = pyc.load_model(model_radio_name, verbose=False)
 
@@ -24,7 +24,7 @@ feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z',
                      'y_J', 'y_W1', 'J_H', 'H_K', 'K_W3', 
                      'K_W4', 'W1_W2', 'W2_W3']
 
-catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
+catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
 
 filter_hiz        = np.array(catalog_HETDEX_df.loc[:, 'Z'] >= 4.0) &\
@@ -40,9 +40,9 @@ reduced_cols      = reduced_data_df.columns
 
 base_logit_radio  = np.log(gv.radio_thresh / (1 - gv.radio_thresh))
 
-explainer_radio   = fasttreeshap.TreeExplainer(radio_det_clf.named_steps['trained_model'].final_estimator_,\
-                                               data=None, feature_perturbation='tree_path_dependent',\
-                                               model_output='raw', feature_dependence='independent',\
+explainer_radio   = fasttreeshap.TreeExplainer(radio_det_clf.named_steps['trained_model'].final_estimator_,
+                                               data=None, feature_perturbation='tree_path_dependent',
+                                               model_output='raw', feature_dependence='independent',
                                                algorithm='auto', n_jobs=12)
 shap_values_radio = explainer_radio(reduced_data_df, check_additivity=False)
 

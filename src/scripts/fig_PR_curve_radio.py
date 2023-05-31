@@ -13,7 +13,7 @@ import paths
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
-file_name_HETDEX     = paths.data / 'HETDEX_for_prediction.h5'
+file_name_HETDEX     = paths.data / 'HETDEX_for_prediction.parquet'
 train_idx            = np.loadtxt(paths.data / 'indices_train.txt')
 validation_idx       = np.loadtxt(paths.data / 'indices_validation.txt')
 train_validation_idx = np.loadtxt(paths.data / 'indices_train_validation.txt')
@@ -22,7 +22,7 @@ test_idx             = np.loadtxt(paths.data / 'indices_test.txt')
 
 feats_2_use      = ['ID', 'class', 'LOFAR_detect', 'Prob_radio']
 
-catalog_HETDEX_df  = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
+catalog_HETDEX_df  = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
 catalog_HETDEX_df  = catalog_HETDEX_df.set_index(keys=['ID'])
 filter_AGN         = np.array(catalog_HETDEX_df.loc[:, 'class'] == 1)
 filter_train       = catalog_HETDEX_df.index.isin(train_idx) * filter_AGN

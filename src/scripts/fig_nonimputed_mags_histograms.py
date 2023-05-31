@@ -16,8 +16,8 @@ from global_functions import pe2
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
-file_name_HETDEX = paths.data / 'HETDEX_mags_non_imputed.h5'
-file_name_S82    = paths.data / 'S82_mags_non_imputed.h5'
+file_name_HETDEX = paths.data / 'HETDEX_mags_non_imputed.parquet'
+file_name_S82    = paths.data / 'S82_mags_non_imputed.parquet'
 
 feats_2_use = ['gmag', 'rmag', 'imag', 'zmag', 'ymag', 'Jmag',
               'Hmag', 'Kmag', 'W1mproPM', 'W2mproPM', 'W3mag', 'W4mag']
@@ -32,8 +32,8 @@ mag_cols_names   = {'W1mproPM': 'W1', 'W2mproPM': 'W2', 'W3mag': 'W3',
                     'imag': 'i', 'zmag': 'z', 'ymag': 'y',
                     'Jmag': 'J', 'Hmag': 'H', 'Kmag': 'K'}  # For strings in plot
 
-catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
-catalog_S82_df    = pd.read_hdf(file_name_S82,    key='df').loc[:, feats_2_use]
+catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
+catalog_S82_df    = pd.read_parquet(file_name_S82,    engine='fastparquet', columns=feats_2_use)
 
 n_cols = 2
 n_rows = int(np.ceil((len(feats_2_use)) / 2))
@@ -87,18 +87,22 @@ for count, band in enumerate(feats_2_use):
         plt.setp(axs[count].get_yticklabels(), visible=False)
     if count < (len(feats_2_use) - n_cols):
         plt.setp(axs[count].get_xticklabels(), visible=False)
-    axs[count].annotate(text=f'{mag_cols_names[band]}', xy=(0.02, 0.9),\
-                         xycoords='axes fraction', fontsize=20, ha='left', va='top', path_effects=pe2)
-    axs[count].annotate(text=f'HETDEX N={np.sum(filt_lims_HETDEX):,}'.replace(',','$\,$'), xy=(0.98, 0.9),\
-                         xycoords='axes fraction', fontsize=16, ha='right', va='top', path_effects=pe2)
-    axs[count].annotate(text=f'S82 N={np.sum(filt_lims_S82):,}'.replace(',','$\,$'), xy=(0.98, 0.7),\
-                         xycoords='axes fraction', fontsize=16, ha='right', va='top', path_effects=pe2)
+    axs[count].annotate(text=f'{mag_cols_names[band]}', xy=(0.02, 0.9),
+                        xycoords='axes fraction', fontsize=20, ha='left', 
+                        va='top', path_effects=pe2)
+    axs[count].annotate(text=f'HETDEX N={np.sum(filt_lims_HETDEX):,}'.replace(',','$\,$'), 
+                        xy=(0.98, 0.9), xycoords='axes fraction', fontsize=16, 
+                        ha='right', va='top', path_effects=pe2)
+    axs[count].annotate(text=f'S82 N={np.sum(filt_lims_S82):,}'.replace(',','$\,$'), 
+                        xy=(0.98, 0.7), xycoords='axes fraction', fontsize=16, 
+                        ha='right', va='top', path_effects=pe2)
     axs[0].set_xlim(left=np.floor(min_magnitude), right=np.ceil(max_magnitude))
     axs[0].invert_xaxis()
 HETDEX_patch = mpatches.Patch(fc='None', ec='k', label='HETDEX', lw=2.5)
 S82_patch    = mpatches.Patch(fc='None', ec='brown', label='Stripe 82', lw=2.5)
-axs[len(feats_2_use) - 1].legend(handles=[HETDEX_patch, S82_patch], loc=3, fontsize=14,\
-               handletextpad=0.3, handlelength=1.0, borderpad=0.3)
+axs[len(feats_2_use) - 1].legend(handles=[HETDEX_patch, S82_patch], loc=3, 
+                                 fontsize=14, handletextpad=0.3, handlelength=1.0, 
+                                 borderpad=0.3)
 
 fig.supxlabel('$m\, \mathrm{[AB]}$', fontsize=26, x=0.52, y=0.045)
 fig.supylabel('Normalised frequency [$\mathrm{deg}^{-2}$]', fontsize=26, va='center', y=0.49, x=0.04)

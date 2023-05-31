@@ -14,7 +14,7 @@ import global_functions as gf
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
-file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.h5'
+file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.parquet'
 model_z_name      = paths.data / 'models' / gv.full_z_model
 redshift_reg_full = pyr.load_model(model_z_name, verbose=False)
 redshift_reg      = redshift_reg_full.named_steps['trained_model'].estimators_[0]
@@ -24,7 +24,7 @@ feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 'pred_Z',
                      'r_z', 'i_z', 'i_y', 'z_y', 'y_J', 'y_W1', 
                      'J_H', 'H_K', 'K_W3', 'K_W4', 'W1_W2', 'W2_W3']
 
-catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
+catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
 
 filter_hiz        = np.array(catalog_HETDEX_df.loc[:, 'Z'] >= 4.0) &\
@@ -38,9 +38,9 @@ reduced_data_df   = gf.preprocess_data(redshift_reg_full,
                                                               base_models_z)
 reduced_cols      = reduced_data_df.columns.drop(base_models_z)
 
-explainer_z       = fasttreeshap.TreeExplainer(redshift_reg,\
-                                               data=None, feature_perturbation='tree_path_dependent',\
-                                               model_output='raw', feature_dependence='independent',\
+explainer_z       = fasttreeshap.TreeExplainer(redshift_reg, data=None, 
+                                               feature_perturbation='tree_path_dependent',
+                                               model_output='raw', feature_dependence='independent',
                                                algorithm='auto', n_jobs=12)
 shap_values_z     = explainer_z(reduced_data_df.drop(columns=base_models_z), check_additivity=False)
 

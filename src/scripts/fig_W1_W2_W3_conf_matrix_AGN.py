@@ -25,21 +25,21 @@ mag_cols_lim = {'W1mproPM': 20.13, 'W2mproPM': 19.81, 'W3mag': 16.67,
 for key in mag_cols_lim.keys():
     mag_cols_lim[key] = np.float32(mag_cols_lim[key])
 
-file_name_HETDEX = paths.data / 'HETDEX_for_prediction.h5'
-file_name_S82    = paths.data / 'S82_for_prediction.h5'
+file_name_HETDEX = paths.data / 'HETDEX_for_prediction.parquet'
+file_name_S82    = paths.data / 'S82_for_prediction.parquet'
 test_idx        = np.loadtxt(paths.data / 'indices_test.txt')
 
 feats_2_use      = ['ID', 'class', 'pred_prob_class', 'pred_prob_radio', 
                     'Z', 'pred_Z', 'W1mproPM', 'W2mproPM', 'W3mag']
 
-catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
+catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
 filter_known_HTDX = np.array(catalog_HETDEX_df.loc[:, 'class'] == 0) |\
                     np.array(catalog_HETDEX_df.loc[:, 'class'] == 1)
 unknown_HTDX_df   = catalog_HETDEX_df.loc[~filter_known_HTDX].copy()
 catalog_HETDEX_df = catalog_HETDEX_df.loc[test_idx]
 
-catalog_S82_df    = pd.read_hdf(file_name_S82, key='df').loc[:, feats_2_use]
+catalog_S82_df    = pd.read_parquet(file_name_S82, engine='fastparquet', columns=feats_2_use)
 catalog_S82_df    = catalog_S82_df.set_index(keys=['ID'])
 filter_known_S82  = np.array(catalog_S82_df.loc[:, 'class'] == 0) |\
                     np.array(catalog_S82_df.loc[:, 'class'] == 1)
@@ -59,7 +59,7 @@ n_cols = 2
 
 fig             = plt.figure(figsize=(5 * n_cols, 4.5 * n_rows), constrained_layout=False)
 
-grid            = fig.add_gridspec(ncols=n_cols, nrows=n_rows, width_ratios=[1]*n_cols,\
+grid            = fig.add_gridspec(ncols=n_cols, nrows=n_rows, width_ratios=[1]*n_cols,
                                    height_ratios=[1]*n_rows, hspace=0.0, wspace=0.0)
 axs             = {}
 axs_twinx       = {}

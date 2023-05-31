@@ -14,7 +14,7 @@ import global_functions as gf
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
-file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.h5'
+file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.parquet'
 model_AGN_name    = paths.data / 'models' / gv.AGN_gal_model
 AGN_gal_clf       = pyc.load_model(model_AGN_name, verbose=False)
 
@@ -24,7 +24,7 @@ feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z',
                      'y_J', 'y_W1', 'y_W2', 'J_H', 'H_K', 
                      'H_W3', 'W1_W2', 'W1_W3', 'W3_W4']
 
-catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
+catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
 
 filter_hiz        = np.array(catalog_HETDEX_df.loc[:, 'Z'] >= 4.0) &\
@@ -40,9 +40,9 @@ reduced_cols      = reduced_data_df.columns
 
 base_logit_AGN    = np.log(gv.AGN_thresh / (1 - gv.AGN_thresh))
 
-explainer_AGN     = fasttreeshap.TreeExplainer(AGN_gal_clf.named_steps['trained_model'].final_estimator_,\
-                                               data=None, feature_perturbation='tree_path_dependent',\
-                                               model_output='raw', feature_dependence='independent',\
+explainer_AGN     = fasttreeshap.TreeExplainer(AGN_gal_clf.named_steps['trained_model'].final_estimator_,
+                                               data=None, feature_perturbation='tree_path_dependent',
+                                               model_output='raw', feature_dependence='independent',
                                                algorithm='auto', n_jobs=12)
 shap_values_AGN   = explainer_AGN(reduced_data_df, check_additivity=False)
 

@@ -28,11 +28,11 @@ for band in mag_cols_lim.keys():
     mag_cols_lim[band] = np.float32(mag_cols_lim[band])
     vega_shift[band]   = np.float32(vega_shift[band])
 
-file_name_HETDEX = paths.data / 'HETDEX_for_prediction.h5'
+file_name_HETDEX = paths.data / 'HETDEX_for_prediction.parquet'
 
 feats_2_use      = ['class', 'rmag', 'zmag', 'W1mproPM', 'W2mproPM', 'r_z', 'W1_W2']
 
-catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
+catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
 
 for col in catalog_HETDEX_df.columns:
     if catalog_HETDEX_df.loc[:, col].dtype == 'float64':

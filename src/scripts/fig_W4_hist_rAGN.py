@@ -12,17 +12,17 @@ import global_variables as gv
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
-file_name_HETDEX = paths.data / 'HETDEX_for_prediction.h5'
-file_name_S82    = paths.data / 'S82_for_prediction.h5'
+file_name_HETDEX = paths.data / 'HETDEX_for_prediction.parquet'
+file_name_S82    = paths.data / 'S82_for_prediction.parquet'
 test_idx         = np.loadtxt(paths.data / 'indices_test.txt')
 
 feats_2_use      = ['ID', 'class', 'pred_prob_class',
                     'pred_prob_radio', 'W4mag']
 
-catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
+catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
 
-catalog_S82_df    = pd.read_hdf(file_name_S82, key='df').loc[:, feats_2_use]
+catalog_S82_df    = pd.read_parquet(file_name_S82, engine='fastparquet', columns=feats_2_use)
 
 HETDEX_known_filter     = np.array(catalog_HETDEX_df.loc[:, 'class'] == 0) |\
                           np.array(catalog_HETDEX_df.loc[:, 'class'] == 1)
@@ -68,14 +68,14 @@ colour_b[3] = 0.65
 colour_a    = tuple(colour_a)
 colour_b    = tuple(colour_b)
 
-ax1.stairs(counts_S82_radio / gv.area_S82, edges_S82_radio, fill=True, ec='k', lw=1.5,\
+ax1.stairs(counts_S82_radio / gv.area_S82, edges_S82_radio, fill=True, ec='k', lw=1.5,
            fc=colour_b, label='S82')
-ax1.stairs(counts_HETDEX_radio / gv.area_HETDEX, edges_HETDEX_radio, fill=True, ec='k', lw=1.5,\
-           fc=colour_a, label='HETDEX')
-ax1.stairs(counts_S82_norad / gv.area_S82, edges_S82_norad, fill=True, ec='k', lw=1.5,\
+ax1.stairs(counts_HETDEX_radio / gv.area_HETDEX, edges_HETDEX_radio, fill=True, ec='k', 
+           lw=1.5, fc=colour_a, label='HETDEX')
+ax1.stairs(counts_S82_norad / gv.area_S82, edges_S82_norad, fill=True, ec='k', lw=1.5,
            fc=colour_b, label='S82', hatch='///')
-ax1.stairs(counts_HETDEX_norad / gv.area_HETDEX, edges_HETDEX_norad, fill=True, ec='k', lw=1.5,\
-           fc=colour_a, label='HETDEX', hatch='///')
+ax1.stairs(counts_HETDEX_norad / gv.area_HETDEX, edges_HETDEX_norad, fill=True, ec='k', 
+           lw=1.5, fc=colour_a, label='HETDEX', hatch='///')
 
 
 HETDEX_patch       = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.3), ec='k', label='HETDEX', lw=2.0, alpha=0.65)

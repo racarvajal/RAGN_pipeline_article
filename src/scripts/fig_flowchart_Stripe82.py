@@ -10,11 +10,11 @@ import matplotlib.pyplot as plt
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
-file_name_S82  = paths.data / 'S82_for_prediction.h5'
+file_name_S82  = paths.data / 'S82_for_prediction.parquet'
 
 feats_2_use    = ['ID', 'class']
 
-catalog_S82_df  = pd.read_hdf(file_name_S82, key='df').loc[:, feats_2_use]
+catalog_S82_df  = pd.read_parquet(file_name_S82, engine='fastparquet', columns=feats_2_use)
 filter_known    = np.array(catalog_S82_df.loc[:, 'class'] == 0) |\
                   np.array(catalog_S82_df.loc[:, 'class'] == 1)
 full_size_S82   = len(catalog_S82_df)

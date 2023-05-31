@@ -12,18 +12,18 @@ import global_variables as gv
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
-file_name_HETDEX = paths.data / 'HETDEX_for_prediction.h5'
-file_name_S82    = paths.data / 'S82_for_prediction.h5'
+file_name_HETDEX = paths.data / 'HETDEX_for_prediction.parquet'
+file_name_S82    = paths.data / 'S82_for_prediction.parquet'
 test_idx         = np.loadtxt(paths.data / 'indices_test.txt')
 
 feats_2_use      = ['ID', 'class', 'pred_prob_class',
                     'LOFAR_detect', 'pred_prob_radio', 'Z', 'pred_Z']
 
-catalog_HETDEX_df = pd.read_hdf(file_name_HETDEX, key='df').loc[:, feats_2_use]
+catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
 catalog_HETDEX_df['is_AGN'] = np.array(catalog_HETDEX_df.loc[:, 'class'] == 1)
 
-catalog_S82_df    = pd.read_hdf(file_name_S82, key='df').loc[:, feats_2_use]
+catalog_S82_df    = pd.read_parquet(file_name_S82, engine='fastparquet', columns=feats_2_use)
 
 HETDEX_known_filter     = np.array(catalog_HETDEX_df.loc[:, 'class'] == 0)           |\
                           np.array(catalog_HETDEX_df.loc[:, 'class'] == 1)
@@ -49,8 +49,9 @@ min_z_S82_pred    = catalog_S82_df.loc[S82_pred_rAGN_filter * ~S82_known_filter,
 max_z_S82_pred    = catalog_S82_df.loc[S82_pred_rAGN_filter * ~S82_known_filter, 'pred_Z'].max()
 min_z_S82_true    = catalog_S82_df.loc[S82_true_rAGN_filter * S82_known_filter, 'Z'].min()
 max_z_S82_true    = catalog_S82_df.loc[S82_true_rAGN_filter * S82_known_filter, 'Z'].max()
-full_z_bins       = np.linspace(np.nanmin([min_z_HETDEX_pred, min_z_HETDEX_true, min_z_S82_pred, min_z_S82_true]),\
-                                np.nanmax([max_z_HETDEX_pred, max_z_HETDEX_true, max_z_S82_pred, max_z_S82_true]), 50)
+full_z_bins       = np.linspace(np.nanmin([min_z_HETDEX_pred, min_z_HETDEX_true, min_z_S82_pred, min_z_S82_true]),
+                                np.nanmax([max_z_HETDEX_pred, max_z_HETDEX_true, max_z_S82_pred, max_z_S82_true]), 
+                                50)
 
 counts_HETDEX_pred, edges_HETDEX_pred = np.histogram(catalog_HETDEX_df.loc[HETDEX_pred_rAGN_filter * ~HETDEX_known_filter, 'pred_Z'],
                                                      bins=full_z_bins)
@@ -67,13 +68,13 @@ colour_b[3] = 0.65
 colour_a    = tuple(colour_a)
 colour_b    = tuple(colour_b)
 
-ax1.stairs(counts_S82_pred / gv.area_S82, edges_S82_pred, fill=True, ec='k', lw=1.5,\
+ax1.stairs(counts_S82_pred / gv.area_S82, edges_S82_pred, fill=True, ec='k', lw=1.5,
            fc=colour_b, label='S82')
-ax1.stairs(counts_HETDEX_pred / gv.area_HETDEX, edges_HETDEX_pred, fill=True, ec='k', lw=1.5,\
+ax1.stairs(counts_HETDEX_pred / gv.area_HETDEX, edges_HETDEX_pred, fill=True, ec='k', lw=1.5,
            fc=colour_a, label='HETDEX')
-ax1.stairs(counts_HETDEX_true / gv.area_HETDEX, edges_HETDEX_true, fill=True, ec='k', lw=1.5,\
+ax1.stairs(counts_HETDEX_true / gv.area_HETDEX, edges_HETDEX_true, fill=True, ec='k', lw=1.5,
            fc=colour_a, label='HETDEX', hatch='///')
-ax1.stairs(counts_S82_true / gv.area_S82, edges_S82_true, fill=True, ec='k', lw=1.5,\
+ax1.stairs(counts_S82_true / gv.area_S82, edges_S82_true, fill=True, ec='k', lw=1.5,
            fc=colour_b, label='S82', hatch='///')
 
 

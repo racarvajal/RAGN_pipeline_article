@@ -5,11 +5,8 @@ dependencies:
   - pip
   - conda-forge::python_abi
   - conda-forge::python=3.8
-  # - conda-forge::numpy=1.20.3  1.19.5
-  - scikit-learn=0.23.2
-  - conda-forge::matplotlib=3.6.1
   - conda-forge::pytables
-  - conda-forge::pandas=1.4.4
+  - conda-forge::fastparquet
   - conda-forge::astropy
   - conda-forge::catboost
   - conda-forge::colorcet
@@ -17,6 +14,9 @@ dependencies:
   - conda-forge::schemdraw
   - pip:
       - "numpy==1.20.3"
+      - "matplotlib==3.6.1"
+      - "pandas==1.4.4"
+      - "scikit-learn==0.23.2"
       - chainconsumer
       - lightgbm
       - "xgboost==1.5.1"
