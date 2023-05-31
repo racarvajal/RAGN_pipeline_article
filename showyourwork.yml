@@ -125,10 +125,20 @@ dependencies:
         - src/data/HETDEX_for_prediction.h5
         - src/data/indices_test.txt
         - src/scripts/global_functions.py
+    src/scripts/fig_scores_vs_band_num_sep_class.py:
+        - src/data/HETDEX_for_prediction.h5
+        - src/data/indices_test.txt
+        - src/scripts/global_functions.py
     src/scripts/fig_W1_W2_W3_conf_matrix_AGN.py:
         - src/data/HETDEX_for_prediction.h5
         - src/scripts/global_variables.py
     src/scripts/fig_W1_W2_r_z_AGN_gal_HETDEX.py:
+        - src/data/HETDEX_for_prediction.h5
+        - src/data/S82_for_prediction.h5
+        - src/data/indices_validation.txt
+        - src/scripts/global_variables.py
+        - src/scripts/global_functions.py
+    src/scripts/fig_W1_W2_g_r_AGN_gal_HETDEX.py:
         - src/data/HETDEX_for_prediction.h5
         - src/data/S82_for_prediction.h5
         - src/data/indices_validation.txt
