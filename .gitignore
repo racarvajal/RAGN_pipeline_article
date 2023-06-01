@@ -4,6 +4,7 @@
 
 # Showyourwork output files
 /*.pdf
+/*.synctex.gz
 report.html
 arxiv.tar.gz
 
