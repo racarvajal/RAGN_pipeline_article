@@ -82,8 +82,8 @@ n_bins   = [50, 75]
 bins_X = np.linspace(min_X, max_X, n_bins[1])
 bins_Y  = np.linspace(min_Y, max_Y, n_bins[0])
 
-sigmas_perc     = [0.6826, 0.9545, 0.9973]  # [0.6826, 0.9545, 0.9973, 0.99994, 0.99999]
-sigmas_perc_inv = [1. - sigma for sigma in sigmas_perc][::-1]  # 1, 2, 3 sigma
+sigmas_perc     = [0.39346934, 0.86466472, 0.988891]  # [0.39346934, 0.86466472, 0.988891, 0.99966454, 0.99999627]
+sigmas_perc_inv = [1. - sigma for sigma in sigmas_perc][::-1]  # 1, 2, 3 sigma (2-dimensional)
 
 nstep = 4
 seq_cont   = np.logspace(-1.5, 0.0, nstep)
@@ -113,7 +113,7 @@ CS_AGN_f = ax1.contourf(x_centers_AGN, y_centers_AGN, Z_AGN, levels=sigmas_perc_
                             colors=cm_gradient_AGN(seq_fill[::-1]), extend='max', 
                             alpha=0.2, antialiased=True)
 CS_AGN = ax1.contour(x_centers_AGN, y_centers_AGN, Z_AGN, levels=sigmas_perc_inv, 
-                         colors=cm_gradient_AGN(seq_cont[::-1]), linewidths=2.5)
+                         colors=cm_gradient_AGN(seq_cont[::-1]), linewidths=3.0)
 for count in np.arange(1):  # times to run nex command, more labels
     labels_AGN = ax1.clabel(CS_AGN, CS_AGN.levels, inline=True, fmt=gf.fmt, 
                             fontsize=10, inline_spacing=-8)
@@ -123,7 +123,7 @@ CS_Gal_f = ax1.contourf(x_centers_Gal, y_centers_Gal, Z_Gal, levels=sigmas_perc_
                             colors=cm_gradient_Gal(seq_fill[::-1]), extend='max', 
                             alpha=0.2, antialiased=True)
 CS_Gal = ax1.contour(x_centers_Gal, y_centers_Gal, Z_Gal, levels=sigmas_perc_inv, 
-                         colors=cm_gradient_Gal(seq_cont[::-1]), linewidths=2.5)
+                         colors=cm_gradient_Gal(seq_cont[::-1]), linewidths=3.0)
 labels_Gal = ax1.clabel(CS_Gal, CS_Gal.levels, inline=True, fmt=gf.fmt, 
                         fontsize=10, inline_spacing=-8)
 [txt.set_bbox(dict(boxstyle='square,pad=0', fc='None', ec='None')) for txt in labels_Gal]

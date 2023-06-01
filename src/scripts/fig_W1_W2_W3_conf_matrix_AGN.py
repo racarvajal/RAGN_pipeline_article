@@ -101,7 +101,9 @@ y_axis_dens_AGN_S82 = {}
 AB_lims_x = (-2.5, 7.2)
 AB_lims_y = (-1.3, 1.7)
 
-contour_levels = [1, 2, 3]  # in sigmas
+contour_levels  = [1, 2, 3]  # in sigmas
+sigmas_perc     = [0.39346934, 0.86466472, 0.988891, 0.99966454]  # [0.39346934, 0.86466472, 0.988891, 0.99966454, 0.99999627]
+sigmas_perc_inv = [1. - sigma for sigma in sigmas_perc][::-1]  # 1, 2, 3, 4 sigma
 
 num_levels_dens = 20
 
@@ -166,9 +168,6 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     n_bins = [50, 75]
     bins_X = np.linspace(min_X, max_X, n_bins[1])
     bins_Y = np.linspace(min_Y, max_Y, n_bins[0])
-
-    sigmas_perc     = [0.6826, 0.9545, 0.9973]  # [0.6826, 0.9545, 0.9973, 0.99994, 0.99999]
-    sigmas_perc_inv = [1. - sigma for sigma in sigmas_perc][::-1]  # 1, 2, 3 sigma
 
     nstep = 4
     seq_cont   = np.logspace(-1.5, 0.0, nstep)
