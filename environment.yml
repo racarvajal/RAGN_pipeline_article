@@ -2,22 +2,22 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - python=3.8
   - pip
   - pip:
+      - python_abi
       - "numpy==1.20.3"
       - "matplotlib==3.6.1"
+      - pytables
+      - fastparquet
       - "pandas==1.4.4"
       - "scikit-learn==0.23.2"
       - lightgbm
       - "xgboost==1.5.1"
       - "pycaret==2.3.10"
       - fasttreeshap
-  - conda-forge::python_abi
-  - conda-forge::python=3.8
-  - conda-forge::pytables
-  - conda-forge::fastparquet
-  - conda-forge::astropy
-  - conda-forge::catboost
-  - conda-forge::colorcet
-  - conda-forge::cmasher
-  - conda-forge::schemdraw
+  - astropy
+  - catboost
+  - colorcet
+  - cmasher
+  - schemdraw
