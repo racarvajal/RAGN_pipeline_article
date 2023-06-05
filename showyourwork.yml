@@ -12,9 +12,9 @@ stamp:
 datasets:
   10.5072/zenodo.1209059:
     contents:
-        classification_AGN_galaxy_ago_30_2022.pkl: src/data/models/classification_AGN_galaxy_ago_30_2022.pkl
-        classification_LOFAR_detect_sep_07_2022.pkl: src/data/models/classification_LOFAR_detect_sep_07_2022.pkl
-        regression_z_sep_09_2022.pkl: src/data/models/regression_z_sep_09_2022.pkl
+        classification_AGN_galaxy_dec_18_2022.pkl: src/data/models/classification_AGN_galaxy_dec_18_2022.pkl
+        classification_LOFAR_detect_dec_19_2022.pkl: src/data/models/classification_LOFAR_detect_dec_19_2022.pkl
+        regression_z_dec_20_2022.pkl: src/data/models/regression_z_dec_20_2022.pkl
         HETDEX_for_prediction.parquet: src/data/HETDEX_for_prediction.parquet
         HETDEX_mags_imputed.parquet: src/data/HETDEX_mags_imputed.parquet
         HETDEX_mags_non_imputed.parquet: src/data/HETDEX_mags_non_imputed.parquet
