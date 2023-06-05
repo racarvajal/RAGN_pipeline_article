@@ -5,7 +5,6 @@ dependencies:
   - python=3.8
   - pip
   - pip:
-      - python_abi
       - "numpy==1.20.3"
       - "matplotlib==3.6.1"
       - pytables
