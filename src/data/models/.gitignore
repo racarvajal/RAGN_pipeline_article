@@ -1,7 +1,4 @@
 # Nothing in this folder should be tracked by git
-*.parquet
-*.txt
-*.h5
 *.pkl
 *.joblib
 !.gitignore
