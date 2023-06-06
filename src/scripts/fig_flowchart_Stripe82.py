@@ -7,6 +7,10 @@ import pandas as pd
 import paths
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import os
+from pathlib import Path
+os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
+
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 

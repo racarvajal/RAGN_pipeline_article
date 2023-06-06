@@ -10,6 +10,7 @@ import pandas as pd
 import shap
 import sklearn.pipeline as skp
 from sklearn.metrics import ConfusionMatrixDisplay
+from scipy.ndimage import gaussian_filter
 from astropy.visualization import LogStretch, PowerStretch
 from astropy.visualization.mpl_normalize import ImageNormalize
 from pycaret import classification as pyc
@@ -18,8 +19,12 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import matplotlib.cm as cm
 import matplotlib.patheffects as mpe
+import matplotlib.colors as mcolors
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import global_variables as gv
+import os
+from pathlib import Path
+os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
 
 ##########################################
 ##########################################

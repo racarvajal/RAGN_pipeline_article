@@ -9,6 +9,9 @@ import cmasher as cmr
 import global_variables as gv
 import pandas as pd
 import paths
+import os
+from pathlib import Path
+os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
 
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
