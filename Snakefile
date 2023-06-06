@@ -89,72 +89,96 @@ rule PR_curve_radio:
         "src/scripts/fig_PR_curve_radio.py"
 
 rule decision_AGN_xgboost:
+    input:
+        "src/data/models/classification_AGN_galaxy_dec_18_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_AGN_base_xgboost_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_xgboost.py"
 
 rule decision_AGN_rf:
+    input:
+        "src/data/models/classification_AGN_galaxy_dec_18_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_AGN_base_rf_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_rf.py"
 
 rule decision_AGN_et:
+    input:
+        "src/data/models/classification_AGN_galaxy_dec_18_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_AGN_base_et_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_et.py"
 
 rule decision_AGN_gbc:
+    input:
+        "src/data/models/classification_AGN_galaxy_dec_18_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_AGN_base_gbc_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_gbc.py"
 
 rule decision_radio_xgboost:
+    input:
+        "src/data/models/classification_LOFAR_detect_dec_19_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_radio_base_xgboost_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_radio_hiz_AGN_xgboost.py"
 
 rule decision_radio_catboost:
+    input:
+        "src/data/models/classification_LOFAR_detect_dec_19_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_radio_base_catboost_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_radio_hiz_AGN_catboost.py"
 
 rule decision_radio_rf:
+    input:
+        "src/data/models/classification_LOFAR_detect_dec_19_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_radio_base_rf_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_radio_hiz_AGN_rf.py"
 
 rule decision_radio_et:
+    input:
+        "src/data/models/classification_LOFAR_detect_dec_19_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_radio_base_et_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_radio_hiz_AGN_et.py"
 
 rule decision_redshift_rf:
+    input:
+        "src/data/models/regression_z_dec_20_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_z_base_rf_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_z_hiz_AGN_rf.py"
 
 rule decision_redshift_catboost:
+    input:
+        "src/data/models/regression_z_dec_20_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_z_base_catboost_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_z_hiz_AGN_catboost.py"
 
 rule decision_redshift_xgboost:
+    input:
+        "src/data/models/regression_z_dec_20_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_z_base_xgboost_HETDEX_highz.pdf"
     script:
         "src/scripts/SHAP/fig_decision_z_hiz_AGN_xgboost.py"
 
 rule decision_redshift_gbr:
+    input:
+        "src/data/models/regression_z_dec_20_2022.pkl"
     output:
         "src/tex/figures/SHAP/SHAP_decision_z_base_gbr_HETDEX_highz.pdf"
     script:

@@ -13,6 +13,9 @@ src = root / "src"
 # Absolute path to the `src/data` folder (contains datasets)
 data = src / "data"
 
+# Absolute path to the `src/data/models` folder (contains prediction models)
+models = data / "models"
+
 # Absolute path to the `src/static` folder (contains static images)
 static = src / "static"
 

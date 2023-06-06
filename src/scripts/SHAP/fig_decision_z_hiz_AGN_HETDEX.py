@@ -15,7 +15,7 @@ mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
 file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.parquet'
-model_z_name      = paths.data / 'models' / gv.full_z_model
+model_z_name      = paths.models / gv.full_z_model
 redshift_reg      = pyr.load_model(model_z_name, verbose=False)
 
 feats_2_use       = ['ID', 'class', 'LOFAR_detect', 'Z', 'pred_Z',

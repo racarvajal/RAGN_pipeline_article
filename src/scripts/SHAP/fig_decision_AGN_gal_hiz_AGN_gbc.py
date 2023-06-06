@@ -15,7 +15,7 @@ mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
 file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.parquet'
-model_AGN_name    = paths.data / 'models' / gv.AGN_gal_model
+model_AGN_name    = paths.models / gv.AGN_gal_model
 AGN_gal_full      = pyc.load_model(model_AGN_name, verbose=False)
 AGN_gal_clf       = AGN_gal_full.named_steps['trained_model'].estimators_[3]
 

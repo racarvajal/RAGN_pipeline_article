@@ -15,7 +15,7 @@ mpl.rcdefaults()
 plt.rcParams['text.usetex'] = True
 
 file_name_HETDEX  = paths.data / 'HETDEX_for_prediction.parquet'
-model_radio_name  = paths.data / 'models' / gv.radio_model
+model_radio_name  = paths.models / gv.radio_model
 radio_det_full    = pyc.load_model(model_radio_name, verbose=False)
 radio_det_clf     = radio_det_full.named_steps['trained_model'].estimators_[3]
 
