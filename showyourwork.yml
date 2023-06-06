@@ -132,6 +132,7 @@ dependencies:
         - src/scripts/global_functions.py
     src/scripts/fig_W1_W2_W3_conf_matrix_AGN.py:
         - src/data/HETDEX_for_prediction.parquet
+        - src/data/S82_for_prediction.parquet
         - src/scripts/global_variables.py
     src/scripts/fig_W1_W2_r_z_AGN_gal_HETDEX.py:
         - src/data/HETDEX_for_prediction.parquet
