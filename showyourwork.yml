@@ -22,6 +22,7 @@ datasets:
         S82_mags_imputed.parquet: src/data/S82_mags_imputed.parquet
         S82_mags_non_imputed.parquet: src/data/S82_mags_non_imputed.parquet
         hlsp_agnsedatlas_multi_multi_mrk231_multi_v1_spec-obs.txt: src/data/hlsp_agnsedatlas_multi_multi_mrk231_multi_v1_spec-obs.txt
+        indices_known.txt: src/data/indices_known.txt
         indices_calibration.txt: src/data/indices_calibration.txt
         indices_test.txt: src/data/indices_test.txt
         indices_train.txt: src/data/indices_train.txt
