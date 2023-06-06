@@ -12,12 +12,9 @@ import cmasher as cmr
 import pandas as pd
 import global_variables as gv
 from global_functions import pe2
-import os
-from pathlib import Path
-os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
 
 mpl.rcdefaults()
-plt.rcParams['text.usetex'] = True
+plt.rcParams['text.usetex'] = gv.use_LaTeX
 
 file_name_HETDEX = paths.data / 'HETDEX_mags_non_imputed.parquet'
 file_name_S82    = paths.data / 'S82_mags_non_imputed.parquet'

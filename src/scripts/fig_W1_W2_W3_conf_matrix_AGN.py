@@ -13,12 +13,9 @@ import pandas as pd
 import paths
 import global_variables as gv
 import global_functions as gf
-import os
-from pathlib import Path
-os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
 
 mpl.rcdefaults()
-plt.rcParams['text.usetex'] = True
+plt.rcParams['text.usetex'] = gv.use_LaTeX
 
 mag_cols_lim = {'W1mproPM': 20.13, 'W2mproPM': 19.81, 'W3mag': 16.67,
                 'W4mag': 14.62, 'gmag': 23.3, 'rmag': 23.2, 'imag': 23.1,

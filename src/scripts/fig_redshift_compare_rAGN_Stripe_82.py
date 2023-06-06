@@ -3,17 +3,14 @@
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import mpl_scatter_density
 import cmasher as cmr
 import pandas as pd
 import paths
 import global_functions as gf
-import os
-from pathlib import Path
-os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
+import global_variables as gv
 
 mpl.rcdefaults()
-plt.rcParams['text.usetex'] = True
+plt.rcParams['text.usetex'] = gv.use_LaTeX
 
 file_name_S82 = paths.data / 'S82_for_prediction.parquet'
 

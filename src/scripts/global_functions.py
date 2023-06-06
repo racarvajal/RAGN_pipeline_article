@@ -22,9 +22,7 @@ import matplotlib.colors as mcolors
 import matplotlib.patheffects as mpe
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import global_variables as gv
-import os
-from pathlib import Path
-os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
+import paths
 
 ##########################################
 ##########################################

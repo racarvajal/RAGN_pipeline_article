@@ -6,12 +6,10 @@ import numpy as np
 import paths
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import os
-from pathlib import Path
-os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
+import global_variables as gv
 
 mpl.rcdefaults()
-plt.rcParams['text.usetex'] = True
+plt.rcParams['text.usetex'] = gv.use_LaTeX
 
 full_size_HTDX       = 15_136_878
 

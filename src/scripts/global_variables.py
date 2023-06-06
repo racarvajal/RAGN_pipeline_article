@@ -4,6 +4,9 @@
 # variables in this project.
 # File paths, file names, etc.
 
+# Use (external) LaTeX in plots
+use_LaTeX           = False
+
 # Fields properties
 # Areas (deg2)
 area_HETDEX         = 424

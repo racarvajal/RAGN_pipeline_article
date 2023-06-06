@@ -9,12 +9,9 @@ import cmasher as cmr
 import global_variables as gv
 import pandas as pd
 import paths
-import os
-from pathlib import Path
-os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
 
 mpl.rcdefaults()
-plt.rcParams['text.usetex'] = True
+plt.rcParams['text.usetex'] = gv.use_LaTeX
 
 file_name_HETDEX     = paths.data / 'HETDEX_for_prediction.parquet'
 train_idx            = np.loadtxt(paths.data / 'indices_train.txt')
