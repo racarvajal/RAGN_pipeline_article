@@ -114,7 +114,7 @@ CS_AGN_f = ax1.contourf(x_centers_AGN, y_centers_AGN, Z_AGN, levels=sigmas_perc_
                             alpha=0.2, antialiased=True)
 CS_AGN = ax1.contour(x_centers_AGN, y_centers_AGN, Z_AGN, levels=sigmas_perc_inv, 
                          colors=cm_gradient_AGN(seq_cont[::-1]), linewidths=3.5)
-for count in np.arange(1):  # times to run nex command, more labels
+for count in np.arange(0):  # times to run next command, more labels
     labels_AGN = ax1.clabel(CS_AGN, CS_AGN.levels, inline=True, fmt=gf.fmt, 
                             fontsize=10, inline_spacing=-8)
     [txt.set_bbox(dict(boxstyle='square, pad=0', fc='None', ec='None')) for txt in labels_AGN]
@@ -124,9 +124,10 @@ CS_Gal_f = ax1.contourf(x_centers_Gal, y_centers_Gal, Z_Gal, levels=sigmas_perc_
                             alpha=0.2, antialiased=True)
 CS_Gal = ax1.contour(x_centers_Gal, y_centers_Gal, Z_Gal, levels=sigmas_perc_inv, 
                          colors=cm_gradient_Gal(seq_cont[::-1]), linewidths=3.5)
-labels_Gal = ax1.clabel(CS_Gal, CS_Gal.levels, inline=True, fmt=gf.fmt, 
-                        fontsize=10, inline_spacing=-8)
-[txt.set_bbox(dict(boxstyle='square, pad=0', fc='None', ec='None')) for txt in labels_Gal]
+for count in np.arange(0):  # times to run next command, more labels
+    labels_Gal = ax1.clabel(CS_Gal, CS_Gal.levels, inline=True, fmt=gf.fmt, 
+                            fontsize=10, inline_spacing=-8)
+    [txt.set_bbox(dict(boxstyle='square, pad=0', fc='None', ec='None')) for txt in labels_Gal]
 
 ax1.plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), 
         label=f'CW          -  N = {n_sources_CW:,}'.replace(',','$\,$'), zorder=0)
