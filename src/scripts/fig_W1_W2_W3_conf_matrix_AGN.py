@@ -209,7 +209,7 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     
     n_sources_HETDEX   = np.sum(cm_mat_AGN_filter_HETDEX[tuple(idx_ax)])
     n_sources_S82   = np.sum(cm_mat_AGN_filter_S82[tuple(idx_ax)])
-    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX: >10,}\nS82-N = {n_sources_S82: >10,}'.replace(',','$\,$'),
+    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX: >6,d}\nS82-N = {n_sources_S82: >6,d}'.replace(',','$\,$'),
                         xy=(txt_x_positions[count], 0.96), xycoords='axes fraction', fontsize=20, 
                         ha='right', va='top', path_effects=gf.pe2, zorder=11)
 
@@ -244,7 +244,7 @@ axins0 = make_axes_locatable(axs[1])
 #clb_dens    = fig.colorbar(dens_plts[1], cax=axins0, orientation='vertical', 
 #                           cmap=plt.get_cmap(gv.cmap_dens_plots), 
 #                           norm=norm_dens)#, format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
-clb_dens    = fig.colorbar(dens_plts[1], cax=axs[1].inset_axes((0.9, 0.08, 0.05, 0.85)), 
+clb_dens    = fig.colorbar(dens_plts[1], cax=axs[1].inset_axes((0.9, 0.05, 0.05, 0.85)), 
                            orientation='vertical', cmap=plt.get_cmap(gv.cmap_dens_plots), 
                            norm=norm_dens, format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
 #axins0.yaxis.set_ticks_position('left')
