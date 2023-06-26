@@ -107,6 +107,8 @@ sigmas_perc_inv = [1. - sigma for sigma in sigmas_perc][::-1]  # 1, 2, 3, 4 sigm
 
 num_levels_dens = 20
 
+txt_x_positions = [0.78, 0.70, 0.70, 0.75]
+
 # norm_val  = mcolors.CenteredNorm(vcenter=0.5)
 try:
     norm_dens = ImageNormalize(vmin=0, vmax=1000, stretch=PowerStretch(0.35))
@@ -207,9 +209,9 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     
     n_sources_HETDEX   = np.sum(cm_mat_AGN_filter_HETDEX[tuple(idx_ax)])
     n_sources_S82   = np.sum(cm_mat_AGN_filter_S82[tuple(idx_ax)])
-    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX:,}\nStripe 82-N = {n_sources_S82:,}'.replace(',','$\,$'),
-                        xy=(0.02, 0.96), xycoords='axes fraction', fontsize=20, 
-                        ha='left', va='top', path_effects=gf.pe2, zorder=11)
+    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX: >10,}\nS82-N = {n_sources_S82: >10,}'.replace(',','$\,$'),
+                        xy=(txt_x_positions[count], 0.96), xycoords='axes fraction', fontsize=20, 
+                        ha='right', va='top', path_effects=gf.pe2, zorder=11)
 
     axs_twinx[count] = axs[count].twinx()
     axs_twinx[count].tick_params(which='both', top=False, right=True, direction='in')

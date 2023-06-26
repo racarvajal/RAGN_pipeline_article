@@ -25,7 +25,7 @@ size_labelled   = np.sum(filter_known, dtype=int)
 size_unlabelled = full_size_S82 - size_labelled
 
 with schemdraw.Drawing(show=False, fontsize=14, lw=2.5) as S:
-    S += (HETDEX := flow.Terminal(w=3, h=1.5).label(f'Stripe 82\n{full_size_S82:,}'.replace(',', '\,')))
+    S += (HETDEX := flow.Terminal(w=3, h=1.5).label(f'S82\n{full_size_S82:,}'.replace(',', '\,')))
     S += schemdraw.elements.lines.Gap().at(HETDEX.S)
 
     S += (Labelled := flow.RoundBox(w=3, h=1.5, anchor='ENE').label(f'Labelled\n{size_labelled:,}'.replace(',', '\,')))
