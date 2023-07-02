@@ -11,7 +11,6 @@ use_LaTeX           = False
 # Areas (deg2)
 area_HETDEX         = 424
 area_S82            = 92
-area_COSMOS         = 4  # Not real value. Placeholder
 
 # Model names with train, test, calibration, and validation sub-sets
 # Stacked models
