@@ -7,7 +7,7 @@ from pathlib import Path
 # os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
 
 # Local path to understand where to move from
-local = Path(__file__).resolve().name()
+local = Path(__file__).resolve().name
 
 # Absolute path to the top level of the repository
 if local == 'SHAP':
