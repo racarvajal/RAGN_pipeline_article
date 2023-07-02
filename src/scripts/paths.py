@@ -6,8 +6,14 @@ Exposes common paths useful for manipulating datasets and generating figures.
 from pathlib import Path
 # os.environ["PATH"] += os.pathsep + str(Path.home() / "bin")
 
+# Local path to understand where to move from
+local = Path(__file__).resolve().name()
+
 # Absolute path to the top level of the repository
-root = Path(__file__).resolve().parents[2].absolute()
+if local == 'SHAP':
+    root = Path(__file__).resolve().parents[3].absolute()
+else:
+    root = Path(__file__).resolve().parents[2].absolute()
 
 # Absolute path to the `src` folder
 src = root / "src"
