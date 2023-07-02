@@ -132,7 +132,9 @@ dependencies:
         - src/scripts/global_functions.py
     src/scripts/fig_W1_W2_W3_conf_matrix_AGN.py:
         - src/data/HETDEX_for_prediction.parquet
+        - src/data/S82_for_prediction.parquet
         - src/scripts/global_variables.py
+        - src/data/indices_test.txt
     src/scripts/fig_W1_W2_r_z_AGN_gal_HETDEX.py:
         - src/data/HETDEX_for_prediction.parquet
         - src/data/S82_for_prediction.parquet
@@ -149,6 +151,7 @@ dependencies:
         - src/data/HETDEX_for_prediction.parquet
         - src/data/S82_for_prediction.parquet
         - src/data/indices_validation.txt
+        - src/data/indices_test.txt
         - src/scripts/global_variables.py
     src/scripts/SHAP/fig_decision_AGN_gal_hiz_AGN_HETDEX.py:
         - src/data/HETDEX_for_prediction.parquet
