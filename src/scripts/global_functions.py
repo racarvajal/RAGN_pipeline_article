@@ -301,6 +301,38 @@ def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, bins=10, cma
     plt.tight_layout()
     return ax_pre
 
+# Plot SHAP decision
+def plot_shap_decision(pred_type, model_name, shap_values, shap_explainer,
+                       col_names, ax, link, cmap=gv.cmap_shap, 
+                       new_base_value=None, base_meta='', xlim=None, highlight=None):
+    if np.ndim(shap_values.values) == 2:
+        shap.plots.decision(base_value=shap_explainer.expected_value,
+                            shap_values=shap_values.values,
+                            feature_names=col_names.to_list(),
+                            link=link, plot_color=plt.get_cmap(cmap),
+                            highlight=highlight, auto_size_plot=False,
+                            show=False, xlim=xlim,
+                            feature_display_range=slice(-1, -(len(shap_values.feature_names) +1), -1),
+                            new_base_value=new_base_value)
+    if np.ndim(shap_values.values) > 2:
+        shap.plots.decision(base_value=shap_explainer.expected_value[-1],
+                            shap_values=(shap_values.values)[:, :, 1],
+                            feature_names=col_names.to_list(),
+                            link=link, plot_color=plt.get_cmap(cmap),
+                            highlight=highlight, auto_size_plot=False,
+                            show=False, xlim=None,
+                            feature_display_range=slice(-1, -(len(shap_values.feature_names) +1), -1),
+                            new_base_value=new_base_value)
+    ax.tick_params('x', labelsize=38)
+    ax.xaxis.get_offset_text().set_fontsize(28)
+    #ax1.xaxis.get_offset_text().set_position((0,1))
+    ax.tick_params('y', labelsize=38)
+    # plt.ticklabel_format(axis='x', style='sci', scilimits=(0,0))
+    ax.xaxis.label.set_size(38)
+    plt.title(f'{pred_type}: {base_meta}-learner - {model_name}', fontsize=38)
+    plt.tight_layout()
+    return ax
+
 ##########################################
 # Methods for contour plots
 
