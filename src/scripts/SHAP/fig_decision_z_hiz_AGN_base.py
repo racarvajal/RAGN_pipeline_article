@@ -1,0 +1,9 @@
+import fig_decision_z_hiz_AGN_rf
+import fig_decision_z_hiz_AGN_catboost
+import fig_decision_z_hiz_AGN_xgboost
+import fig_decision_z_hiz_AGN_gbr
+
+fig_decision_z_hiz_AGN_rf.main()
+fig_decision_z_hiz_AGN_catboost.main()
+fig_decision_z_hiz_AGN_xgboost.main()
+fig_decision_z_hiz_AGN_gbr.main()

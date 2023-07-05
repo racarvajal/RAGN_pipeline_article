@@ -1,0 +1,9 @@
+import fig_decision_AGN_gal_hiz_AGN_xgboost
+import fig_decision_AGN_gal_hiz_AGN_rf
+import fig_decision_AGN_gal_hiz_AGN_et
+import fig_decision_AGN_gal_hiz_AGN_gbc
+
+fig_decision_AGN_gal_hiz_AGN_xgboost.main()
+fig_decision_AGN_gal_hiz_AGN_rf.main()
+fig_decision_AGN_gal_hiz_AGN_et.main()
+fig_decision_AGN_gal_hiz_AGN_gbc.main()

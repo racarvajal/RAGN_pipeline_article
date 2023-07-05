@@ -1,0 +1,9 @@
+import fig_conf_matrix_radio_AGN_test
+import fig_redshift_compare_rAGN_test
+import fig_conf_matrix_radio_AGN_Stripe_82
+import fig_redshift_compare_rAGN_Stripe_82
+
+fig_conf_matrix_radio_AGN_test.main()
+fig_redshift_compare_rAGN_test.main()
+fig_conf_matrix_radio_AGN_Stripe_82.main()
+fig_redshift_compare_rAGN_Stripe_82.main()

@@ -310,6 +310,7 @@ Given that we need to be able to compare the results from the training and appli
 Before any calculation or transformation is applied to the data from the HETDEX field, we split the labelled dataset into training, validation, calibration, and testing subsets. The early creation of these subsets helps avoid information leakage from the test subset into the models. Initially, a $20 \%$ of the dataset has been reserved as testing data. Of the remaining elements, an $80 \%$ of them have been used for training, and the rest of the data has been divided equally between calibration and validation subsets (i.e. a $10 \%$ each). The splitting process and the number of elements for each subset are shown in Fig.~\ref{fig:dataset_sizes}. Depending on the model, the needed sources are selected from each of the sub-sets that have been already created. The use of these subsets will be shown in Sects.~\ref{sec:model_selection} and \ref{sec:models_training}.  
 
 \begin{figure}
+  \script{fig_flowcharts_datasets.py}
   \centering
   \begin{minipage}{0.65\columnwidth}
     \centering
@@ -570,6 +571,7 @@ Uncertainties show standard deviation of metrics obtained across all $10$ traini
 \end{table}
 
 \begin{figure}
+  \script{fig_pipeline_performance_test.py}
   \centering
   \begin{minipage}{0.49\columnwidth}
     \centering
@@ -733,6 +735,7 @@ The distribution of the predicted redshifts for radio-AGN in HETDEX and \textbf{
 Section~\ref{sec:discussion} explores the comparison of these results with previous works in the literature and discusses the main drivers (i.e. features) for the detection of these radio-AGN.
 
 \begin{figure*}
+  \script{fig_pipeline_performance_rAGN_datasets.py}
   \centering
   \begin{minipage}{0.20\textwidth}
     \centering
@@ -1451,6 +1454,7 @@ i       & 14\,507.01      & J     &  2\,330.92      & W1    & 39\,025.01      & 
 \section{From Scores to Probabilities}\label{app:calibration_models}
 
 \begin{figure}
+  \script{fig_calibration_pre.py}
   \centering
   \begin{minipage}{0.24\textwidth}
     \centering
@@ -1468,6 +1472,7 @@ i       & 14\,507.01      & J     &  2\,330.92      & W1    & 39\,025.01      & 
 \end{figure}
 
 \begin{figure}
+  \script{fig_calibration_post.py}
   \centering
   \begin{minipage}{0.24\textwidth}
     \centering
@@ -1539,6 +1544,7 @@ In Table~\ref{table:hyper_params_meta}, we present the optimised hyper-parameter
 \section{PR-curve threshold optimisation}\label{sec:app_pr_curve}
 
 \begin{figure}
+  \script{fig_PR_curves.py}
   \centering
   \begin{minipage}{0.24\textwidth}
     \centering
@@ -1565,6 +1571,7 @@ One statistical tool designed to optimise the classification threshold taking in
 Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z_base_HETDEX_high_z}, and \ref{fig:SHAP_decision_radio_base_HETDEX_high_z} show the decision plots for each base learners used in the prediction models of our pipeline (Sect.~\ref{sec:shapley_values}). For the classification algorithms, the starting point of their predictions corresponds to the naive threshold ($0.5$) since no threshold optimisation was applied to them and only the scores are included in the stacking step, not the final \textbf{probabilities}. In the case of the redshift predictors, decision plots start at the value $z {=} 0$, as presented for the meta-learner.
 
 \begin{figure}
+  \script{SHAP/fig_decision_AGN_gal_hiz_AGN_base.py}
   \centering
   \begin{minipage}{0.48\columnwidth}
     \centering
@@ -1589,6 +1596,7 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
 \end{figure}
 
 \begin{figure}
+  \script{SHAP/fig_decision_radio_hiz_AGN_base.py}
   \centering
   \begin{minipage}{0.48\columnwidth}
     \centering
@@ -1613,6 +1621,7 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
 \end{figure}
 
 \begin{figure}
+  \script{SHAP/fig_decision_z_hiz_AGN_base.py}
   \centering
   \begin{minipage}{0.48\columnwidth}
     \centering
