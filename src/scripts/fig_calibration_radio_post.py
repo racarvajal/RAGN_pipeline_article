@@ -46,12 +46,12 @@ def main():
     ax1             = fig.add_subplot(111)
 
     ax1.plot(mean_pred_val_train_validation, fract_positiv_train_validation, ls='-',
-             marker='o', c=plt.get_cmap(gv.cmap_conf_matr)(1.0), lw=2.5, 
+             marker='o', c=plt.get_cmap(gv.cmap_bands)(0.5), lw=2.5, 
              label='Train+\nvalidation')
     ax1.plot(mean_pred_val_calib, fract_positiv_calib, ls='-', marker='s',
-             c=plt.get_cmap(gv.cmap_conf_matr)(0.6), lw=2.5, label='Calibration')
+             c=plt.get_cmap(gv.cmap_bands)(0.7), lw=2.5, label='Calibration')
     ax1.plot(mean_pred_val_test, fract_positiv_test, ls='-', marker='p',
-             c=plt.get_cmap(gv.cmap_conf_matr)(0.3), lw=2.5, label='Test')
+             c=plt.get_cmap(gv.cmap_bands)(0.9), lw=2.5, label='Test')
     ax1.plot([0, 1], [0, 1], ls=':', c='k', label="Perfectly\ncalibrated")
     ax1.set_xlabel('Predicted score', fontsize=36)
     ax1.set_ylabel('Fraction of positives', fontsize=36)

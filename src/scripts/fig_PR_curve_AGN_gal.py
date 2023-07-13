@@ -89,9 +89,9 @@ def main():
     ax1.tick_params(which='minor', length=4, width=1.5)
     plt.setp(ax1.spines.values(), linewidth=3.0)
     plt.setp(ax1.spines.values(), linewidth=3.0)
-    plt.legend(loc=6, fontsize=25, title='AGN/Galaxy\nclassification', 
+    plt.legend(loc=6, fontsize=24, title='AGN/Galaxy\nclassification', 
                title_fontsize=24, ncol=2, columnspacing=.25, handlelength=0.8, 
-               handletextpad=0.2, framealpha=0.75)
+               handletextpad=0.1, framealpha=0.55)
     ax1.set_aspect('equal', 'datalim')
     # ax1.set_title('Calibrated PR curve. HETDEX field.', fontsize=16)
     fig.tight_layout()
