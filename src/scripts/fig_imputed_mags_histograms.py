@@ -18,6 +18,8 @@ plt.rcParams['text.usetex'] = gv.use_LaTeX
 
 file_name_HETDEX = paths.data / 'HETDEX_mags_imputed.parquet'
 file_name_S82    = paths.data / 'S82_mags_imputed.parquet'
+file_name_HETDEX_ni = paths.data / 'HETDEX_mags_non_imputed.parquet'
+file_name_S82_ni    = paths.data / 'S82_mags_non_imputed.parquet'
 
 feats_2_use = ['gmag', 'rmag', 'imag', 'zmag', 'ymag', 'Jmag',
               'Hmag', 'Kmag', 'W1mproPM', 'W2mproPM', 'W3mag', 'W4mag']
@@ -34,6 +36,8 @@ mag_cols_names   = {'W1mproPM': 'W1', 'W2mproPM': 'W2', 'W3mag': 'W3',
 
 catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
 catalog_S82_df    = pd.read_parquet(file_name_S82,    engine='fastparquet', columns=feats_2_use)
+catalog_HETDEX_ni_df = pd.read_parquet(file_name_HETDEX_ni, engine='fastparquet', columns=feats_2_use)
+catalog_S82_ni_df    = pd.read_parquet(file_name_S82_ni,    engine='fastparquet', columns=feats_2_use)
 
 n_cols = 2
 n_rows = int(np.ceil((len(feats_2_use)) / 2))
@@ -64,6 +68,8 @@ for count, band in enumerate(feats_2_use):
     
     filt_lims_HETDEX = np.array(catalog_HETDEX_df.loc[:, band] < mag_cols_lim[band]) & np.isfinite(catalog_HETDEX_df.loc[:, band])
     filt_lims_S82    = np.array(catalog_S82_df.loc[:, band] < mag_cols_lim[band]) & np.isfinite(catalog_S82_df.loc[:, band])
+    filt_lims_HETDEX_ni = np.array(catalog_HETDEX_ni_df.loc[:, band] < mag_cols_lim[band]) & np.isfinite(catalog_HETDEX_ni_df.loc[:, band])
+    filt_lims_S82_ni    = np.array(catalog_S82_ni_df.loc[:, band] < mag_cols_lim[band]) & np.isfinite(catalog_S82_ni_df.loc[:, band])
     
     counts_HETDEX, edges_HETDEX = np.histogram(catalog_HETDEX_df.loc[filt_lims_HETDEX, band], bins=mag_bins_both)
     counts_S82,    edges_S82    = np.histogram(catalog_S82_df.loc[filt_lims_S82, band], bins=mag_bins_both)
@@ -90,10 +96,10 @@ for count, band in enumerate(feats_2_use):
     axs[count].annotate(text=f'{mag_cols_names[band]}', xy=(0.02, 0.9),
                         xycoords='axes fraction', fontsize=20, ha='left', 
                         va='top', path_effects=pe2)
-    axs[count].annotate(text=f'HETDEX N={np.sum(filt_lims_HETDEX):,}'.replace(',','$\,$'), 
+    axs[count].annotate(text=f'HETDEX N={np.sum(filt_lims_HETDEX_ni):,}'.replace(',','$\,$'), 
                         xy=(0.98, 0.9), xycoords='axes fraction', fontsize=16, 
                         ha='right', va='top', path_effects=pe2)
-    axs[count].annotate(text=f'S82 N={np.sum(filt_lims_S82):,}'.replace(',','$\,$'), 
+    axs[count].annotate(text=f'S82 N={np.sum(filt_lims_S82_ni):,}'.replace(',','$\,$'), 
                         xy=(0.98, 0.7), xycoords='axes fraction', fontsize=16, 
                         ha='right', va='top', path_effects=pe2)
     axs[0].set_xlim(left=np.floor(min_magnitude), right=np.ceil(max_magnitude))
