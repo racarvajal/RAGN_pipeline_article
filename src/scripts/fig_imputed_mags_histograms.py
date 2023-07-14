@@ -16,8 +16,8 @@ from global_functions import pe2
 mpl.rcdefaults()
 plt.rcParams['text.usetex'] = gv.use_LaTeX
 
-file_name_HETDEX = paths.data / 'HETDEX_mags_imputed.parquet'
-file_name_S82    = paths.data / 'S82_mags_imputed.parquet'
+file_name_HETDEX    = paths.data / 'HETDEX_mags_imputed.parquet'
+file_name_S82       = paths.data / 'S82_mags_imputed.parquet'
 file_name_HETDEX_ni = paths.data / 'HETDEX_mags_non_imputed.parquet'
 file_name_S82_ni    = paths.data / 'S82_mags_non_imputed.parquet'
 
@@ -34,8 +34,8 @@ mag_cols_names   = {'W1mproPM': 'W1', 'W2mproPM': 'W2', 'W3mag': 'W3',
                     'imag': 'i', 'zmag': 'z', 'ymag': 'y',
                     'Jmag': 'J', 'Hmag': 'H', 'Kmag': 'K'}  # For strings in plot
 
-catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
-catalog_S82_df    = pd.read_parquet(file_name_S82,    engine='fastparquet', columns=feats_2_use)
+catalog_HETDEX_df    = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
+catalog_S82_df       = pd.read_parquet(file_name_S82,    engine='fastparquet', columns=feats_2_use)
 catalog_HETDEX_ni_df = pd.read_parquet(file_name_HETDEX_ni, engine='fastparquet', columns=feats_2_use)
 catalog_S82_ni_df    = pd.read_parquet(file_name_S82_ni,    engine='fastparquet', columns=feats_2_use)
 

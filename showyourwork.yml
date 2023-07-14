@@ -141,6 +141,8 @@ dependencies:
     src/scripts/fig_imputed_mags_histograms.py:
         - src/data/HETDEX_mags_imputed.parquet
         - src/data/S82_mags_imputed.parquet
+        - src/data/HETDEX_mags_non_imputed.parquet
+        - src/data/S82_mags_non_imputed.parquet
         - src/scripts/global_variables.py
         - src/scripts/global_functions.py
     src/scripts/fig_nonimputed_mags_histograms.py:
