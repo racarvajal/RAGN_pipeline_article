@@ -39,7 +39,7 @@ S82_pred_rAGN_filter      = np.array(catalog_S82_df.loc[:, 'pred_prob_class'] ==
 S82_pred_AGN_norad_filter = np.array(catalog_S82_df.loc[:, 'pred_prob_class'] == 1) &\
                             np.array(catalog_S82_df.loc[:, 'pred_prob_radio'] == 0)
 
-fig             = plt.figure(figsize=(9,3.5))
+fig             = plt.figure(figsize=(9, 4.5))
 ax1             = fig.add_subplot(111, xscale='linear', yscale='log')
 
 min_z_HETDEX_radio = catalog_HETDEX_df.loc[HETDEX_pred_rAGN_filter      * ~HETDEX_known_filter, 'W4mag'].min()
