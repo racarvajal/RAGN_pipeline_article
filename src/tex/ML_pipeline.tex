@@ -16,6 +16,7 @@
 
 %
 \usepackage{graphicx,multirow,xcolor}
+\graphicspath{{figures/}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{txfonts}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -194,7 +195,7 @@ It is worth noting the depth difference between VLAS82 and LoTSS-DR1 is ${\sim}1
 \begin{figure}
   \centering
   \script{fig_nonimputed_mags_histograms.py}
-  \includegraphics[width=0.90\columnwidth]{figures/hists_bands_norm_HETDEX_S82_non_imputed.pdf}
+  \includegraphics[width=0.90\columnwidth]{hists_bands_norm_HETDEX_S82_non_imputed.pdf}
   \caption{Histograms of base collected, non-imputed, non-radio bands for HETDEX (clean, background histograms) and \textbf{S82} (empty, brown histograms). Each panel shows the distribution of measured magnitudes of detected sources divided by the total area of the field. Dashed, vertical lines represent the $5{-}\sigma$ magnitude limit for each band. The number in the upper right corner of each panel shows the number of measured magnitudes included in their corresponding histogram.}
   \label{fig:hists_bands_nonimp_HETDEX_S82}
 \end{figure}
@@ -202,7 +203,7 @@ It is worth noting the depth difference between VLAS82 and LoTSS-DR1 is ${\sim}1
 \begin{figure}
    \centering
    \script{fig_imputed_mags_histograms.py}
-   \includegraphics[width=0.90\columnwidth]{figures/hists_bands_norm_HETDEX_S82_imputed.pdf}
+   \includegraphics[width=0.90\columnwidth]{hists_bands_norm_HETDEX_S82_imputed.pdf}
    \caption{Histograms of base collected non-radio bands for HETDEX (clean, background histograms) and \textbf{S82} (empty, brown histograms) fields. Description as in Fig.~\ref{fig:hists_bands_nonimp_HETDEX_S82}. The number in the upper right corner of each panel shows number of sources with magnitudes originally measured above the $5{-}\sigma$ limit included in their corresponding histogram for each field \textbf{(i.e. sources that have not been imputed or replaced)}.}
    \label{fig:hists_bands_HETDEX_S82}
 \end{figure}
@@ -233,7 +234,7 @@ AllWISE (AW)     & W3 (\texttt{W3mag}), W4 (\texttt{W4mag}) \\
 \begin{figure}
    \centering
    \script{fig_bands_depth.py}
-   \includegraphics[width=0.95\columnwidth]{figures/surveys_depth_HETDEX.pdf}
+   \includegraphics[width=0.95\columnwidth]{surveys_depth_HETDEX.pdf}
    \caption{Flux and magnitude depths ($5{-}\sigma$) from the surveys and bands used in this work. Limiting magnitudes and fluxes were obtained from the description of the surveys, as referenced in Sect.~\ref{sec:data_collection}. In purple, rest-frame SED from Mrk231 \citep[$z = 0.0422$,][]{2019MNRAS.489.3351B} is displayed as an example AGN. Redshifted (from $z {=} 0.001$ to $z {=} 7$) versions of this SED are shown in dashed grey lines.}
    \label{fig:surveys_depth_HETDEX}
 \end{figure}
@@ -299,7 +300,7 @@ In an attempt to extract the largest available amount of information from the da
 \begin{figure}
    \centering
    \script{fig_flowchart_pipeline.py}
-   \includegraphics[width=0.48\columnwidth]{figures/flowchart_pipeline_radio_AGN_z.pdf}
+   \includegraphics[width=0.48\columnwidth]{flowchart_pipeline_radio_AGN_z.pdf}
    \caption{Flowchart representing the prediction pipeline used to predict the presence of radio-detectable AGN and their redshift values. At the beginning of each model step, the most relevant features are selected as described in Sect.~\ref{sec:feat_selection}.}
    \label{fig:pipeline_flowchart}
 \end{figure}
@@ -317,13 +318,13 @@ Before any calculation or transformation is applied to the data from the HETDEX 
   \centering
   \begin{minipage}{0.65\columnwidth}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/flowchart_HETDEX_subsets.pdf}\hfill\break
+    \includegraphics[width=0.99\textwidth]{flowchart_HETDEX_subsets.pdf}\hfill\break
     {(a) HETDEX Field}
   \end{minipage}
   \hfill
   \begin{minipage}{0.34\columnwidth}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/flowchart_S82_subsets.pdf}
+    \includegraphics[width=0.99\textwidth]{flowchart_S82_subsets.pdf}
     \vspace{3.6cm}\hfill\break
     {(b) \textbf{S82} Field}
   \end{minipage}
@@ -578,17 +579,17 @@ Uncertainties show standard deviation of metrics obtained across all $10$ traini
   \centering
   \begin{minipage}{0.49\columnwidth}
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/conf_matrix_AGN_HETDEX_test.pdf}\hfill\break
+    \includegraphics[width=0.9\textwidth]{conf_matrix_AGN_HETDEX_test.pdf}\hfill\break
     {(a) AGN-galaxy classification}
   \end{minipage}%\\%
   \begin{minipage}{0.49\columnwidth}
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/conf_matrix_radio_HETDEX_test.pdf}\hfill\break
+    \includegraphics[width=0.9\textwidth]{conf_matrix_radio_HETDEX_test.pdf}\hfill\break
     {(b) Radio detection on AGN}
   \end{minipage}\hfill\break%\\%
   \begin{minipage}{0.70\columnwidth}
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/compare_redshift_HETDEX_test.pdf}\hfill\break
+    \includegraphics[width=0.9\textwidth]{compare_redshift_HETDEX_test.pdf}\hfill\break
     {(c) Redshift on radio AGN}
   \end{minipage}%
   \caption{Performance of individual models (AGN-Galaxy classification, radio-detectability classification and redshift regression) when applied to the HETDEX test subset. (a): confusion matrix for AGN-galaxy classification. 
@@ -730,7 +731,7 @@ The distribution of the predicted redshifts for radio-AGN in HETDEX and \textbf{
 \begin{figure}
   \centering
   \script{fig_hist_redshift_radio_AGN.py}
-    \includegraphics[width=0.90\columnwidth]{figures/hist_pred_true_z_HETDEX_all_S82_nonimputed.pdf}
+    \includegraphics[width=0.90\columnwidth]{hist_pred_true_z_HETDEX_all_S82_nonimputed.pdf}
   \caption{Redshift density distribution of the predicted radio-AGN within the unlabelled sources (clean histograms) in HETDEX (ochre histograms) and \textbf{S82} (blue histograms) and true redshifts from labelled radio-AGN (dashed histograms).}
   \label{fig:hist_pred_z_unlabel_true_z_label}
 \end{figure}
@@ -742,23 +743,23 @@ Section~\ref{sec:discussion} explores the comparison of these results with previ
   \centering
   \begin{minipage}{0.20\textwidth}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/conf_matrix_rAGN_HETDEX_test.pdf}\hfill\break
+    \includegraphics[width=0.99\textwidth]{conf_matrix_rAGN_HETDEX_test.pdf}\hfill\break
     {(a) Radio-AGN confusion matrix}
   \end{minipage}%\\%
       \centering
   \begin{minipage}{0.30\textwidth}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/compare_redshift_rAGN_HETDEX_test.pdf}\hfill\break
+    \includegraphics[width=0.99\textwidth]{compare_redshift_rAGN_HETDEX_test.pdf}\hfill\break
     {(b) Predicted-True $z$ comparison}
   \end{minipage}%\\%
   \begin{minipage}{0.20\textwidth}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/conf_matrix_rAGN_Stripe82.pdf}\hfill\break
+    \includegraphics[width=0.99\textwidth]{conf_matrix_rAGN_Stripe82.pdf}\hfill\break
     {(c) Radio-AGN confusion matrix}
   \end{minipage}%\\%
   \begin{minipage}{0.30\textwidth}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/compare_redshift_rAGN_Stripe82.pdf}\hfill\break
+    \includegraphics[width=0.99\textwidth]{compare_redshift_rAGN_Stripe82.pdf}\hfill\break
     {(d) Predicted-True $z$ comparison}
   \end{minipage}%\\%
   \caption{Combined confusion matrices and True/predicted redshift density plot for the full radio AGN detection prediction computed using the testing sub-set from HETDEX (panels (a) and (b)) and the known labelled sources from \textbf{S82} (panels (c) and (d)).
@@ -976,7 +977,7 @@ This work   & 90.63             & 58.53             & 94.15             & 87.91 
 \begin{figure}
    \centering
    \script{fig_W1_W2_W3_conf_matrix_AGN.py}
-   \includegraphics[width=0.99\columnwidth]{figures/WISE_colour_colour_conf_matrix_AGN_HETDEX_test_S82_all.pdf}
+   \includegraphics[width=0.99\columnwidth]{WISE_colour_colour_conf_matrix_AGN_HETDEX_test_S82_all.pdf}
    \caption{W1~-~W2, W2~-~W3 colour-colour diagrams for sources in the testing subset, from HETDEX, and labelled sources from \textbf{S82} given their position in the AGN-galaxy confusion matrix (see, for HETDEX, rightmost panel of Fig.~\ref{fig:conf_matx_results_radio_AGN}). In the background, density plot of all CW-detected sources in the full HETDEX field sample is displayed. Colour of each square represents the number of sources in that position of parameter space, with darker squares having more sources (as defined in the colorbar of the upper-right panel). Contours represent distribution of sources for each of the aforementioned subsets at $1$, $2$, $3$, and $\mathbf{4}\,\sigma$ levels (shades of blue, for testing set and shades of red for labelled \textbf{S82} sources). Coloured, solid lines display limits from the criteria for the detection of AGN described in Sect.~\ref{sec:previous_AGN_detection}.}
    \label{fig:W1_W2_W2_W3_AGN_pred_HETDEX_S82}
 \end{figure}
@@ -1021,7 +1022,7 @@ One effect which might influence the training of the models and, consequently, t
 \begin{figure}
   \centering
    \script{fig_scores_vs_band_num_sep_class.py}
-    \includegraphics[width=0.90\columnwidth]{figures/predicted_probs_band_num_HETDEX_test_sep_class.pdf}
+    \includegraphics[width=0.90\columnwidth]{predicted_probs_band_num_HETDEX_test_sep_class.pdf}
   \caption{Evolution of predicted probabilities (top: probability to be AGN, middle: probability of AGN to be detected in radio) and redshift values for radio-detectable AGN (bottom panel) as a function of the number of observed bands \textbf{for} sources in test set. \textbf{In top panel, sources have been divided between those predicted to be AGN and galaxy. In middle panel, sources are divided between predicted AGN that are predicted to be detected in radio and those predicted to not have radio detection.} Background density plot\textbf{s} (following colour coding in colorbars) show location of predicted values. Overlaid boxplots display main statistics for each number of measured bands. Black rectangles encompass sources in second and third quartiles. Vertical lines show the place of sources from first and fourth quartiles. Orange lines represent median value of sample and dashed, green lines indicate their mean values. \textbf{Dashed, grey lines show PR thresholds for AGN-galaxy and radio detection classifications.} \textbf{Close to} each boxplot, written values correspond to the number of sources considered to create each set of statistics.}
   \label{fig:probs_band_num_test}
 \end{figure}
@@ -1144,7 +1145,7 @@ For the AGN-galaxy classification model, it is very interesting to note that the
     \centering
     \begin{minipage}{0.80\columnwidth}
      \script{fig_W1_W2_g_r_AGN_gal_HETDEX.py}
-    \includegraphics[width=\textwidth]{figures/g_r_W1_W2_AGN_gal_HETDEX_nonimputed.pdf}
+    \includegraphics[width=\textwidth]{g_r_W1_W2_AGN_gal_HETDEX_nonimputed.pdf}
     \end{minipage}%\\%
     \caption{AGN classification colour-colour plot in the HETDEX field using CW (W1, W2) and PS1 (\textbf{g, r}) passbands. Grey-scale density plot include all CW detected and non-imputed sources. Red contours highlight the density distribution of the AGN in the Million QSO catalogue (MQC) and blue contours show the density distribution for the galaxies from SDSS DR16. Contours are located at 1, 2, and 3 $\sigma$ levels.}
    \label{fig:HETDEX_gr_W1W2_AGN_gal_class}
@@ -1155,7 +1156,7 @@ One of the main potential uses of the pipeline is its capability to pinpoint rad
 \begin{figure}
   \centering
   \script{fig_W4_hist_rAGN.py}
-    \includegraphics[width=0.90\columnwidth]{figures/hist_W4_radio_non_radio_HETDEX_S82_nonimputed.pdf}
+    \includegraphics[width=0.90\columnwidth]{hist_W4_radio_non_radio_HETDEX_S82_nonimputed.pdf}
   \caption{W4 magnitudes density distribution of the \textbf{newly} predicted radio-AGN  (clean histograms) in HETDEX (ochre histograms) and \textbf{S82} (blue histograms) and W4 magnitudes from predicted AGN that are predicted to not have radio detection (dashed histograms).}
   \label{fig:hist_W4_nonimputed_pred_radio_non_radio_AGN}
 \end{figure}
@@ -1176,7 +1177,7 @@ One way to display these SHAP values is through the so-called decision plots. Th
     \centering
     \begin{minipage}{0.70\columnwidth}
     \script{SHAP/fig_decision_AGN_gal_hiz_AGN_HETDEX.py}
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_meta_learner_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_AGN_meta_learner_HETDEX_highz.pdf}
     \end{minipage}%\\%
     \caption{Decision plot from SHAP values for AGN-Galaxy classification from the $121$ high redshift ($z \geq 4$) spectroscopically confirmed AGN in HETDEX. Horizontal axis represents the model's output with a starting value for each source centred on the selected naive threshold for classification. Vertical axis shows features used in the model sorted, from top to bottom, by decreasing mean absolute SHAP value. Each prediction is represented by a coloured line corresponding to its final predicted value as shown by the colorbar at the top. Moving from the bottom of the plot to the top, SHAP values for each feature are added to the previous value in order to highlight how each feature contributes to the overall prediction. Predictions for sources detected by LOFAR are highlighted with a dotted, dashed line.}
    \label{fig:SHAP_decision_AGN_meta_HETDEX_high_z}
@@ -1224,7 +1225,7 @@ Feature             & SHAP value    & Feature           & SHAP value \\
    \centering
    \begin{minipage}{0.70\columnwidth}
    \script{SHAP/fig_decision_radio_hiz_AGN_HETDEX.py}
-   \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_meta_learner_HETDEX_highz.pdf}
+   \includegraphics[width=\textwidth]{SHAP/SHAP_decision_radio_meta_learner_HETDEX_highz.pdf}
    \end{minipage}
    \caption{Decision plot from the SHAP values for all features from the radio detection model in the $121$ high redshift ($z \geq 4$) spectroscopically confirmed AGN from HETDEX. Description as in Fig.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}.}
    \label{fig:SHAP_decision_radio_meta_HETDEX_high_z}
@@ -1234,7 +1235,7 @@ Feature             & SHAP value    & Feature           & SHAP value \\
    \centering
    \begin{minipage}{0.70\columnwidth}
    \script{SHAP/fig_decision_z_hiz_AGN_HETDEX.py}
-   \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_meta_learner_HETDEX_highz.pdf}
+   \includegraphics[width=\textwidth]{SHAP/SHAP_decision_z_meta_learner_HETDEX_highz.pdf}
    \end{minipage}
    \caption{Decision plot from the SHAP values for all features from the redshift prediction model in the $121$ high redshift ($z \geq 4$) spectroscopically confirmed AGN from HETDEX. Description as in Fig.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}.}
    \label{fig:SHAP_decision_z_meta_HETDEX_high_z}
@@ -1461,13 +1462,13 @@ i       & 14\,507.01      & J     &  2\,330.92      & W1    & 39\,025.01      & 
   \centering
   \begin{minipage}{0.24\textwidth}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/calib_curves_pre_calib_AGN_galaxy.pdf}\hfill\break%\linebreak
+    \includegraphics[width=0.99\textwidth]{calib_curves_pre_calib_AGN_galaxy.pdf}\hfill\break%\linebreak
     {(a) AGN-galaxy}
   \end{minipage}
   \hfill 
   \begin{minipage}{0.24\textwidth}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/calib_curves_pre_calib_radio.pdf}\hfill\break%\linebreak
+    \includegraphics[width=0.99\textwidth]{calib_curves_pre_calib_radio.pdf}\hfill\break%\linebreak
     {(b) Radio detection}
   \end{minipage}
   \caption{Reliability curves for uncalibrated classifiers. Each line represents the calibration curve for each subset in HETDEX field. Data has been binned and each bin (represented by the points) has the same number of elements per curve. Dashed line represents a perfectly calibrated model. (a) AGN-galaxy classification model. (b) Radio detection model.}
@@ -1479,13 +1480,13 @@ i       & 14\,507.01      & J     &  2\,330.92      & W1    & 39\,025.01      & 
   \centering
   \begin{minipage}{0.24\textwidth}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/calib_curves_post_calib_AGN_galaxy.pdf}\hfill\break%\linebreak
+    \includegraphics[width=0.99\textwidth]{calib_curves_post_calib_AGN_galaxy.pdf}\hfill\break%\linebreak
     {(a) AGN-galaxy}
   \end{minipage}
   \hfill 
   \begin{minipage}{0.24\textwidth}
     \centering
-    \includegraphics[width=0.99\textwidth]{figures/calib_curves_post_calib_radio.pdf}\hfill\break%\linebreak
+    \includegraphics[width=0.99\textwidth]{calib_curves_post_calib_radio.pdf}\hfill\break%\linebreak
     {(b) Radio detection}
   \end{minipage}
   \caption{Reliability curves for calibrated classifiers. (a) AGN-galaxy classification model. (b) Radio detection model. Details as in Fig.~\ref{fig:calibration_curves_classification_pre}.}
@@ -1551,13 +1552,13 @@ In Table~\ref{table:hyper_params_meta}, we present the optimised hyper-parameter
   \centering
   \begin{minipage}{0.24\textwidth}
     \centering
-    \includegraphics[width=0.98\textwidth]{figures/PR_cal_curve_AGN_gal.pdf}\hfill\break
+    \includegraphics[width=0.98\textwidth]{PR_cal_curve_AGN_gal.pdf}\hfill\break
     {(a) AGN-galaxy} 
   \end{minipage}
   \hfill 
   \begin{minipage}{0.24\textwidth}
     \centering
-    \includegraphics[width=0.98\textwidth]{figures/PR_cal_curve_radio.pdf}\hfill\break
+    \includegraphics[width=0.98\textwidth]{PR_cal_curve_radio.pdf}\hfill\break
     {(b) Radio detection}
   \end{minipage}
   \centering
@@ -1578,21 +1579,21 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \centering
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_xgboost_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_AGN_base_xgboost_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_rf_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_AGN_base_rf_HETDEX_highz.pdf}
   \end{minipage}\break%\%
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_et_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_AGN_base_et_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_AGN_base_gbc_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_AGN_base_gbc_HETDEX_highz.pdf}
   \end{minipage}
   \caption{SHAP decision plots for base AGN-Galaxy algorithms. Details as described in Figs.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}. Starting point of predictions is the naive classification threshold. From left to right and from top to bottom, each panel shows the results from \texttt{XGBoost}, \texttt{RF}, \texttt{ET}, and \texttt{GBC}.}
   \label{fig:SHAP_decision_AGN_base_HETDEX_high_z}
@@ -1603,21 +1604,21 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \centering
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_xgboost_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_radio_base_xgboost_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_catboost_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_radio_base_catboost_HETDEX_highz.pdf}
   \end{minipage}\break%\%
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_rf_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_radio_base_rf_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_radio_base_et_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_radio_base_et_HETDEX_highz.pdf}
   \end{minipage}
   \caption{SHAP decision plots from base radio algorithms. Details as Figs.~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z} and \ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}. Each panel with results for \texttt{XGBoost}, \texttt{CatBoost}, \texttt{RF}, and \texttt{ET}.}
   \label{fig:SHAP_decision_radio_base_HETDEX_high_z}
@@ -1628,21 +1629,21 @@ Figures~\ref{fig:SHAP_decision_AGN_base_HETDEX_high_z}, \ref{fig:SHAP_decision_z
   \centering
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_rf_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_z_base_rf_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_catboost_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_z_base_catboost_HETDEX_highz.pdf}
   \end{minipage}\break%\%
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_xgboost_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_z_base_xgboost_HETDEX_highz.pdf}
   \end{minipage}%\\%
   \hfill
   \begin{minipage}{0.48\columnwidth}
     \centering
-    \includegraphics[width=\textwidth]{figures/SHAP/SHAP_decision_z_base_gbr_HETDEX_highz.pdf}
+    \includegraphics[width=\textwidth]{SHAP/SHAP_decision_z_base_gbr_HETDEX_highz.pdf}
   \end{minipage}
   \caption{SHAP decision plots from base $z$ algorithms. Details as in Fig~\ref{fig:SHAP_decision_AGN_meta_HETDEX_high_z}. Each panel shows results for \texttt{ET}, \texttt{CatBoost}, \texttt{XGBoost}, and \texttt{GBR}.}
   \label{fig:SHAP_decision_z_base_HETDEX_high_z}
