@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import fig_PR_curve_AGN_gal
 import fig_PR_curve_radio
 

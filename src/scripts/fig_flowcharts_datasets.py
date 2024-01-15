@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import fig_flowchart_HETDEX
 import fig_flowchart_Stripe82
 
