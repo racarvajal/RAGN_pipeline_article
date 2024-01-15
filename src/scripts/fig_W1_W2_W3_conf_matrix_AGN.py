@@ -109,12 +109,12 @@ num_levels_dens = 20
 
 txt_x_positions = [0.78, 0.70, 0.70, 0.75]
 
-# norm_val  = mcolors.CenteredNorm(vcenter=0.5)
+# norm_val  = mcolors.CenteredNorm(vcenter=0.5)
 try:
     norm_dens = ImageNormalize(vmin=0, vmax=1000, stretch=PowerStretch(0.35))
 except:
     pass
-# norm_cont = ImageNormalize(vmin=contour_levels[0], vmax=contour_levels[-1], stretch=PowerStretch(0.35)) # PowerStretch(0.35), LogStretch()
+# norm_cont = ImageNormalize(vmin=contour_levels[0], vmax=contour_levels[-1], stretch=PowerStretch(0.35)) # PowerStretch(0.35), LogStretch()
 
 for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     if count == 0:
@@ -294,9 +294,9 @@ axs[2].legend(loc=4, fontsize=18, ncol=1, columnspacing=.25,
 axs[3].legend(loc=4, fontsize=17, ncol=2, columnspacing=.25, 
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 
-fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\nPredicted values', 
+fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\nPredicted class', 
               fontsize=25, ha='left', x=0.46, y=0.05)
-fig.supylabel('True values\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', 
+fig.supylabel('True class\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', 
               fontsize=26, x=0.09, y=0.55, va='center', ha='center')
 # fig.suptitle('AGN prediction', fontsize=20, x=0.55)
 fig.tight_layout()
