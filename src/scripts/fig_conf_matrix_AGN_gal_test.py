@@ -29,7 +29,7 @@ def main():
     ax1 = fig.add_subplot(111)
     ax1 = gf.plot_conf_mat(cm_AGN_gal, 
                            axin=ax1, 
-                           display_labels=['Galaxy', 'AGN'], 
+                           display_labels=[r'$\mathrm{Galaxy}$', r'$\mathrm{AGN}$'], 
                            title=None, 
                            log_stretch=False)
     ax1.texts[1].set_color('black')

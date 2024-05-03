@@ -87,25 +87,27 @@ for count, band in enumerate(feats_2_use):
         plt.setp(axs[count].get_yticklabels(), visible=False)
     if count < (len(feats_2_use) - n_cols):
         plt.setp(axs[count].get_xticklabels(), visible=False)
-    axs[count].annotate(text=f'{mag_cols_names[band]}', xy=(0.02, 0.9),
+    axs[count].annotate(text=rf'$\mathrm{{{mag_cols_names[band]}}}$', xy=(0.02, 0.9),
                         xycoords='axes fraction', fontsize=20, ha='left', 
                         va='top', path_effects=pe2)
-    axs[count].annotate(text=f'HETDEX N={np.sum(filt_lims_HETDEX):,}'.replace(',','$\,$'), 
+    axs[count].annotate(text=rf'$\mathrm{{HETDEX ~ N}} = {np.sum(filt_lims_HETDEX):,}$'.replace(',','$\,$'), 
                         xy=(0.98, 0.9), xycoords='axes fraction', fontsize=16, 
                         ha='right', va='top', path_effects=pe2)
-    axs[count].annotate(text=f'S82 N={np.sum(filt_lims_S82):,}'.replace(',','$\,$'), 
+    axs[count].annotate(text=rf'$\mathrm{{S82 ~ N}} = {np.sum(filt_lims_S82):,}$'.replace(',','$\,$'), 
                         xy=(0.98, 0.7), xycoords='axes fraction', fontsize=16, 
                         ha='right', va='top', path_effects=pe2)
-    axs[0].set_xlim(left=np.floor(min_magnitude), right=np.ceil(max_magnitude))
-    axs[0].invert_xaxis()
-HETDEX_patch = mpatches.Patch(fc='None', ec='k', label='HETDEX', lw=2.5)
-S82_patch    = mpatches.Patch(fc='None', ec='brown', label='Stripe 82', lw=2.5)
+# axs[0].set_xlim(left=np.floor(min_magnitude), right=np.ceil(max_magnitude))
+axs[0].set_xlim(left=1.0, right=32.0)
+axs[0].set_ylim(top=1e5)
+axs[0].invert_xaxis()
+HETDEX_patch = mpatches.Patch(fc='None', ec='k', label=r'$\mathrm{HETDEX}$', lw=2.5)
+S82_patch    = mpatches.Patch(fc='None', ec='brown', label=r'$\mathrm{Stripe ~ 82}$', lw=2.5)
 axs[len(feats_2_use) - 1].legend(handles=[HETDEX_patch, S82_patch], loc=3, 
                                  fontsize=14, handletextpad=0.3, handlelength=1.0, 
                                  borderpad=0.3)
 
-fig.supxlabel('$m\, \mathrm{[AB]}$', fontsize=26, x=0.52, y=0.045)
-fig.supylabel('Normalised frequency [$\mathrm{deg}^{-2}$]', fontsize=26, va='center', y=0.49, x=0.04)
+fig.supxlabel('$m\, \mathrm{[AB]}$', fontsize=26, x=0.52, y=0.040)
+fig.supylabel('$\mathrm{Normalised ~ frequency ~} [\mathrm{deg}^{-2}]$', fontsize=26, va='center', y=0.49, x=0.04)
 fig.tight_layout()
 plt.savefig(paths.figures / 'hists_bands_norm_HETDEX_S82_non_imputed.pdf', bbox_inches='tight')
 

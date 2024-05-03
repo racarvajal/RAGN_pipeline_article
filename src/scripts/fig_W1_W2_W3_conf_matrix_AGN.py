@@ -209,8 +209,8 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     
     n_sources_HETDEX   = np.sum(cm_mat_AGN_filter_HETDEX[tuple(idx_ax)])
     n_sources_S82   = np.sum(cm_mat_AGN_filter_S82[tuple(idx_ax)])
-    axs[count].annotate(text=f'HETDEX-N = {n_sources_HETDEX: >6,d}\nS82-N = {n_sources_S82: >6,d}'.replace(',','$\,$'),
-                        xy=(txt_x_positions[count], 0.96), xycoords='axes fraction', fontsize=20, 
+    axs[count].annotate(text=rf'$\mathrm{{HETDEX - N}} = {n_sources_HETDEX: >6,d}$'.replace(',','$\,$') + '\n' + rf'$\mathrm{{S82 - N}} = {n_sources_S82: >6,d}$'.replace(',','$\,$'),
+                        xy=(txt_x_positions[count], 0.96), xycoords='axes fraction', fontsize=18, 
                         ha='right', va='top', path_effects=gf.pe2, zorder=11)
 
     axs_twinx[count] = axs[count].twinx()
@@ -246,7 +246,7 @@ axins0 = make_axes_locatable(axs[1])
 #                           norm=norm_dens)#, format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
 clb_dens    = fig.colorbar(dens_plts[1], cax=axs[1].inset_axes((0.9, 0.05, 0.05, 0.85)), 
                            orientation='vertical', cmap=plt.get_cmap(gv.cmap_dens_plots), 
-                           norm=norm_dens, format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
+                           norm=norm_dens, format=lambda x, pos: f"${x:,.0f}$".replace(",", "$\,$"))
 #axins0.yaxis.set_ticks_position('left')
 #axins0.yaxis.set_ticklabels(axins0.yaxis.get_ticklabels(), path_effects=gf.pe2)
 clb_dens.ax.yaxis.set_ticks_position('left')
@@ -254,15 +254,15 @@ clb_dens.ax.yaxis.set_ticklabels(clb_dens.ax.yaxis.get_ticklabels(), path_effect
 clb_dens.ax.tick_params(labelsize=20)
 clb_dens.outline.set_linewidth(2.5)
 
-axs[1].plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), label='HETDEX', zorder=0)
+axs[1].plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), label=r'$\mathrm{HETDEX}$', zorder=0)
 
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.01), label='M12', zorder=0)
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.35), label='S12', zorder=0)
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.60), label='M16', zorder=0)
-axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.75), label='B18', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.01), label=r'$\mathrm{M12}$', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.35), label=r'$\mathrm{S12}$', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.60), label=r'$\mathrm{M16}$', zorder=0)
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.75), label=r'$\mathrm{B18}$', zorder=0)
     
-axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#1E88E5', label='MQC-SDSS\nHETDEX', zorder=0)
-axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#D32F2F', label='MQC-SDSS\nS82', zorder=0)
+axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#1E88E5', label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{HETDEX}$', zorder=0)
+axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#D32F2F', label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{S82}$', zorder=0)
 
 axs[0].set_xlim(left=AB_lims_x[0], right=AB_lims_x[1])
 axs[0].set_ylim(bottom=AB_lims_y[0], top=AB_lims_y[1])
@@ -279,10 +279,10 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     axs_twinx[count].set_ylim(tuple(np.array(axs[0].get_ylim()) - 2.699 + 3.339))
     axs_twiny[count].set_xlim(tuple(np.array(axs[0].get_xlim()) - 3.339 + 5.174))
 
-axs[0].set_ylabel('Galaxy', fontsize=22, rotation='horizontal', labelpad=35)
-axs[2].set_xlabel('Galaxy', fontsize=22)
-axs[2].set_ylabel('AGN', fontsize=22, rotation='horizontal', labelpad=25)
-axs[3].set_xlabel('AGN', fontsize=22)
+axs[0].set_ylabel(r'$\mathrm{Galaxy}$', fontsize=22, rotation='horizontal', labelpad=35)
+axs[2].set_xlabel(r'$\mathrm{Galaxy}$', fontsize=22)
+axs[2].set_ylabel(r'$\mathrm{AGN}$', fontsize=22, rotation='horizontal', labelpad=25)
+axs[3].set_xlabel(r'$\mathrm{AGN}$', fontsize=22)
 
 axs_twinx[1].set_ylabel('$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[Vega]}$', size=26, y=0.10)
 axs_twiny[0].set_xlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[Vega]}$', size=26, x=1.05)
@@ -291,12 +291,12 @@ axs[1].legend(loc=8, fontsize=18, ncol=1, columnspacing=.25,
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 axs[2].legend(loc=4, fontsize=18, ncol=1, columnspacing=.25, 
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
-axs[3].legend(loc=4, fontsize=17, ncol=2, columnspacing=.25, 
+axs[3].legend(loc=4, fontsize=14, ncol=2, columnspacing=.25, 
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 
-fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\nPredicted class', 
+fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\n$\mathrm{Predicted ~ class}$', 
               fontsize=25, ha='left', x=0.46, y=0.05)
-fig.supylabel('True class\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', 
+fig.supylabel('$\mathrm{True ~ class}$\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', 
               fontsize=26, x=0.09, y=0.55, va='center', ha='center')
 # fig.suptitle('AGN prediction', fontsize=20, x=0.55)
 fig.tight_layout()

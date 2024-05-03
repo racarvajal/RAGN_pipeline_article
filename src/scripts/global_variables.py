@@ -5,7 +5,7 @@
 # File paths, file names, etc.
 
 # Use (external) LaTeX in plots
-use_LaTeX           = False
+use_LaTeX           = True
 
 # Fields properties
 # Areas (deg2)

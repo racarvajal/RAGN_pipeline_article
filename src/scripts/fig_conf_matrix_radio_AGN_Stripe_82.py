@@ -30,7 +30,7 @@ def main():
     ax1 = fig.add_subplot(111)
     ax1 = gf.plot_conf_mat(cm_rAGN, 
                            axin=ax1,
-                           display_labels=['No\nRadio\nAGN', 'Radio\nAGN'], 
+                           display_labels=[r'$\mathrm{No}$' + '\n' + r'$\mathrm{Radio}$' + '\n' + r'$\mathrm{AGN}$', r'$\mathrm{Radio}$' + '\n' + r'$\mathrm{AGN}$'], 
                            title=None,
                            log_stretch=False)
     ax1.texts[1].set_color('black')

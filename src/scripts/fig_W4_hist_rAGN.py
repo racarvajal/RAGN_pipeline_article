@@ -69,19 +69,19 @@ colour_a    = tuple(colour_a)
 colour_b    = tuple(colour_b)
 
 ax1.stairs(counts_S82_radio / gv.area_S82, edges_S82_radio, fill=True, ec='k', lw=1.5,
-           fc=colour_b, label='S82')
+           fc=colour_b, label=r'$\mathrm{S82}$')
 ax1.stairs(counts_HETDEX_radio / gv.area_HETDEX, edges_HETDEX_radio, fill=True, ec='k', 
-           lw=1.5, fc=colour_a, label='HETDEX')
+           lw=1.5, fc=colour_a, label=r'$\mathrm{HETDEX}$')
 ax1.stairs(counts_S82_norad / gv.area_S82, edges_S82_norad, fill=True, ec='k', lw=1.5,
-           fc=colour_b, label='S82', hatch='///')
+           fc=colour_b, label=r'$\mathrm{S82}$', hatch='///')
 ax1.stairs(counts_HETDEX_norad / gv.area_HETDEX, edges_HETDEX_norad, fill=True, ec='k', 
-           lw=1.5, fc=colour_a, label='HETDEX', hatch='///')
+           lw=1.5, fc=colour_a, label=r'$\mathrm{HETDEX}$', hatch='///')
 
 
-HETDEX_patch       = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.3), ec='k', label='HETDEX', lw=2.0, alpha=0.65)
-S82_patch          = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.7), ec='k', label='S82', lw=2.0, alpha=0.65)
-pred_patch         = mpatches.Patch(fc='None', ec='k', label='Pred AGN + Radio', lw=2.0)
-true_patch         = mpatches.Patch(fc='None', ec='k', label='Pred AGN + No Radio', hatch='///', lw=2.0)
+HETDEX_patch       = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.3), ec='k', label=r'$\mathrm{HETDEX}$', lw=2.0, alpha=0.65)
+S82_patch          = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.7), ec='k', label=r'$\mathrm{S82}$', lw=2.0, alpha=0.65)
+pred_patch         = mpatches.Patch(fc='None', ec='k', label=r'$\mathrm{Pred ~ AGN} + \mathrm{Radio}$', lw=2.0)
+true_patch         = mpatches.Patch(fc='None', ec='k', label=r'$\mathrm{Pred ~ AGN} + \mathrm{No Radio}$', hatch='///', lw=2.0)
 ax1.legend(handles=[HETDEX_patch, S82_patch, pred_patch, true_patch], loc=1, fontsize=20, ncol=1,
            handletextpad=0.3, handlelength=1.0, columnspacing=0.5)
 ax1.invert_xaxis()
@@ -90,7 +90,7 @@ ax1.tick_params(axis='both', which='major', labelsize=24)
 ax1.tick_params(which='major', length=8, width=1.5)
 ax1.tick_params(which='minor', length=4, width=1.5)
 ax1.set_xlabel('$\mathrm{mag}_{\mathrm{W4}}\,[\mathrm{AB}]$', size=28)
-ax1.set_ylabel('Normalised\nfrequency [$\mathrm{deg}^{-2}$]', size=26)
+ax1.set_ylabel(r'$\mathrm{Normalised}$' + '\n' + r'$\mathrm{frequency} ~ [\mathrm{deg}^{-2}]$', size=26)
 plt.setp(ax1.spines.values(), linewidth=3.5)
 plt.setp(ax1.spines.values(), linewidth=3.5)
 fig.tight_layout()

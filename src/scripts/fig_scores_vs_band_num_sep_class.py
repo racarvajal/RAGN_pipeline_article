@@ -103,12 +103,12 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
                            medianprops=medianprops)
         axs[count].axhline(y=cal_thresh[count], ls='--', c='gray', lw=2.0)
         for count_b, num in enumerate(vals_band_num_up):
-            str_b = f'{sizes_up[count_b]:,}'.replace(',', '$\,$')
+            str_b = rf'${sizes_up[count_b]:,}$'.replace(',', '$\,$')
             axs[count].annotate(text=str_b, xy=(num, 1.270),xycoords='data', 
                                 fontsize=18, ha='center', va='top', 
                                 rotation='vertical', path_effects=gf.pe2)
         for count_b, num in enumerate(vals_band_num_low):
-            str_b = f'{sizes_low[count_b]:,}'.replace(',', '$\,$')
+            str_b = rf'${sizes_low[count_b]:,}$'.replace(',', '$\,$')
             axs[count].annotate(text=str_b, xy=(num, 0.000), xycoords='data', 
                                 fontsize=18, ha='center', va='top', 
                                 rotation='vertical', path_effects=gf.pe2)
@@ -128,7 +128,7 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
                             capprops=capprops, meanprops=meanprops, medianprops=medianprops)
         y_lims = axs[count].get_ylim()
         for count_b, num in enumerate(vals_band_num):
-            str_b = f'{sizes_z[count_b]:,}'.replace(',', '$\,$')
+            str_b = rf'${sizes_z[count_b]:,}$'.replace(',', '$\,$')
             axs[count].annotate(text=str_b, xy=(num, 0.935 * y_lims[1]), xycoords='data', 
                                 fontsize=18, ha='center', va='top', rotation='vertical', path_effects=gf.pe2)
 
@@ -139,4 +139,5 @@ used_x_ticks = np.unique(catalog_HETDEX_df.loc[:, 'band_num'])
 str_x_ticks  = [rf'${tick}$' for tick in used_x_ticks]
 axs[2].set_xticks(np.unique(catalog_HETDEX_df.loc[:, 'band_num']))
 axs[2].set_xticklabels(str_x_ticks)
+fig.text(s=r'$\mathrm{Sources ~ per ~ bin}$', x=0.96, y=0.55, fontsize=32, rotation=90, ha='left', va='center')
 plt.savefig(paths.figures / 'predicted_probs_band_num_HETDEX_test_sep_class.pdf', bbox_inches='tight')

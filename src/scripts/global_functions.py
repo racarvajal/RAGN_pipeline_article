@@ -147,12 +147,13 @@ def plot_conf_mat(confusion_matrix, axin, display_labels=['0', '1'], title=None,
 
     for text_val in disp_b.text_.flatten():
         text_val.set_fontsize(28)
-        text_val.set_text( text_val.get_text().replace(',','$\,$'))
+        text_val.set_text(rf'${text_val.get_text()}$'.replace(',','$\,$'))
     clb = plt.gca().images[-1].colorbar
     clb.ax.tick_params(labelsize=26)
     clb.ax.ticklabel_format(style='sci', scilimits=(0, 0))
     clb.outline.set_linewidth(2.5)
-    clb.ax.set_ylabel('Elements in bin', size=20)
+    clb.ax.set_ylabel(r'$\mathrm{Elements ~ in ~ bin}$', size=20)
+    axin.set(ylabel=r'$\mathrm{True ~ label}$', xlabel=r'$\mathrm{Predicted ~ label}$')
     if not show_clb:
         clb.remove()
 
@@ -200,7 +201,7 @@ def plot_redshift_compare(true_z, predicted_z, ax_pre, title=None, dpi=10, cmap=
         clb = plt.colorbar(hist_sources_rGal, extend='neither', norm=norm, ticks=mtick.MaxNLocator(integer=True))
         clb.ax.tick_params(labelsize=26)
         clb.outline.set_linewidth(2.5)
-        clb.ax.set_ylabel('Elements per pixel', size=28, path_effects=pe2)
+        clb.ax.set_ylabel(r'$\mathrm{Sources ~ per ~ bin}$', size=28, path_effects=pe2)
 
     # Inset axis with residuals
     axins = inset_axes(ax_pre, width='35%', height='20%', loc=2)
@@ -271,10 +272,10 @@ def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, bins=10, cma
     if show_clb:
         clb = plt.colorbar(dens_1, extend='neither', norm=norm, ax=ax_pre, 
                            ticks=mtick.MaxNLocator(nbins=5, integer=True, prune='lower'), 
-                           format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
+                           format=lambda x, pos: rf"${x:,.0f}$".replace(",", "$\,$"))
         clb.ax.tick_params(labelsize=26)
         clb.outline.set_linewidth(2.5)
-        clb.ax.set_ylabel('Sources per pixel', size=28, path_effects=pe2)
+        # clb.ax.set_ylabel(r'$\mathrm{Sources ~ per ~ bin$}', size=28, path_effects=pe2)
     if bottom_plot:
         ax_pre.set_xlabel(xlabel, fontsize=30)
     ax_pre.set_ylabel(ylabel, fontsize=30)

@@ -55,15 +55,15 @@ def main():
 
     ax1.plot(mean_pred_val_train_validation, fract_positiv_train_validation, ls='-',
              marker='o', c=plt.get_cmap(gv.cmap_bands)(0.5), lw=2.5, 
-             label='Train+\nvalidation')
+             label=r'$\mathrm{Train} + $' + '\n' r'$\mathrm{validation}$')
     ax1.plot(mean_pred_val_calib, fract_positiv_calib, ls='-', marker='s',
-             c=plt.get_cmap(gv.cmap_bands)(0.7), lw=2.5, label='Calibration')
+             c=plt.get_cmap(gv.cmap_bands)(0.7), lw=2.5, label=r'$\mathrm{Calibration}$')
     ax1.plot(mean_pred_val_test, fract_positiv_test, ls='-', marker='p',
-             c=plt.get_cmap(gv.cmap_bands)(0.9), lw=2.5, label='Test')
-    ax1.plot([0, 1], [0, 1], ls=':', c='k', label="Perfectly\ncalibrated")
-    ax1.set_xlabel('Predicted score', fontsize=36)
+             c=plt.get_cmap(gv.cmap_bands)(0.9), lw=2.5, label=r'$\mathrm{Test}$')
+    ax1.plot([0, 1], [0, 1], ls=':', c='k', label=r'$\mathrm{Perfectly}$' + '\n' r'$\mathrm{calibrated}$')
+    ax1.set_xlabel(r'$\mathrm{Predicted ~ score}$', fontsize=36)
     ax1.xaxis.set_label_coords(.4, -.09)
-    ax1.set_ylabel('Fraction of positives', fontsize=36)
+    ax1.set_ylabel(r'$\mathrm{Fraction ~ of ~ positives}$', fontsize=36)
     ax1.tick_params(which='both', top=True, right=True, direction='in')
     ax1.tick_params(axis='both', which='major', labelsize=30)
     ax1.tick_params(which='major', length=8, width=1.5)
@@ -72,7 +72,7 @@ def main():
     plt.setp(ax1.spines.values(), linewidth=2.5)
     #ax1.set_xlim(left=min_x * 0.99999, right=max_x * 1.00001)
     ax1.xaxis.get_offset_text().set_fontsize(26)
-    plt.legend(loc='best', fontsize=25, title='Sub-sets', title_fontsize=25, 
+    plt.legend(loc='best', fontsize=25, title='$\mathrm{Sub-sets}$', title_fontsize=25, 
                ncol=2, columnspacing=.25, handlelength=0.8, 
                handletextpad=0.1, framealpha=0.55)
     fig.tight_layout()

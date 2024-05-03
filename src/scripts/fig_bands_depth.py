@@ -147,7 +147,7 @@ for count, filt_name in enumerate(filter_names):
     if 'W2' in filt_name: centering = 'left'
     if 'y'  in filt_name: centering = 'left'
     if 'Ks' in filt_name: centering = 'left'
-    band_texts.append(ax1.annotate(filt_name.replace('-AW', '').replace('-CW', ''), 
+    band_texts.append(ax1.annotate(rf'$\mathrm{{{filt_name}}}$'.replace('-AW', '').replace('-CW', ''), 
                      (central_pos_um[count], depth_5sigma_AB[count]), 
                      textcoords='offset points', xytext=(-3, 3.5), fontsize=16, 
                      ha=centering, path_effects=gf.pe2, zorder=10, va=valign))
@@ -197,7 +197,7 @@ elif AGN_sed == 'rest-frame':
     AGN_flux_uJy    = AGN_flux_rf_uJy
 
 ax2.plot(AGN_wave.value, AGN_flux_rf_uJy.value / (1 + orig_z),
-         zorder=1, color='indigo', lw=2.5, label=f'Mrk231 - z={orig_z}', alpha=1.0)  # observed
+         zorder=1, color='indigo', lw=2.5, label=rf'$\mathrm{{Mrk231 ~ -}} z = {orig_z}$', alpha=1.0)  # observed
 max_z_plot = 7
 for z in np.linspace(z_zero_proxy, max_z_plot, 8):
     ax2.plot(AGN_wave_rf.value * (1 + z), AGN_flux_uJy.value / (1 + z),
@@ -216,7 +216,7 @@ ax1.set_xlabel('$\mathrm{Wavelength}\, [\mu \mathrm{m}]$', size=23)
 ax1.set_ylabel('$m_{5\sigma\, \mathrm{Depth}}\, \mathrm{[AB]}$', size=23)
 plt.setp(ax2.spines.values(), linewidth=3.5)
 plt.setp(ax2.spines.values(), linewidth=3.5)
-ax2.legend(loc=8, fontsize=18, title='Model AGN', title_fontsize=18)
+ax2.legend(loc=8, fontsize=18, title=r'$\mathrm{Model ~ AGN}$', title_fontsize=18)
 plt.tight_layout()
 
 ax1.set_zorder(ax2.get_zorder()+1)

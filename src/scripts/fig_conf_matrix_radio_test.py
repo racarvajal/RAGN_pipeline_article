@@ -34,7 +34,7 @@ def main():
     ax1 = fig.add_subplot(111)
     ax1 = gf.plot_conf_mat(cm_radio, 
                            axin=ax1, 
-                           display_labels=['No\nRadio', 'Radio'], 
+                           display_labels=[r'$\mathrm{No}$' + '\n' + r'$\mathrm{Radio}$', r'$\mathrm{Radio}$'], 
                            title=None, 
                            log_stretch=False)
     ax1.texts[1].set_color('black')

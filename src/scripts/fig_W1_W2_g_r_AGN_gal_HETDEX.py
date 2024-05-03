@@ -130,11 +130,11 @@ for count in np.arange(0):  # times to run next command, more labels
     [txt.set_bbox(dict(boxstyle='square, pad=0', fc='None', ec='None')) for txt in labels_Gal]
 
 ax1.plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), 
-        label=f'CW          -  N = {n_sources_CW:,}'.replace(',','$\,$'), zorder=0)
+        label=rf'$\mathrm{{CW ~ - ~ N}} = {n_sources_CW:,}$'.replace(',','$\,$'), zorder=0)
 ax1.plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_hists)(0.2), 
-        label=f'MQC AGN - N =      {np.sum(filter_used_data & filter_AGN_HETDEX):,}'.replace(',','$\,$'), zorder=0)
+        label=rf'$\mathrm{{MQC ~ AGN ~ - ~ N}} =      {np.sum(filter_used_data & filter_AGN_HETDEX):,}$'.replace(',','$\,$'), zorder=0)
 ax1.plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_hists)(0.8), 
-        label=f'SDSS Gal  - N =      {np.sum(filter_used_data & filter_gal_HETDEX):,}'.replace(',','$\,$'), zorder=0)
+        label=rf'$\mathrm{{SDSS ~ Gal ~ - ~ N}} =      {np.sum(filter_used_data & filter_gal_HETDEX):,}$'.replace(',','$\,$'), zorder=0)
 
 # Colorbar density
 axins0 = inset_axes(ax1, width='100%', height='100%', bbox_transform=ax1.transAxes,
@@ -142,7 +142,7 @@ axins0 = inset_axes(ax1, width='100%', height='100%', bbox_transform=ax1.transAx
 clb_dens    = fig.colorbar(dens_CW_HETDEX, cax=axins0, orientation='vertical', 
                            cmap=plt.get_cmap(gv.cmap_dens_plots, num_levels_dens), 
                            norm=norm_dens, extend='max', 
-                           format=lambda x, pos: f"{x:,.0f}".replace(",", "$\,$"))
+                           format=lambda x, pos: rf"${x:,.0f}$".replace(",", "$\,$"))
 axins0.yaxis.set_ticks_position('left')
 clb_dens.ax.tick_params(labelsize=20)
 clb_dens.outline.set_linewidth(2.5)
@@ -157,7 +157,7 @@ y_Vega   = np.array(AB_lims_y) - vega_shift['W1mproPM'] + vega_shift['W2mproPM']
 points_C23 = np.array([[-0.76, -0.76, 1.8, 1.8], [y_Vega[-1], 0.26, 0.84, y_Vega[-1]]])
 ax1.plot(points_C23[0] + vega_shift['gmag'] - vega_shift['rmag'], 
         points_C23[1] + vega_shift['W1mproPM'] - vega_shift['W2mproPM'], 
-        label='This work', c=plt.get_cmap(gv.cmap_bands)(0.75), zorder=2, lw=3.5)
+        label=r'$\mathrm{This ~ work}$', c=plt.get_cmap(gv.cmap_bands)(0.75), zorder=2, lw=3.5)
 
 ax2 = ax1.twinx()
 ax2.set_ylim(tuple(np.array(ax1.get_ylim()) - 2.699 + 3.339))
@@ -175,7 +175,7 @@ ax3.tick_params(which='both', bottom=False, left=False, direction='in')
 ax3.tick_params(axis='both', which='major', labelsize=20)
 ax3.tick_params(which='major', length=8, width=1.5)
 ax3.tick_params(which='minor', length=4, width=1.5)
-ax3.set_xlabel('$m_{\mathrm{g}} - m_{\mathrm{r}}\, \mathrm{[Vega]}$', size=28)
+ax3.set_xlabel('$m_{\mathrm{g}} - m_{\mathrm{r}}\, \mathrm{[Vega]}$', size=28, labelpad=10)
 
 ax1.tick_params(which='both', top=False, right=False, direction='in')
 ax1.tick_params(axis='both', which='major', labelsize=20)

@@ -69,11 +69,11 @@ def main():
     viz_train_val   = PrecisionRecallDisplay(precision=prec_train_val_cal,  recall=recall_train_val_cal)
     viz_calib       = PrecisionRecallDisplay(precision=prec_calib_cal,      recall=recall_calib_cal)
     viz_val         = PrecisionRecallDisplay(precision=prec_validation_cal, recall=recall_validation_cal)
-    viz_train.plot(ax=ax1,     lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.0), alpha=0.75, label="Training")
-    viz_val.plot(ax=ax1,       lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.3), alpha=0.75, label="Validation")
-    viz_train_val.plot(ax=ax1, lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.5), alpha=0.75, label="Train+\nValidation")
-    viz_calib.plot(ax=ax1,     lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.7), alpha=0.75, label="Calibration")
-    viz_test.plot(ax=ax1,      lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.9), alpha=0.75, label="Test")
+    viz_train.plot(ax=ax1,     lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.0), alpha=0.75, label=r'$\mathrm{Training}$')
+    viz_val.plot(ax=ax1,       lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.3), alpha=0.75, label=r'$\mathrm{Validation}$')
+    viz_train_val.plot(ax=ax1, lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.5), alpha=0.75, label=r'$\mathrm{Train} + $' + '\n' r'$\mathrm{validation}$')
+    viz_calib.plot(ax=ax1,     lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.7), alpha=0.75, label=r'$\mathrm{Calibration}$')
+    viz_test.plot(ax=ax1,      lw=4.5, c=cm.get_cmap(gv.cmap_bands)(0.9), alpha=0.75, label=r'$\mathrm{Test}$')
 
     no_skill_train      = np.sum(catalog_HETDEX_df.loc[filter_train,       'LOFAR_detect'] == 1) / len(catalog_HETDEX_df.loc[filter_train,       'LOFAR_detect'])
     no_skill_val        = np.sum(catalog_HETDEX_df.loc[filter_validation,  'LOFAR_detect'] == 1) / len(catalog_HETDEX_df.loc[filter_validation , 'LOFAR_detect'])
@@ -86,17 +86,17 @@ def main():
     ax1.plot([0, 1], [no_skill_train_val, no_skill_train_val], ls='--', marker=None, c=cm.get_cmap(gv.cmap_bands)(0.6), alpha=0.4, lw=3.5)
     ax1.plot([0, 1], [no_skill_calib,     no_skill_calib],     ls='--', marker=None, c=cm.get_cmap(gv.cmap_bands)(0.8), alpha=0.4, lw=3.5)
     ax1.plot([0, 1], [no_skill_test,      no_skill_test],      ls='--', marker=None, c=cm.get_cmap(gv.cmap_bands)(1.0), alpha=0.4, lw=3.5)
-    ax1.plot([1, 1], [1, 1], ls=':', marker=None, c='Gray', alpha=0.9, lw=4.5, label='No Skill', zorder=0)
+    ax1.plot([1, 1], [1, 1], ls=':', marker=None, c='Gray', alpha=0.9, lw=4.5, label=r'$\mathrm{No ~ Skill}$', zorder=0)
 
-    ax1.set_xlabel('Recall', fontsize=36)
-    ax1.set_ylabel('Precision', fontsize=36)
+    ax1.set_xlabel(r'$\mathrm{Recall}$', fontsize=36)
+    ax1.set_ylabel(r'$\mathrm{Precision}$', fontsize=36)
     ax1.tick_params(which='both', top=True, right=True, direction='in')
     ax1.tick_params(axis='both', which='major', labelsize=30)
     ax1.tick_params(which='major', length=8, width=1.5)
     ax1.tick_params(which='minor', length=4, width=1.5)
     plt.setp(ax1.spines.values(), linewidth=3.0)
     plt.setp(ax1.spines.values(), linewidth=3.0)
-    plt.legend(loc='best', fontsize=24, title='Radio detection\nclassification', 
+    plt.legend(loc='best', fontsize=24, title=r'$\mathrm{Radio ~ detection}$' + '\n' + r'$\mathrm{classification}$', 
                 title_fontsize=24, ncol=2, columnspacing=.25, handlelength=0.8, 
                 handletextpad=0.1, framealpha=0.55)
     ax1.set_aspect('equal', 'datalim')

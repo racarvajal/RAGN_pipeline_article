@@ -3,6 +3,12 @@
 import schemdraw
 from schemdraw import flow
 import paths
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import global_variables as gv
+
+mpl.rcdefaults()
+plt.rcParams['text.usetex'] = gv.use_LaTeX
 
 with schemdraw.Drawing(show=False, fontsize=11) as d:
       d += (initial := flow.Start(w=3, h=1.5).label('SOURCE\nFROM\nCATALOGUE'))

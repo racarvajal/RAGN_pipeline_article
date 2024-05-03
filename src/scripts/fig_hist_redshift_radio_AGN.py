@@ -69,19 +69,19 @@ colour_a    = tuple(colour_a)
 colour_b    = tuple(colour_b)
 
 ax1.stairs(counts_S82_pred / gv.area_S82, edges_S82_pred, fill=True, ec='k', lw=1.5,
-           fc=colour_b, label='S82')
+           fc=colour_b, label=r'$\mathrm{S82}$')
 ax1.stairs(counts_HETDEX_pred / gv.area_HETDEX, edges_HETDEX_pred, fill=True, ec='k', lw=1.5,
-           fc=colour_a, label='HETDEX')
+           fc=colour_a, label=r'$\mathrm{HETDEX}$')
 ax1.stairs(counts_HETDEX_true / gv.area_HETDEX, edges_HETDEX_true, fill=True, ec='k', lw=1.5,
-           fc=colour_a, label='HETDEX', hatch='///')
+           fc=colour_a, label=r'$\mathrm{HETDEX}$', hatch='///')
 ax1.stairs(counts_S82_true / gv.area_S82, edges_S82_true, fill=True, ec='k', lw=1.5,
-           fc=colour_b, label='S82', hatch='///')
+           fc=colour_b, label=r'$\mathrm{S82}$', hatch='///')
 
 
-HETDEX_patch       = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.3), ec='k', label='HETDEX', lw=2.0, alpha=0.65)
-S82_patch          = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.7), ec='k', label='S82', lw=2.0, alpha=0.65)
-pred_patch         = mpatches.Patch(fc='None', ec='k', label='Predicted', lw=2.0)
-true_patch         = mpatches.Patch(fc='None', ec='k', label='True', hatch='///', lw=2.0)
+HETDEX_patch       = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.3), ec='k', label=r'$\mathrm{HETDEX}$', lw=2.0, alpha=0.65)
+S82_patch          = mpatches.Patch(fc=plt.get_cmap(gv.cmap_hists)(0.7), ec='k', label=r'$\mathrm{S82}$', lw=2.0, alpha=0.65)
+pred_patch         = mpatches.Patch(fc='None', ec='k', label=r'$\mathrm{Predicted}$', lw=2.0)
+true_patch         = mpatches.Patch(fc='None', ec='k', label=r'$\mathrm{True}$', hatch='///', lw=2.0)
 ax1.legend(handles=[HETDEX_patch, S82_patch, pred_patch, true_patch], loc=1, fontsize=20, ncol=1,
            handletextpad=0.3, handlelength=1.0, columnspacing=0.5, framealpha=0.75)
 
@@ -89,8 +89,8 @@ ax1.tick_params(which='both', top=True, right=True, direction='in')
 ax1.tick_params(axis='both', which='major', labelsize=24)
 ax1.tick_params(which='major', length=8, width=1.5)
 ax1.tick_params(which='minor', length=4, width=1.5)
-ax1.set_xlabel('Redshift', size=28)
-ax1.set_ylabel('Normalised\nfrequency [$\mathrm{deg}^{-2}$]', size=26)
+ax1.set_xlabel(r'$\mathrm{Redshift}$', size=28)
+ax1.set_ylabel(r'$\mathrm{Normalised}$' + '\n' + r'$\mathrm{frequency} ~ [\mathrm{deg}^{-2}]$', size=26)
 plt.setp(ax1.spines.values(), linewidth=3.5)
 plt.setp(ax1.spines.values(), linewidth=3.5)
 fig.tight_layout()
