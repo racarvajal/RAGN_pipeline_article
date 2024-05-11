@@ -279,8 +279,8 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     axs_twinx[count].set_ylim(tuple(np.array(axs[0].get_ylim()) - 2.699 + 3.339))
     axs_twiny[count].set_xlim(tuple(np.array(axs[0].get_xlim()) - 3.339 + 5.174))
 
-axs[0].set_ylabel(r'$\mathrm{Galaxy}$', fontsize=22, rotation='horizontal', labelpad=35)
-axs[2].set_xlabel(r'$\mathrm{Galaxy}$', fontsize=22)
+axs[0].set_ylabel(r'$\mathrm{SFG}$', fontsize=22, rotation='horizontal', labelpad=25)
+axs[2].set_xlabel(r'$\mathrm{SFG}$', fontsize=22)
 axs[2].set_ylabel(r'$\mathrm{AGN}$', fontsize=22, rotation='horizontal', labelpad=25)
 axs[3].set_xlabel(r'$\mathrm{AGN}$', fontsize=22)
 
@@ -295,7 +295,7 @@ axs[3].legend(loc=4, fontsize=14, ncol=2, columnspacing=.25,
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 
 fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\n$\mathrm{Predicted ~ class}$', 
-              fontsize=25, ha='left', x=0.46, y=0.05)
+              fontsize=25, ha='left', x=0.45, y=0.04)
 fig.supylabel('$\mathrm{True ~ class}$\n$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', 
               fontsize=26, x=0.09, y=0.55, va='center', ha='center')
 # fig.suptitle('AGN prediction', fontsize=20, x=0.55)
