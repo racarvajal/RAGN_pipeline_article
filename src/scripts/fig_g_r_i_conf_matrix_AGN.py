@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+from matplotlib.patches import Rectangle
 #from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from astropy.visualization import PowerStretch
@@ -117,7 +118,7 @@ sigmas_perc_inv = [1. - sigma for sigma in sigmas_perc][::-1]  # 1, 2, 3, 4 sigm
 
 num_levels_dens = 20
 
-txt_x_positions = [0.65, 0.60, 0.60, 0.63]
+txt_x_positions = [0.67, 0.60, 0.60, 0.65]
 
 # norm_val  = mcolors.CenteredNorm(vcenter=0.5)
 try:
@@ -135,6 +136,12 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     _, _, _, dens_plts[count] = axs[count].hist2d(dens_plot_data_x, dens_plot_data_y, 
                                                   bins=[50, 50], cmin=1, norm=norm_dens,
                                                   cmap=plt.get_cmap(gv.cmap_dens_plots))
+    
+    # Create a Rectangle patch
+    rect_S23 = Rectangle((-0.2, -0.2), 1.0, 0.8, linewidth=3,
+                        edgecolor='k', facecolor='none')
+    axs[count].add_patch(rect_S23)
+
     
     x_axis_dens_AGN_HETDEX[count] = (catalog_HETDEX_df[cm_mat_AGN_filter_HETDEX[tuple(idx_ax)] ][mag_a] -\
                catalog_HETDEX_df[cm_mat_AGN_filter_HETDEX[tuple(idx_ax)] ][mag_b])
@@ -226,6 +233,8 @@ clb_dens.ax.yaxis.set_ticklabels(clb_dens.ax.yaxis.get_ticklabels(), path_effect
 clb_dens.ax.tick_params(labelsize=20)
 clb_dens.outline.set_linewidth(2.5)
 
+axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='k', label=r'$\mathrm{S23}$', zorder=0)
+
 axs[1].plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), label=r'$\mathrm{HETDEX}$', zorder=0)
     
 axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#1E88E5', label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{HETDEX}$', zorder=0)
@@ -233,11 +242,16 @@ axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#D32F2F', label=r'$\math
 
 # axs[0].set_xlim(left=AB_lims_x[0], right=AB_lims_x[1])
 # axs[0].set_ylim(bottom=AB_lims_y[0], top=AB_lims_y[1])
+
+axs[0].xaxis.set_ticks_position('top')
+axs[1].xaxis.set_ticks_position('top')
+axs[1].yaxis.set_ticks_position('right')
+axs[3].yaxis.set_ticks_position('right')
     
-plt.setp(axs[0].get_xticklabels(), visible=False)
-plt.setp(axs[1].get_yticklabels(), visible=False)
-plt.setp(axs[1].get_xticklabels(), visible=False)
-plt.setp(axs[3].get_yticklabels(), visible=False)
+# plt.setp(axs[0].get_xticklabels(), visible=False)
+# plt.setp(axs[1].get_yticklabels(), visible=False)
+# plt.setp(axs[1].get_xticklabels(), visible=False)
+# plt.setp(axs[3].get_yticklabels(), visible=False)
 
 axs[0].set_ylabel(r'$\mathrm{SFG}$', fontsize=22, rotation='horizontal', labelpad=25)
 axs[2].set_xlabel(r'$\mathrm{SFG}$', fontsize=22)
@@ -246,8 +260,8 @@ axs[3].set_xlabel(r'$\mathrm{AGN}$', fontsize=22)
 
 axs[1].legend(loc=3, fontsize=18, ncol=1, columnspacing=.25, 
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
-# axs[2].legend(loc=4, fontsize=18, ncol=1, columnspacing=.25, 
-#               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+axs[2].legend(loc=3, fontsize=18, ncol=1, columnspacing=.25, 
+              handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 axs[3].legend(loc=4, fontsize=14, ncol=2, columnspacing=.25, 
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 
