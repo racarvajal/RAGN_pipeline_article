@@ -276,6 +276,10 @@ def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, bins=10, cma
         clb.ax.tick_params(labelsize=26)
         clb.outline.set_linewidth(2.5)
         # clb.ax.set_ylabel(r'$\mathrm{Sources ~ per ~ bin$}', size=28, path_effects=pe2)
+    if top_plot:
+        ax_pre.xaxis.set_ticks_position('top')
+        ax_pre.set_xlabel(xlabel, fontsize=30)
+        ax_pre.xaxis.set_label_position('top')
     if bottom_plot:
         ax_pre.set_xlabel(xlabel, fontsize=30)
     ax_pre.set_ylabel(ylabel, fontsize=30)
@@ -295,7 +299,7 @@ def plot_scores_band_num(pred_scores, band_num, ax_pre, title=None, bins=10, cma
     if top_plot:
         ax_pre.set_xlim(left=np.floor(min_x)-0.5, right=np.ceil(max_x)+0.5)
     ax_pre.set_ylim(bottom=np.floor(min_y)-0.1, top=np.ceil(max_y)+0.1)
-    if not bottom_plot:
+    if (not bottom_plot) and (not top_plot):
         ax_pre.xaxis.set_ticklabels([])
     #ax_pre.set_ylim(bottom=-0.1, top=1.1)
     ax_pre.set_title(title, fontsize=22)

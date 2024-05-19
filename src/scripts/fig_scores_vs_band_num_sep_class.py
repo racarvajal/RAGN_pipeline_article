@@ -49,7 +49,7 @@ capprops      = dict(linewidth=2.0)
 meanprops     = dict(linewidth=2.0)
 medianprops   = dict(linewidth=2.0)
 
-xlabels       = [None, None, '$\mathtt{band\_num}$']
+xlabels       = ['$\mathtt{band\_num}$', None, '$\mathtt{band\_num}$']
 ylabels       = ['$\mathrm{AGN\:prob.}$', '$\mathrm{Radio\:prob.}$', '$\mathrm{Redshift}$']
 top_plots     = [True, False, False]
 bottom_plots  = [False, False, True]
@@ -106,12 +106,12 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
             str_b = rf'${sizes_up[count_b]:,}$'.replace(',', '$\,$')
             axs[count].annotate(text=str_b, xy=(num, 1.270),xycoords='data', 
                                 fontsize=18, ha='center', va='top', 
-                                rotation='vertical', path_effects=gf.pe2)
+                                rotation='vertical', path_effects=gf.pe2, color='darkblue')
         for count_b, num in enumerate(vals_band_num_low):
             str_b = rf'${sizes_low[count_b]:,}$'.replace(',', '$\,$')
             axs[count].annotate(text=str_b, xy=(num, 0.000), xycoords='data', 
                                 fontsize=18, ha='center', va='top', 
-                                rotation='vertical', path_effects=gf.pe2)
+                                rotation='vertical', path_effects=gf.pe2, color='darkblue')
 
     if count in [2]:
         vals_band_num = np.unique(catalog_HETDEX_df.loc[filter_rAGN[count], 'band_num'])
@@ -130,14 +130,15 @@ for count, score_to_use in enumerate([score_to_use_1, score_to_use_2, score_to_u
         for count_b, num in enumerate(vals_band_num):
             str_b = rf'${sizes_z[count_b]:,}$'.replace(',', '$\,$')
             axs[count].annotate(text=str_b, xy=(num, 0.935 * y_lims[1]), xycoords='data', 
-                                fontsize=18, ha='center', va='top', rotation='vertical', path_effects=gf.pe2)
+                                fontsize=18, ha='center', va='top', rotation='vertical', path_effects=gf.pe2, color='darkblue')
 
 axs[0].set_xlim(left=1.5, right=12.5)
 for count in [0, 1]:
     axs[count].set_ylim(bottom=-0.3, top=1.3)
 used_x_ticks = np.unique(catalog_HETDEX_df.loc[:, 'band_num'])
 str_x_ticks  = [rf'${tick}$' for tick in used_x_ticks]
-axs[2].set_xticks(np.unique(catalog_HETDEX_df.loc[:, 'band_num']))
-axs[2].set_xticklabels(str_x_ticks)
+for count in [0, 2]:
+    axs[count].set_xticks(np.unique(catalog_HETDEX_df.loc[:, 'band_num']))
+    axs[count].set_xticklabels(str_x_ticks)
 fig.text(s=r'$\mathrm{Sources ~ per ~ bin}$', x=0.96, y=0.55, fontsize=32, rotation=90, ha='left', va='center')
 plt.savefig(paths.figures / 'predicted_probs_band_num_HETDEX_test_sep_class.pdf', bbox_inches='tight')
