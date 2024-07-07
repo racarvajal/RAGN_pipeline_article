@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+from matplotlib.legend_handler import HandlerTuple
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from astropy.visualization import PowerStretch
 from astropy.visualization.mpl_normalize import ImageNormalize
@@ -111,9 +112,9 @@ Z_Gal, x_centers_Gal, y_centers_Gal = gf.pad_matrix_zeros(Z_Gal, xedges_Gal, yed
 
 CS_AGN_f = ax1.contourf(x_centers_AGN, y_centers_AGN, Z_AGN, levels=sigmas_perc_inv, 
                             colors=cm_gradient_AGN(seq_fill[::-1]), extend='max', 
-                            alpha=0.2, antialiased=True)
+                            alpha=0.2, antialiased=True, zorder=3)
 CS_AGN = ax1.contour(x_centers_AGN, y_centers_AGN, Z_AGN, levels=sigmas_perc_inv, 
-                         colors=cm_gradient_AGN(seq_cont[::-1]), linewidths=3.5)
+                         colors=cm_gradient_AGN(seq_cont[::-1]), linewidths=3.5, zorder=4)
 for count in np.arange(0):  # times to run next command, more labels
     labels_AGN = ax1.clabel(CS_AGN, CS_AGN.levels, inline=True, fmt=gf.fmt, 
                             fontsize=10, inline_spacing=-8)
@@ -121,20 +122,39 @@ for count in np.arange(0):  # times to run next command, more labels
 
 CS_Gal_f = ax1.contourf(x_centers_Gal, y_centers_Gal, Z_Gal, levels=sigmas_perc_inv, 
                             colors=cm_gradient_Gal(seq_fill[::-1]), extend='max', 
-                            alpha=0.2, antialiased=True)
+                            alpha=0.2, antialiased=True, zorder=3)
 CS_Gal = ax1.contour(x_centers_Gal, y_centers_Gal, Z_Gal, levels=sigmas_perc_inv, 
-                         colors=cm_gradient_Gal(seq_cont[::-1]), linewidths=3.5)
+                         colors=cm_gradient_Gal(seq_cont[::-1]), linewidths=3.5, zorder=4)
 for count in np.arange(0):  # times to run next command, more labels
     labels_Gal = ax1.clabel(CS_Gal, CS_Gal.levels, inline=True, fmt=gf.fmt, 
                             fontsize=10, inline_spacing=-8)
     [txt.set_bbox(dict(boxstyle='square, pad=0', fc='None', ec='None')) for txt in labels_Gal]
 
-ax1.plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), 
-        label=rf'$\mathrm{{CW ~ - ~ N}} = {n_sources_CW:,}$'.replace(',','$\,$'), zorder=0)
-ax1.plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_hists)(0.2), 
-        label=rf'$\mathrm{{MQC ~ AGN ~ - ~ N}} =      {np.sum(filter_used_data & filter_AGN_HETDEX):,}$'.replace(',','$\,$'), zorder=0)
-ax1.plot([-3], [-3], marker=None, ls='-', lw=3.5, c=plt.get_cmap(gv.cmap_hists)(0.8), 
-        label=rf'$\mathrm{{SDSS ~ Gal ~ - ~ N}} =      {np.sum(filter_used_data & filter_gal_HETDEX):,}$'.replace(',','$\,$'), zorder=0)
+base_dens, = ax1.plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), 
+                      label=rf'$\mathrm{{CW ~ - ~ N}} = {n_sources_CW:,}$'.replace(',','$\,$'),
+                      zorder=0, ms=8)
+cont_SFG = ax1.scatter([-1], [10], marker='o', edgecolor=gf.colour_SFG, 
+               color=gf.colour_SFG_shade, s=80, 
+               label=rf'$\mathrm{{SDSS ~ Gal ~ - ~ N}} =      {np.sum(filter_used_data & filter_gal_HETDEX):,}$'.replace(',','$\,$'), linewidths=2.5)
+cont_AGN = ax1.scatter([-1], [10], marker='o', 
+               edgecolor=gf.colour_AGN, color=gf.colour_AGN_shade, s=80, 
+               label=rf'$\mathrm{{MQC ~ AGN ~ - ~ N}} =      {np.sum(filter_used_data & filter_AGN_HETDEX):,}$'.replace(',','$\,$'), linewidths=2.5)
+
+# Identify and plot points outside contours
+p_AGN = CS_AGN.collections[0].get_paths()
+p_Gal = CS_Gal.collections[0].get_paths()
+inside_AGN = np.full_like(catalog_HETDEX_df.loc[filter_used_data & filter_AGN_HETDEX, 'g_r'], False, dtype=bool)
+inside_Gal = np.full_like(catalog_HETDEX_df.loc[filter_used_data & filter_gal_HETDEX, 'g_r'], False, dtype=bool)
+for level in p_AGN:
+    inside_AGN |= level.contains_points(catalog_HETDEX_df.loc[filter_used_data & filter_AGN_HETDEX, ['g_r', 'W1_W2']])
+for level in p_Gal:
+    inside_Gal |= level.contains_points(catalog_HETDEX_df.loc[filter_used_data & filter_gal_HETDEX, ['g_r', 'W1_W2']])
+out_AGN, = ax1.plot(catalog_HETDEX_df.loc[filter_used_data & filter_AGN_HETDEX].loc[~inside_AGN, 'g_r'], 
+                    catalog_HETDEX_df.loc[filter_used_data & filter_AGN_HETDEX].loc[~inside_AGN, 'W1_W2'],
+                     marker='x', ls='None', color=gf.colour_AGN, zorder=2, alpha=0.8)
+out_SFG, = ax1.plot(catalog_HETDEX_df.loc[filter_used_data & filter_gal_HETDEX].loc[~inside_Gal, 'g_r'], 
+                    catalog_HETDEX_df.loc[filter_used_data & filter_gal_HETDEX].loc[~inside_Gal, 'W1_W2'],
+                    marker='x', ls='None', color=gf.colour_SFG, zorder=2, alpha=0.8)
 
 # Colorbar density
 axins0 = inset_axes(ax1, width='100%', height='100%', bbox_transform=ax1.transAxes,
@@ -146,18 +166,24 @@ clb_dens    = fig.colorbar(dens_CW_HETDEX, cax=axins0, orientation='vertical',
 axins0.yaxis.set_ticks_position('left')
 clb_dens.ax.tick_params(labelsize=20)
 clb_dens.outline.set_linewidth(2.5)
-# clb_dens.ax.set_ylabel('Elements per pixel', size=12, path_effects=pe2)
-
-ax1.set_xlim(AB_lims_x)
-ax1.set_ylim(AB_lims_y)
+# clb_dens.ax.set_ylabel('Elements per bin', size=12, path_effects=pe2)
 
 x_Vega   = np.array(AB_lims_x) - vega_shift['gmag']     + vega_shift['rmag']      # Vega
 y_Vega   = np.array(AB_lims_y) - vega_shift['W1mproPM'] + vega_shift['W2mproPM']  # Vega
+x_Vega_shift = vega_shift['gmag'] - vega_shift['rmag']
+y_Vega_shift = vega_shift['W1mproPM'] - vega_shift['W2mproPM']
 # New criterion by Carvajal+
 points_C23 = np.array([[-0.76, -0.76, 1.8, 1.8], [y_Vega[-1], 0.26, 0.84, y_Vega[-1]]])
-ax1.plot(points_C23[0] + vega_shift['gmag'] - vega_shift['rmag'], 
+points_C23_AB = np.array([[-0.76 + x_Vega_shift, -0.76 + x_Vega_shift, 1.8 + x_Vega_shift, 1.8 + x_Vega_shift], [np.array(AB_lims_y)[-1], 0.26 + y_Vega_shift, 0.84 + y_Vega_shift, np.array(AB_lims_y)[-1]]])
+points_C23_AB_constrained = [[-0.6, -0.6, 1.2, 1.2], [np.array(AB_lims_y)[-1], 0.0, 0.3, np.array(AB_lims_y)[-1]]]
+C23_plot, = ax1.plot(points_C23[0] + vega_shift['gmag'] - vega_shift['rmag'], 
         points_C23[1] + vega_shift['W1mproPM'] - vega_shift['W2mproPM'], 
-        label=r'$\mathrm{This ~ work}$', c=plt.get_cmap(gv.cmap_bands)(0.75), zorder=2, lw=3.5)
+        label=r'$\mathrm{This ~ work}$', c=plt.get_cmap(gv.cmap_bands)(0.75), zorder=6, lw=3.5)
+# ax1.plot(points_C23_AB_constrained[0], 
+#          points_C23_AB_constrained[1], 
+#          label=r'$\mathrm{This ~ work}$', c=plt.get_cmap(gv.cmap_bands)(0.75), zorder=2, lw=3.5)
+ax1.set_xlim(AB_lims_x)
+ax1.set_ylim(AB_lims_y)
 
 ax2 = ax1.twinx()
 ax2.set_ylim(tuple(np.array(ax1.get_ylim()) - 2.699 + 3.339))
@@ -185,6 +211,10 @@ ax1.set_xlabel('$m_{\mathrm{g}} - m_{\mathrm{r}}\, \mathrm{[AB]}$', size=28)
 ax1.set_ylabel('$m_{\mathrm{W1}} - m_{\mathrm{W2}}\, \mathrm{[AB]}$', size=28)
 plt.setp(ax1.spines.values(), linewidth=3.5)
 plt.setp(ax1.spines.values(), linewidth=3.5)
-ax1.legend(loc=2, fontsize=20, ncol=1, columnspacing=.5, handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+# ax1.legend(loc=2, fontsize=20, ncol=1, columnspacing=.5, handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+arr_legends = [rf'$\mathrm{{CW ~ - ~ N}} = {n_sources_CW:,}$'.replace(',','$\,$'), rf'$\mathrm{{MQC ~ AGN ~ - ~ N}} =      {np.sum(filter_used_data & filter_AGN_HETDEX):,}$'.replace(',','$\,$'), rf'$\mathrm{{SDSS ~ Gal ~ - ~ N}} =      {np.sum(filter_used_data & filter_gal_HETDEX):,}$'.replace(',','$\,$'), '$\mathrm{This ~ work}$']
+ax1.legend([base_dens, (cont_AGN, out_AGN), (cont_SFG, out_SFG), C23_plot], arr_legends, scatterpoints=1,
+           numpoints=1, handler_map={tuple: HandlerTuple(ndivide=None)}, loc=2, fontsize=18,
+           ncol=1, columnspacing=.5, handletextpad=0.2, handlelength=0.8, framealpha=0.75).set_zorder(10)
 # plt.tight_layout()
 plt.savefig(paths.figures / 'g_r_W1_W2_AGN_gal_HETDEX_nonimputed.pdf', bbox_inches='tight')

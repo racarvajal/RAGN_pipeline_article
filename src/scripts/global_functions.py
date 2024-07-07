@@ -381,3 +381,22 @@ def cut_rgb_val(val):
         return 1.0
     else:
         return val
+
+# colours for AGN and SFGs
+colour_hex_SFG = '#1E88E5'
+colour_hex_AGN = '#D32F2F'
+colour_SFG = mcolors.to_rgba(colour_hex_SFG)
+colour_AGN = mcolors.to_rgba(colour_hex_AGN)
+colour_SFG_shade = list(colour_SFG)
+colour_AGN_shade = list(colour_AGN)
+colour_SFG_shade[3] = 0.6
+colour_AGN_shade[3] = 0.6
+colour_SFG_shade = tuple(colour_SFG_shade)
+colour_AGN_shade = tuple(colour_AGN_shade)
+
+colour_SFG_solid = list(colour_SFG)
+colour_AGN_solid = list(colour_AGN)
+colour_SFG_solid[3] = 1.0
+colour_AGN_solid[3] = 1.0
+colour_SFG_solid = tuple(colour_SFG_solid)
+colour_AGN_solid = tuple(colour_AGN_solid)

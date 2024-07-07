@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+from matplotlib.legend_handler import HandlerTuple
 #from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from astropy.visualization import PowerStretch
@@ -29,7 +30,8 @@ file_name_S82    = paths.data / 'S82_for_prediction.parquet'
 test_idx        = np.loadtxt(paths.data / 'indices_test.txt')
 
 feats_2_use      = ['ID', 'class', 'pred_prob_class', 'pred_prob_radio', 
-                    'Z', 'pred_Z', 'W1mproPM', 'W2mproPM', 'W3mag']
+                    'Z', 'pred_Z', 'W1mproPM', 'W2mproPM', 'W3mag',
+                    'W1_W2', 'W2_W3']
 
 catalog_HETDEX_df = pd.read_parquet(file_name_HETDEX, engine='fastparquet', columns=feats_2_use)
 catalog_HETDEX_df = catalog_HETDEX_df.set_index(keys=['ID'])
@@ -124,7 +126,8 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     
     _, _, _, dens_plts[count] = axs[count].hist2d(dens_plot_data_x, dens_plot_data_y, 
                                                   bins=[50, 150], cmin=1, norm=norm_dens,
-                                                  cmap=plt.get_cmap(gv.cmap_dens_plots))
+                                                  cmap=plt.get_cmap(gv.cmap_dens_plots),
+                                                  zorder=0)
     
     x_axis_dens_AGN_HETDEX[count] = (catalog_HETDEX_df[cm_mat_AGN_filter_HETDEX[tuple(idx_ax)] ]['W2mproPM'] -\
                catalog_HETDEX_df[cm_mat_AGN_filter_HETDEX[tuple(idx_ax)] ]['W3mag'])
@@ -212,6 +215,22 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     axs[count].annotate(text=rf'$\mathrm{{HETDEX - N}} = {n_sources_HETDEX: >6,d}$'.replace(',','$\,$') + '\n' + rf'$\mathrm{{S82 - N}} = {n_sources_S82: >6,d}$'.replace(',','$\,$'),
                         xy=(txt_x_positions[count], 0.96), xycoords='axes fraction', fontsize=18, 
                         ha='right', va='top', path_effects=gf.pe2, zorder=11)
+    
+    # Identify and plot points outside contours
+    p_S82 = CS_S82.collections[0].get_paths()
+    p_HET = CS_HETDEX.collections[0].get_paths()
+    inside_S82 = np.full_like(x_axis_dens_AGN_S82[count], False, dtype=bool)
+    inside_HET = np.full_like(x_axis_dens_AGN_HETDEX[count], False, dtype=bool)
+    for level in p_S82:
+        inside_S82 |= level.contains_points(np.array([x_axis_dens_AGN_S82[count], y_axis_dens_AGN_S82[count]]).T)
+    for level in p_HET:
+        inside_HET |= level.contains_points(np.array([x_axis_dens_AGN_HETDEX[count], y_axis_dens_AGN_HETDEX[count]]).T)
+    out_HETDEX, = axs[count].plot(x_axis_dens_AGN_HETDEX[count].loc[~inside_HET], 
+                        y_axis_dens_AGN_HETDEX[count].loc[~inside_HET],
+                        marker='x', ls='None', color=gf.colour_AGN, zorder=2, alpha=0.8)
+    out_S82, = axs[count].plot(x_axis_dens_AGN_S82[count].loc[~inside_S82], 
+                        y_axis_dens_AGN_S82[count].loc[~inside_S82],
+                        marker='x', ls='None', color=gf.colour_SFG, zorder=2, alpha=0.8)
 
     axs_twinx[count] = axs[count].twinx()
     axs_twinx[count].tick_params(which='both', top=False, right=True, direction='in')
@@ -260,9 +279,13 @@ axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_band
 axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.35), label=r'$\mathrm{S12}$', zorder=0)
 axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.60), label=r'$\mathrm{M16}$', zorder=0)
 axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c=plt.get_cmap(gv.cmap_bands)(0.75), label=r'$\mathrm{B18}$', zorder=0)
-    
-axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#1E88E5', label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{HETDEX}$', zorder=0)
-axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#D32F2F', label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{S82}$', zorder=0)
+
+cont_S82 = axs[3].scatter([-1], [10], marker='o', edgecolor=gf.colour_SFG, 
+               color=gf.colour_SFG_shade, s=80, 
+               label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{S82}$', linewidths=2.5)
+cont_HET = axs[3].scatter([-1], [10], marker='o', 
+               edgecolor=gf.colour_AGN, color=gf.colour_AGN_shade, s=80, 
+               label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{HETDEX}$', linewidths=2.5)
 
 axs[0].set_xlim(left=AB_lims_x[0], right=AB_lims_x[1])
 axs[0].set_ylim(bottom=AB_lims_y[0], top=AB_lims_y[1])
@@ -291,8 +314,13 @@ axs[1].legend(loc=8, fontsize=18, ncol=1, columnspacing=.25,
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 axs[2].legend(loc=4, fontsize=18, ncol=1, columnspacing=.25, 
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
-axs[3].legend(loc=4, fontsize=14, ncol=2, columnspacing=.25, 
-              handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+# axs[3].legend(loc=4, fontsize=14, ncol=2, columnspacing=.25, 
+#               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+arr_legends = [r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{HETDEX}$', r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{S82}$']
+axs[3].legend([(cont_HET, out_HETDEX), (cont_S82, out_S82)], arr_legends,
+              scatterpoints=1, numpoints=1, handler_map={tuple: HandlerTuple(ndivide=None)},
+              fontsize=14, ncol=2, columnspacing=.30, handletextpad=0.30,
+              handlelength=1.00, framealpha=0.75, loc=4)
 
 fig.supxlabel('$m_{\mathrm{W2}} - m_{\mathrm{W3}}\, \mathrm{[AB]}$\n$\mathrm{Predicted ~ class}$', 
               fontsize=25, ha='left', x=0.45, y=0.04)

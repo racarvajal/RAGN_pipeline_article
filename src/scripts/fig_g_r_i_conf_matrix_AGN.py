@@ -5,6 +5,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from matplotlib.patches import Rectangle
+from matplotlib.legend_handler import HandlerTuple
 #from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from astropy.visualization import PowerStretch
@@ -113,7 +114,7 @@ AB_lims_x = (-1.0, 2.5)
 AB_lims_y = (-1.3, 1.7)
 
 contour_levels  = [1, 2, 3]  # in sigmas
-sigmas_perc     = [0.39346934, 0.86466472, 0.988891]  # [0.39346934, 0.86466472, 0.988891, 0.99966454, 0.99999627]
+sigmas_perc     = [0.39346934, 0.86466472, 0.988891, 0.99966454]  # [0.39346934, 0.86466472, 0.988891, 0.99966454, 0.99999627]
 sigmas_perc_inv = [1. - sigma for sigma in sigmas_perc][::-1]  # 1, 2, 3, 4 sigma
 
 num_levels_dens = 20
@@ -135,7 +136,8 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     
     _, _, _, dens_plts[count] = axs[count].hist2d(dens_plot_data_x, dens_plot_data_y, 
                                                   bins=[50, 50], cmin=1, norm=norm_dens,
-                                                  cmap=plt.get_cmap(gv.cmap_dens_plots))
+                                                  cmap=plt.get_cmap(gv.cmap_dens_plots),
+                                                  zorder=0)
     
     # Create a Rectangle patch
     rect_S23 = Rectangle((-0.2, -0.2), 1.0, 0.8, linewidth=3,
@@ -206,6 +208,22 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
                         xy=(txt_x_positions[count], 0.96), xycoords='axes fraction', fontsize=18, 
                         ha='right', va='top', path_effects=gf.pe2, zorder=11)
     
+    # Identify and plot points outside contours
+    p_S82 = CS_S82.collections[0].get_paths()
+    p_HET = CS_HETDEX.collections[0].get_paths()
+    inside_S82 = np.full_like(x_axis_dens_AGN_S82[count], False, dtype=bool)
+    inside_HET = np.full_like(x_axis_dens_AGN_HETDEX[count], False, dtype=bool)
+    for level in p_S82:
+        inside_S82 |= level.contains_points(np.array([x_axis_dens_AGN_S82[count], y_axis_dens_AGN_S82[count]]).T)
+    for level in p_HET:
+        inside_HET |= level.contains_points(np.array([x_axis_dens_AGN_HETDEX[count], y_axis_dens_AGN_HETDEX[count]]).T)
+    out_HETDEX, = axs[count].plot(x_axis_dens_AGN_HETDEX[count].loc[~inside_HET], 
+                        y_axis_dens_AGN_HETDEX[count].loc[~inside_HET],
+                        marker='x', ls='None', color=gf.colour_AGN, zorder=2, alpha=0.8)
+    out_S82, = axs[count].plot(x_axis_dens_AGN_S82[count].loc[~inside_S82], 
+                        y_axis_dens_AGN_S82[count].loc[~inside_S82],
+                        marker='x', ls='None', color=gf.colour_SFG, zorder=2, alpha=0.8)
+    
     axs[count].tick_params(which='both', top=True, right=True,\
                             bottom=True, left=True, direction='in')
     axs[count].tick_params(axis='both', which='major', labelsize=20)
@@ -236,9 +254,13 @@ clb_dens.outline.set_linewidth(2.5)
 axs[2].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='k', label=r'$\mathrm{S23}$', zorder=0)
 
 axs[1].plot([-3], [-3], marker='s', ls='None', c=plt.get_cmap(gv.cmap_dens_plots)(1.1), label=r'$\mathrm{HETDEX}$', zorder=0)
-    
-axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#1E88E5', label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{HETDEX}$', zorder=0)
-axs[3].plot([-3], [-3], marker=None, ls='-', lw=4.5, c='#D32F2F', label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{S82}$', zorder=0)
+
+cont_S82 = axs[3].scatter([-1], [10], marker='o', edgecolor=gf.colour_SFG, 
+               color=gf.colour_SFG_shade, s=80, 
+               label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{S82}$', linewidths=2.5)
+cont_HET = axs[3].scatter([-1], [10], marker='o', 
+               edgecolor=gf.colour_AGN, color=gf.colour_AGN_shade, s=80, 
+               label=r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{HETDEX}$', linewidths=2.5)
 
 # axs[0].set_xlim(left=AB_lims_x[0], right=AB_lims_x[1])
 # axs[0].set_ylim(bottom=AB_lims_y[0], top=AB_lims_y[1])
@@ -262,8 +284,14 @@ axs[1].legend(loc=3, fontsize=18, ncol=1, columnspacing=.25,
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 axs[2].legend(loc=3, fontsize=18, ncol=1, columnspacing=.25, 
               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
-axs[3].legend(loc=4, fontsize=14, ncol=2, columnspacing=.25, 
-              handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+# axs[3].legend(loc=4, fontsize=14, ncol=2, columnspacing=.25, 
+#               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
+arr_legends = [r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{HETDEX}$', r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{S82}$']
+axs[3].legend([(cont_HET, out_HETDEX), (cont_S82, out_S82)], arr_legends,
+              scatterpoints=1, numpoints=1,
+              handler_map={tuple: HandlerTuple(ndivide=None)}, fontsize=14,
+              ncol=2, columnspacing=.30, handletextpad=0.30,
+              handlelength=1.10, framealpha=0.75, loc=4)
 
 fig.supxlabel('$m_{\mathrm{g}} - m_{\mathrm{r}}\, \mathrm{[AB]}$\n$\mathrm{Predicted ~ class}$', 
               fontsize=25, ha='left', x=0.49, y=0.05)
