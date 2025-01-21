@@ -29,6 +29,10 @@ file_name_HETDEX = paths.data / 'HETDEX_for_prediction.parquet'
 file_name_S82    = paths.data / 'S82_for_prediction.parquet'
 test_idx        = np.loadtxt(paths.data / 'indices_test.txt')
 
+cm_gradient_HETDEX = gf.create_colour_gradient('#1E88E5')
+cm_gradient_S82    = gf.create_colour_gradient('#D32F2F')
+cm_gradient_black  = gf.create_colour_gradient('#000000')
+
 feats_2_use      = ['ID', 'class', 'pred_prob_class', 'pred_prob_radio', 
                     'Z', 'pred_Z', 'W1mproPM', 'W2mproPM', 'W3mag',
                     'W1_W2', 'W2_W3']
@@ -53,7 +57,6 @@ for col in feats_2_use[1::]:
         catalog_S82_df.loc[:, col] = catalog_S82_df.loc[:, col].astype('float32')
     if unknown_HTDX_df.loc[:, col].dtype == 'float64':
         unknown_HTDX_df.loc[:, col] = unknown_HTDX_df.loc[:, col].astype('float32')
-
 
 n_rows = 2
 n_cols = 2
@@ -91,7 +94,6 @@ cm_mat_AGN_filter_S82    = np.array([[(np.array(catalog_S82_df['class'] == 0)   
                                       (np.array(catalog_S82_df['class'] == 0)   & np.array(catalog_S82_df['pred_prob_class'] == 1))],
                                       [(np.array(catalog_S82_df['class'] == 1)   & np.array(catalog_S82_df['pred_prob_class'] == 0)),
                                        (np.array(catalog_S82_df['class'] == 1)   & np.array(catalog_S82_df['pred_prob_class'] == 1))]])
-
 dens_plts = {}
 cont_plts = {}
 
@@ -106,9 +108,12 @@ AB_lims_y = (-1.3, 1.7)
 contour_levels  = [1, 2, 3]  # in sigmas
 sigmas_perc     = [0.39346934, 0.86466472, 0.988891, 0.99966454]  # [0.39346934, 0.86466472, 0.988891, 0.99966454, 0.99999627]
 sigmas_perc_inv = [1. - sigma for sigma in sigmas_perc][::-1]  # 1, 2, 3, 4 sigma
+# sigmas_perc     = [0.5, 0.75, 0.999]  # [50%, 75%, 99.9% of data]
+nstep           = len(sigmas_perc)
+seq_cont        = np.linspace(0, 1, nstep)
+n_bins_large    = [[30, 30], [25, 25], [25, 25], [30, 30]]
 
 num_levels_dens = 20
-
 txt_x_positions = [0.78, 0.70, 0.70, 0.75]
 
 # norm_val  = mcolors.CenteredNorm(vcenter=0.5)
@@ -170,67 +175,100 @@ for count, idx_ax in enumerate(np.array([[0, 0], [0, 1], [1, 0], [1, 1]])):
     max_X  = np.nanmax([np.nanmax(x_axis_dens_AGN_HETDEX[count]), np.nanmax(x_axis_dens_AGN_S82[count])])
     min_Y  = np.nanmin([np.nanmin(y_axis_dens_AGN_HETDEX[count]), np.nanmin(y_axis_dens_AGN_S82[count])])
     max_Y  = np.nanmax([np.nanmax(y_axis_dens_AGN_HETDEX[count]), np.nanmax(y_axis_dens_AGN_S82[count])])
-    n_bins = [50, 75]
-    bins_X = np.linspace(min_X, max_X, n_bins[1])
-    bins_Y = np.linspace(min_Y, max_Y, n_bins[0])
+    n_bins = n_bins_large[count]
+    # bins_X = np.linspace(min_X, max_X, n_bins[1])
+    # bins_Y = np.linspace(min_Y, max_Y, n_bins[0])
+    bins_X = np.linspace(-3, 3, n_bins[1])
+    bins_Y = np.linspace(-3, 3, n_bins[0])
 
-    nstep = 4
-    seq_cont   = np.logspace(-1.5, 0.0, nstep)
-    seq_cont   = np.insert(seq_cont, 0, 0.0)
-    seq_fill   = np.logspace(-1.5, 0.0, nstep+2)
-    seq_fill   = np.insert(seq_fill, 0, 0.0)
+    H_HET, xedges_HET, yedges_HET = np.histogram2d(x_axis_dens_AGN_HETDEX[count],
+                                                    y_axis_dens_AGN_HETDEX[count],
+                                                    bins=n_bins, density=False)
+    H_S82, xedges_S82, yedges_S82 = np.histogram2d(x_axis_dens_AGN_S82[count],
+                                                    y_axis_dens_AGN_S82[count],
+                                                    bins=n_bins, density=False)
+    # Flatten histogram and sort by density
+    H_flat_HET   = H_HET.ravel()
+    H_flat_S82   = H_S82.ravel()
+    H_sorted_HET = np.sort(H_flat_HET)[::-1]  # Sort descending
+    H_sorted_S82 = np.sort(H_flat_S82)[::-1]  # Sort descending
+    cumulative_density_HET = np.cumsum(H_sorted_HET) / np.sum(H_sorted_HET)
+    cumulative_density_S82 = np.cumsum(H_sorted_S82) / np.sum(H_sorted_S82)
 
-    cm_gradient_HETDEX = gf.create_colour_gradient('#1E88E5')
-    cm_gradient_S82    = gf.create_colour_gradient('#D32F2F')
-
-    H_HETDEX, xedges_HETDEX, yedges_HETDEX = np.histogram2d(x_axis_dens_AGN_HETDEX[count], 
-                                       y_axis_dens_AGN_HETDEX[count], bins=n_bins)
-    H_S82, xedges_S82, yedges_S82 = np.histogram2d(x_axis_dens_AGN_S82[count], 
-                                       y_axis_dens_AGN_S82[count], bins=n_bins)
-
-    H_HETDEX_smooth = gf.clean_and_smooth_matrix(H_HETDEX, sigma=0.9)
-    H_S82_smooth    = gf.clean_and_smooth_matrix(H_S82, sigma=0.9)
-
-    Z_HETDEX = (H_HETDEX_smooth.T - H_HETDEX_smooth.T.min())/(H_HETDEX_smooth.T.max() - H_HETDEX_smooth.T.min())
-    Z_S82    = (H_S82_smooth.T - H_S82_smooth.T.min())/(H_S82_smooth.T.max() - H_S82_smooth.T.min())
+    # Find bin count thresholds for the desired percentiles
+    target_percentiles_HET = np.array(sigmas_perc) * np.sum(H_HET)
+    target_percentiles_S82 = np.array(sigmas_perc) * np.sum(H_S82)
+    density_thresholds_HET = []
+    density_thresholds_S82 = []
+    for target in target_percentiles_HET:
+        idx = np.argmin(np.abs(cumulative_density_HET * np.sum(H_HET) - target))
+        threshold = H_sorted_HET[idx]
+        density_thresholds_HET.append(threshold)
+    for target in target_percentiles_S82:
+        idx = np.argmin(np.abs(cumulative_density_S82 * np.sum(H_S82) - target))
+        threshold = H_sorted_S82[idx]
+        density_thresholds_S82.append(threshold)
+    density_thresholds_HET = sorted(set(density_thresholds_HET), reverse=True)  # Ensure unique, decreasing values
+    density_thresholds_S82 = sorted(set(density_thresholds_S82), reverse=True)  # Ensure unique, decreasing values
 
     # fix probable lines not closing
-    Z_HETDEX, x_centers_HETDEX, y_centers_HETDEX = gf.pad_matrix_zeros(Z_HETDEX, xedges_HETDEX, yedges_HETDEX)
-    Z_S82,    x_centers_S82,    y_centers_S82    = gf.pad_matrix_zeros(Z_S82, xedges_S82, yedges_S82)
+    H_HET, x_centers_HET, y_centers_HET = gf.pad_matrix_zeros(H_HET, xedges_HET, yedges_HET)
+    H_S82, x_centers_S82, y_centers_S82 = gf.pad_matrix_zeros(H_S82, xedges_S82, yedges_S82)
 
-    CS_HETDEX_f = axs[count].contourf(x_centers_HETDEX, y_centers_HETDEX, Z_HETDEX, levels=sigmas_perc_inv,
-                                      colors=cm_gradient_HETDEX(seq_fill[::-1]), extend='max', 
-                                      alpha=0.2, antialiased=True)
-    CS_HETDEX = axs[count].contour(x_centers_HETDEX, y_centers_HETDEX, Z_HETDEX, levels=sigmas_perc_inv,
-                                   colors=cm_gradient_HETDEX(seq_cont[::-1]), linewidths=2.5)
+    # Plot contours using the computed density thresholds
+    CS_HET = axs[count].contour(x_centers_HET, y_centers_HET, H_HET.T,
+                        levels=density_thresholds_HET[::-1],
+                        colors=cm_gradient_HETDEX.reversed()(seq_cont),
+                        linewidths=2.25, zorder=3)
+    CS_S82 = axs[count].contour(x_centers_S82, y_centers_S82, H_S82.T,
+                        levels=density_thresholds_S82[::-1],
+                        colors=cm_gradient_S82.reversed()(seq_cont),
+                        linewidths=2.25, zorder=3)
 
-    CS_S82_f = axs[count].contourf(x_centers_S82, y_centers_S82, Z_S82, levels=sigmas_perc_inv, 
-                                   colors=cm_gradient_S82(seq_fill[::-1]), extend='max', 
-                                   alpha=0.2, antialiased=True)
-    CS_S82 = axs[count].contour(x_centers_S82, y_centers_S82, Z_S82, levels=sigmas_perc_inv, 
-                                colors=cm_gradient_S82(seq_cont[::-1]), linewidths=2.5)
-    
+    # Calculate percentage levels from density thresholds
+    # density_percentages = [100.0 * cumulative_density[np.searchsorted(np.sort(H_flat), level)] for level in density_thresholds]
+    density_percentages = [100 * sigma_perc for sigma_perc in sigmas_perc]
     n_sources_HETDEX   = np.sum(cm_mat_AGN_filter_HETDEX[tuple(idx_ax)])
     n_sources_S82   = np.sum(cm_mat_AGN_filter_S82[tuple(idx_ax)])
-    axs[count].annotate(text=rf'$\mathrm{{HETDEX - N}} = {n_sources_HETDEX: >6,d}$'.replace(',','$\,$') + '\n' + rf'$\mathrm{{S82 - N}} = {n_sources_S82: >6,d}$'.replace(',','$\,$'),
-                        xy=(txt_x_positions[count], 0.96), xycoords='axes fraction', fontsize=18, 
-                        ha='right', va='top', path_effects=gf.pe2, zorder=11)
-    
-    # Identify and plot points outside contours
-    p_S82 = CS_S82.collections[0].get_paths()
-    p_HET = CS_HETDEX.collections[0].get_paths()
-    inside_S82 = np.full_like(x_axis_dens_AGN_S82[count], False, dtype=bool)
+    outlier_number_HETDEX  = int(np.floor(n_sources_HETDEX * (1 - sigmas_perc[-1]))) # expected number of points outside last contour
+    outlier_number_S82     = int(np.floor(n_sources_S82 * (1 - sigmas_perc[-1]))) # expected number of points outside last contour
+    try:
+        p_HET = CS_HET.get_paths()
+    except Exception as e:
+        p_HET = CS_HET.collections[0].get_paths()
+    try:
+        p_S82 = CS_S82.get_paths()
+    except Exception as e:
+        p_S82 = CS_S82.collections[0].get_paths()
     inside_HET = np.full_like(x_axis_dens_AGN_HETDEX[count], False, dtype=bool)
-    for level in p_S82:
-        inside_S82 |= level.contains_points(np.array([x_axis_dens_AGN_S82[count], y_axis_dens_AGN_S82[count]]).T)
+    inside_S82 = np.full_like(x_axis_dens_AGN_S82[count], False, dtype=bool)
     for level in p_HET:
-        inside_HET |= level.contains_points(np.array([x_axis_dens_AGN_HETDEX[count], y_axis_dens_AGN_HETDEX[count]]).T)
-    out_HETDEX, = axs[count].plot(x_axis_dens_AGN_HETDEX[count].loc[~inside_HET], 
+        inside_HET |= level.contains_points(np.column_stack((x_axis_dens_AGN_HETDEX[count],
+                                                            y_axis_dens_AGN_HETDEX[count])))
+    for level in p_S82:
+        inside_S82 |= level.contains_points(np.column_stack((x_axis_dens_AGN_S82[count],
+                                                            y_axis_dens_AGN_S82[count])))
+    print(f'For cell {count}: -------------------------')
+    print(f'There are {np.sum(inside_HET)} HETDEX sources inside contours')
+    print(f'There are {np.sum(~inside_HET)} HETDEX sources outside contours')
+    print(f'It is expected to have {outlier_number_HETDEX} HETDEX sources outside contours')
+    print(f'There are {np.sum(inside_S82)} S82 sources inside contours')
+    print(f'There are {np.sum(~inside_S82)} S82 sources outside contours')
+    print(f'It is expected to have {outlier_number_S82} S82 sources outside contours')
+    out_HET, = axs[count].plot(x_axis_dens_AGN_HETDEX[count].loc[~inside_HET], 
                         y_axis_dens_AGN_HETDEX[count].loc[~inside_HET],
                         marker='x', ls='None', color=gf.colour_AGN, zorder=2, alpha=0.8)
     out_S82, = axs[count].plot(x_axis_dens_AGN_S82[count].loc[~inside_S82], 
                         y_axis_dens_AGN_S82[count].loc[~inside_S82],
                         marker='x', ls='None', color=gf.colour_SFG, zorder=2, alpha=0.8)
+
+    n_sources_HETDEX   = np.sum(cm_mat_AGN_filter_HETDEX[tuple(idx_ax)])
+    n_sources_S82   = np.sum(cm_mat_AGN_filter_S82[tuple(idx_ax)])
+    outlier_number_HETDEX  = int(np.floor(n_sources_HETDEX * (1 - sigmas_perc[-1]))) # expected number of points outside last contour
+    outlier_number_S82     = int(np.floor(n_sources_S82 * (1 - sigmas_perc[-1]))) # expected number of points outside last contour
+    axs[count].annotate(text=rf'$\mathrm{{HETDEX - N}} = {n_sources_HETDEX: >6,d}$'.replace(',','$\,$') + '\n' + rf'$\mathrm{{S82 - N}} = {n_sources_S82: >6,d}$'.replace(',','$\,$'),
+                        xy=(txt_x_positions[count], 0.96), xycoords='axes fraction', fontsize=18, 
+                        ha='right', va='top', path_effects=gf.pe2, zorder=11)
 
     axs_twinx[count] = axs[count].twinx()
     axs_twinx[count].tick_params(which='both', top=False, right=True, direction='in')
@@ -317,7 +355,7 @@ axs[2].legend(loc=4, fontsize=18, ncol=1, columnspacing=.25,
 # axs[3].legend(loc=4, fontsize=14, ncol=2, columnspacing=.25, 
 #               handletextpad=0.2, handlelength=0.8, framealpha=0.75)
 arr_legends = [r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{HETDEX}$', r'$\mathrm{MQC - SDSS}$' + '\n' + r'$\mathrm{S82}$']
-axs[3].legend([(cont_HET, out_HETDEX), (cont_S82, out_S82)], arr_legends,
+axs[3].legend([(cont_HET, out_HET), (cont_S82, out_S82)], arr_legends,
               scatterpoints=1, numpoints=1, handler_map={tuple: HandlerTuple(ndivide=None)},
               fontsize=14, ncol=2, columnspacing=.30, handletextpad=0.30,
               handlelength=1.00, framealpha=0.75, loc=4)
